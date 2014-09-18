@@ -5,13 +5,14 @@
 .home_sponsor_buttonto {
 	min-height: 40px;
 	min-width: 10%;
-    font-size: 1.8em;
-    background-color: #9d0;
+    background-color: #7d0;
 	color: white;
 	font-family: sans-serif;
+    font-size: 1.8em;
     position: fixed;
     top: 40%;
     left: 50%;
+    border-radius: 10px;
     transform: translate(-50%, -50%);
 }
 
