@@ -23,9 +23,6 @@
 
 one:
   name: MyString
-  organizer_first_name: MyString
-  organizer_last_name: MyString
-  organizer_email: MyString
   size: 1
   address1: MyText
   address2: MyText
@@ -35,14 +32,11 @@ one:
   country: MyString
   date: 2014-09-19
   time: 2014-09-19 12:32:21
-  organizer_phone_number: MyString
+  contact_number: MyString
   description: MyText
 
 two:
   name: MyString
-  organizer_first_name: MyString
-  organizer_last_name: MyString
-  organizer_email: MyString
   size: 1
   address1: MyText
   address2: MyText
@@ -52,5 +46,5 @@ two:
   country: MyString
   date: 2014-09-19
   time: 2014-09-19 12:32:21
-  organizer_phone_number: MyString
+  contact_number: MyString
   description: MyText
