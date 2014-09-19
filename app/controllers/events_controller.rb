@@ -2,8 +2,7 @@ class EventsController < ApplicationController
 
 	# action to show all events
 	def index
-		@events = "showing all events and a filter to filter them"
-		#@events = Event.all
+		@events = Event.all
 	end
 
 	# action taken when a user wants to create a new event
@@ -12,7 +11,33 @@ class EventsController < ApplicationController
 
 	# action taken when a user submits a new event
 	def create
+		@event = Event.new(event_params)
+ 
+		@event.save
+		redirect_to @event
+	end
+
+	# action to show one event by id
+	def show
+		@event = Event.find(params[:id])
 	end
 
 
+private
+	def event_params
+		params.require(:event).permit(
+			:name, 
+			:size, 
+			:address1,
+			:address2,
+			:city,
+			:region,
+			:zip_code,
+			:country,
+			:date,
+			:time,
+			:contact_number,
+			:description
+			)
+	end
 end

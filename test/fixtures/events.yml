@@ -1,0 +1,56 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  size           :integer
+#  address1       :text
+#  address2       :text
+#  city           :string(255)
+#  region         :string(255)
+#  zip_code       :integer
+#  country        :string(255)
+#  date           :date
+#  time           :time
+#  contact_number :string(255)
+#  description    :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  organizer_first_name: MyString
+  organizer_last_name: MyString
+  organizer_email: MyString
+  size: 1
+  address1: MyText
+  address2: MyText
+  city: MyString
+  region: MyString
+  zip_code: 1
+  country: MyString
+  date: 2014-09-19
+  time: 2014-09-19 12:32:21
+  organizer_phone_number: MyString
+  description: MyText
+
+two:
+  name: MyString
+  organizer_first_name: MyString
+  organizer_last_name: MyString
+  organizer_email: MyString
+  size: 1
+  address1: MyText
+  address2: MyText
+  city: MyString
+  region: MyString
+  zip_code: 1
+  country: MyString
+  date: 2014-09-19
+  time: 2014-09-19 12:32:21
+  organizer_phone_number: MyString
+  description: MyText

@@ -1,1 +1,16 @@
-<p><%= @events %></p>
+<h1>Listing events</h1>
+ 
+<table>
+  <tr>
+    <th>Event Name</th>
+    <th>Contact Number</th>
+  </tr>
+ 
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.contact_number	 %></td>
+      <td><%= link_to 'Sponsor Event', event_path(id: event.id) %></td>
+    </tr>
+  <% end %>
+</table>

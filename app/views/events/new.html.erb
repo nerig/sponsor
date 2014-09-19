@@ -1,0 +1,16 @@
+<h1>Create an event!</h1>
+<%= form_for :event, url: events_path do |f| %>
+  <p>
+    <%= f.label :event_name %>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :contact_number %>
+    <%= f.text_field :contact_number %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
