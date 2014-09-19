@@ -1,18 +1,29 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
-.home_sponsor_buttonto {
-	min-height: 40px;
-	min-width: 10%;
-    background-color: #7d0;
-	color: white;
-	font-family: sans-serif;
-    font-size: 1.8em;
+.home_sponsor_linkto {
+	background:url(./green.jpg) no-repeat;
+	background-position: -325px -396px;
+	height: 200px;
+	width: 600px;
     position: fixed;
     top: 40%;
     left: 50%;
     border-radius: 10px;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
+	
+	// text
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-family: sans-serif;
+    font-size: 1.8em;
+    line-height: 190px
 }
 
+.home_sponsor_linkto:hover {
+	background:url(./green.jpg) no-repeat;
+}
+
+.home_sponsor_linkto:active {
+	background:url(./green.jpg) no-repeat;
+	background-position: -600px -396px;
+}
