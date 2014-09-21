@@ -15,9 +15,15 @@
 #  time           :time
 #  contact_number :string(255)
 #  description    :text
+#  user_id        :integer
 #  created_at     :datetime
 #  updated_at     :datetime
 #
+# Indexes
+#
+#  index_events_on_user_id  (user_id)
+#
 
 class Event < ActiveRecord::Base
+	belongs_to :user
 end

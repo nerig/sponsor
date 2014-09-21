@@ -14,6 +14,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :contact_number
       t.text :description
 
+      t.references :user, index: true
+
       t.timestamps
     end
   end
