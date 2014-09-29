@@ -45,3 +45,5 @@ gem 'annotate'
 gem 'devise'
 
 gem 'rails_12factor'
+
+gem 'angularjs-rails'

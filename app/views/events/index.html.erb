@@ -1,16 +1,14 @@
-<h1>Listing events</h1>
- 
-<table>
-  <tr>
-    <th>Event Name</th>
-    <th>Contact Number</th>
-  </tr>
- 
-  <% @events.each do |event| %>
-    <tr>
-      <td><%= event.name %></td>
-      <td><%= event.contact_number	 %></td>
-      <td><%= link_to 'Sponsor Event', event_path(id: event.id) %></td>
-    </tr>
-  <% end %>
-</table>
+
+<!-- general div to include ng -->
+<div ng-controller="EventsListCtrl" ng-init="init('<%= @events %>')">
+	
+	<h1>Listing {{events.length}} events</h1>
+ 	
+ 	<!-- div to arrange searching and filtering area -->
+	<div class="search_filter_div">
+
+		<div multi-select input-model="events" button-label="name" item-label="name" tick-property="ticked" max-labels="3" helper-elements="none" default-label="Any..."/>
+
+	</div>
+
+</div>
