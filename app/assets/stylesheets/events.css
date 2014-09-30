@@ -2,7 +2,7 @@ body {
 	background: #F0F0F0;
 }
 
-.search_filter_div {
+#search_filter_div {
 	background: #00bFFF;
 	height: 80px;
 	width: 100%;
@@ -12,14 +12,14 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.main_filter_left {
+#main_filter_left {
 	position: fixed;
 	top: 50%;
 	left: 15%;
 	transform: translate(-50%, -50%);
 }
 
-.main_filter_middle {
+#main_filter_middle {
 	float: left;
 	position: fixed;
 	top: 50%;
@@ -27,7 +27,7 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-.main_filter_right {
+#main_filter_right {
 	float: right;
 	position: fixed;
 	top: 50%;
