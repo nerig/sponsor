@@ -1,3 +1,36 @@
+body {
+	background: #F0F0F0;
+}
+
 .search_filter_div {
-	
+	background: #00bFFF;
+	height: 80px;
+	width: 100%;
+	position: fixed;
+	top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main_filter_left {
+	position: fixed;
+	top: 50%;
+	left: 15%;
+	transform: translate(-50%, -50%);
+}
+
+.main_filter_middle {
+	float: left;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.main_filter_right {
+	float: right;
+	position: fixed;
+	top: 50%;
+	right: 15%;
+	transform: translate(50%, -50%);
 }
