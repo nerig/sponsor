@@ -6,7 +6,7 @@ var compare = function(a, b) {
 	return (a > b) ? 1 : ((b > a) ? -1 : 0);
 }
 
-spons.controller('EventsListCtrl', function($scope) {
+spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	
 	$scope.initWith = function(events) {
 		$scope.events = JSON.parse(events);
@@ -43,7 +43,7 @@ spons.controller('EventsListCtrl', function($scope) {
 	$scope.go = function(path) {
 		window.location.href = path;
 	}
-})
+}])
 
 .filter('locationFilter', function() {
 	return function(events, locations) {
