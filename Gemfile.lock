@@ -27,7 +27,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    angularjs-rails (1.2.22)
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -41,10 +40,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    devise (3.3.0)
+    devise (3.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
@@ -93,6 +93,8 @@ GEM
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    responders (1.1.1)
+      railties (>= 3.2, < 4.2)
     sass (3.4.5)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
@@ -112,7 +114,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.3.0)
+    turbolinks (2.4.0)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -128,7 +130,6 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  angularjs-rails
   annotate
   coffee-rails (~> 4.0.0)
   devise

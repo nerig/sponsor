@@ -16,13 +16,14 @@ Event.create([
 		zip_code: "02163",
 		country: "USA",
 		contact_number: "757584847",
-		description: "a description",
+		description: "a description a description a description a description a description a description",
 		sponsorship_type: "Capital Contribution",
 		sponsorship_requests: "some requests",
 		recurrence: "One-Time Event",
 		age_range: "51+",
 		attendees_gender: "Both",
-		attendees_income_level: "Medium"
+		attendees_income_level: "Medium",
+		date: "11/26/2014"
 	},
 	{
 		name: 'two',
@@ -33,13 +34,14 @@ Event.create([
 		zip_code: "02163",
 		country: "USA",
 		contact_number: "757584847",
-		description: "a description",
+		description: "a description a description a description a description a description",
 		sponsorship_type: "Capital Contribution",
 		sponsorship_requests: "some requests",
 		recurrence: "Weekly",
 		age_range: "51+",
 		attendees_gender: "Male",
-		attendees_income_level: "Low"
+		attendees_income_level: "Low",
+		date: "11/25/2014"
 	},
 	{
 		name: 'tree',
@@ -50,13 +52,14 @@ Event.create([
 		zip_code: "02163",
 		country: "USA",
 		contact_number: "757584847",
-		description: "a description",
+		description: "a description a description a description a description a description a description",
 		sponsorship_type: "Capital Contribution",
 		sponsorship_requests: "some requests",
 		recurrence: "Monthly",
 		age_range: "36-50",
 		attendees_gender: "Female",
-		attendees_income_level: "High"
+		attendees_income_level: "High",
+		date: "11/28/2014"
 	},
 	{
 		name: 'four',
@@ -67,28 +70,30 @@ Event.create([
 		zip_code: "02163",
 		country: "USA",
 		contact_number: "757584847",
-		description: "a description",
+		description: "a descriptio a description a description a description a description a descriptionn",
 		sponsorship_type: "Capital Contribution",
 		sponsorship_requests: "some requests",
 		recurrence: "Yearly",
 		age_range: "21-35",
 		attendees_gender: "Female",
-		attendees_income_level: "Medium"
+		attendees_income_level: "Medium",
+		date: "11/27/2014"
 	},
 	{
 		name: 'five',
 		size_range: "1000+",
 		address1: "there",
-		city: "Boston",
+		city: "Very Long String City",
 		region: "MA",
 		zip_code: "02163",
 		country: "USA",
 		contact_number: "757584847",
-		description: "a description",
+		description: "a desc a description a description a description a description a descriptionription",
 		sponsorship_type: "Capital Contribution",
 		sponsorship_requests: "some requests",
 		recurrence: "Monthly",
 		age_range: "12-20",
 		attendees_gender: "Male",
-		attendees_income_level: "Low"
+		attendees_income_level: "Low",
+		date: "11/29/2014"
 	}])

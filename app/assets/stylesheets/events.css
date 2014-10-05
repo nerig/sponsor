@@ -1,36 +1,97 @@
-body {
-	background: #F0F0F0;
+/* advanced animation reference: http://jsfiddle.net/Bq6eK/13/   	http://jsfiddle.net/nMNJE/ */
+
+* {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-#search_filter_div {
-	background: #00bFFF;
-	height: 80px;
-	width: 100%;
-	position: fixed;
-	top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+html, body {
+	background: #f0f0ff !important;
 }
 
-#main_filter_left {
-	position: fixed;
-	top: 50%;
-	left: 15%;
-	transform: translate(-50%, -50%);
+/* events list and event */
+#events_list {
+	list-style-type: none;
+	margin: 4em 0 0 1em;
 }
 
-#main_filter_middle {
+.event {
+	width: 35em;
+	height: 10.7em;
+	margin-bottom: 2em;
+	cursor: pointer;
+	background: #ffffff;
+	border: 1px solid #ffffff; /* to prevent all the below events of moving upon hover */
+}
+
+/* event selectors */
+.event:hover {
+	border: 1px solid #c2c2ff;
+}
+
+.event:active {
+	background: #e0e0ff;
+	border: 1px solid #ffffff;
+}
+
+.event::after {
+	clear: both;
+}
+
+/* event's contents */
+.event .logo {
+	position: relative;
+	left: calc(10.7em * 0.05);
+	top: calc(10.7em * 0.04);
+	height: calc(10.7em * 0.9);
+	width: calc(10.7em * 0.9);
+}
+
+.event .name_text {
+	color: darkgrey;
+    font-size: 1.2em;
+    padding-top: 1em;
+}
+
+.text {
 	float: left;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	color: grey;
+    font-size: 0.9em;
 }
 
-#main_filter_right {
-	float: right;
-	position: fixed;
-	top: 50%;
-	right: 15%;
-	transform: translate(50%, -50%);
+.description_text {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 15em;
+    padding-top: 0.15em;
+}
+
+.text_padding {
+	padding-left: 0.3em;
+}
+
+.icon {
+	float: left;
+	height: 1em;
+	width: 1em;
+}
+
+.event #description {
+	float: left;
+	position: relative;
+	left: 32%;
+}
+
+/* filters */
+#search_filter_div {
+	background: #00bfff;
+	height: 7em;
+	width: 90em;
+	margin-top: 2em;
+}
+
+.filter {
+	margin-top: calc(7em / 2);
+	transform: translate(0%, -50%);
+	z-index: 10;
 }

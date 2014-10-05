@@ -447,7 +447,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                     angular.forEach( $scope.outputModel, function( value, key ) {
                         // remove the index number and spacing number from output model
                         delete value[ $scope.indexProperty ];
-                        delete value[ $scope.spacingProperty ];      
+                        delete value[ $scope.spacingProperty ];
                     });
                 }                  
             }
@@ -475,26 +475,28 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                     }
                     else {
                         $scope.more = false;
-                    }                
-                
+                    }
+
                     angular.forEach( $scope.selectedItems, function( value, key ) {
                         if ( typeof value !== 'undefined' ) {                        
-                            if ( ctr < tempMaxLabels ) {                            
-                                $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
-                            }
+                            if ( ctr < tempMaxLabels ) {
+                                    //$scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
+                                    $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? ', ' : '') + $scope.writeLabel( value, 'buttonLabel' );
+                                }
                             ctr++;
                         }
-                    });                
-
+                    });
+                    /*
                     if ( $scope.more === true ) {
                         // https://github.com/isteven/angular-multi-select/pull/16
                         if (tempMaxLabels > 0) {
-                            $scope.varButtonLabel += ', ... ';
+                            $scope.varButtonLabel += '...';
                         }
-                        $scope.varButtonLabel += '(Total: ' + $scope.selectedItems.length + ')';                        
-                    }
+                        $scope.varButtonLabel += '(Total: ' + $scope.selectedItems.length + ')'; 
+                    }*/
                 }
-                $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<span class="caret"></span>' );                
+
+                $scope.varButtonLabel = $sce.trustAsHtml( '<p class="multiSelect buttonLabel">' + $scope.varButtonLabel + '</p>' + '<span class="caret"></span>' );
             }
 
             // Check if a checkbox is disabled or enabled. It will check the granular control (disableProperty) and global control (isDisabled)

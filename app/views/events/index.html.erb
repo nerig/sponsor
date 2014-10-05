@@ -1,18 +1,53 @@
-
 <!-- general div to include ng -->
-<div ng-controller="EventsListCtrl" ng-init="init('<%= @events %>')">
+<div ng-controller="EventsListCtrl" ng-init="initWith('<%= @events %>')">
 	
-	<h1>Listing {{events.length}} events</h1>
+	<div class="row">
+		<h1 class="col-md-12 text-center" style="margin-top:2em;">Pick an event to sponsor:</h1>
+	</div>
  	
- 	<!-- div to arrange searching and filtering area -->
-	<div id="search_filter_div">
-	  	
-		<div id="main_filter_left" multi-select input-model="locations" button-label="city" item-label="city" tick-property="ticked" max-labels="2" helper-elements="none all" default-label="Any location"></div>
+ 	<div class="row">
+	 	<!-- div to arrange searching and filtering area -->
+		<div id="search_filter_div" class="center-block">
+		  	
+			<div class="col-md-4 filter" multi-select input-model="locations" output-model="locationSelections" button-label="city" item-label="city" tick-property="ticked" max-labels="5" helper-elements="none all" default-label="Any location"></div>
 
-		<div id="main_filter_middle" multi-select input-model="ageRanges" button-label="range" item-label="range" tick-property="ticked" max-labels="2" helper-elements="none all" default-label="Any age range"></div>
+			<div class="col-md-4 filter" multi-select input-model="ageRanges" output-model="ageSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none all" default-label="Any age range"></div>
 
-		<div id="main_filter_right" multi-select input-model="sizeRanges" button-label="range" item-label="range" tick-property="ticked" max-labels="2" helper-elements="none all" default-label="Any size range"></div>
-	  
+			<div class="col-md-4 filter" multi-select input-model="sizeRanges" output-model="sizeSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none all" default-label="Any size range"></div>
+		  
+		</div>
 	</div>
 	
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<!-- events listing -->
+			<ul id="events_list">
+			    <li class="event" ng-repeat="event in events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections" ng-click="go('/events/' + event.id)">
+			      <div class="row">
+				      <div class="col-md-4">
+				      	<img class="logo" ng-src="http://cdn.evbuc.com/images/4760545/287655592/2/logo.JPG"></img>
+				      </div>
+				      <div class="col-md-8">
+				      	<div class="row">
+				      		<p class="name_text text-capitalize">{{event.name}}</p>
+				      	</div>
+				      	<div class="row">
+				      		<img class="icon" src="assets/location.png"></img>
+				      		<p class="text_padding text">{{event.city}}</p>
+				      	</div>
+				      	<div class="row">
+					      	<img class="icon" src="assets/date.png"></img>
+					      	<p class="text_padding text">{{event.date}}</p>
+				      	</div>
+				      	<div class="row">
+			      			<p class="description_text text">{{event.description}}</p>
+			      			<a ng-href="/events/{{event.id}}" style="padding-left: 0.4em;">read more</a>
+				      	</div>
+				      </div>
+			      </div>
+			    </li>
+			</ul>
+		</div>
+	</div>
 </div>

@@ -8,7 +8,7 @@ var compare = function(a, b) {
 
 spons.controller('EventsListCtrl', function($scope) {
 	
-	$scope.init = function(events) {
+	$scope.initWith = function(events) {
 		$scope.events = JSON.parse(events);
 		//console.log($scope.events);
 		
@@ -40,4 +40,86 @@ spons.controller('EventsListCtrl', function($scope) {
 
 	}
 
+	$scope.go = function(path) {
+		window.location.href = path;
+	}
 })
+
+.filter('locationFilter', function() {
+	return function(events, locations) {
+		return events.filter(function(element,index, array) {return true});
+		var locations = search.locations;
+		if (!locations || '' === locations || 0 === locations.length) {
+			return events;
+		}
+
+		var flatLocations = [];
+		angular.forEach(locations, function(location) {
+			flatLocations.push(location.city);
+		});
+
+		if (flatLocations.length === 0) {
+			return events;
+		}
+    
+		return events.filter(function(element, index, array) {
+			return (flatLocations.indexOf(element.city) >= 0) ? true : false;
+		});
+	};
+})
+
+.filter('ageFilter', function() {
+	return function(events, search) {
+		return events.filter(function(element,index, array) {return true});
+
+		if (!search) {
+			return events;
+		}
+
+		var locations = search.locations;
+		if (!locations || '' === locations || 0 === locations.length) {
+			return events;
+		}
+
+		var flatLocations = [];
+		angular.forEach(locations, function(location) {
+			flatLocations.push(location.city);
+		});
+
+		if (flatLocations.length === 0) {
+			return events;
+		}
+    
+		return events.filter(function(element, index, array) {
+			return (flatLocations.indexOf(element.city) >= 0) ? true : false;
+		});
+	};	
+})
+
+.filter('sizeFilter', function() {
+	return function(events, search) {
+		return events.filter(function(element,index, array) {return true});
+
+		if (!search) {
+			return events;
+		}
+
+		var locations = search.locations;
+		if (!locations || '' === locations || 0 === locations.length) {
+			return events;
+		}
+
+		var flatLocations = [];
+		angular.forEach(locations, function(location) {
+			flatLocations.push(location.city);
+		});
+
+		if (flatLocations.length === 0) {
+			return events;
+		}
+    
+		return events.filter(function(element, index, array) {
+			return (flatLocations.indexOf(element.city) >= 0) ? true : false;
+		});
+	};	
+});

@@ -2,13 +2,26 @@
 <html ng-app="spons">
 <head>
 	<title>Sponsor</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 </head>
 <body>
 
 	<%= yield %>
 
+	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" %>
+	<!-- Latest compiled and minified JavaScript -->
+	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" %>
 </body>
 </html>
