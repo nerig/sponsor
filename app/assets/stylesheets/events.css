@@ -11,7 +11,7 @@ html, body {
 /* events list and event */
 #events_list {
 	list-style-type: none;
-	margin: 4em 0 0 1em;
+	margin: 3em 0 0 1em;
 }
 
 .event {

@@ -12,7 +12,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		$scope.events = JSON.parse(events);
 		//console.log($scope.events);
 		
-		// extracting the list of locations
+		// extracting the lists of filters from existing values in the events
 		$scope.locations = [];
 		$scope.ageRanges = [];
 		$scope.sizeRanges = [];
@@ -37,7 +37,6 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		//console.log($scope.ageRanges);
 		$scope.sizeRanges.sort(function(a, b) { return compare(parseInt(a.range), parseInt(b.range)); })
 		//console.log($scope.sizeRanges);
-
 	}
 
 	$scope.go = function(path) {
