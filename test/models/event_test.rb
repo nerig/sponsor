@@ -24,6 +24,7 @@
 #  age_range              :string(255)
 #  attendees_gender       :string(255)
 #  attendees_income_level :string(255)
+#  image_url              :string(255)
 #
 # Indexes
 #

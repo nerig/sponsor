@@ -18,6 +18,7 @@
 		</div>
 	</div>
 
+	<!-- line in the middle of the screen to show number of events -->
 	<div class="row">
 		<h1 class="col-md-12 text-center" style="margin-top:1em;" ng-hide="filteredEvents.length === 0 || filteredEvents.length === 1">Listing {{filteredEvents.length}} events...</h1>
 		<h1 class="col-md-12 text-center" style="margin-top:1em;" ng-hide="filteredEvents.length !== 1">Listing {{filteredEvents.length}} event...</h1>
@@ -32,7 +33,7 @@
 			    <li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections)" ng-click="go('/events/' + event.id)">
 			      <div class="row">
 				      <div class="col-md-4">
-				      	<img class="logo" ng-src="http://cdn.evbuc.com/images/4760545/287655592/2/logo.JPG"></img>
+				      	<img class="logo" ng-src="{{event.image_url}}"></img>
 				      </div>
 				      <div class="col-md-8">
 				      	<div class="row">

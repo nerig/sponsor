@@ -23,7 +23,8 @@ Event.create([
 		age_range: "51+",
 		attendees_gender: "Both",
 		attendees_income_level: "Medium",
-		date: "11/26/2014"
+		date: "11/26/2014",
+		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
 	},
 	{
 		name: 'two',
@@ -41,7 +42,8 @@ Event.create([
 		age_range: "51+",
 		attendees_gender: "Male",
 		attendees_income_level: "Low",
-		date: "11/25/2014"
+		date: "11/25/2014",
+		image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg"
 	},
 	{
 		name: 'tree',
@@ -59,7 +61,8 @@ Event.create([
 		age_range: "36-50",
 		attendees_gender: "Female",
 		attendees_income_level: "High",
-		date: "11/28/2014"
+		date: "11/28/2014",
+		image_url: "https://s3.amazonaws.com/rmktimages/logo3.png"
 	},
 	{
 		name: 'four',
@@ -77,7 +80,8 @@ Event.create([
 		age_range: "21-35",
 		attendees_gender: "Female",
 		attendees_income_level: "Medium",
-		date: "11/27/2014"
+		date: "11/27/2014",
+		image_url: "https://s3.amazonaws.com/rmktimages/logo2.jpg"
 	},
 	{
 		name: 'five',
@@ -95,5 +99,6 @@ Event.create([
 		age_range: "12-20",
 		attendees_gender: "Male",
 		attendees_income_level: "Low",
-		date: "11/29/2014"
+		date: "11/29/2014",
+		image_url: "https://s3.amazonaws.com/rmktimages/logo1.JPG"
 	}])

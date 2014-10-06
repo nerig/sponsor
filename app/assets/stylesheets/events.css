@@ -39,11 +39,18 @@ html, body {
 
 /* event's contents */
 .event .logo {
+	/*
 	position: relative;
 	left: calc(10.7em * 0.05);
 	top: calc(10.7em * 0.04);
-	height: calc(10.7em * 0.9);
-	width: calc(10.7em * 0.9);
+	*/
+	position: absolute;
+  	top: 10.4em; left: 0; bottom: 0; right: 0;
+    margin: auto;
+    max-width: calc(10.7em * 0.9);
+    max-height: calc(10.7em * 0.9);
+    width: auto;
+    height: auto;
 }
 
 .event .name_text {
