@@ -5,7 +5,7 @@
 }
 
 html, body {
-	background: #f0f0ff !important;
+	background: #f8f8ff !important;
 }
 
 /* events list and event */
@@ -15,12 +15,13 @@ html, body {
 }
 
 .event {
-	width: 35em;
+	width: 70em;
 	height: 10.7em;
 	margin-bottom: 2em;
 	cursor: pointer;
 	background: #ffffff;
-	border: 1px solid #ffffff; /* to prevent all the below events of moving upon hover */
+	border: 1px solid #ffffff; /* to prevent all the events of moving upon hover */
+	border-radius: 8px;
 }
 
 /* event selectors */
@@ -33,27 +34,20 @@ html, body {
 	border: 1px solid #ffffff;
 }
 
-.event::after {
-	clear: both;
-}
-
 /* event's contents */
 .event .logo {
-	/*
-	position: relative;
-	left: calc(10.7em * 0.05);
-	top: calc(10.7em * 0.04);
-	*/
 	position: absolute;
-  	top: 10.4em; left: 0; bottom: 0; right: 0;
+  	top: 10.4em; left: 0.5em; bottom: 0; right: 0;
     margin: auto;
     max-width: calc(10.7em * 0.9);
     max-height: calc(10.7em * 0.9);
     width: auto;
     height: auto;
+    border-radius: 6px;
 }
 
 .event .name_text {
+	float: left;
 	color: darkgrey;
     font-size: 1.2em;
     padding-top: 1em;
@@ -69,8 +63,10 @@ html, body {
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 15em;
-    padding-top: 0.15em;
+    width: auto;
+    max-width: 54em;
+    height: auto;
+    padding-top: 0.05em;
 }
 
 .text_padding {
@@ -91,14 +87,33 @@ html, body {
 
 /* filters */
 #search_filter_div {
-	background: #00bfff;
-	height: 7em;
-	width: 90em;
 	margin-top: 2em;
+	background: #00bfff;
+	border-radius: 8px;
+}
+
+.search_area_size {
+	height: auto;
+	width: 90em;
 }
 
 .filter {
 	margin-top: calc(7em / 2);
 	transform: translate(0%, -50%);
 	z-index: 10;
+}
+
+.toggleMoreFilters {
+	float: right;
+	color: #00bfff;
+}
+
+.genderCaret {
+	float: right !important;
+	position: relative !important;
+	top: .65em !important;
+}
+
+.genderText {
+	float: left;
 }
