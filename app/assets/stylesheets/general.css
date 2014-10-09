@@ -1,6 +1,4 @@
 .app-header {
-	/*height: auto;
-	width: auto;*/
 	background-color: #00bfff;
 }
 
@@ -8,8 +6,37 @@
 	width: 90em;
 }
 
-.app-header .logo {
+.app-header .logo * {
 	color: white;
 	font-size: 3em;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.app-header .logo:hover {
+	text-decoration: none;
+}
+
+.app-header #menu {
+	text-align: center;
+}
+
+.app-header #menu ul {
+	margin-top: 2.6em; 
+	list-style-type: none;
+}
+
+.app-header #menu li { 
+	display: inline;
+
+	padding-left: 2.5em;
+}
+
+.app-header #menu a {
+	font-size: 1.4em;
+	color: white;
+	text-decoration: none;
+}
+
+.app-header #menu a:hover {
+	color: #f8f8ff;
 }
