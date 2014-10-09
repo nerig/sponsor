@@ -6,6 +6,8 @@
 
 html, body {
 	background: #f8f8ff !important;
+	max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* events list and event */

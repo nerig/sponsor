@@ -1,0 +1,15 @@
+.app-header {
+	/*height: auto;
+	width: auto;*/
+	background-color: #00bfff;
+}
+
+.app-header .content-margins {
+	width: 90em;
+}
+
+.app-header .logo {
+	color: white;
+	font-size: 3em;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}

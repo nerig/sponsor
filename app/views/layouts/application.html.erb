@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="spons">
 <head>
-	<title>Sponsor</title>
+	<title>Marketiers</title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
 
@@ -9,7 +9,6 @@
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
 
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 	<!-- Optional theme -->
@@ -17,11 +16,17 @@
 
 </head>
 <body>
+	<div class="row">
+		<div class="col-md-12 app-header">
+			<div class="center-block content-margins">
+				<h1 class="col-md-4 logo">Marketiers</h1>
+			</div>
+		</div>
+	</div>
 
 	<%= yield %>
 
 	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" %>
-	<!-- Latest compiled and minified JavaScript -->
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" %>
 	<%= javascript_include_tag "https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js" %>
 </body>
