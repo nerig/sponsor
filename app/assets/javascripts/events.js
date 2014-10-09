@@ -40,12 +40,12 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 
 		$scope.incomeLevels = [{"income": "Low"}, {"income": "Medium"}, {"income": "High"}];
 
-		$scope.hideMoreFilters = true;
-
 		$scope.genderFilterSelection = 'Both';
 
 		$scope.fromDate = 'From, today'
 		$scope.toDate = 'To, eternity'
+
+		$scope.isCollapsed = true;
 	}
 
 	$scope.go = function(path) {
@@ -53,8 +53,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	}
 
 	$scope.toggleHiddenFilters = function() {
-		$scope.hideMoreFilters = !$scope.hideMoreFilters;
-		//console.log('hideMoreFilters: ' + $scope.hideMoreFilters);
+		$scope.isCollapsed = !$scope.isCollapsed;
 	}
 }])
 

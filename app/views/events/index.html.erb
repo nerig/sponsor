@@ -18,7 +18,7 @@
 		  	</div>
 
 		  	<!-- hidden filters -->
-		  	<div class="row" ng-hide="hideMoreFilters">
+		  	<div class="row" collapse="isCollapsed">
 		  		<div class="col-md-2"></div>
 		  		<div class="col-md-4" style="margin:0 0 1em 1em" ng-controller="DatepickerCtrl">
 		  			<div class="col-md-6">
@@ -58,10 +58,10 @@
 	</div>
 
 	<div class="row">
-		<div class="search_area_size center-block" ng-click="toggleHiddenFilters()" ng-show="hideMoreFilters">
+		<div class="search_area_size center-block" ng-click="toggleHiddenFilters()" ng-show="isCollapsed">
 			<a class="toggleMoreFilters" href="">more filtering options</a>
 		</div>
-		<div class="search_area_size center-block" ng-click="toggleHiddenFilters()" ng-hide="hideMoreFilters">
+		<div class="search_area_size center-block" ng-click="toggleHiddenFilters()" ng-hide="isCollapsed">
 			<a class="toggleMoreFilters" href="">less filtering options</a>
 		</div>
 	</div>
