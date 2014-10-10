@@ -32,14 +32,12 @@
 /* the multiselect button */
 .smallMultiSelect .multiSelect .button {
     display: block;
-    position: relative;
     text-align: left;    
     cursor: pointer;
-    border: 1px solid #c6c6c6;    
-    padding: 1px 8px 1px 8px;    
+    border: 1px solid #c6c6c6;
     font-size: 1em;
-    height: 1.5em !important;
-    width: 12em;
+    height: 2em;
+    width: 11em;
     border-radius: 4px;
     color: #555;   
     -webkit-user-select: none;
@@ -47,7 +45,6 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none; 
-    white-space: nowrap;
     background-color: #fff;
     /*background-image: linear-gradient(#fff, #f7f7f7);      */
 }
@@ -67,7 +64,7 @@
 .smallMultiSelect .multiSelect .buttonLabel {
     padding: 5px 0px 0px 0px;
     display: inline-block;
-    width: 9em;
+    width: 8.2em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -173,7 +170,7 @@
 /* container of multi select items */
 .smallMultiSelect .multiSelect .checkBoxContainer {
     display: inline-block;
-    padding: 8px;   
+    padding: 8px;
 }
 
 /* ! to show / hide the checkbox layer above */
@@ -183,8 +180,6 @@
 
 /* item labels */
 .smallMultiSelect .multiSelect .multiSelectItem {
-    display: block;
-    padding: 3px;
     color: #444;       
     white-space: nowrap;
     -webkit-user-select: none;
@@ -195,8 +190,11 @@
     border: 1px solid transparent;
     position: relative;
     min-width:278px;
+}
 
-    font-size: .7em;
+.smallMultiSelect .multiSelect .multiSelectItem label {
+    font-weight: lighter;
+
 }
 
 /* Item labels: selected - Enable this if you want to apply styling on selected items */
@@ -254,7 +252,7 @@
     color: #ddd !important;    
     position: absolute;
     left: -9999px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 /* checkboxes currently disabled */

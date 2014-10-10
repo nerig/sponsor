@@ -122,3 +122,8 @@ html, body {
 .genderText {
 	float: left;
 }
+
+.freetext-search {
+	margin-left: 2em;
+	max-width: 25.75em;
+}
