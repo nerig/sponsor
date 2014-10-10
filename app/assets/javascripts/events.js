@@ -147,14 +147,11 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 .filter('fromDateFilter', function() {
 	return function(events, fromDate) {
 		
-		console.log('fromDate = ' + fromDate)
-
 		if (!fromDate || '' === fromDate || 'From, today' === fromDate) {
 			return events;
 		}
     
 		return events.filter(function(element, index, array) {
-			console.log('fromDate.getTime(): ' + fromDate.getTime() + ' element.date: ' + element.date)
 			return (fromDate.getTime() <= element.date);
 		});
 	};	
@@ -163,14 +160,11 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 .filter('toDateFilter', function() {
 	return function(events, toDate) {
 		
-		console.log('toDate = ' + toDate)
-
 		if (!toDate || '' === toDate || 'To, eternity' === toDate) {
 			return events;
 		}
     
 		return events.filter(function(element, index, array) {
-			console.log('toDate.getTime(): ' + toDate.getTime() + ' element.date: ' + element.date)
 			return (toDate.getTime() >= element.date);
 		});
 	};	

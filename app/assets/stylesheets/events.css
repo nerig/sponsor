@@ -93,7 +93,7 @@ html, body {
 /* filters */
 #search_filter_div {
 	margin-top: 2em;
-	background: #00bfff;
+	background: #007acc;
 	border-radius: 8px;
 }
 
@@ -110,7 +110,7 @@ html, body {
 
 .toggleMoreFilters {
 	float: right;
-	color: #00bfff;
+	color: #007acc;
 }
 
 .genderCaret {
