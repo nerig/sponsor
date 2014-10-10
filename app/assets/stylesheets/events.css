@@ -34,10 +34,10 @@ html, body {
 	border: 1px solid #c2c2ff;
 }
 
-.event:active {
+/*.event:active {
 	background: #e0e0ff;
 	border: 1px solid #ffffff;
-}
+}*/
 
 /* event's contents */
 .event .logo {
@@ -49,6 +49,12 @@ html, body {
     width: auto;
     height: auto;
     border-radius: 6px;
+}
+
+.sponsorButton {
+	position: absolute;
+	top: 1.5em;
+	z-index: 8;
 }
 
 .event .name_text {
@@ -69,7 +75,7 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     width: auto;
-    max-width: 54em;
+    max-width: 47em;
     height: auto;
     padding-top: 0.05em;
 }
@@ -89,6 +95,7 @@ html, body {
 	position: relative;
 	left: 32%;
 }
+
 
 /* filters */
 #search_filter_div {
