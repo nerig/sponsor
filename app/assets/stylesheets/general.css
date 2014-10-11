@@ -40,3 +40,7 @@
 .app-header #menu a:hover {
 	color: #F5e0eb;
 }
+
+footer {
+	margin-top: 3em;
+}

@@ -34,11 +34,6 @@ html, body {
 	border: 1px solid #c2c2ff;
 }
 
-/*.event:active {
-	background: #e0e0ff;
-	border: 1px solid #ffffff;
-}*/
-
 /* event's contents */
 .event .logo {
 	position: absolute;
