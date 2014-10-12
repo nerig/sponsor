@@ -1,10 +1,11 @@
-<h1>Event details</h1>
-<p>
-  <strong>Event name:</strong>
-  <%= @event.name %>
-</p>
- 
-<p>
-  <strong>Contact number:</strong>
-  <%= @event.contact_number %>
-</p>
+
+<div class="container">
+	<div class="row">	
+		<h1 class="col-md-8 text-capitalize"><%= @event.name %></h1>
+	</div>
+
+	<div class="row">
+		<img id="event_logo" class="col-md-3" src="<%= @event.image_url %>">
+	</div>
+
+</div>

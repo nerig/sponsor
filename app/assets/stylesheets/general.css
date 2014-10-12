@@ -1,9 +1,10 @@
 .app-header {
 	background-color: #1947a3;
-}
-
-.app-header .content-margins {
-	width: 90em;
+	
+	/* sticky header */
+	position:fixed;
+	width:100%;
+	z-index: 999;
 }
 
 .app-header .logo * {

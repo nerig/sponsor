@@ -17,11 +17,11 @@
 	<link rel="shortcut icon" href="https://s3.amazonaws.com/rmktimages/cropped.png">
 </head>
 <body>
-	<header class="row">
-		<div class="col-md-12 app-header">
-			<div class="center-block content-margins">
-				<a class="col-md-4 logo" href="/"><h1>Marketiers</h1></a>
-				<div class="col-md-8" id="menu">
+	<header class="app-header">
+		<div class="container">
+			<div class="row">
+				<a class="col-md-2 logo" href="/"><h1>Marketiers</h1></a>
+				<div class="col-md-10" id="menu">
 					<ul>
 						<li><a href="/">Home</a></li>
 						<li><a href="/events">Events List</a></li>
@@ -35,16 +35,20 @@
 		</div>
 	</header>
 
-	<%= yield %>
+	<!-- padding for taking space from sticky header -->
+	<div style="padding: 6em 0">
+		<%= yield %>
+	</div>
 
 	<footer class="row">
 		<div class="col-md-12 app-header">
-			<div class="center-block">
-				<a class="col-md-12 logo text-center" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><h3>Ora give me footer please</h3></a>
+			<div class="container"> <!-- consider location of container div -->
+				<div class="center-block">
+					<a class="col-md-12 logo text-center" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><h3>Ora give me footer please</h3></a>
+				</div>
 			</div>
 		</div>
 	</footer>
-
 	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" %>
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" %>
 	<%= javascript_include_tag "https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js" %>
