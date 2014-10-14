@@ -14,6 +14,15 @@ var get = function(id) {
 	return document.getElementById(id);
 }
 
+var getStyle = function (el, styleProp)
+{
+	if (el.currentStyle)
+		var y = el.currentStyle[styleProp];
+	else if (window.getComputedStyle)
+		var y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+	return y;
+}
+
 spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	
 	$scope.initWith = function(events) {
@@ -267,7 +276,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		while (descriptionElement.offsetHeight > descriptionMaxHeight) {
 			var lastSpace = tmpTrimmedText.lastIndexOf(" ");
 			tmpTrimmedText = $scope.originalDescription.substring(0, lastSpace);
-			trimmedText = tmpTrimmedText + '<span id="three-Dots">...</span>';
+			trimmedText = tmpTrimmedText + '<span id="three-dots">...</span>';
 			$scope.restOfText = $scope.originalDescription.substring(tmpTrimmedText.length, $scope.originalDescription.length);
 
 			descriptionElement.innerHTML = trimmedText;
@@ -283,8 +292,23 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		var restOfTextPosition = lower - $('#rest-of-description').offset().top;
 		
 		var restOfDescElement = get('rest-of-description');
-		descriptionElement.style.marginTop  = -restOfTextPosition + 'px';
 		restOfDescElement.style.marginTop  = restOfTextPosition + 'px';
+
+		/* now we want to see if the original trimmed description needs moving
+		to look nicely with the rest of the description */
+
+		var descriptionOffset = 0;
+		if (logoBottom > descriptionBottom) {
+			descriptionOffset = logoBottom - descriptionBottom;
+		}
+		
+		var marginBottom = parseInt(getStyle(descriptionElement, 'margin-bottom'));
+		descriptionElement.style.marginTop  = marginBottom + descriptionOffset + 'px';
+
+		if (descriptionOffset > 0) {
+			descriptionElement.style.marginBottom = 0 + 'px';
+			get('read-more').style.marginTop = '0px';
+		}
 
 	} else {
 		/* not showing read more if there is no overflow */
@@ -293,6 +317,6 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 
 	$scope.toggleFullDescription = function() {
 		$scope.showRestOfDescription = !$scope.showRestOfDescription;
-		get('three-Dots').style.visibility = $scope.showRestOfDescription ? "hidden" : "visible";
+		get('three-dots').style.visibility = $scope.showRestOfDescription ? "hidden" : "visible";
 	}
 }]);
