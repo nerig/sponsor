@@ -1,7 +1,48 @@
-#event_logo {
-	margin: auto;
-    max-width: 18em;
-    max-height: 18em;
+#event-logo {
+    max-width: 19em;
+    max-height: 19em;
     width: auto;
     height: auto;
+    border: 2px solid #c2c2ff;
+    padding: .1em;
+}
+
+.event-details {
+	margin-top: .5em;
+}
+
+#little-details {
+	margin: 1em 0 0 1em;
+}
+
+#att-gender {
+	max-height: 1.7em;
+	height: auto;
+	width: auto;
+}
+
+.age-icon {
+	font: bold .8em Georgia, serif;
+}
+
+.age-detail {
+	font: bold .8em Georgia, serif;
+}
+
+#size-icon {
+	margin-top: -0.5em;
+	max-height: 1.2em;
+	height: auto;
+	width: auto;
+}
+
+.size-range {
+	margin-top: -0.5em;
+	font: bold .8em Georgia, serif;
+}
+
+.description-toggle {
+	float: right;
+	font-size: 0.8em;
+	margin: -1em -1em 0 0;
 }

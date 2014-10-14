@@ -16,8 +16,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  size_range             :string(255)
-#  date                   :string(255)
-#  time                   :string(255)
 #  sponsorship_type       :string(255)
 #  sponsorship_requests   :text
 #  recurrence             :string(255)
@@ -25,6 +23,7 @@
 #  attendees_gender       :string(255)
 #  attendees_income_level :string(255)
 #  image_url              :string(255)
+#  date_time              :datetime
 #
 # Indexes
 #
