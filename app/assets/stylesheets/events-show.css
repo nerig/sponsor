@@ -46,3 +46,14 @@
 	font-size: 0.8em;
 	margin: -1em -1em 0 0;
 }
+
+.requested-sponsorship-icon {
+	float: right;
+}
+
+#map_canvas {
+	width: 100%;
+	height: 40em;
+	background-color: #CCC;
+	margin-top: 1em;
+}

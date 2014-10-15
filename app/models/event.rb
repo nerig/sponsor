@@ -16,7 +16,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  size_range             :string(255)
-#  sponsorship_type       :string(255)
 #  sponsorship_requests   :text
 #  recurrence             :string(255)
 #  age_range              :string(255)
@@ -24,6 +23,7 @@
 #  attendees_income_level :string(255)
 #  image_url              :string(255)
 #  date_time              :datetime
+#  sponsorship_types      :text
 #
 # Indexes
 #
@@ -32,4 +32,6 @@
 
 class Event < ActiveRecord::Base
 	belongs_to :user
+
+	serialize :sponsorship_types, Array
 end

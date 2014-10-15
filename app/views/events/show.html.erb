@@ -1,5 +1,5 @@
 
-<div class="container" ng-controller="ShowEventCtrl">
+<div class="container" ng-controller="ShowEventCtrl" ng-init="initWith('<%= @event.to_json %>')">
 	<div class="row">	
 		<h1 class="col-md-8 text-capitalize"><%= @event.name %></h1>
 	</div>
@@ -36,8 +36,16 @@
 				<p id="ev-desc" class="event-details"><%= @event.description %></p>
 			</div>
 		</div>
-		<div class="col-md-3">
-			<!-- put sticky sponsor button here -->
+		<div class="col-md-offset-1 col-md-1">
+			<div class="row">
+				<p id="event-sponsor-button"><a class="btn btn-primary btn-lg" role="button" ng-href="/events/<%= @event.id %>">Sponsor!</a></p>
+			</div>
+			<div class="row">
+				<p class="text-center" style="margin-top:-0.6em;font-size:0.9em;">or</p>
+			</div>
+			<div class="row">
+				<p style="margin-top:-1.2em;"><a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank" style="font-size:0.7em;white-space:nowrap;">Contact event organizer</a></p>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -52,6 +60,46 @@
 				<a class="" href="">Read less</a>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-8">
+			<div class="row">
+				<p style="white-space: nowrap;">Requested sponsorship:</p>
+			</div>
+			<div class="row">
+				<div class="col-md-1">
+					<p>Capital</p>
+				</div>
+				<div class="col-md-2">
+					<i id="Capital" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1">
+					<p>Merchandise</p>
+				</div>
+				<div class="col-md-2">
+					<i id="Merchandise" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1">
+					<p>Discounts</p>
+				</div>
+				<div class="col-md-2">
+					<i id="Discounts" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
+				</div>
+			</div>
+			<div class="row">
+				<p><%= @event.sponsorship_requests %></p>
+			</div>
+			<div class="row">
+				<a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div id="map_canvas"></div>
 	</div>
 
 </div>
