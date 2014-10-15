@@ -44,4 +44,25 @@
 
 footer {
 	margin-top: 3em;
+	background-color: #1947a3;
+	width: 100%;
+}
+
+.footer-text {
+	color: white;
+}
+
+.email-us {
+	margin-top: -.5em;
+	margin-bottom: 2.5em;
+}
+
+.email-us:hover {
+	color: lightgreen;
+}
+
+.footer-logo {
+	color: white;
+	font-size: 3em;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
