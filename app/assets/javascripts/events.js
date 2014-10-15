@@ -346,7 +346,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 					var mapOptions = {
 						zoom: 17,
 						center: results[0].geometry.location,
-						mapTypeId: google.maps.MapTypeId.ROADMAP
+						mapTypeId: google.maps.MapTypeId.ROADMAP,
+						scrollwheel: false
 					}
 					var map = new google.maps.Map(get("map_canvas"), mapOptions);
 
