@@ -1,5 +1,5 @@
 <!-- general div to include ng -->
-<div ng-controller="EventsListCtrl" ng-init="initWith('<%= @events %>')">
+<div ng-controller="EventsListCtrl" ng-init="initWith('<%=h @events.gsub("'", "&#39;") %>')">
 	
 	<div class="row">
 		<h1 class="col-md-12 text-center" style="margin-top:2em;">Pick an event to sponsor:</h1>

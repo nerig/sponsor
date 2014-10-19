@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014160552) do
+ActiveRecord::Schema.define(version: 20141017143130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(version: 20141014160552) do
     t.string   "size_range"
     t.text     "sponsorship_requests"
     t.string   "recurrence"
-    t.string   "age_range"
     t.string   "attendees_gender"
-    t.string   "attendees_income_level"
     t.string   "image_url"
     t.datetime "date_time"
     t.text     "sponsorship_types"
+    t.text     "attendees_income_levels"
+    t.text     "age_ranges"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree

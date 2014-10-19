@@ -43,5 +43,7 @@ gem 'annotate'
 
 # for user login
 gem 'devise'
-
-gem 'rails_12factor'
+ 
+group :production do 
+	gem 'rails_12factor' 
+end

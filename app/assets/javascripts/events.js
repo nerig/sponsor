@@ -26,8 +26,7 @@ var getStyle = function (el, styleProp)
 spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	
 	$scope.initWith = function(events) {
-		$scope.events = JSON.parse(events);
-		//console.log($scope.events);
+		$scope.events = JSON.parse(events.replace(/\r\n/g, "\\r\\n"));
 		
 		// extracting the lists of filters from existing values in the events
 		$scope.locations = [];
@@ -49,11 +48,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			}
 		});
 		$scope.locations.sort(function(a, b) { return compare(a.city, b.city); });
-		//console.log($scope.locations);
 		$scope.ageRanges.sort(function(a, b) { return compare(a.range, b.range); });
-		//console.log($scope.ageRanges);
 		$scope.sizeRanges.sort(function(a, b) { return compare(parseInt(a.range), parseInt(b.range)); });
-		//console.log($scope.sizeRanges);
 
 		$scope.incomeLevels = [{"income": "Low"}, {"income": "Medium"}, {"income": "High"}];
 
@@ -330,6 +326,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
 
 		/* glyphicons selections logic for sponsorship types */
+		crudeEvent = crudeEvent.replace(/\r\n/g, "\\r\\n");
 		var event = JSON.parse(crudeEvent);
 		angular.forEach(event.sponsorship_types, function(type) {
 			var spTypeElement = $('#' + type);
@@ -341,6 +338,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		var mapInit = function() {
 			var geocoder = new google.maps.Geocoder();
 			var address = event.address1 + (event.address2 ? ' ' + event.address2 : '') + ', ' + event.city + ', ' + event.country;
+			log(address);
 			geocoder.geocode({ 'address': address }, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var mapOptions = {
@@ -356,11 +354,40 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 						position: results[0].geometry.location,
 						title: event.name
 					});
+				} else {
+					log('could not find address for showing in google maps');
+					log('results: ' + results);
+					log('status: ' + status);
 				}
 			});
 		}
 		/* load the map when page is done loading */
 		google.maps.event.addDomListener(window, 'load', mapInit);
 
+		/* make age range readable */
+		event.age_ranges.sort();
+		for (var i = 0; i < event.age_ranges.length; i++) {
+			if (!$scope.ageRanges) {
+				$scope.ageRanges = event.age_ranges[i];
+				continue;
+			}
+
+			var splitRange = event.age_ranges[i].split("-");
+			var bigger = parseInt(splitRange[0]);
+
+			var splitScope = $scope.ageRanges.split("-");
+			var smallerStr = splitScope[splitScope.length - 1];
+			var smaller = parseInt(smallerStr);
+
+			if ((bigger - smaller) == 1) {
+				if (bigger == 51) {
+					$scope.ageRanges = $scope.ageRanges.replace('-' + smallerStr, '+');
+				} else {
+					$scope.ageRanges = $scope.ageRanges.replace(smallerStr, splitRange[1]);
+				}
+			} else {
+				$scope.ageRanges += ',' + event.age_ranges[i];
+			}
+		}
 	}
 }]);
