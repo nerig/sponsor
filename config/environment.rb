@@ -5,3 +5,7 @@ require File.expand_path('../application', __FILE__)
 Rails.application.initialize!
 
 ActiveRecord::Base.logger.level = 1
+
+def log(text)
+  Rails.logger.info(text)
+end
