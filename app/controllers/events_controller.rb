@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 	# action to show all events
 	def index
 		@events = Event.all.sort { |a, b| a.date_time <=> b.date_time}.to_json
+		log "#{@events}"
 	end
 
 	# action taken when a user wants to create a new event
