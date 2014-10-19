@@ -38,10 +38,12 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 				$scope.locations.push({"city": event.city});
 				tempValues.push(event.city);
 			}
-			if (tempValues.indexOf(event.age_range) === -1) {
-				$scope.ageRanges.push({"range": event.age_range});
-				tempValues.push(event.age_range);
-			}
+			angular.forEach(event.age_ranges, function(oneRange) {
+				if (tempValues.indexOf(oneRange) === -1) {
+					$scope.ageRanges.push({"range": oneRange});
+					tempValues.push(oneRange);
+				}
+			});
 			if (tempValues.indexOf(event.size_range) === -1) {
 				$scope.sizeRanges.push({"range": event.size_range});
 				tempValues.push(event.size_range);
@@ -106,9 +108,13 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		if (flatRanges.length === 0) {
 			return events;
 		}
-    
+
 		return events.filter(function(element, index, array) {
-			return (flatRanges.indexOf(element.age_range) >= 0);
+			var found = false;
+			angular.forEach(element.age_ranges, function(range) {
+				if (flatRanges.indexOf(range) >= 0) found = true;
+			});
+			return found;
 		});
 	};	
 })
@@ -152,7 +158,11 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		}
     
 		return events.filter(function(element, index, array) {
-			return (flatIncomes.indexOf(element.attendees_income_level) >= 0);
+			var found = false;
+			angular.forEach(element.attendees_income_levels, function(level) {
+				if (flatIncomes.indexOf(level) >= 0) found = true;
+			});
+			return found;
 		});
 	};	
 })
