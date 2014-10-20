@@ -1,6 +1,6 @@
 "use strict";
 
-var spons = angular.module('spons', ['multi-select', 'ui.bootstrap']);
+var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize']);
 
 var compare = function(a, b) {
 	return (a > b) ? 1 : ((b > a) ? -1 : 0);

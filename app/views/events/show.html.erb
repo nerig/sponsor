@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<p id="ev-desc" class="event-details"><%= @event.description.gsub("\r\n", "<br/>").html_safe %> </p>
+				<p id="ev-desc" class="event-details"><%= @event.description.gsub("\r\n", "<br>").html_safe %> </p>
 			</div>
 		</div>
 		<div class="col-md-offset-1 col-md-1">
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<p id="rest-of-description" class="col-md-9" ng-show="showRestOfDescription">{{restOfText}}</p>
+		<p id="rest-of-description" class="col-md-9" ng-show="showRestOfDescription" ng-bind-html="restOfText"></p>
 	</div>
 	<div class="row">
 		<div class="col-md-9">
@@ -90,7 +90,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<p><%= @event.sponsorship_requests.gsub("\r\n", "<br/>").html_safe %></p>
+				<p><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
 			</div>
 			<div class="row">
 				<a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
