@@ -301,25 +301,20 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 
 			/* getting negative number of pixels to offset the rest of description */
 			var restOfTextPosition = lower - $('#rest-of-description').offset().top;
-			
 			var restOfDescElement = get('rest-of-description');
 			restOfDescElement.style.marginTop  = restOfTextPosition + 'px';
 
-			/* now we want to see if the original trimmed description needs moving
-			to look nicely with the rest of the description */
+			/* now if the image is lower than the description we wnat the description
+			   to end at the same line */
 
 			var descriptionOffset = 0;
 			if (logoBottom > descriptionBottom) {
 				descriptionOffset = logoBottom - descriptionBottom;
-			}
-			
-			var marginBottom = parseInt(getStyle(descriptionElement, 'margin-bottom'));
-			descriptionElement.style.marginTop  = marginBottom + descriptionOffset + 'px';
+				descriptionElement.style.marginTop  = descriptionOffset + 'px';
 
-			if (descriptionOffset > 0) {
-				descriptionElement.style.marginBottom = 0 + 'px';
 				get('read-more').style.marginTop = '0px';
 			}
+			
 
 		} else {
 			/* not showing read more if there is no overflow */
