@@ -1,28 +1,16 @@
-
-.home_sponsor_linkto {
-	background:url(./green.jpg) no-repeat;
-	background-position: -325px -396px;
-	height: 200px;
-	width: 600px;
-    top: 40%;
-    left: 50%;
-    border-radius: 10px;
-    transform: translate(-50%, -50%);
-	
-	/* text */
-	color: white;
-	text-align: center;
-	text-decoration: none;
-	font-family: sans-serif;
-    font-size: 1.8em;
-    line-height: 190px
+#big-background-image {
+	background: url(./homepage-bigimage.jpg) no-repeat;
+	background-size: 100% 60em;
+	height: 60em;
 }
 
-.home_sponsor_linkto:hover {
-	background:url(./green.jpg) no-repeat;
-}
+#big-background-image .freetext-search {
+	position: relative;
+	top: 40%;
+	left: 50%;
+	transform: translate(-55%, 0%);
 
-.home_sponsor_linkto:active {
-	background:url(./green.jpg) no-repeat;
-	background-position: -600px -396px;
+	width: 60em;
+	height: auto;
+	font-size: 2em;
 }
