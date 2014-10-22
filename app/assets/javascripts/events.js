@@ -252,10 +252,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	};
 
 	$scope.genderChanged = function(choice) {
-		//console.log($scope.$parent.genderFilterSelection);
 		$scope.status.buttonText = choice;
 		$scope.$parent.genderFilterSelection = choice;
-		//console.log($scope.$parent.genderFilterSelection);
 	}
 }])
 

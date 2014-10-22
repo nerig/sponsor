@@ -14,3 +14,49 @@
 	height: auto;
 	font-size: 2em;
 }
+
+#trending-events {
+	list-style-type: none;
+	margin-top: 3em;
+}
+
+#one-trending-event {
+	width: 20em;
+	height: 26.5em;
+	margin-bottom: 5em;
+	cursor: pointer;
+	background: #ffffff;
+	border: 1px solid #ffffff; /* to prevent all the events of moving upon hover */
+	border-radius: 8px;
+}
+
+#one-trending-event:hover {
+	border: 1px solid #c2c2ff;
+}
+
+#one-trending-event #logo {
+	margin: 1em 0 0 1em;
+	max-height: 10em;
+	max-width: 16em;
+	width: auto;
+}
+
+#one-trending-event .absolute-items {
+	position: absolute;
+	top: 12em;
+	margin-left: 1em;
+}
+
+#one-trending-event #line {
+	width: 18em;
+}
+
+#sponsor-button {
+	font-size: 2em;
+}
+
+#events-list {
+	opacity: 0;
+	height: 0px;
+	overflow: hidden;
+}

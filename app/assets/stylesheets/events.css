@@ -126,6 +126,11 @@ html, body {
 }
 
 .freetext-search {
-	margin-left: 2em;
-	max-width: 25.75em;
+	margin-left: 1em;
+	max-width: 18.8em;
+	font-size: 1.5em !important;
+	min-height: 2.5em !important;
+	border-radius: 4px;
+	color: #555 !important;
+	border: 1px solid #c6c6c6 !important;
 }

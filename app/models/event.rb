@@ -8,7 +8,6 @@
 #  address2                :text
 #  city                    :string(255)
 #  region                  :string(255)
-#  zip_code                :integer
 #  country                 :string(255)
 #  contact_number          :string(255)
 #  description             :text
@@ -24,6 +23,7 @@
 #  sponsorship_types       :text
 #  attendees_income_levels :text
 #  age_ranges              :text
+#  zipcode                 :string(255)
 #
 # Indexes
 #
