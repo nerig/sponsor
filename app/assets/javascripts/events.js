@@ -1,7 +1,5 @@
 "use strict";
 
-var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize']);
-
 var compare = function(a, b) {
 	return (a > b) ? 1 : ((b > a) ? -1 : 0);
 }
@@ -22,6 +20,8 @@ var getStyle = function (el, styleProp)
 		var y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
 	return y;
 }
+
+var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize']);
 
 spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	
@@ -175,7 +175,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		}
     
 		return events.filter(function(element, index, array) {
-			return (fromDate.getTime() <= element.date_time);
+			return (fromDate.getTime() <= new Date(element.date_time).getTime());
 		});
 	};	
 })
@@ -188,7 +188,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		}
     
 		return events.filter(function(element, index, array) {
-			return (toDate.getTime() >= element.date_time);
+			return (toDate.getTime() >= new Date(element.date_time).getTime());
 		});
 	};	
 })
@@ -225,6 +225,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			$scope.opened1 = false;
 			$scope.opened2 = !$scope.opened2;
 		}
+
+		$scope.minDateTo = ($scope.$parent.fromDate === 'From, today') ? new Date() : $scope.$parent.fromDate;
 	};
 
 	$scope.dateOptions = {

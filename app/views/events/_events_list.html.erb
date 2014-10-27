@@ -26,7 +26,7 @@
 				  		<div class="col-md-4" style="margin:0 0 1em 0em" ng-controller="DatepickerCtrl">
 				  			<div class="col-md-6">
 					  			<p class="input-group">
-			              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.fromDate" is-open="opened1" min-date="minDateFrom" datepicker-options="dateOptions" ng-click="open($event, 'from')" ng-required="false" show-button-bar="false"/>
+			              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.fromDate" is-open="opened1" min-date="minDateFrom" datepicker-options="dateOptions" ng-click="open($event, 'from')" show-button-bar="true"/>
 			              			<span class="input-group-btn">
 			                			<button type="button" class="btn btn-default" ng-click="open($event, 'from')"><i class="glyphicon glyphicon-calendar"></i></button>
 			              			</span>
@@ -34,7 +34,7 @@
 		            		</div>
 		            		<div class="col-md-6">
 					  			<p class="input-group">
-			              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.toDate" is-open="opened2" min-date="$parent.fromDate" datepicker-options="dateOptions" ng-click="open($event, 'to')" ng-required="false" show-button-bar="false"/>
+			              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.toDate" is-open="opened2" min-date="minDateTo" datepicker-options="dateOptions" ng-click="open($event, 'to')" show-button-bar="false"/>
 			              			<span class="input-group-btn">
 			                			<button type="button" class="btn btn-default" ng-click="open($event, 'to')"><i class="glyphicon glyphicon-calendar"></i></button>
 			              			</span>
