@@ -7,6 +7,9 @@
 		<div ng-controller="HomepageCtrl" ng-init="initWith('<%=h @six_events.gsub("'", "&#39;") %>')">
 			<div class="container">
 				<div class="row">
+					<h3 class="col-md-offset-1" style="margin-top:2em;">Trending Events</h3>
+				</div>
+				<div class="row">
 					<ul id="trending-events">
 						<li class="col-md-4" ng-repeat="event in events" ng-click="go('/events/' + event.id)">
 							<div id="one-trending-event" class="center-block">
