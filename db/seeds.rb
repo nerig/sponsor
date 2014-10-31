@@ -8,7 +8,7 @@
 
 Event.create([
 	{
-		name: 'one',
+		name: 'HBS Happy feet',
 		size_range: "0-50",
 		address1: "2 E 59th St",
 		city: "New York",
@@ -27,7 +27,7 @@ Event.create([
 		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
 	},
 	{
-		name: 'onetwo',
+		name: 'Women in labor',
 		size_range: "0-50",
 		address1: "2 E 59th St",
 		city: "New York",
@@ -46,7 +46,7 @@ Event.create([
 		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
 	},
 	{
-		name: 'one-three',
+		name: 'Hot-tub Sunday party',
 		size_range: "0-50",
 		address1: "2 E 59th St",
 		city: "New York",
@@ -65,7 +65,7 @@ Event.create([
 		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
 	},
 	{
-		name: 'two',
+		name: 'Moses lamps store anniversary',
 		size_range: "50-100",
 		address1: "111 western avenue",
 		city: "Boston",
@@ -84,7 +84,7 @@ Event.create([
 		image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg"
 	},
 	{
-		name: 'tree',
+		name: 'HotS spring Concert',
 		size_range: "100-500",
 		address1: "151 Hanover Street",
 		city: "Boston",
@@ -103,7 +103,7 @@ Event.create([
 		image_url: "https://s3.amazonaws.com/rmktimages/logo3.png"
 	},
 	{
-		name: 'four',
+		name: 'cyber Posium',
 		size_range: "500-1000",
 		address1: "136 W 3rd St",
 		city: "Los Angeles",
@@ -122,7 +122,7 @@ Event.create([
 		image_url: "https://s3.amazonaws.com/rmktimages/logo2.jpg"
 	},
 	{
-		name: 'five',
+		name: 'cAts in an alley',
 		size_range: "1000+",
 		address1: "30085 Comercio",
 		city: "Rancho Santa Margarita",

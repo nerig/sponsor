@@ -1,0 +1,88 @@
+
+<div id="main_body" >
+
+	<img id="top" src="/assets/top.png" alt="">
+	<div id="form_container">
+
+		<h1 id="thick-line"><a>Sponsor an event</a></h1>
+		<form accept-charset="UTF-8" class="appnitro" method="post" enctype="multipart/form-data" action="/sponsorship_responses">
+			<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+			<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
+			<div class="form_description">
+				<h2>Sponsor <strong><%= @event.name.capitalize %></strong> event</h2>
+				<p>Please fill up all applicable fields.</p>
+			</div>
+			<ul>
+				<li>
+					<label class="description">Event name</label>
+					<p><%= @event.name %></p>
+				</li>
+				<li>
+					<label class="description">Requested sponsorship types</label>
+					<p><%= @event.sponsorship_types.map { |st| st.capitalize }.join(", ") %></p>
+				</li>
+				<li id="li_1" >
+					<label class="description" for="response[first_name]">Your name </label>
+					<span>
+						<input id="element_1_1" name="response[first_name]" class="element text" maxlength="255" size="8" value=""/>
+						<label>First</label>
+					</span>
+					<span>
+						<input id="element_1_2" name="response[last_name]" class="element text" maxlength="255" size="14" value=""/>
+						<label>Last</label>
+					</span> 
+				</li>
+				<li id="li_2" >
+					<label class="description" for="response[email]">Email </label>
+					<div>
+						<input id="element_2" name="response[email]" class="element text medium" type="text" maxlength="255" value=""/> 
+					</div> 
+				</li>
+				<li id="li_7" >
+					<label class="description" for="element_7">Phone </label>
+					<span>
+						<input id="element_7_1" name="response[phone1]" class="element text" size="3" maxlength="3" value="" type="text"> -
+						<label for="response[phone1]">(###)</label>
+					</span>
+					<span>
+						<input id="element_7_2" name="response[phone2]" class="element text" size="3" maxlength="3" value="" type="text"> -
+						<label for="response[phone2]">###</label>
+					</span>
+					<span>
+						<input id="element_7_3" name="response[phone3]" class="element text" size="4" maxlength="4" value="" type="text">
+						<label for="response[phone3]">####</label>
+					</span>
+				</li>
+				<li id="li_3" >
+					<label class="description" for="response[company_name]">Company name </label>
+					<div>
+						<input id="element_3" name="response[company_name]" class="element text medium" type="text" maxlength="255" value=""/> 
+					</div> 
+				</li>
+				<li id="li_9" >
+					<label class="description" for="response[title]">Your title </label>
+					<div>
+						<input id="element_9" name="response[title]" class="element text medium" type="text" maxlength="255" value=""/> 
+					</div> 
+				</li>
+				<li id="li_8" >
+					<label class="description" for="response[offered_sponsorship]">Please specify the sponsorship package you're offering </label>
+					<div>
+						<textarea id="element_8" name="response[offered_sponsorship]" class="element textarea small"></textarea> 
+					</div> 
+				</li>
+				<li id="li_10" >
+				<label class="description" for="response[comments]">Comments </label>
+				<div>
+					<textarea id="element_10" name="response[comments]" class="element textarea small"></textarea> 
+				</div> 
+				</li>
+
+				<li class="buttons">
+					<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+				</li>
+			</ul>
+		</form>	
+	</div>
+	<img id="bottom" src="/assets/bottom.png" alt="">
+</div>

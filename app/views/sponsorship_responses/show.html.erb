@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @sponsorship_response.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @sponsorship_response.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @sponsorship_response.email %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @sponsorship_response.phone_number %>
+</p>
+
+<p>
+  <strong>Company name:</strong>
+  <%= @sponsorship_response.company_name %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @sponsorship_response.title %>
+</p>
+
+<p>
+  <strong>Offered sponsorship:</strong>
+  <%= @sponsorship_response.offered_sponsorship %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @sponsorship_response.comments %>
+</p>
+
+<%= link_to 'Edit', edit_sponsorship_response_path(@sponsorship_response) %> |
+<%= link_to 'Back', sponsorship_responses_path %>

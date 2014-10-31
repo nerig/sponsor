@@ -1,15 +1,33 @@
+* {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+html, body {
+	background: #f8f8ff !important;
+	height: 100%;
+}
+
 .app-header {
-	background-color: #1947a3;
+	background-color: white;
+	border-bottom: 2px solid #AAAAAA;
 	
 	/* sticky header */
 	position:fixed;
 	width:100%;
 	z-index: 999;
+
+	height: 4em;
 }
 
 .app-header .logo * {
-	color: white;
-	font-size: 3em;
+	color: grey;
+	font-size: 2em;
+	margin-top: 0.5em;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
@@ -18,9 +36,11 @@
 }
 
 .event-create-button {
-	color: black !important;
+	color: grey !important;
+	font-size: 1em !important;
+
 	position: relative;
-	bottom: .5em;
+	bottom: 0.2em;
 }
 
 .app-header #menu {
@@ -28,7 +48,7 @@
 }
 
 .app-header #menu ul {
-	margin-top: 2.6em; 
+	margin-top: 1em; 
 	list-style-type: none;
 }
 
@@ -39,8 +59,8 @@
 }
 
 .app-header #menu a {
-	font-size: 1.4em;
-	color: white;
+	font-size: 1.2em;
+	color: grey;
 	text-decoration: none;
 }
 
@@ -51,7 +71,7 @@
 footer {
 	margin-top: 3em;
 	margin-bottom: -4em; 
-	background-color: #1947a3;
+	background-color: #333;
 	width: 100%;
 }
 
