@@ -8,7 +8,7 @@ html {
 }
 
 html, body {
-	background: #f8f8ff !important;
+	background: #F7F7F7 !important;
 	height: 100%;
 }
 
@@ -65,7 +65,7 @@ html, body {
 }
 
 .app-header #menu a:hover {
-	color: #F5e0eb;
+	color: #0F90C9;
 }
 
 footer {
