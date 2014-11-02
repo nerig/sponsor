@@ -268,7 +268,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		for sponsorship types... */
 		
 		/* description length and position calculations */
-		var logoHeight = get('event-logo').offsetHeight;
+		var logoElement = get('event-logo');
+		var logoHeight = logoElement.offsetHeight;
 		var detailsAboveTheDescriptionHeight = get('above-the-description').offsetHeight;
 
 		var descriptionMaxHeight = logoHeight - detailsAboveTheDescriptionHeight;
@@ -304,7 +305,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			var restOfDescElement = get('rest-of-description');
 			restOfDescElement.style.marginTop  = restOfTextPosition + 'px';
 
-			/* now if the image is lower than the description we wnat the description
+			/* now if the image is lower than the description we want the description
 			   to end at the same line */
 
 			var descriptionOffset = 0;
@@ -319,11 +320,6 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		} else {
 			/* not showing read more if there is no overflow */
 			get('read-more').style.visibility = "hidden";
-		}
-
-		$scope.toggleFullDescription = function() {
-			$scope.showRestOfDescription = !$scope.showRestOfDescription;
-			get('three-dots').style.visibility = $scope.showRestOfDescription ? "hidden" : "visible";
 		}
 
 		/* sponsor! button location calculation */
@@ -393,6 +389,11 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			} else {
 				$scope.ageRanges += ',' + event.age_ranges[i];
 			}
+		}
+
+		$scope.toggleFullDescription = function() {
+			$scope.showRestOfDescription = !$scope.showRestOfDescription;
+			get('three-dots').style.visibility = $scope.showRestOfDescription ? "hidden" : "visible";
 		}
 	}
 }]);

@@ -1,104 +1,102 @@
 <div class="container" ng-controller="ShowEventCtrl" ng-init="initWith('<%=h @event.to_json.gsub("'", "&#39;") %>')">
-	<div class="row">	
-		<h1 class="col-md-8 text-capitalize"><%= @event.name %></h1>
-	</div>
-
-	<div class="row">
-		<div class="col-md-3">
-			<img id="event-logo" class="center-block" src="<%= @event.image_url %>">
+	<div class="margin-left-indent">
+		<div class="row">	
+			<h1 class="col-md-8 text-capitalize"><%= @event.name %></h1>
 		</div>
-		<div class="col-md-6">
-			<div id="above-the-description">
-				<div class="row">
-					<h4 class="event-details"><span><i class="glyphicon glyphicon-calendar"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:m a'}}</h4>
-				</div>
-				<div class="row">
-					<h4 class="event-details"><span><i class="glyphicon glyphicon-map-marker"></i></span> <%= @event.city %></h4>
-				</div>
-				<div id="little-details" class="row">
-					<div class="col-md-2 text-center">
-						<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png"></img>
+
+		<div class="row">
+			<div class="col-md-3">
+				<img id="event-logo" class="center-block" src="<%= @event.image_url %>">
+			</div>
+			<div class="col-md-6">
+				<div id="above-the-description">
+					<div class="row">
+						<p class="event-details"><span><i id="cal-icon" class="glyphicon glyphicon-calendar"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:m a'}}</p>
 					</div>
-					<div class="col-md-2 text-center">
-						<div class="row age-icon">Ages</div>
-						<div class="row age-detail">{{ageRanges}}</div>
+					<div class="row">
+						<p><span><i id="mark-icon" class="glyphicon glyphicon-map-marker"></i></span> <%= @event.city %></p>
 					</div>
-					<div class="col-md-2 text-center">
-						<div class="row">
-							<img id="size-icon" src="/assets/people.png"></img>
+					<div id="little-details" class="row">
+						<div title="Attendees gender" class="col-md-2 text-center">
+							<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png"></img>
 						</div>
-						<div class="row size-range"><%= @event.size_range %></div>
+						<div title="Attendees age" class="col-md-2 text-center">
+							<div class="row age-icon">Ages</div>
+							<div class="row age-detail">{{ageRanges}}</div>
+						</div>
+						<div title="Number of attendees" class="col-md-2 text-center">
+							<div class="row">
+								<img id="size-icon" src="/assets/people.png"></img>
+							</div>
+							<div class="row size-range"><%= @event.size_range %></div>
+						</div>
 					</div>
 				</div>
+				<div class="row">
+					<p id="ev-desc" class="event-details"><%= @event.description.gsub("\r\n", "<br>").html_safe %> </p>
+				</div>
 			</div>
-			<div class="row">
-				<p id="ev-desc" class="event-details"><%= @event.description.gsub("\r\n", "<br>").html_safe %> </p>
+			<div class="col-md-3">
+				<div class="row text-center">
+					<p id="event-sponsor-button"><a class="btn btn-primary btn-lg btn-wide" role="button" ng-href="/sponsorship_responses/new?event_id=<%= @event.id %>">Sponsor!</a></p>
+				</div>
+				<div class="row text-center">
+					<p id="contact-below-button">or <span><a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a></span></p>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-offset-1 col-md-1">
-			<div class="row">
-				<p id="event-sponsor-button"><a class="btn btn-primary btn-lg" role="button" ng-href="/sponsorship_responses/new?event_id=<%= @event.id %>">Sponsor!</a></p>
-			</div>
-			<div class="row">
-				<p class="text-center" style="margin-top:-0.6em;font-size:0.9em;">or</p>
-			</div>
-			<div class="row">
-				<p style="margin-top:-1.2em;"><a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank" style="font-size:0.7em;white-space:nowrap;">Contact event organizer</a></p>
+		<div class="row">
+			<p id="rest-of-description" class="col-md-9" collapse="!showRestOfDescription" ng-bind-html="restOfText"></p>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				<div id="read-more" class="description-toggle" ng-click="toggleFullDescription()" ng-hide="showRestOfDescription">
+					<a href="">Read more</a>
+				</div>
+				<div class="description-toggle" ng-click="toggleFullDescription()" ng-show="showRestOfDescription">
+					<a href="">Read less</a>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<p id="rest-of-description" class="col-md-9" collapse="!showRestOfDescription" ng-bind-html="restOfText"></p>
-	</div>
-	<div class="row">
-		<div class="col-md-9">
-			<div id="read-more" class="description-toggle" ng-click="toggleFullDescription()" ng-hide="showRestOfDescription">
-				<a class="" href="">Read more</a>
-			</div>
-			<div class="description-toggle" ng-click="toggleFullDescription()" ng-show="showRestOfDescription">
-				<a class="" href="">Read less</a>
+		<div class="row">
+			<div class="col-md-9 margin-left-indent">
+				<div class="row">
+					<p style="white-space: nowrap;">Requested sponsorship:</p>
+				</div>
+				<div class="row">
+					<div class="col-md-1">
+						<p>Capital</p>
+					</div>
+					<div class="col-md-2">
+						<i id="capital" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1">
+						<p>Merchandise</p>
+					</div>
+					<div class="col-md-2">
+						<i id="merchandise" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1">
+						<p>Discounts</p>
+					</div>
+					<div class="col-md-2">
+						<i id="discounts" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
+					</div>
+				</div>
+				<div class="row">
+					<p><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
+				</div>
+				<div class="row">
+					<a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-offset-1 col-md-8">
-			<div class="row">
-				<p style="white-space: nowrap;">Requested sponsorship:</p>
-			</div>
-			<div class="row">
-				<div class="col-md-1">
-					<p>Capital</p>
-				</div>
-				<div class="col-md-2">
-					<i id="capital" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-1">
-					<p>Merchandise</p>
-				</div>
-				<div class="col-md-2">
-					<i id="merchandise" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-1">
-					<p>Discounts</p>
-				</div>
-				<div class="col-md-2">
-					<i id="discounts" class="glyphicon glyphicon-remove requested-sponsorship-icon"></i>
-				</div>
-			</div>
-			<div class="row">
-				<p><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
-			</div>
-			<div class="row">
-				<a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
-			</div>
+		<div class="row">
+			<div id="map_canvas"></div>
 		</div>
 	</div>
-	<div class="row">
-		<div id="map_canvas"></div>
-	</div>
-
 </div>

@@ -80,16 +80,6 @@
 
 
 /* filters */
-#search_filter_div {
-	margin-top: 2em;
-	background: #007acc;
-	border-radius: 8px;
-}
-
-.search_area_size {
-	height: auto;
-	width: 90em;
-}
 
 .filter {
 	margin-top: calc(7em / 2);
@@ -99,6 +89,7 @@
 
 .toggleMoreFilters {
 	float: right;
+	margin-right: 1em;
 	color: #007acc;
 }
 
@@ -112,12 +103,18 @@
 	float: left;
 }
 
-.freetext-search {
-	margin-left: 1em;
-	max-width: 18.8em;
+.filter .freetext-search {
 	font-size: 1.5em !important;
 	min-height: 2.5em !important;
 	border-radius: 4px;
 	color: #555 !important;
 	border: 1px solid #c6c6c6 !important;
+}
+
+h3.title {
+	margin: 1em 0 0 1em;
+}
+
+#search-filter-div {
+	margin-left: 1em;
 }
