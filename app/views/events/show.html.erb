@@ -11,13 +11,13 @@
 			<div class="col-md-6">
 				<div id="above-the-description">
 					<div class="row">
-						<p class="event-details"><span><i id="cal-icon" class="glyphicon glyphicon-calendar"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:m a'}}</p>
+						<p class="event-details"><span><i id="cal-icon" class="glyphicon glyphicon-calendar"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:mm a'}}</p>
 					</div>
 					<div class="row">
-						<p><span><i id="mark-icon" class="glyphicon glyphicon-map-marker"></i></span> <%= @event.city %></p>
+						<p class="text-capitalize"><span><i id="mark-icon" class="glyphicon glyphicon-map-marker"></i></span> {{fullAddress}} </p>
 					</div>
 					<div id="little-details" class="row">
-						<div title="Attendees gender" class="col-md-2 text-center">
+						<div title="Attendees gender: <%= @event.attendees_gender %>" class="col-md-2 text-center">
 							<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png"></img>
 						</div>
 						<div title="Attendees age" class="col-md-2 text-center">

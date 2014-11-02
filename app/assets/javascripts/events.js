@@ -21,6 +21,43 @@ var getStyle = function (el, styleProp)
 	return y;
 }
 
+var getFullAddress = function(event) {
+	var streetAddress = (event.address1 ? event.address1 : '') + 
+		(event.address2 ? ' ' + event.address2 : '');
+	var streetAndCity = '';
+	if (event.city) {
+		if (streetAddress != '') {
+			streetAndCity = streetAddress + ', ' + event.city;
+		} else {
+			streetAndCity = event.city;
+		}
+	} else {
+		streetAndCity += streetAddress;
+	}
+	var streetCityAndRegion = '';
+	if (event.region) {
+		if (streetAndCity != '') {
+			streetCityAndRegion = streetAndCity + ', ' + event.region;
+		} else {
+			streetCityAndRegion = event.region;
+		}
+	} else {
+		streetCityAndRegion += streetAndCity;
+	}
+	var streetCityRegionAndCountry = '';
+	if (event.country) {
+		if (streetCityAndRegion != '') {
+			streetCityRegionAndCountry = streetCityAndRegion + ', ' + event.country;
+		} else {
+			streetCityRegionAndCountry = event.country;
+		}
+	} else {
+		streetCityRegionAndCountry += streetCityAndRegion;
+	}
+
+	return streetCityRegionAndCountry;
+}
+
 var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize']);
 
 spons.controller('EventsListCtrl', ["$scope", function($scope) {
@@ -70,6 +107,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	$scope.toggleHiddenFilters = function() {
 		$scope.isCollapsed = !$scope.isCollapsed;
 	}
+
+	$scope.fullAddress = getFullAddress;
 }])
 
 .filter('locationFilter', function() {
@@ -335,12 +374,13 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			spTypeElement.addClass('glyphicon-ok');
 		});
 
+		$scope.fullAddress = getFullAddress(event);
+
 		/* get the map */
 		var mapInit = function() {
 			var geocoder = new google.maps.Geocoder();
-			var address = event.address1 + (event.address2 ? ' ' + event.address2 : '') + ', ' + event.city + ', ' + event.country;
-			log(address);
-			geocoder.geocode({ 'address': address }, function(results, status) {
+			log($scope.fullAddress);
+			geocoder.geocode({ 'address': $scope.fullAddress }, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var mapOptions = {
 						zoom: 17,
