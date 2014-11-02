@@ -10,6 +10,8 @@ spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
 		listElement.style.opacity = 1;
 		listElement.style.height = "auto";
 		listElement.style.overflowY = "visible";
+
+		get('free-text-search').focus();
 	}
 
 	$scope.showInitialHomepage = true;
@@ -23,10 +25,7 @@ spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
 	
 	$scope.onTextChange = function() {
 		window.location.hash = 'events';
-
 		makeEventsVisible();
-
-		get('free-text-search').focus();
 	}
 
 	window.onhashchange = function() {		
