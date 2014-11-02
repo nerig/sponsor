@@ -3,7 +3,7 @@
   <img id="top" src="/assets/top.png" alt="">
   <div id="form_container">
 
-    <h1 id="thick-line"><a>Create a new event!</a></h1>
+    <h6 id="thick-line"><a>Create a new event!</a></h6>
     <form accept-charset="UTF-8" class="appnitro" enctype="multipart/form-data" method="post" action="/events">
       <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
       <div class="form_description">

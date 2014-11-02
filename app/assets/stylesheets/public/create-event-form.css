@@ -50,7 +50,7 @@ form.appnitro
 /**** Logo Section  *****/
 #thick-line
 {
-	background-color:#6699CC;
+	background-color:#ffffff;
 	margin:0;
 	min-height:0;
 	padding:0;
@@ -61,10 +61,7 @@ form.appnitro
 
 #thick-line a
 {
-	
 	display:block;
-	height:100%;
-	min-height:40px;
 	overflow:hidden;
 }
 
