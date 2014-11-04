@@ -1,6 +1,7 @@
 #big-background-image {
 	background: url(./homepage-bigimage.jpg) no-repeat;
-	background-size: 100% auto;
+	background-size: 100% 40em;
+	width: 100%;
 	height: 40em;
 }
 
@@ -17,7 +18,6 @@
 
 #trending-events {
 	list-style-type: none;
-	margin-top: 1em;
 }
 
 #one-trending-event {
