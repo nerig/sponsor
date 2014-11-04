@@ -1,12 +1,12 @@
 #big-background-image {
 	background: url(./homepage-bigimage.jpg) no-repeat;
-	background-size: 100% 60em;
-	height: 60em;
+	background-size: 100% auto;
+	height: 40em;
 }
 
 #big-background-image .freetext-search {
 	position: relative;
-	top: 40%;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%, 0%);
 
