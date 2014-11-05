@@ -1,88 +1,133 @@
+<div class="container" ng-controller="newSponsorshipResponseFormCtrl">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<img id="top" src="/assets/top.png" alt="">
+			<form accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses">
+				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+				<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
+				<div class="row">
+					<div id="form-description">
+						<h4>Sponsor an Event!</h4>
+						<p>Please fill out all applicable fields.</p>
+					</div>
+					<hr class="col-md-11 hri">
+				</div>
+				<div class="questions">
 
-<div id="main_body" >
+					<!-- sponsor agent name -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Your name</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="input-group">
+								<span class="input-group-addon">First</span>
+								<input name="response[first_name]" type="text" class="form-control" placeholder="John" maxlength="255">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon">Last</span>
+								<input name="response[last_name]" type="text" class="form-control" placeholder="Doe" maxlength="255">
+							</div>
+						</div>
+					</div>
 
-	<img id="top" src="/assets/top.png" alt="">
-	<div id="form_container">
 
-		<h1 id="thick-line"><a>Sponsor an event</a></h1>
-		<form accept-charset="UTF-8" class="appnitro" method="post" enctype="multipart/form-data" action="/sponsorship_responses">
-			<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-			<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
-			<div class="form_description">
-				<h2>Sponsor <strong><%= @event.name.capitalize %></strong> event</h2>
-				<p>Please fill up all applicable fields.</p>
-			</div>
-			<ul>
-				<li>
-					<label class="description">Event name</label>
-					<p><%= @event.name %></p>
-				</li>
-				<li>
-					<label class="description">Requested sponsorship types</label>
-					<p><%= @event.sponsorship_types.map { |st| st.capitalize }.join(", ") %></p>
-				</li>
-				<li id="li_1" >
-					<label class="description" for="response[first_name]">Your name </label>
-					<span>
-						<input id="element_1_1" name="response[first_name]" class="element text" maxlength="255" size="8" value=""/>
-						<label>First</label>
-					</span>
-					<span>
-						<input id="element_1_2" name="response[last_name]" class="element text" maxlength="255" size="14" value=""/>
-						<label>Last</label>
-					</span> 
-				</li>
-				<li id="li_2" >
-					<label class="description" for="response[email]">Email </label>
-					<div>
-						<input id="element_2" name="response[email]" class="element text medium" type="text" maxlength="255" value=""/> 
-					</div> 
-				</li>
-				<li id="li_7" >
-					<label class="description" for="element_7">Phone </label>
-					<span>
-						<input id="element_7_1" name="response[phone1]" class="element text" size="3" maxlength="3" value="" type="text"> -
-						<label for="response[phone1]">(###)</label>
-					</span>
-					<span>
-						<input id="element_7_2" name="response[phone2]" class="element text" size="3" maxlength="3" value="" type="text"> -
-						<label for="response[phone2]">###</label>
-					</span>
-					<span>
-						<input id="element_7_3" name="response[phone3]" class="element text" size="4" maxlength="4" value="" type="text">
-						<label for="response[phone3]">####</label>
-					</span>
-				</li>
-				<li id="li_3" >
-					<label class="description" for="response[company_name]">Company name </label>
-					<div>
-						<input id="element_3" name="response[company_name]" class="element text medium" type="text" maxlength="255" value=""/> 
-					</div> 
-				</li>
-				<li id="li_9" >
-					<label class="description" for="response[title]">Your title </label>
-					<div>
-						<input id="element_9" name="response[title]" class="element text medium" type="text" maxlength="255" value=""/> 
-					</div> 
-				</li>
-				<li id="li_8" >
-					<label class="description" for="response[offered_sponsorship]">Please specify the sponsorship package you're offering </label>
-					<div>
-						<textarea id="element_8" name="response[offered_sponsorship]" class="element textarea small"></textarea> 
-					</div> 
-				</li>
-				<li id="li_10" >
-				<label class="description" for="response[comments]">Comments </label>
-				<div>
-					<textarea id="element_10" name="response[comments]" class="element textarea small"></textarea> 
-				</div> 
-				</li>
+					<!-- sponsor agent email -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Email</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-7">
+							<div class="input-group">
+								<span class="input-group-addon"></span>
+								<input name="response[email]" type="email" class="form-control" placeholder="example@mkt.com" maxlength="255">
+							</div>
+						</div>
+					</div>
 
-				<li class="buttons">
-					<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
-				</li>
-			</ul>
-		</form>	
+					<!-- phone number -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Phone</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-7">
+							<div class="input-group">
+								<span class="input-group-addon"></span>
+								<input name="response[phone_number]" type="text" class="form-control" placeholder="###-###-####" maxlength="12">
+							</div>
+						</div>
+					</div>
+
+					<!-- company name -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Company name</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-7">
+							<div class="input-group">
+								<span class="input-group-addon"></span>
+								<input name="response[company_name]" type="text" class="form-control" placeholder="" maxlength="255">
+							</div>
+						</div>
+					</div>
+
+					<!-- agent's title -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Your title</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-7">
+							<div class="input-group">
+								<span class="input-group-addon"></span>
+								<input name="response[title]" type="text" class="form-control" placeholder="" maxlength="255">
+							</div>
+						</div>
+					</div>
+
+					<!-- sponsorship offer -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Please specify the sponsorship package you are willing to offer</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10">
+							<textarea name="response[offered_sponsorship]" rows="3"></textarea>
+						</div>
+					</div>
+
+					<!-- comments -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Comments</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10">
+							<textarea name="response[comments]" rows="3"></textarea>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-11">
+							<input id="btn-sbmt" role="button" class="btn btn-default btn-sm btn-style" type="submit" name="submit"/>
+						</div>
+					</div>
+				</div>
+			</form>
+			<img id="bottom" src="/assets/bottom.png" alt="">
+		</div>
 	</div>
-	<img id="bottom" src="/assets/bottom.png" alt="">
 </div>
