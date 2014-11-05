@@ -24,6 +24,8 @@
 #  attendees_income_levels :text
 #  age_ranges              :text
 #  zipcode                 :string(255)
+#  total_amount            :integer
+#  min_amount              :integer
 #
 # Indexes
 #

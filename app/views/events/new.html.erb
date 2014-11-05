@@ -1,435 +1,386 @@
-<div id="main_body">
+<div class="container" ng-controller="newEventFormCtrl">
 
-  <img id="top" src="/assets/top.png" alt="">
-  <div id="form_container">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<img id="top" src="/assets/top.png" alt="">
+			<form accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/events">
+				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+				<div class="row">
+					<div id="form-description">
+						<h4>Create a new event!</h4>
+						<p>Please fill out all applicable fields.</p>
+					</div>
+					<hr class="col-md-11 hri">
+				</div>
+				<div class="questions">
+				  <div ng-show="questionsSectionNumber === 1">
+						
+						<!-- event organizer name -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Your name</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">First</span>
+									<input name="event[first_name]" type="text" class="form-control" placeholder="John" maxlength="255">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">Last</span>
+									<input name="event[last_name]" type="text" class="form-control" placeholder="Doe" maxlength="255">
+								</div>
+							</div>
+						</div>
 
-	<h6 id="thick-line"><a>Create a new event!</a></h6>
-	<form accept-charset="UTF-8" class="appnitro" enctype="multipart/form-data" method="post" action="/events">
-	  <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-	  <div class="form_description">
-		<h2>Create a new event!</h2>
-		<p>Please fill up all applicable fields.</p>
-	  </div>            
-	  <ul >
+						<!-- event organizer email -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Email</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon"></span>
+									<input name="event[email]" type="email" class="form-control" placeholder="example@mkt.com" maxlength="255">
+								</div>
+							</div>
+						</div>
 
-		<li id="li_1" >
-		  <label class="description" for="event[first_name]">Your name </label>
-			<span>
-			  <input id="element_1_1" name="event[first_name]" class="element text" maxlength="255" size="8" value=""/>
-			  <label>First</label>
-			</span>
-			<span>
-			  <input id="element_1_2" name="event[last_name]" class="element text" maxlength="255" size="14" value=""/>
-			  <label>Last</label>
-			</span> 
-		</li>   
-		<li id="li_2" >
-		  <label class="description" for="event[email]">Email </label>
-		  <div>
-			<input id="element_2" name="event[email]" class="element text medium" type="text" maxlength="255" value=""/> 
-		  </div> 
-		</li>   
-		<li id="li_3" >
-		  <label class="description" for="event[name]">Event name </label>
-		  <div>
-			<input id="element_3" name="event[name]" class="element text medium" type="text" maxlength="255" value=""/> 
-		  </div> 
-		</li>
-		<li id="li_9" >
-		  <label class="description" for="event[size]">Size of event (people) </label>
-		  <div>
-			<select class="element select medium" id="element_9" name="event[size]"> 
-			<option value="" selected="selected"></option>
-			<option value="none">Choose one</option>
-			<option value="0-50">0-50</option>
-			<option value="50-100">50-100</option>
-			<option value="100-500">100-500</option>
-			<option value="500-1000">500-1000</option>
-			<option value="1000+">1000+</option>
+						<!-- phone number -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Phone</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon"></span>
+									<input name="event[phone]" type="text" class="form-control" placeholder="###-###-####" maxlength="12">
+								</div>
+							</div>
+						</div>
+					
+						<!-- event name -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Event's name</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon"></span>
+									<input name="event[name]" type="text" class="form-control" placeholder="What's the name of the event?" maxlength="255">
+								</div>
+							</div>
+						</div>
 
-			</select>
-		  </div> 
-		</li>   
-		<li id="li_4" >
-		  <label class="description" for="element_4">Location </label>
+						<!-- event size -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Event's size (#people)</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Pick a range <span class="caret"></span></button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a ng-click="onSizeSelected('0-50')">0-50</a></li>
+											<li><a ng-click="onSizeSelected('50-100')">50-100</a></li>
+											<li><a ng-click="onSizeSelected('100-500')">100-500</a></li>
+											<li><a ng-click="onSizeSelected('500-1000')">500-1000</a></li>
+											<li><a ng-click="onSizeSelected('1000+')">1000+</a></li>
+										</ul>
+									</div>
+									<input ng-model="sizeInputText" type="text" class="form-control" name="event[size]"/>
+								</div>
+							</div>
+						</div>
 
-		  <div>
-			<input id="element_4_1" name="event[address1]" class="element text large" value="" type="text">
-			<label for="event[address1]">Street Address</label>
-		  </div>
+						<!-- date and time-->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Date and time</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default btn-grey" ng-click="toggleCalendar($event)"><i class="glyphicon glyphicon-calendar"></i> <span class="caret"></span></button>
+									</span>
+									<input type="text" class="form-control" datepicker-popup="MMM d, y" name="event[date]" ng-model="date" is-open="isOpened" min-date="minDate" datepicker-options="dateOptions" ng-click="isOpened = !isOpened" show-button-bar="true"/>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown"><i class="glyphicon glyphicon-time"></i> <span class="caret"></span></button>
+										<ul class="dropdown-menu scrollable-menu" role="menu">
+											<li ng-repeat="time in times">
+												<a ng-click="onTimeSelected(time)">{{time}}</a>
+											</li>
+										</ul>
+									</div>
+									<input ng-model="timeInputText" type="text" class="form-control" name="event[time]"/>
+								</div>
+							</div>
+						</div>
 
-		  <div>
-			<input id="element_4_2" name="event[address2]" class="element text large" value="" type="text">
-			<label for="event[address2]">Address Line 2</label>
-		  </div>
+						<!-- location -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Location</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10">
+								<div class="input-group">
+									<span class="input-group-addon">Address line 1</span>
+									<input name="event[address1]" type="text" class="form-control" placeholder="" maxlength="255">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10">
+								<div class="input-group location">
+									<span class="input-group-addon">Address line 2</span>
+									<input name="event[address2]" type="text" class="form-control" placeholder="" maxlength="255">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="input-group location">
+									<span class="input-group-addon">City</span>
+									<input name="event[city]" type="text" class="form-control" placeholder="" maxlength="255">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group location">
+									<span class="input-group-addon">State / Province / Region</span>
+									<input name="event[state_province_region]" type="text" class="form-control" placeholder="" maxlength="255">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="input-group location">
+									<span class="input-group-addon">Postal / Zip Code</span>
+									<input name="event[zipcode]" type="text" class="form-control" placeholder="" maxlength="255">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group location">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Country <span class="caret"></span></button>
+										<ul class="dropdown-menu scrollable-menu" role="menu">
+											<li ng-repeat="country in countries">
+												<a ng-click="onCountrySelected(country)">{{country}}</a>
+											</li>
+										</ul>
+									</div>
+									<input ng-model="countryInputText" type="text" class="form-control" name="event[country]"/>
+								</div>
+							</div>
+						</div>
+					</div>
 
-		  <div class="left">
-			<input id="element_4_3" name="event[city]" class="element text medium" value="" type="text">
-			<label for="event[city]">City</label>
-		  </div>
+					<div ng-show="questionsSectionNumber === 2">
 
-		  <div class="right">
-			<input id="element_4_4" name="event[state_province_region]" class="element text medium" value="" type="text">
-			<label for="event[state_province_region]">State / Province / Region</label>
-		  </div>
+						<!-- event's description -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Event description</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10">
+								<textarea name="event[description]" rows="2"></textarea>
+							</div>
+						</div>
 
-		  <div class="left">
-			<input id="element_4_5" name="event[zipcode]" class="element text medium" maxlength="15" value="" type="text">
-			<label for="event[zipcode]">Postal / Zip Code</label>
-		  </div>
+						<!-- Sponsorship types -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Sponsorship Types You're Interested In</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">	
+								<input id="cb-capital" name="event[capital]" type="checkbox" value="capital"/>
+								<span ng-click="onCapitalClick()">Capital</span>
+							</div>
+							<div class="col-md-2">	
+								<input id="cb-discounts" name="event[discounts]" type="checkbox" value="discounts"/>
+								<span ng-click="onDiscountsClick()">Discounts</span>
+							</div>
+							<div class="col-md-3">	
+								<input id="cb-merchandise" name="event[merchandise]" type="checkbox" value="merchandise"/>
+								<span ng-click="onMerchandiseClick()">Merchandise</span>
+							</div>
+						</div>
 
-		  <div class="right">
-			<select class="element select medium" id="element_4_6" name="event[country]">
-			  <option value="Afghanistan" >Afghanistan</option>
-			  <option value="Albania" >Albania</option>
-			  <option value="Algeria" >Algeria</option>
-			  <option value="Andorra" >Andorra</option>
-			  <option value="Antigua and Barbuda" >Antigua and Barbuda</option>
-			  <option value="Argentina" >Argentina</option>
-			  <option value="Armenia" >Armenia</option>
-			  <option value="Australia" >Australia</option>
-			  <option value="Austria" >Austria</option>
-			  <option value="Azerbaijan" >Azerbaijan</option>
-			  <option value="Bahamas" >Bahamas</option>
-			  <option value="Bahrain" >Bahrain</option>
-			  <option value="Bangladesh" >Bangladesh</option>
-			  <option value="Barbados" >Barbados</option>
-			  <option value="Belarus" >Belarus</option>
-			  <option value="Belgium" >Belgium</option>
-			  <option value="Belize" >Belize</option>
-			  <option value="Benin" >Benin</option>
-			  <option value="Bhutan" >Bhutan</option>
-			  <option value="Bolivia" >Bolivia</option>
-			  <option value="Bosnia and Herzegovina" >Bosnia and Herzegovina</option>
-			  <option value="Botswana" >Botswana</option>
-			  <option value="Brazil" >Brazil</option>
-			  <option value="Brunei" >Brunei</option>
-			  <option value="Bulgaria" >Bulgaria</option>
-			  <option value="Burkina Faso" >Burkina Faso</option>
-			  <option value="Burundi" >Burundi</option>
-			  <option value="Cambodia" >Cambodia</option>
-			  <option value="Cameroon" >Cameroon</option>
-			  <option value="Canada" >Canada</option>
-			  <option value="Cape Verde" >Cape Verde</option>
-			  <option value="Central African Republic" >Central African Republic</option>
-			  <option value="Chad" >Chad</option>
-			  <option value="Chile" >Chile</option>
-			  <option value="China" >China</option>
-			  <option value="Colombia" >Colombia</option>
-			  <option value="Comoros" >Comoros</option>
-			  <option value="Congo" >Congo</option>
-			  <option value="Costa Rica" >Costa Rica</option>
-			  <option value="Côte d'Ivoire" >Côte d'Ivoire</option>
-			  <option value="Croatia" >Croatia</option>
-			  <option value="Cuba" >Cuba</option>
-			  <option value="Cyprus" >Cyprus</option>
-			  <option value="Czech Republic" >Czech Republic</option>
-			  <option value="Denmark" >Denmark</option>
-			  <option value="Djibouti" >Djibouti</option>
-			  <option value="Dominica" >Dominica</option>
-			  <option value="Dominican Republic" >Dominican Republic</option>
-			  <option value="East Timor" >East Timor</option>
-			  <option value="Ecuador" >Ecuador</option>
-			  <option value="Egypt" >Egypt</option>
-			  <option value="El Salvador" >El Salvador</option>
-			  <option value="Equatorial Guinea" >Equatorial Guinea</option>
-			  <option value="Eritrea" >Eritrea</option>
-			  <option value="Estonia" >Estonia</option>
-			  <option value="Ethiopia" >Ethiopia</option>
-			  <option value="Fiji" >Fiji</option>
-			  <option value="Finland" >Finland</option>
-			  <option value="France" >France</option>
-			  <option value="Gabon" >Gabon</option>
-			  <option value="Gambia" >Gambia</option>
-			  <option value="Georgia" >Georgia</option>
-			  <option value="Germany" >Germany</option>
-			  <option value="Ghana" >Ghana</option>
-			  <option value="Greece" >Greece</option>
-			  <option value="Grenada" >Grenada</option>
-			  <option value="Guatemala" >Guatemala</option>
-			  <option value="Guinea" >Guinea</option>
-			  <option value="Guinea-Bissau" >Guinea-Bissau</option>
-			  <option value="Guyana" >Guyana</option>
-			  <option value="Haiti" >Haiti</option>
-			  <option value="Honduras" >Honduras</option>
-			  <option value="Hong Kong" >Hong Kong</option>
-			  <option value="Hungary" >Hungary</option>
-			  <option value="Iceland" >Iceland</option>
-			  <option value="India" >India</option>
-			  <option value="Indonesia" >Indonesia</option>
-			  <option value="Iran" >Iran</option>
-			  <option value="Iraq" >Iraq</option>
-			  <option value="Ireland" >Ireland</option>
-			  <option value="Israel" >Israel</option>
-			  <option value="Italy" >Italy</option>
-			  <option value="Jamaica" >Jamaica</option>
-			  <option value="Japan" >Japan</option>
-			  <option value="Jordan" >Jordan</option>
-			  <option value="Kazakhstan" >Kazakhstan</option>
-			  <option value="Kenya" >Kenya</option>
-			  <option value="Kiribati" >Kiribati</option>
-			  <option value="North Korea" >North Korea</option>
-			  <option value="South Korea" >South Korea</option>
-			  <option value="Kuwait" >Kuwait</option>
-			  <option value="Kyrgyzstan" >Kyrgyzstan</option>
-			  <option value="Laos" >Laos</option>
-			  <option value="Latvia" >Latvia</option>
-			  <option value="Lebanon" >Lebanon</option>
-			  <option value="Lesotho" >Lesotho</option>
-			  <option value="Liberia" >Liberia</option>
-			  <option value="Libya" >Libya</option>
-			  <option value="Liechtenstein" >Liechtenstein</option>
-			  <option value="Lithuania" >Lithuania</option>
-			  <option value="Luxembourg" >Luxembourg</option>
-			  <option value="Macedonia" >Macedonia</option>
-			  <option value="Madagascar" >Madagascar</option>
-			  <option value="Malawi" >Malawi</option>
-			  <option value="Malaysia" >Malaysia</option>
-			  <option value="Maldives" >Maldives</option>
-			  <option value="Mali" >Mali</option>
-			  <option value="Malta" >Malta</option>
-			  <option value="Marshall Islands" >Marshall Islands</option>
-			  <option value="Mauritania" >Mauritania</option>
-			  <option value="Mauritius" >Mauritius</option>
-			  <option value="Mexico" >Mexico</option>
-			  <option value="Micronesia" >Micronesia</option>
-			  <option value="Moldova" >Moldova</option>
-			  <option value="Monaco" >Monaco</option>
-			  <option value="Mongolia" >Mongolia</option>
-			  <option value="Montenegro" >Montenegro</option>
-			  <option value="Morocco" >Morocco</option>
-			  <option value="Mozambique" >Mozambique</option>
-			  <option value="Myanmar" >Myanmar</option>
-			  <option value="Namibia" >Namibia</option>
-			  <option value="Nauru" >Nauru</option>
-			  <option value="Nepal" >Nepal</option>
-			  <option value="Netherlands" >Netherlands</option>
-			  <option value="New Zealand" >New Zealand</option>
-			  <option value="Nicaragua" >Nicaragua</option>
-			  <option value="Niger" >Niger</option>
-			  <option value="Nigeria" >Nigeria</option>
-			  <option value="Norway" >Norway</option>
-			  <option value="Oman" >Oman</option>
-			  <option value="Pakistan" >Pakistan</option>
-			  <option value="Palau" >Palau</option>
-			  <option value="Panama" >Panama</option>
-			  <option value="Papua New Guinea" >Papua New Guinea</option>
-			  <option value="Paraguay" >Paraguay</option>
-			  <option value="Peru" >Peru</option>
-			  <option value="Philippines" >Philippines</option>
-			  <option value="Poland" >Poland</option>
-			  <option value="Portugal" >Portugal</option>
-			  <option value="Puerto Rico" >Puerto Rico</option>
-			  <option value="Qatar" >Qatar</option>
-			  <option value="Romania" >Romania</option>
-			  <option value="Russia" >Russia</option>
-			  <option value="Rwanda" >Rwanda</option>
-			  <option value="Saint Kitts and Nevis" >Saint Kitts and Nevis</option>
-			  <option value="Saint Lucia" >Saint Lucia</option>
-			  <option value="Saint Vincent and the Grenadines" >Saint Vincent and the Grenadines</option>
-			  <option value="Samoa" >Samoa</option>
-			  <option value="San Marino" >San Marino</option>
-			  <option value="Sao Tome and Principe" >Sao Tome and Principe</option>
-			  <option value="Saudi Arabia" >Saudi Arabia</option>
-			  <option value="Senegal" >Senegal</option>
-			  <option value="Serbia and Montenegro" >Serbia and Montenegro</option>
-			  <option value="Seychelles" >Seychelles</option>
-			  <option value="Sierra Leone" >Sierra Leone</option>
-			  <option value="Singapore" >Singapore</option>
-			  <option value="Slovakia" >Slovakia</option>
-			  <option value="Slovenia" >Slovenia</option>
-			  <option value="Solomon Islands" >Solomon Islands</option>
-			  <option value="Somalia" >Somalia</option>
-			  <option value="South Africa" >South Africa</option>
-			  <option value="Spain" >Spain</option>
-			  <option value="Sri Lanka" >Sri Lanka</option>
-			  <option value="Sudan" >Sudan</option>
-			  <option value="Suriname" >Suriname</option>
-			  <option value="Swaziland" >Swaziland</option>
-			  <option value="Sweden" >Sweden</option>
-			  <option value="Switzerland" >Switzerland</option>
-			  <option value="Syria" >Syria</option>
-			  <option value="Taiwan" >Taiwan</option>
-			  <option value="Tajikistan" >Tajikistan</option>
-			  <option value="Tanzania" >Tanzania</option>
-			  <option value="Thailand" >Thailand</option>
-			  <option value="Togo" >Togo</option>
-			  <option value="Tonga" >Tonga</option>
-			  <option value="Trinidad and Tobago" >Trinidad and Tobago</option>
-			  <option value="Tunisia" >Tunisia</option>
-			  <option value="Turkey" >Turkey</option>
-			  <option value="Turkmenistan" >Turkmenistan</option>
-			  <option value="Tuvalu" >Tuvalu</option>
-			  <option value="Uganda" >Uganda</option>
-			  <option value="Ukraine" >Ukraine</option>
-			  <option value="United Arab Emirates" >United Arab Emirates</option>
-			  <option value="United Kingdom" >United Kingdom</option>
-			  <option value="United States" selected="selected">United States</option>
-			  <option value="Uruguay" >Uruguay</option>
-			  <option value="Uzbekistan" >Uzbekistan</option>
-			  <option value="Vanuatu" >Vanuatu</option>
-			  <option value="Vatican City" >Vatican City</option>
-			  <option value="Venezuela" >Venezuela</option>
-			  <option value="Vietnam" >Vietnam</option>
-			  <option value="Yemen" >Yemen</option>
-			  <option value="Zambia" >Zambia</option>
-			  <option value="Zimbabwe" >Zimbabwe</option>
+						<!-- overall requested sponsorship -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Total Sponsorship Requested</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon">$</span>
+									<input name="event[total_amount]" type="text" class="form-control" placeholder="" maxlength="10">
+								</div>
+							</div>
+						</div>
 
-			</select>
-			<label for="event[country]">Country</label>
-		  </div> 
-		</li>   
-		<li id="li_5" >
-		  <label class="description" for="element_5">Date </label>
-		  <span>
-			<input id="element_5_1" name="event[month]" class="element text" size="2" maxlength="2" value="" type="text"> /
-			<label for="event[month]">MM</label>
-		  </span>
-		  <span>
-			<input id="element_5_2" name="event[day]" class="element text" size="2" maxlength="2" value="" type="text"> /
-			<label for="event[day]">DD</label>
-		  </span>
-		  <span>
-			<input id="element_5_3" name="event[year]" class="element text" size="4" maxlength="4" value="" type="text">
-			<label for="event[year]">YYYY</label>
-		  </span>
+						<!-- minimum requested sponsorship -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Minimum Acceptable Sponsorship from a Sponsor</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon">$</span>
+									<input name="event[min_amount]" type="text" class="form-control" placeholder="" maxlength="6">
+								</div>
+							</div>
+						</div>
 
-		  <span id="calendar_5">
-			<img id="cal_img_5" class="datepicker" src="/assets/calendar.gif" alt="Pick a date."> 
-		  </span>
-		  <script type="text/javascript">
-			Calendar.setup({
-			  inputField   : "element_5_3",
-			  baseField    : "element_5",
-			  displayArea  : "calendar_5",
-			  button     : "cal_img_5",
-			  ifFormat   : "%B %e, %Y",
-			  onSelect   : selectDate
-			});
-		  </script>
+						<!-- Sponsorship Requests -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Special Sponsorship Requests or Comments</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10">
+								<textarea name="event[sponsorship_requests]" rows="2"></textarea>
+							</div>
+						</div>
 
-		</li>   
-		<li id="li_6" >
-		  <label class="description" for="element_6">Time </label>
-		  <span>
-			<input id="element_6_1" name="event[hour]" class="element text " size="2" type="text" maxlength="2" value=""/> : 
-			<label>HH</label>
-		  </span>
-		  <span>
-			<input id="element_6_2" name="event[minutes]" class="element text " size="2" type="text" maxlength="2" value=""/> : 
-			<label>MM</label>
-		  </span>
-		  <span>
-			<select class="element select" style="width:4em" id="element_6_4" name="event[ampm]">
-			  <option value="AM" >AM</option>
-			  <option value="PM" >PM</option>
-			</select>
-			<label>AM/PM</label>
-		  </span> 
-		</li>   
-		<li id="li_7" >
-		  <label class="description" for="element_7">Phone </label>
-		  <span>
-			<input id="element_7_1" name="event[phone1]" class="element text" size="3" maxlength="3" value="" type="text"> -
-			<label for="event[phone1]">(###)</label>
-		  </span>
-		  <span>
-			<input id="element_7_2" name="event[phone2]" class="element text" size="3" maxlength="3" value="" type="text"> -
-			<label for="event[phone2]">###</label>
-		  </span>
-		  <span>
-			<input id="element_7_3" name="event[phone3]" class="element text" size="4" maxlength="4" value="" type="text">
-			<label for="event[phone3]">####</label>
-		  </span>
+						<!-- Event recurrence -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Event Recurrence</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Recurrence <span class="caret"></span></button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a ng-click="onRecurrenceSelected('One-Time Event')">One-Time Event</a></li>
+											<li><a ng-click="onRecurrenceSelected('Weekly')">Weekly</a></li>
+											<li><a ng-click="onRecurrenceSelected('Monthly')">Monthly</a></li>
+											<li><a ng-click="onRecurrenceSelected('Yearly')">Yearly</a></li>
+										</ul>
+									</div>
+									<input ng-model="recurrenceInputText" type="text" class="form-control" name="event[recurrence]"/>
+								</div>
+							</div>
+						</div>
 
-		</li>   
-		<li id="li_8" >
-		  <label class="description" for="event[description]">Event description </label>
-		  <div>
-			<textarea id="element_8" name="event[description]" class="element textarea small"></textarea> 
-		  </div> 
-		</li>   
-		<li id="li_10" >
-		  <label class="description" for="event[logo]">Event logo </label>
-		  <div>
-			<input id="element_10" name="event[logo]" class="element file" type="file"/> 
-		  </div>  
-		</li>
-		<li id="li_12" >
-		  <label class="description" for="element_12">Sponsorship You're Interested In </label>
-		  <span>
-			<input id="element_12_1" name="event[capital]" class="element checkbox" type="checkbox" value="capital" />
-			<label class="choice" for="event[capital]">Capital</label>
-			<input id="element_12_2" name="event[merchandise]" class="element checkbox" type="checkbox" value="merchandise" />
-			<label class="choice" for="event[merchandise]">Merchandise</label>
-			<input id="element_12_3" name="event[discounts]" class="element checkbox" type="checkbox" value="discounts" />
-			<label class="choice" for="event[discounts]">Discounts</label>
+						<!-- Ages -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Attendees' Age group</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">	
+								<input id="cb-12-20" name="event[age12_20]" type="checkbox" value="12-20"/>
+								<span ng-click="on12_20Click()">12-20</span>
+							</div>
+							<div class="col-md-2">	
+								<input id="cb-21-35" name="event[age21_35]" type="checkbox" value="21-35"/>
+								<span ng-click="on21_35Click()">21-35</span>
+							</div>
+							<div class="col-md-2">	
+								<input id="cb-36-50" name="event[age36_50]" type="checkbox" value="36-50"/>
+								<span ng-click="on36_50Click()">36-50</span>
+							</div>
+							<div class="col-md-2">	
+								<input id="cb-51" name="event[age51]" type="checkbox" value="51+"/>
+								<span ng-click="on51Click()">51+</span>
+							</div>
+						</div>
 
-		  </span> 
-		</li>   
-		<li id="li_11" >
-		  <label class="description" for="event[sponsorship_requests]">Sponsorship Requests </label>
-		  <div>
-			<textarea id="element_11" name="event[sponsorship_requests]" class="element textarea small"></textarea> 
-		  </div> 
-		</li>   
-		<li id="li_13" >
-		  <label class="description" for="event[recurrence]">Event Recurrence </label>
-		  <div>
-			<select class="element select medium" id="element_13" name="event[recurrence]">
-			  <option value="One-Time" selected="selected">One-Time Event</option>
-			  <option value="Weekly" >Weekly</option>
-			  <option value="Monthly" >Monthly</option>
-			  <option value="Yearly" >Yearly</option>
+						<!-- gender -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Attendees' Gender</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Gender <span class="caret"></span></button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a ng-click="onGenderSelected('Both')">Both</a></li>
+											<li><a ng-click="onGenderSelected('Female')">Female</a></li>
+											<li><a ng-click="onGenderSelected('Male')">Male</a></li>
+										</ul>
+									</div>
+									<input ng-model="genderInputText" type="text" class="form-control" name="event[gender]"/>
+								</div>
+							</div>
+						</div>
 
-			</select>
-		  </div> 
-		</li>   
-		<li id="li_14" >
-		  <label class="description" for="element_14">Attendees' Age group </label>
-		  <span>
-			<input id="element_14_1" name="event[age12_20]" class="element checkbox" type="checkbox" value="12-20" />
-			<label class="choice" for="event[age12_20]">12-20</label>
-			<input id="element_14_2" name="event[age21_35]" class="element checkbox" type="checkbox" value="21-35" />
-			<label class="choice" for="event[age21_35]">21-35</label>
-			<input id="element_14_3" name="event[age36_50]" class="element checkbox" type="checkbox" value="36-50" />
-			<label class="choice" for="event[age36_50]">36-50</label>
-			<input id="element_14_4" name="event[age51]" class="element checkbox" type="checkbox" value="51+" />
-			<label class="choice" for="event[age51]">51+</label>
+						<!-- income -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Attendees' Income Level</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">	
+								<input id="cb-income-low" name="event[income_low]" type="checkbox" value="12-20"/>
+								<span ng-click="onIncomeLowClick()">Low</span>
+							</div>
+							<div class="col-md-2">	
+								<input id="cb-income-med" name="event[income_med]" type="checkbox" value="21-35"/>
+								<span ng-click="onIncomeMedClick()">Medium</span>
+							</div>
+							<div class="col-md-2">	
+								<input id="cb-income-high" name="event[income_high]" type="checkbox" value="36-50"/>
+								<span ng-click="onIncomeHighClick()">High</span>
+							</div>
+						</div>
 
-		  </span> 
-		</li>   
-		<li id="li_15" >
-		  <label class="description" for="event[gender]">Attendees' Gender </label>
-		  <div>
-			<select class="element select medium" id="element_15" name="event[gender]"> 
-			  <option value="" selected="selected"></option>
-			  <option value="Both" >Both</option>
-			  <option value="Female" >Female</option>
-			  <option value="Male" >Male</option>
 
-			</select>
-		  </div> 
-		</li>   
-		<li id="li_16" >
-		  <label class="description" for="element_16">Attendees' Income Level </label>
-		  <span>
-			<input id="element_16_1" name="event[income_low]" class="element checkbox" type="checkbox" value="Low" />
-			<label class="choice" for="event[income_low]">Low Income</label>
-			<input id="element_16_2" name="event[income_med]" class="element checkbox" type="checkbox" value="Medium" />
-			<label class="choice" for="event[income_med]">Medium  Income</label>
-			<input id="element_16_3" name="event[income_high]" class="element checkbox" type="checkbox" value="High" />
-			<label class="choice" for="event[income_high]">High Income</label>
+					</div>
 
-		  </span> 
-		</li>
-		<li class="buttons">
-		<!--input type="hidden" name="form_id" value="917142" /-->
+					<div class="row">
+						<div class="col-md-11">
+							<input id="btn-sbmt" role="button" class="btn btn-default btn-sm btn-style" type="submit" name="submit" ng-show="questionsSectionNumber === 2"/>
+							<div id="btn-next" role="button" class="btn btn-default btn-sm btn-style" ng-hide="questionsSectionNumber === 2" ng-click="onNextClick()">Next</div>
+							<div id="btn-back" role="button" class="btn btn-default btn-sm btn-style" ng-hide="questionsSectionNumber === 1" ng-click="onBackClick()">Back</div>
+						</div>
+					</div>
+				</div>
 
-		<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
-		</li>
-</ul>
-</form>
-</div>
-<img id="bottom" src="/assets/bottom.png" alt="">
+
+
+							  
+				</form>
+				<img id="bottom" src="/assets/bottom.png" alt="">
+			</div>
+		</div>
+	</div>
+	
 </div>

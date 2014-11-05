@@ -30,13 +30,26 @@ class EventsController < ApplicationController
 		sponsorship_types << new_event[:merchandise] if new_event[:merchandise]
 		sponsorship_types << new_event[:discounts] if new_event[:discounts]
 
+		# new_event[:date] = mmm dd, yyyy
+		da = new_event[:date].delete("\n,").split
+
+		# new_event[:time] = hh:mm AM
+		hour_plus_meridian = new_event[:time].split
+		ham = hour_plus_meridian[0].split(":")
+		if (hour_plus_meridian[1] == "PM")
+			ham[0] = ham[0].to_i + 12
+		end
+
+		date_time = Time.new(da[2], da[0], da[1], ham[0], ham[1])
+
+		time_array = new_event[:time]
 		event_params = {
 			name: new_event[:name],
 			address1: new_event[:address1],
 			address2: new_event[:address2],
 			city: new_event[:city],
 			region: new_event[:state_province_region],
-			zip_code: new_event[:zipcode],
+			zipcode: new_event[:zipcode],
 			country: new_event[:country],
 			description: new_event[:description],
 			size_range: new_event[:size],
@@ -44,11 +57,12 @@ class EventsController < ApplicationController
 			recurrence: new_event[:recurrence],
 			attendees_gender: new_event[:gender],
 			image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg",
-			date_time: Time.new(new_event[:year], new_event[:month], 
-				new_event[:day], new_event[:hour], new_event[:minutes]), # add timezone
+			date_time: date_time,
 			age_ranges: age_ranges,
 			attendees_income_levels: income_levels,
-			sponsorship_types: sponsorship_types
+			sponsorship_types: sponsorship_types,
+			total_amount: new_event[:total_amount],
+			min_amount: new_event[:min_amount]
 		}
 
 		@event = Event.new(event_params)
@@ -66,41 +80,15 @@ class EventsController < ApplicationController
 private
 	def new_event
 		params.require(:event).permit(
-			:first_name, 
-			:last_name,
-			:email,
-			:name,
-			:size,
-			:address1,
-			:address2,
-			:city,
-			:state_province_region,
-			:zipcode,
-			:country,
-			:month,
-			:day,
-			:year,
-			:hour,
-			:minutes,
-			:ampm,
-			:phone1,
-			:phone2,
-			:phone3,
-			:description,
-			:logo,
-			:capital,
-			:merchandise,
-			:discounts,
-			:sponsorship_requests,
-			:recurrence,
-			:age12_20,
-			:age21_35,
-			:age36_50,
-			:age51,
-			:gender,
-			:income_low,
-			:income_med,
-			:income_high
-			)
+			:first_name, :last_name, :email,
+			:name, :size, :date, :time,
+			:address1, :address2, :city,
+			:state_province_region, :zipcode,
+			:country, :phone, :description,
+			:capital, :merchandise, :discounts,
+			:total_amount, :min_amount,
+			:sponsorship_requests, :recurrence,
+			:age12_20, :age21_35, :age36_50, :age51,
+			:gender, :income_low, :income_med, :income_high)
 	end
 end
