@@ -12,3 +12,33 @@
 //
 //= require_tree ./public
 //= require_tree .
+
+
+var log = function(str) {
+	console.log(str);
+}
+
+var get = function(id) {
+	return document.getElementById(id);
+}
+
+var getStyle = function (el, styleProp)
+{
+	if (el.currentStyle)
+		var y = el.currentStyle[styleProp];
+	else if (window.getComputedStyle)
+		var y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+	return y;
+}
+
+// calculating correct minimum hight of general-div so the 
+// footer will always be at the bottom of the screen when 
+// there is not enough content
+window.onload = function() {
+	var footerHeight = getStyle(get('footer'), 'height');
+	var headerHeight = getStyle(get('app-header'), 'height');
+
+	var generalDivMinHeight = window.screen.availHeight - parseInt(headerHeight) - parseInt(footerHeight) - 29;
+
+	get('general-div').style.minHeight = generalDivMinHeight + 'px';
+}

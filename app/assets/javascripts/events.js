@@ -4,23 +4,6 @@ var compare = function(a, b) {
 	return (a > b) ? 1 : ((b > a) ? -1 : 0);
 }
 
-var log = function(str) {
-	console.log(str);
-}
-
-var get = function(id) {
-	return document.getElementById(id);
-}
-
-var getStyle = function (el, styleProp)
-{
-	if (el.currentStyle)
-		var y = el.currentStyle[styleProp];
-	else if (window.getComputedStyle)
-		var y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
-	return y;
-}
-
 var getFullAddress = function(event) {
 	var streetAddress = (event.address1 ? event.address1 : '') + 
 		(event.address2 ? ' ' + event.address2 : '');
