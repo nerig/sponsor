@@ -9,7 +9,7 @@ spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
 		var listElement = get('events-list');
 		listElement.style.opacity = 1;
 		listElement.style.height = "auto";
-		listElement.style.overflowY = "visible";
+		listElement.style.overflow = "visible";
 
 		get('free-text-search').focus();
 	}

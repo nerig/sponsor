@@ -5,6 +5,7 @@ class SponsorshipResponsesController < ApplicationController
     end
 
     def show
+        @event = Event.find_by(id: @sponsorship_response.event_id)
     end
 
     def new
