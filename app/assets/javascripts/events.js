@@ -352,9 +352,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		crudeEvent = crudeEvent.replace(/\r\n/g, "\\r\\n");
 		var event = JSON.parse(crudeEvent);
 		angular.forEach(event.sponsorship_types, function(type) {
-			var spTypeElement = $('#' + type);
-			spTypeElement.removeClass('glyphicon-remove');
-			spTypeElement.addClass('glyphicon-ok');
+			get(type).style.display = "inherit";
 		});
 
 		$scope.fullAddress = getFullAddress(event);

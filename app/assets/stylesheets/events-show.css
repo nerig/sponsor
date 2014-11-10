@@ -76,3 +76,7 @@
 	background-color: #CCC;
 	margin-top: 1em;
 }
+
+#capital, #merchandise, #discounts {
+	display: none;
+}
