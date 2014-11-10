@@ -24,7 +24,9 @@ Event.create([
 		attendees_gender: "Both",
 		attendees_income_levels: ["Medium"],
 		date_time: Time.at(1416990000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png",
+		total_amount: 10000,
+		min_amount: 1000
 	},
 	{
 		name: 'Women in labor',
@@ -43,7 +45,9 @@ Event.create([
 		attendees_gender: "Both",
 		attendees_income_levels: ["Medium"],
 		date_time: Time.at(1427990000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png",
+		total_amount: 100000,
+		min_amount: 10000
 	},
 	{
 		name: 'Hot-tub Sunday party',
@@ -62,7 +66,9 @@ Event.create([
 		attendees_gender: "Both",
 		attendees_income_levels: ["Medium"],
 		date_time: Time.at(1437990000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png",
+		total_amount: 2000,
+		min_amount: 400
 	},
 	{
 		name: 'Moses lamps store anniversary',
@@ -81,7 +87,9 @@ Event.create([
 		attendees_gender: "Male",
 		attendees_income_levels: ["Low"],
 		date_time: Time.at(1416960000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg",
+		total_amount: 3000,
+		min_amount: 500
 	},
 	{
 		name: 'HotS spring Concert',
@@ -100,7 +108,9 @@ Event.create([
 		attendees_gender: "Female",
 		attendees_income_levels: ["High"],
 		date_time: Time.at(1417060000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo3.png"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo3.png",
+		total_amount: 1000,
+		min_amount: 1000
 	},
 	{
 		name: 'cyber Posium',
@@ -119,7 +129,9 @@ Event.create([
 		attendees_gender: "Female",
 		attendees_income_levels: ["Medium"],
 		date_time: Time.at(1417960000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo2.jpg"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo2.jpg",
+		total_amount: 10000,
+		min_amount: 1000
 	},
 	{
 		name: 'cAts in an alley',
@@ -138,5 +150,7 @@ Event.create([
 		attendees_gender: "Male",
 		attendees_income_levels: ["Low"],
 		date_time: Time.at(1426960000),
-		image_url: "https://s3.amazonaws.com/rmktimages/logo1.JPG"
+		image_url: "https://s3.amazonaws.com/rmktimages/logo1.JPG",
+		total_amount: 10000,
+		min_amount: 1000
 	}])

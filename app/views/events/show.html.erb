@@ -59,41 +59,59 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-9 margin-left-indent">
+			<div class="col-md-3 margin-left-indent">
 				<div class="row">
 					<p>Requested sponsorship:</p>
 				</div>
 				<div class="row" id="capital">
-					<div class="col-md-1">
+					<div class="col-md-6">
 						<p>Capital</p>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-6">
 						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
 					</div>
 				</div>
 				<div class="row" id="merchandise">
-					<div class="col-md-1">
+					<div class="col-md-6">
 						<p>Merchandise</p>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-6">
 						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
 					</div>
 				</div>
 				<div class="row" id="discounts">
-					<div class="col-md-1">
+					<div class="col-md-6">
 						<p>Discounts</p>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-6">
 						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
 					</div>
 				</div>
+			</div>
+			<div class="col-md-offset-1 col-md-6">
 				<div class="row">
-					<p><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
+					<div class="col-md-5">
+						<p>Total requested:</p>
+					</div>
+					<div class="col-md-7">
+						<p>$<%= @event.total_amount %></p>
+					</div>
 				</div>
 				<div class="row">
-					<a href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
+					<div class="col-md-5">
+						<p>Minimum acceptable:</p>
+					</div>
+					<div class="col-md-7">
+						<p>$<%= @event.min_amount %></p>
+					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<p class="col-md-9"><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
+		</div>
+		<div class="row">
+			<a class="col-md-9" href="mailto:slevit@mba2015.hbs.edu?subject=I would like to sponsor <%= @event.name.capitalize %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
 		</div>
 		<div class="row">
 			<div id="map_canvas"></div>
