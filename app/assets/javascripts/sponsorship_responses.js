@@ -1,30 +1,32 @@
 "use strict";
 
-spons.controller('ShowSponsorshipResponseCtrl', ["$scope", function($scope) {
+spons.controller('newSponsorshipResponseFormCtrl', ["$scope", function($scope) {
     
-    $scope.initWith = function(spres, eventi) {
+    $scope.initWith = function(eventi) {
 
-        var sponsorshipResponse = JSON.parse(spres.replace(/\r\n/g, "\\r\\n"));
         var event = JSON.parse(eventi.replace(/\r\n/g, "\\r\\n"));
 
         var handler = StripeCheckout.configure({
             key: 'pk_test_ivj8TLBMdtxp3dek1oI5Szny',
             image: 'https://www.callfire.com/sites/default/files/blog/images/advertising.jpg',
             token: function(token) {
-                // Use the token to create the charge with a server-side script.
-                // You can access the token ID with `token.id`
-                log('token: ' + token.id);
+                var formElement = $('#sponsor-form');
+                formElement.append($('<input type="hidden" name="response[payment_token]" />').val(token.id));
+                formElement.get(0).submit(); // get(0) is needed because calling submit on the jQuery object will cause an infinite loop. see https://stripe.com/docs/tutorials/forms
             }
         });
 
-        get('sponsor-with-payment').addEventListener('click', function(e) {
+        get('btn-sbmt-sponsor').addEventListener('click', function(e) {
             // Open Checkout with further options
             handler.open({
                 name: 'You are sponsoring:',
                 description: event.name,
+                panelLabel: "Sponsor {{amount}}",
+                allowRememberMe: false,
+                zipCode: true,
                 amount: $scope.amount * 100
             });
             e.preventDefault();
-        })
+        });
     }
 }]);

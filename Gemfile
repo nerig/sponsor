@@ -1,5 +1,6 @@
 ruby '2.0.0'
 source 'https://rubygems.org'
+source 'https://code.stripe.com'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -49,3 +50,5 @@ group :production do
 end
 
 gem 'remote_syslog_logger'
+
+gem 'stripe'

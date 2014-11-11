@@ -1,21 +1,14 @@
-<div class="container" ng-controller="ShowSponsorshipResponseCtrl" ng-init="initWith('<%=h @sponsorship_response.to_json.gsub("'", "&#39;") %>', '<%=h @event.to_json.gsub("'", "&#39;") %>')">
-    
+<div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h4 id="thanks-for-sponsoring">Thank you for sponsoring <%= @event.name %>.<br>Please enter your sponsorship amount</h4>
+        <h1 class="margin-left-indent">Thank you for sponsoring <%= @event.name %>.</p>
+    </div>
+    <div class="spacer"></div>
+    <div class="row">
+        <div class="col-md-offset-8 col-md-1">
+            <a type="button" class="btn btn-success btn-lg" href="/">Home</a>
+        </div>
+        <div class="col-md-2">
+            <a type="button" class="btn btn-success btn-lg" href="/events">Search for more events</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input ng-model="amount" type="text" class="form-control" placeholder="####.##" maxlength="10">
-                <div class="input-group-btn">
-                    <button class="btn btn-primary" id="sponsor-with-payment">Sponsor!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
-<%= javascript_include_tag "https://checkout.stripe.com/checkout.js" %>

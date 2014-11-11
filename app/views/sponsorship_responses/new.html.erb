@@ -1,13 +1,13 @@
-<div class="container" ng-controller="newSponsorshipResponseFormCtrl">
+<div class="container" ng-controller="newSponsorshipResponseFormCtrl" ng-init="initWith('<%=h @event.to_json.gsub("'", "&#39;") %>')">
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
 			<img id="top" src="/assets/top.png" alt="">
-			<form accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses">
+			<form id="sponsor-form" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses">
 				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 				<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
 				<div class="row">
 					<div id="form-description">
-						<h4>Sponsor an Event!</h4>
+						<h4 class="text-capitalize">Sponsor <%= @event.name %>!</h4>
 						<p>Please fill out all applicable fields.</p>
 					</div>
 					<hr class="col-md-11 hri">
@@ -96,6 +96,21 @@
 						</div>
 					</div>
 
+					<!-- sponsorship amount -->
+					<div class="row">
+						<div class="col-md-12">
+							<p class="field-title"><strong>Please enter your sponsorship amount</strong><br>The event organizer asked for a total of $<%= @event.total_amount %> and minimum of $<%= @event.min_amount %></p>
+						</div>
+					</div>
+					<div class="row">
+				        <div class="col-md-7">
+				            <div class="input-group">
+				                <span class="input-group-addon">$</span>
+				                <input ng-model="amount" name="response[amount]" type="text" class="form-control" placeholder="" maxlength="10">
+				            </div>
+				        </div>
+				    </div>
+
 					<!-- sponsorship offer -->
 					<div class="row">
 						<div class="col-md-12">
@@ -122,7 +137,7 @@
 
 					<div class="row">
 						<div class="col-md-11">
-							<input id="btn-sbmt" role="button" class="btn btn-default btn-sm btn-style" type="submit" name="submit"/>
+							<input id="btn-sbmt-sponsor" role="button" class="btn btn-default btn-sm btn-style" type="submit" name="formSubmit"/>
 						</div>
 					</div>
 				</div>
@@ -131,3 +146,5 @@
 		</div>
 	</div>
 </div>
+
+<%= javascript_include_tag "https://checkout.stripe.com/checkout.js" %>
