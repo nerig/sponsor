@@ -91,3 +91,12 @@ body {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	float: right;
 }
+
+.btn-orange {
+	background: #FFC000 !important;
+	color: black !important;
+}
+
+.btn-orange:hover {
+	background: #FFB000 !important;
+}

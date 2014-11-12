@@ -35,6 +35,17 @@ spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
 		}
 	}
 
+	window.onload = function() {
+		var imageHeightWidthRatio = 0.29;
+		
+		var bigImageElement = get('big-background-image');
+		var imageWidth = parseInt(getStyle(bigImageElement, "width"));
+
+		var imageHeight = imageWidth * imageHeightWidthRatio;
+		
+		bigImageElement.style.height = imageHeight + 'px';
+	}
+
 }])
 
 .controller('HomepageCtrl', ["$scope", function($scope) {
