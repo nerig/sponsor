@@ -23,9 +23,9 @@
 
 /* event's contents */
 .event .logo {
-	position: absolute;
-  	top: 10.4em; left: 0.5em; bottom: 0; right: 0;
-    margin: auto;
+	position: relative;
+    top: 5.35em; left: 55%;
+    transform: translate(-50%, -50%);
     max-width: calc(10.7em * 0.9);
     max-height: calc(10.7em * 0.9);
     width: auto;
