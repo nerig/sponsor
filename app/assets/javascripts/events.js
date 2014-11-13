@@ -77,8 +77,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 
 		$scope.genderFilterSelection = 'Both';
 
-		$scope.fromDate = 'From, today'
-		$scope.toDate = 'To, eternity'
+		$scope.fromDate = 'From'
+		$scope.toDate = 'To'
 
 		$scope.isCollapsed = true;
 	}
@@ -192,7 +192,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 .filter('fromDateFilter', function() {
 	return function(events, fromDate) {
 		
-		if (!fromDate || '' === fromDate || 'From, today' === fromDate) {
+		if (!fromDate || '' === fromDate || 'From' === fromDate) {
 			return events;
 		}
     
@@ -205,7 +205,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 .filter('toDateFilter', function() {
 	return function(events, toDate) {
 		
-		if (!toDate || '' === toDate || 'To, eternity' === toDate) {
+		if (!toDate || '' === toDate || 'To' === toDate) {
 			return events;
 		}
     
@@ -248,7 +248,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			$scope.opened2 = !$scope.opened2;
 		}
 
-		$scope.minDateTo = ($scope.$parent.fromDate === 'From, today') ? new Date() : $scope.$parent.fromDate;
+		$scope.minDateTo = ($scope.$parent.fromDate === 'From') ? new Date() : $scope.$parent.fromDate;
 	};
 
 	$scope.dateOptions = {
