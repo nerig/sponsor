@@ -14,7 +14,7 @@ class SponsorshipResponsesController < ApplicationController
     def new
         @event = Event.find_by(id: params['event_id'])
 
-        raise "event not found" if not @event
+        #raise "event not found" if not @event
     end
 
     def edit
