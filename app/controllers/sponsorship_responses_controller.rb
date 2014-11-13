@@ -2,6 +2,7 @@ require 'stripe'
 
 class SponsorshipResponsesController < ApplicationController
     before_action :set_sponsorship_response, only: [:show, :edit, :update, :destroy]
+    before_filter :redirect_to_https, :only => [:new]
 
     def index
     end
@@ -49,6 +50,11 @@ class SponsorshipResponsesController < ApplicationController
     end
 
     private
+
+        def redirect_to_https
+            redirect_to :protocol => "https://" unless (request.ssl? || request.local?)
+        end
+
         def set_sponsorship_response
             @sponsorship_response = SponsorshipResponse.find(params[:id])
         end
