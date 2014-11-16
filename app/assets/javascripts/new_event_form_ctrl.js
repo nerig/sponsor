@@ -25,6 +25,20 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		}
 	}
 
+	var turnCheckboxesNotificationsOn = function() {
+		if ($scope.typesRequired()) {
+			$scope.showTypesRequiredNotification = true;
+		}
+
+		if ($scope.agesRequired()) {
+			$scope.showAgesRequiredNotification = true;
+		}
+
+		if ($scope.incomesRequired()) {
+			$scope.showIncomesRequiredNotification = true;
+		}
+	}
+
 	get('btn-sbmt-event').addEventListener('click', function(e) {
 
 		// if form is not valid, submit is not happening
@@ -33,17 +47,10 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 			$scope.formIsNotValid = true;
 
 			addValidationsCssRule();
-
-			if ($scope.typesRequired()) {
-				$scope.showTypesRequiredNotification = true;
-			}
-
-			if ($scope.agesRequired()) {
-				$scope.showAgesRequiredNotification = true;
-			}
-
-			if ($scope.incomesRequired()) {
-				$scope.showIncomesRequiredNotification = true;
+			turnCheckboxesNotificationsOn();
+			
+			if (!$scope.firstSectionForm.$valid) {
+				$scope.onBackClick();
 			}
 
 		} else { // submit form
