@@ -13,6 +13,52 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		$scope.questionsSectionNumber -= 1;
 	}
 
+	var addValidationsCssRule = function() {
+		var sheet = window.document.styleSheets[0];
+		if (sheet.insertRule) {
+			sheet.insertRule('form .ng-untouched.ng-invalid, form .ng-dirty.ng-invalid, form .ng-touched.ng-invalid { border-color: red; box-shadow: none; }', 
+				sheet.cssRules.length);
+		} else {
+			if (sheet.addRule) {
+				sheet.addRule('form .ng-untouched.ng-invalid, form .ng-dirty.ng-invalid, form .ng-touched.ng-invalid', 'border-color: red; box-shadow: none;', -1);
+			}
+		}
+	}
+
+	get('btn-sbmt-event').addEventListener('click', function(e) {
+
+		// if form is not valid, submit is not happening
+		if ($scope.newEventForm.$invalid) {
+
+			$scope.formIsNotValid = true;
+
+			addValidationsCssRule();
+
+			if ($scope.typesRequired()) {
+				$scope.showTypesRequiredNotification = true;
+			}
+
+			if ($scope.agesRequired()) {
+				$scope.showAgesRequiredNotification = true;
+			}
+
+			if ($scope.incomesRequired()) {
+				$scope.showIncomesRequiredNotification = true;
+			}
+
+		} else { // submit form
+			$scope.formIsNotValid = false;
+			$scope.showTypeRequiredNotification = false;
+			$scope.showAgesRequiredNotification = false;
+			$scope.showIncomesRequiredNotification = false;
+
+			var formElement = get('new-event-form');
+			formElement.action = "/events";
+			formElement.method = "post";
+			formElement.submit();
+		}
+    });
+
 	// date picker settings
 	$scope.dateOptions = {
 		startingDay: 1,
@@ -48,6 +94,8 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	}
 
 	// event size dropdown
+	$scope.sizes = ["0-50", "50-100", "100-500", "500-1000", "1000+"];
+
 	$scope.onSizeSelected = function(size) {
 		$scope.sizeInputText = size;
 	}
@@ -56,6 +104,8 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	$scope.onCountrySelected = function(country) {
 		$scope.countryInputText = country;
 	}
+
+	$scope.countryInputText = "United States";
 
 	// sponsorship types settings
 	$scope.onCapitalClick = function() {
@@ -71,6 +121,16 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	$scope.onDiscountsClick = function() {
 		var element = get('cb-discounts');
 		element.checked = !element.checked;
+	}
+
+	$scope.onTypesChange = function () {
+		if (!$scope.typesRequired()) {
+			$scope.showTypesRequiredNotification = false;
+		}
+	}
+
+	$scope.typesRequired = function() {
+		return (!get('cb-capital').checked && !get('cb-merchandise').checked && !get('cb-discounts').checked);
 	}
 
 	// ages settings
@@ -94,12 +154,26 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		element.checked = !element.checked;
 	}
 
+	$scope.onAgesChange = function () {
+		if (!$scope.agesRequired()) {
+			$scope.showAgesRequiredNotification = false;
+		}
+	}
+
+	$scope.agesRequired = function() {
+		return (!get('cb-12-20').checked && !get('cb-21-35').checked && !get('cb-36-50').checked && !get('cb-51').checked);
+	}
+
 	// recurrence settings
+	$scope.ocurrences = ["One-time event", "Weekly", "Monthly", "Yearly"];
+
 	$scope.onRecurrenceSelected = function(recurrence) {
 		$scope.recurrenceInputText = recurrence;
 	}
 
 	// gender settings
+	$scope.genders = ["Both", "Female", "Male"];
+
 	$scope.onGenderSelected = function(gender) {
 		$scope.genderInputText = gender;
 	}
@@ -118,6 +192,16 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	$scope.onIncomeHighClick = function() {
 		var element = get('cb-income-high');
 		element.checked = !element.checked;
+	}
+
+	$scope.onIncomesChange = function () {
+		if (!$scope.incomesRequired()) {
+			$scope.showIncomesRequiredNotification = false;
+		}
+	}
+
+	$scope.incomesRequired = function() {
+		return (!get('cb-income-low').checked && !get('cb-income-med').checked && !get('cb-income-high').checked);
 	}
 
 	$scope.countries = ["Afghanistan", "Albania", "Algeria", "Andorra", 
@@ -166,3 +250,6 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		"Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", 
 		"Vietnam", "Yemen", "Zambia", "Zimbabwe"];
 }]);
+
+
+

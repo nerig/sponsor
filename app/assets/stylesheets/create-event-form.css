@@ -68,5 +68,14 @@ textarea {
 	display:block;
 	margin-top: 0em;
 	margin-bottom: 0em;
-	margin-left: -.7em
+	margin-left: -.7em;
+}
+
+.readonly-input {
+	background-color: white !important;
+	cursor: default !important;
+}
+
+.not-valid-notification {
+	color: red;
 }
