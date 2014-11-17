@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :events
   resources :sponsorship_responses
 
+  get '/about' => 'pages#about'
+
   # Example resource route with options:
   #   resources :products do
   #     member do

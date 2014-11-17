@@ -1,0 +1,25 @@
+
+.about {
+	margin-top: 3em;
+	background-color: white;
+}
+
+.about-details-indentation {
+	margin: 0 5em 0 5em;
+	padding: 1em 0 3em 0;
+}
+
+.paragraph {
+	font-size: 1.2em;
+}
+
+.spacer {
+	min-height: 3em;
+}
+
+.about img {
+	-webkit-box-shadow: 3px 3px 3px #7C7C7C;
+	box-shadow: 3px 3px 3px #7C7C7C;
+	width: 100%;
+	height: auto;
+}
