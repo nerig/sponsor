@@ -54,6 +54,7 @@ ul {
 	min-width: 7em;
 	margin-top: 2em;
 	margin-left: 1em;
+	font-size: 1.2em !important;
 }
 
 textarea {

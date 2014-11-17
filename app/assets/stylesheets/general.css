@@ -105,3 +105,7 @@ body {
 	background: #003580 !important;
 	color: white !important;
 }
+
+.btn-navy:hover {
+	background: #002A66 !important;
+}
