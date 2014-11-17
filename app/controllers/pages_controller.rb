@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
 	def brand
 	end
+
+	def event
+	end
 end

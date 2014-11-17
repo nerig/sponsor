@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get '/about' => 'pages#about'
   get '/your-brand' => 'pages#brand'
+  get '/your-event' => 'pages#event'
 
   # Example resource route with options:
   #   resources :products do
