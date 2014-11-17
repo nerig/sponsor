@@ -44,6 +44,10 @@ class EventsController < ApplicationController
 
 		time_array = new_event[:time]
 		event_params = {
+			first_name: new_event[:first_name],
+			last_name: new_event[:last_name],
+			contact_number: new_event[:phone],
+			email: new_event[:email],
 			name: new_event[:name],
 			address1: new_event[:address1],
 			address2: new_event[:address2],

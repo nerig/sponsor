@@ -26,6 +26,9 @@
 #  zipcode                 :string(255)
 #  total_amount            :integer
 #  min_amount              :integer
+#  first_name              :string(255)
+#  last_name               :string(255)
+#  email                   :string(255)
 #
 # Indexes
 #
