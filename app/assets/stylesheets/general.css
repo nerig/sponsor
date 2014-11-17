@@ -100,3 +100,8 @@ body {
 .btn-orange:hover {
 	background: #FFB000 !important;
 }
+
+.btn-navy {
+	background: #003580 !important;
+	color: white !important;
+}

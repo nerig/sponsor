@@ -61,8 +61,13 @@
 	margin-top: -1.45em;
 }
 
+.btn-bold {
+	font-weight: bold !important;
+}
+
 #create-new-event-button {
-	font-size: 2em;
+	font-size: 1.5em;
+	margin-left: 1.9em;
 }
 
 #events-list {
