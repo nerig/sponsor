@@ -1,0 +1,44 @@
+
+.static {
+	margin-top: 3em;
+	background-color: white;
+}
+
+.static-details-indentation {
+	margin: 0 5em 0 5em;
+	padding: 1em 0 3em 0;
+}
+
+.paragraph {
+	font-size: 1.2em;
+}
+
+.paragraph-small {
+	font-size: 1em;
+}
+
+.spacer {
+	min-height: 3em;
+}
+
+.spacer-small {
+	min-height: 0.5em;
+}
+
+.static img {
+	-webkit-box-shadow: 3px 3px 3px #7C7C7C;
+	box-shadow: 3px 3px 3px #7C7C7C;
+	width: 100%;
+	height: auto;
+}
+
+.square-img {
+	width: 16.5em !important;
+	height: 16.5em !important;
+}
+
+.brand-sponsor-btn {
+	float: right;
+	position: relative;
+	top: 1em;
+}

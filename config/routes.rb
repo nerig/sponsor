@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :sponsorship_responses
 
   get '/about' => 'pages#about'
+  get '/your-brand' => 'pages#brand'
 
   # Example resource route with options:
   #   resources :products do
