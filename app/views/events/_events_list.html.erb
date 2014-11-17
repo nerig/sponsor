@@ -10,69 +10,61 @@
 			<div id="search-filter-div" class="center-block">
 			  	
 				<div class="row">
-					<div class="col-md-12">
-						<div class="col-md-4 filter">
-							<input id="free-text-search" type="text" class="form-control freetext-search" placeholder="Any keyword" ng-model="freetext"/>
-						</div>
-						<div class="col-md-4 filter" multi-select input-model="locations" output-model="locationSelections" button-label="city" item-label="city" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any location"></div>
-						<div class="col-md-4 filter" multi-select input-model="sizeRanges" output-model="sizeSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any size range"></div>
+					<div class="col-md-4 filter">
+						<input id="free-text-search" type="text" class="form-control freetext-search" placeholder="Any keyword" ng-model="freetext"/>
 					</div>
+					<div class="col-md-4 filter" multi-select input-model="locations" output-model="locationSelections" button-label="city" item-label="city" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any location"></div>
+					<div class="col-md-4 filter" multi-select input-model="sizeRanges" output-model="sizeSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any size range"></div>
 			  	</div>
 
 			  	<!-- hidden filters -->
 			  	<div class="row" collapse="isCollapsed">
-			  		<div class="col-md-12 center-block">	
-				  		<div class="row">
-				  			<div class="col-md-offset-1 col-md-2 smallMultiSelect">
-				  				<div multi-select input-model="ageRanges" output-model="ageSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any age range"></div>
-							</div>
-					  		<div class="col-md-4" style="margin:0 0 1em 0em" ng-controller="DatepickerCtrl">
-					  			<div class="col-md-6">
-						  			<p class="input-group">
-				              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.fromDate" is-open="opened1" min-date="minDateFrom" datepicker-options="dateOptions" ng-click="open($event, 'from')" show-button-bar="true"/>
-				              			<span class="input-group-btn">
-				                			<button type="button" class="btn btn-default" ng-click="open($event, 'from')"><i class="glyphicon glyphicon-calendar"></i></button>
-				              			</span>
-				            		</p>
-			            		</div>
-			            		<div class="col-md-6">
-						  			<p class="input-group">
-				              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.toDate" is-open="opened2" min-date="minDateTo" datepicker-options="dateOptions" ng-click="open($event, 'to')" show-button-bar="false"/>
-				              			<span class="input-group-btn">
-				                			<button type="button" class="btn btn-default" ng-click="open($event, 'to')"><i class="glyphicon glyphicon-calendar"></i></button>
-				              			</span>
-				            		</p>
-			            		</div>
-					  		</div>
-					  		<div class="col-md-4">
-						  		<div class="col-md-6" ng-controller="DropdownCtrl">
-						  			<div class="btn-group" dropdown is-open="status.isopen">
-										<button type="button" class="btn btn-default dropdown-toggle" ng-disabled="disabled" style="min-width:11em"><span class="genderText">{{status.buttonText}}</span> <span class="caret genderCaret"></span></button>
-										<ul class="dropdown-menu" role="menu">
-											<li ng-repeat="choice in items">
-												<a ng-click="genderChanged(choice)">{{choice}}</a>
-											</li>
-										</ul>
-									</div>
-						  		</div>
-						  		<div class="col-md-6 smallMultiSelect">
-						  			<div multi-select input-model="incomeLevels" output-model="incomeSelections" button-label="income" item-label="income" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any income level"></div>
-		  						</div>
-				  			</div>
-			  			</div>
+		  			<div class="col-md-2-4">
+			  			<div class="smallMultiSelect">
+			  				<div multi-select input-model="ageRanges" output-model="ageSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any age range"></div>
+						</div>
+					</div>
+			  		<div ng-controller="DatepickerCtrl">
+			  			<div class="col-md-2-4" style="margin-left:-.2em;">
+				  			<p class="input-group date-picker-width">
+		              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.fromDate" is-open="opened1" min-date="minDateFrom" datepicker-options="dateOptions" ng-click="open($event, 'from')" show-button-bar="true"/>
+		              			<span class="input-group-btn">
+		                			<button type="button" class="btn btn-default btn-height" ng-click="open($event, 'from')"><i class="glyphicon glyphicon-calendar"></i></button>
+		              			</span>
+		            		</p>
+	            		</div>
+	            		<div class="col-md-2-4">
+				  			<p class="input-group date-picker-width">
+		              			<input type="text" class="form-control" datepicker-popup="MMM d, y" ng-model="$parent.toDate" is-open="opened2" min-date="minDateTo" datepicker-options="dateOptions" ng-click="open($event, 'to')" show-button-bar="false"/>
+		              			<span class="input-group-btn">
+		                			<button type="button" class="btn btn-default btn-height" ng-click="open($event, 'to')"><i class="glyphicon glyphicon-calendar"></i></button>
+		              			</span>
+		            		</p>
+	            		</div>
 			  		</div>
+			  		<div class="col-md-2-4" ng-controller="DropdownCtrl">
+			  			<div class="btn-group" dropdown is-open="status.isopen">
+							<button type="button" class="btn btn-default dropdown-toggle btn-gender" ng-disabled="disabled"><span class="genderText">{{status.buttonText}}</span> <span class="caret genderCaret"></span></button>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="choice in items">
+									<a ng-click="genderChanged(choice)">{{choice}}</a>
+								</li>
+							</ul>
+						</div>
+			  		</div>
+			  		<div class="col-md-2-4 smallMultiSelect">
+			  			<div multi-select input-model="incomeLevels" output-model="incomeSelections" button-label="income" item-label="income" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any income level"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
-				<div ng-click="toggleHiddenFilters()" ng-show="isCollapsed">
-					<a class="toggleMoreFilters" href="">more filtering options</a>
-				</div>
-				<div ng-click="toggleHiddenFilters()" ng-hide="isCollapsed">
-					<a class="toggleMoreFilters" href="">less filtering options</a>
-				</div>
+			<div ng-click="toggleHiddenFilters()" ng-show="isCollapsed">
+				<a class="toggleMoreFilters" href="">more filtering options</a>
+			</div>
+			<div ng-click="toggleHiddenFilters()" ng-hide="isCollapsed">
+				<a class="toggleMoreFilters" href="">less filtering options</a>
 			</div>
 		</div>
 
@@ -83,35 +75,37 @@
 		
 		<div class="row">
 			<!-- events listing -->
-			<ul id="events_list">
-				<li class="event center-block" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.id)">
-					<div class="row">
-						<div class="col-md-2">
-							<img class="logo" ng-src="{{event.image_url}}"></img>
+			<div class="col-md-offset-1 col-md-10">
+				<ul id="events_list">
+					<li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.id)">
+						<div class="row">
+							<div class="col-md-2">
+								<img class="logo" ng-src="{{event.image_url}}"></img>
+							</div>
+							<div class="col-md-8">
+								<div class="row">
+									<p class="name-text">{{event.name}}</p>
+								</div>
+								<div class="row">
+									<i id="cal-icon" class="glyphicon glyphicon-calendar icon"></i>
+									<p class="text_padding text">{{event.date_time | date : 'EEEE, MMMM d, y h:mm a'}}</p>
+								</div>
+								<div class="row">
+									<i id="mark-icon" class="glyphicon glyphicon-map-marker icon"></i>
+									<p class="text_padding text text-capitalize">{{fullAddress(event)}}</p>
+								</div>
+								<div class="row">
+									<p class="description_text text">{{event.description}}</p>
+									<a ng-href="/events/{{event.id}}" style="padding-left: 0.4em;">Read more</a>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<p><a class="btn btn-lg sponsorButton btn-orange btn-bold" role="button" ng-href="sponsorship_responses/new?event_id={{event.id}}">Sponsor!</a></p>
+							</div>
 						</div>
-						<div class="col-md-8">
-							<div class="row">
-								<p class="name-text">{{event.name}}</p>
-							</div>
-							<div class="row">
-								<i id="cal-icon" class="glyphicon glyphicon-calendar icon"></i>
-								<p class="text_padding text">{{event.date_time | date : 'EEEE, MMMM d, y h:mm a'}}</p>
-							</div>
-							<div class="row">
-								<i id="mark-icon" class="glyphicon glyphicon-map-marker icon"></i>
-								<p class="text_padding text text-capitalize">{{fullAddress(event)}}</p>
-							</div>
-							<div class="row">
-								<p class="description_text text">{{event.description}}</p>
-								<a ng-href="/events/{{event.id}}" style="padding-left: 0.4em;">Read more</a>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<p><a class="btn btn-lg sponsorButton btn-orange btn-bold" role="button" ng-href="sponsorship_responses/new?event_id={{event.id}}">Sponsor!</a></p>
-						</div>
-					</div>
-				</li>
-			</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>

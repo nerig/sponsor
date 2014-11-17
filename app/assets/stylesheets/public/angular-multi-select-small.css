@@ -35,9 +35,9 @@
     text-align: left;    
     cursor: pointer;
     border: 1px solid #c6c6c6;
-    font-size: 1em;
-    height: 2em;
-    width: 11em;
+    font-size: .98em;
+    max-height: 2.45em;
+    width: 14.4em;
     border-radius: 4px;
     color: #555;   
     -webkit-user-select: none;
@@ -46,12 +46,10 @@
     -o-user-select: none;
     user-select: none; 
     background-color: #fff;
-    /*background-image: linear-gradient(#fff, #f7f7f7);      */
 }
 
 /* button: hover */
-.smallMultiSelect .multiSelect .button:hover {    
-    /*background-image: linear-gradient(#fff, #e9e9e9);    */
+.smallMultiSelect .multiSelect .button:hover {
     background-image: linear-gradient(#fff, #f7f7f7);
 }
 
@@ -64,7 +62,7 @@
 .smallMultiSelect .multiSelect .buttonLabel {
     padding: 5px 0px 0px 0px;
     display: inline-block;
-    width: 8.2em;
+    width: 11.5em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
