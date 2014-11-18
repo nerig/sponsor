@@ -58,7 +58,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: auto;
-    max-width: 47em;
+    max-width: 45em;
     height: auto;
     padding-top: 0.05em;
 }
