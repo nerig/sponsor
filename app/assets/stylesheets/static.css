@@ -42,3 +42,8 @@
 	position: relative;
 	top: 1em;
 }
+
+.small-thankyou-message {
+	margin-left: -1em;
+	color: green;
+}

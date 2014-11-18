@@ -53,7 +53,7 @@ GEM
     ffi (1.9.6-x64-mingw32)
     hike (1.2.3)
     i18n (0.6.11)
-    jbuilder (2.2.4)
+    jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -64,7 +64,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    minitest (5.4.2)
+    minitest (5.4.3)
     multi_json (1.10.1)
     netrc (0.8.0)
     orm_adapter (0.5.0)
@@ -104,7 +104,7 @@ GEM
       ffi (~> 1.9)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    sass (3.4.7)
+    sass (3.4.8)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -132,7 +132,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2014.9)
+    tzinfo-data (1.2014.10)
       tzinfo (>= 1.0.0)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
@@ -149,6 +149,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  mail
   pg
   rails (= 4.1.1)
   rails_12factor
