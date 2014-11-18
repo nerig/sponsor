@@ -81,7 +81,7 @@ body {
 	margin-bottom: 2.5em;
 }
 
-.email-us:hover {
+.email-us-link:hover {
 	color: lightgreen;
 }
 
@@ -108,4 +108,33 @@ body {
 
 .btn-navy:hover {
 	background: #002A66 !important;
+}
+
+#about-us-on-hover {
+	visibility: hidden;
+	transition: visibility .5s ease-in;
+
+	background-color: white;
+	border: solid 1px grey;
+	border-radius: 4px;
+	min-height: 4em;
+	min-width: 8em;
+	position: absolute;
+	top: 5em;
+	left: 51.5em;
+	
+	text-align: center;
+}
+
+#about-us-on-hover a {
+	position: relative;
+	top: 0.9em;
+}
+
+#about-us-on-hover a:hover {
+	color: #0F90C9 !important;
+}
+
+#contact-us-item:hover #about-us-on-hover {
+	visibility: visible;
 }
