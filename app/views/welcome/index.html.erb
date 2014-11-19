@@ -1,7 +1,7 @@
 <div ng-controller="EntireHomepageCtrl">
 	<div ng-show="showInitialHomepage">
 		<div id="big-background-image">
-			<input id="homepage-search" type="text" class="form-control freetext-search" placeholder="Start searching for events..." ng-model="freetext" ng-change="onTextChange()"/>		
+			<input id="homepage-search" type="text" class="form-control freetext-search" placeholder="" ng-model="freetext" ng-change="onTextChange()"/>		
 		</div>
 
 		<div ng-controller="HomepageCtrl" ng-init="initWith('<%=h @six_events.gsub("'", "&#39;") %>')">

@@ -39,8 +39,7 @@ spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
 		var imageHeightWidthRatio = 0.29;
 		
 		var bigImageElement = get('big-background-image');
-		var imageWidth = parseInt(getStyle(bigImageElement, "width"));
-
+		var imageWidth = bigImageElement.offsetWidth;
 		var imageHeight = imageWidth * imageHeightWidthRatio;
 		
 		bigImageElement.style.height = imageHeight + 'px';
