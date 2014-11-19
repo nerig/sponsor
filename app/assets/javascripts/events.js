@@ -41,7 +41,7 @@ var getFullAddress = function(event) {
 	return streetCityRegionAndCountry;
 }
 
-var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize']);
+var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize', 'ng']);
 
 spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	

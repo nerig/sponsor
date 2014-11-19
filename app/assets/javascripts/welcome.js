@@ -1,6 +1,6 @@
 "use strict";
 
-spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
+spons.controller('EntireHomepageCtrl', ["$scope", "$timeout", function($scope, $timeout) {
 	
 	var makeEventsVisible = function() {
 		$scope.showInitialHomepage = false;
@@ -11,7 +11,15 @@ spons.controller('EntireHomepageCtrl', ["$scope", function($scope) {
 		listElement.style.height = "auto";
 		listElement.style.overflow = "visible";
 
-		get('free-text-search').focus();
+		$timeout(function() {
+			var ftsElement = get('free-text-search');
+			ftsElement.focus();
+
+			// positioning the cursor at the end of the search text
+			var val = ftsElement.value;
+			ftsElement.value = '';
+			ftsElement.value = val;
+		})
 	}
 
 	$scope.showInitialHomepage = true;

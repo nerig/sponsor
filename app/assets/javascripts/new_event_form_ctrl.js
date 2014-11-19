@@ -2,8 +2,8 @@
 
 spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	
-	formElement.method = "POST";
 	var formElement = get('new-event-form');
+	formElement.method = "POST";
 	var urlParts = document.URL.split("/");
 	if (urlParts[urlParts.length - 1] === "edit") {
 		var eventId = urlParts[urlParts.length - 2];
