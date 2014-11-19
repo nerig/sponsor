@@ -60,7 +60,7 @@ class EventsController < ApplicationController
 			sponsorship_requests: new_event[:sponsorship_requests],
 			recurrence: new_event[:recurrence],
 			attendees_gender: new_event[:gender],
-			image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg",
+			image_url: new_event[:image_url],
 			date_time: date_time,
 			age_ranges: age_ranges,
 			attendees_income_levels: income_levels,
@@ -93,6 +93,6 @@ private
 			:total_amount, :min_amount,
 			:sponsorship_requests, :recurrence,
 			:age12_20, :age21_35, :age36_50, :age51,
-			:gender, :income_low, :income_med, :income_high)
+			:gender, :income_low, :income_med, :income_high, :image_url)
 	end
 end
