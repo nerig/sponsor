@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
 #	before_action :authenticate_user!,
 #		:only => [:new, :create]
+	before_action :set_event, only: [:show, :edit, :update, :destroy]
+	http_basic_authenticate_with name: "marketiers", password: "marketiersedit", only: [:edit, :update]
 
 	# action to show all events
 	def index
@@ -11,9 +13,28 @@ class EventsController < ApplicationController
 	def new
 	end
 
+	def edit
+	end
+
 	# action taken when a user submits a new event
 	def create
-		
+		@event = Event.new(event_params)
+		@event.save
+		redirect_to @event
+	end
+
+	def update
+		@event.update(event_params)
+		redirect_to @event
+	end
+
+	# action to show one event by id
+	def show
+	end
+
+
+private
+	def event_params
 		age_ranges = []
 		age_ranges << new_event[:age12_20] if new_event[:age12_20]
 		age_ranges << new_event[:age21_35] if new_event[:age21_35]
@@ -43,7 +64,7 @@ class EventsController < ApplicationController
 		date_time = Time.new(da[2], da[0], da[1], ham[0], ham[1])
 
 		time_array = new_event[:time]
-		event_params = {
+		eparams = {
 			first_name: new_event[:first_name],
 			last_name: new_event[:last_name],
 			contact_number: new_event[:phone],
@@ -69,19 +90,9 @@ class EventsController < ApplicationController
 			min_amount: new_event[:min_amount]
 		}
 
-		@event = Event.new(event_params)
- 
-		@event.save
-		redirect_to @event
+		return eparams
 	end
 
-	# action to show one event by id
-	def show
-		@event = Event.find(params[:id])
-	end
-
-
-private
 	def new_event
 		params.require(:event).permit(
 			:first_name, :last_name, :email,
@@ -94,5 +105,9 @@ private
 			:sponsorship_requests, :recurrence,
 			:age12_20, :age21_35, :age36_50, :age51,
 			:gender, :income_low, :income_med, :income_high, :image_url)
+	end
+
+	def set_event
+		@event = Event.find(params[:id])
 	end
 end

@@ -2,6 +2,19 @@
 
 spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	
+	formElement.method = "POST";
+	var formElement = get('new-event-form');
+	var urlParts = document.URL.split("/");
+	if (urlParts[urlParts.length - 1] === "edit") {
+		var eventId = urlParts[urlParts.length - 2];
+		formElement.action = "/events/" + eventId;
+		$('#new-event-form').append($('<input type="hidden" name="_method" value="put" />'));
+		get('btn-sbmt-event').value = "Update Event";
+	} else {
+		formElement.action = "/events";
+		get('btn-sbmt-event').value = "Create Event";
+	}
+
 	// managing states of the form to show it one part at a time
 	$scope.questionsSectionNumber = 1;
 
@@ -62,9 +75,6 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 			$scope.showAgesRequiredNotification = false;
 			$scope.showIncomesRequiredNotification = false;
 
-			var formElement = get('new-event-form');
-			formElement.action = "/events";
-			formElement.method = "post";
 			formElement.submit();
 		}
     });
