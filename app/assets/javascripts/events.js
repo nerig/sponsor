@@ -4,41 +4,54 @@ var compare = function(a, b) {
 	return (a > b) ? 1 : ((b > a) ? -1 : 0);
 }
 
-var getFullAddress = function(event) {
-	var streetAddress = (event.address1 ? event.address1 : '') + 
+var getStreetAddress = function(event) {
+	return (event.address1 ? event.address1 : '') + 
 		(event.address2 ? ' ' + event.address2 : '');
-	var streetAndCity = '';
+}
+
+var getCityAndRest = function(event) {
+	var city = '';
 	if (event.city) {
-		if (streetAddress != '') {
-			streetAndCity = streetAddress + ', ' + event.city;
-		} else {
-			streetAndCity = event.city;
-		}
-	} else {
-		streetAndCity += streetAddress;
+		city = event.city;
 	}
-	var streetCityAndRegion = '';
+	var cityAndRegion = '';
 	if (event.region) {
-		if (streetAndCity != '') {
-			streetCityAndRegion = streetAndCity + ', ' + event.region;
+		if (city != '') {
+			cityAndRegion = city + ', ' + event.region;
 		} else {
-			streetCityAndRegion = event.region;
+			cityAndRegion = event.region;
 		}
 	} else {
-		streetCityAndRegion += streetAndCity;
+		cityAndRegion += city;
 	}
-	var streetCityRegionAndCountry = '';
+	var cityRegionAndCountry = '';
 	if (event.country) {
-		if (streetCityAndRegion != '') {
-			streetCityRegionAndCountry = streetCityAndRegion + ', ' + event.country;
+		if (cityAndRegion != '') {
+			cityRegionAndCountry = cityAndRegion + ', ' + event.country;
 		} else {
-			streetCityRegionAndCountry = event.country;
+			cityRegionAndCountry = event.country;
 		}
 	} else {
-		streetCityRegionAndCountry += streetCityAndRegion;
+		cityRegionAndCountry += cityAndRegion;
 	}
 
-	return streetCityRegionAndCountry;
+	return cityRegionAndCountry;
+}
+
+var getFullAddress = function(event) {
+	var streetAddress = getStreetAddress(event);
+	
+	var address = '';
+	if (streetAddress != '') {
+		address += streetAddress;
+	}
+
+	var cityAndRest = getCityAndRest(event);
+	if (cityAndRest != '') {
+		address += ', ' + cityAndRest;
+	}
+
+	return address;
 }
 
 var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize', 'ng']);
@@ -355,6 +368,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			get(type).style.display = "inherit";
 		});
 
+		$scope.streetAddress = getStreetAddress(event);
+		$scope.cityAndRest =  getCityAndRest(event);
 		$scope.fullAddress = getFullAddress(event);
 
 		/* get the map */

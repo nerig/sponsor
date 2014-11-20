@@ -23,6 +23,8 @@
 
 #mark-icon {
 	 color: #d9534f;
+	 transform: translate(0%, -50%);
+	 padding-right: .3em;
 }
 
 #att-gender {

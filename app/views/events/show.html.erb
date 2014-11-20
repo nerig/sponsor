@@ -14,7 +14,12 @@
 						<p class="event-details"><span><i id="cal-icon" class="glyphicon glyphicon-calendar"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:mm a'}}</p>
 					</div>
 					<div class="row">
-						<p class="text-capitalize"><span><i id="mark-icon" class="glyphicon glyphicon-map-marker"></i></span> {{fullAddress}} </p>
+						<table>
+							<tr>
+								<td><i id="mark-icon" class="glyphicon glyphicon-map-marker"></i></td>
+								<td><p class="text-capitalize"> {{streetAddress}}<br>{{cityAndRest}} </p></td>
+							</tr>
+						</table>
 					</div>
 					<div id="little-details" class="row">
 						<div title="Attendees gender: <%= @event.attendees_gender %>" class="col-md-2 text-center">
