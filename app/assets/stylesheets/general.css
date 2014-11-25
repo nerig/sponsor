@@ -120,7 +120,7 @@ body {
 	min-height: 4em;
 	min-width: 8em;
 	position: absolute;
-	top: 5em;
+	top: 4.5em;
 	left: 51.5em;
 	
 	text-align: center;
@@ -137,4 +137,20 @@ body {
 
 #contact-us-item:hover #about-us-on-hover {
 	visibility: visible;
+}
+
+.btn-style {
+	float: right;
+	min-width: 7em;
+	margin-top: 2em;
+	margin-left: 1em;
+	font-size: 1.2em !important;
+}
+
+.mark-icon-color {
+	 color: #d9534f;
+}
+
+.cal-icon-color {
+	 color: #5cb85c;
 }

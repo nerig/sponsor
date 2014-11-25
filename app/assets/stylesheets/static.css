@@ -13,16 +13,20 @@
 	font-size: 1.2em;
 }
 
-.paragraph-small {
-	font-size: 1em;
-}
-
-.spacer {
-	min-height: 3em;
-}
-
-.spacer-small {
+.spacer-half {
 	min-height: 0.5em;
+}
+
+.spacer-1 {
+	min-height: 1em;
+}
+
+.spacer-2 {
+	min-height: 2em;
+}
+
+.spacer-4 {
+	min-height: 4em;
 }
 
 .static img {

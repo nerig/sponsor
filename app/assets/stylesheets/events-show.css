@@ -14,16 +14,11 @@
 }
 
 #little-details {
-	margin-left: 1em;
-}
-
-#cal-icon {
-	 color: #5cb85c;
+	margin: .4em 0 .2em 1em;
 }
 
 #mark-icon {
-	 color: #d9534f;
-	 transform: translate(0%, -50%);
+	 transform: translate(0%, -100%);
 	 padding-right: .3em;
 }
 

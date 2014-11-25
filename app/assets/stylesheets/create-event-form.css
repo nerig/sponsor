@@ -49,14 +49,6 @@ ul {
 	left: 0 !important;
 }
 
-.btn-style {
-	float: right;
-	min-width: 7em;
-	margin-top: 2em;
-	margin-left: 1em;
-	font-size: 1.2em !important;
-}
-
 textarea {
 	width: 100%;
 	border-radius: 4px;

@@ -11,12 +11,12 @@
 			<div class="col-md-6">
 				<div id="above-the-description">
 					<div class="row">
-						<p class="event-details"><span><i id="cal-icon" class="glyphicon glyphicon-calendar"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:mm a'}}</p>
+						<p class="event-details"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:mm a'}}</p>
 					</div>
 					<div class="row">
 						<table>
 							<tr>
-								<td><i id="mark-icon" class="glyphicon glyphicon-map-marker"></i></td>
+								<td><i id="mark-icon" class="glyphicon glyphicon-map-marker mark-icon-color"></i></td>
 								<td><p class="text-capitalize"> {{streetAddress}}<br>{{cityAndRest}} </p></td>
 							</tr>
 						</table>
@@ -46,7 +46,7 @@
 					<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= @event.id %>">Sponsor!</a></p>
 				</div>
 				<div class="row text-center">
-					<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a></span></p>
+					<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
 				</div>
 			</div>
 		</div>
@@ -93,33 +93,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-offset-1 col-md-6">
-				<div class="row">
-					<div class="col-md-5">
-						<p>Total requested:</p>
-					</div>
-					<div class="col-md-7">
-						<p>$<%= @event.total_amount %></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-5">
-						<p>Minimum acceptable:</p>
-					</div>
-					<div class="col-md-7">
-						<p>$<%= @event.min_amount %></p>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div class="row">
 			<p class="col-md-9"><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
 		</div>
 		<div class="row">
-			<a class="col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A" target="_blank">Contact event organizer</a>
-		</div>
-		<div class="row">
-			<div id="map_canvas"></div>
+			<a class="col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
 		</div>
 	</div>
+</div>
+<div class="row">
+	<div id="map_canvas"></div>
 </div>

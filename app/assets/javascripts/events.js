@@ -375,7 +375,6 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		/* get the map */
 		var mapInit = function() {
 			var geocoder = new google.maps.Geocoder();
-			log($scope.fullAddress);
 			geocoder.geocode({ 'address': $scope.fullAddress }, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var mapOptions = {
