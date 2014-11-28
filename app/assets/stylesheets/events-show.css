@@ -9,14 +9,6 @@
     height: auto;
 }
 
-.event-details {
-	margin-top: .5em;
-}
-
-#little-details {
-	margin: .4em 0 .2em 1em;
-}
-
 #mark-icon {
 	 transform: translate(0%, -100%);
 	 padding-right: .3em;
@@ -57,10 +49,15 @@
 	 font-size: 0.9em;"
 }
 
+#rest-of-description {
+	margin-top: -.8em;
+}
+
 .description-toggle {
 	float: right;
-	font-size: 0.8em;
-	margin: -1em -1em 0 0;
+	font-size: 0.9em;
+
+	margin-top: -.6em;
 }
 
 .requested-sponsorship-icon {

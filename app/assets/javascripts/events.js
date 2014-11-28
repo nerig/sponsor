@@ -302,16 +302,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		lower than the image, sponsor! button location, selection of glyphicons
 		for sponsorship types... */
 		
-		/* description length and position calculations */
-		var logoElement = get('event-logo');
-		var logoHeight = logoElement.offsetHeight;
-		var detailsAboveTheDescriptionHeight = get('above-the-description').offsetHeight;
-
-		var descriptionMaxHeight = logoHeight - detailsAboveTheDescriptionHeight;
-
-		if (descriptionMaxHeight < 20) {
-			descriptionMaxHeight = 20;
-		}
+		/* description length and description position calculations */
+		var descriptionMaxHeight = 60;
 
 		var descriptionElement = get('ev-desc');
 		var tmpTrimmedText = descriptionElement.innerHTML;
@@ -325,43 +317,25 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 				tmpTrimmedText = $scope.originalDescription.substring(0, lastSpace);
 				trimmedText = tmpTrimmedText + '<span id="three-dots">...</span>';
 				$scope.restOfText = $scope.originalDescription.substring(tmpTrimmedText.length, $scope.originalDescription.length);
-
+				
 				descriptionElement.innerHTML = trimmedText;
 			}
-
-			/* calculate gap between trimmed description to the rest of it
-			so to place the rest of the text correctly when needed */
-			var logoBottom = $('#event-logo').offset().top + logoHeight;
-			var descriptionBottom = $('#ev-desc').offset().top + descriptionElement.offsetHeight;
-			var lower = Math.max(logoBottom, descriptionBottom);
-
-			/* getting negative number of pixels to offset the rest of description */
-			var restOfTextPosition = lower - $('#rest-of-description').offset().top;
-			var restOfDescElement = get('rest-of-description');
-			restOfDescElement.style.marginTop  = restOfTextPosition + 'px';
-
-			/* now if the image is lower than the description we want the description
-			   to end at the same line */
-
-			var descriptionOffset = 0;
-			if (logoBottom > descriptionBottom) {
-				descriptionOffset = logoBottom - descriptionBottom;
-				descriptionElement.style.marginTop  = descriptionOffset + 'px';
-
-				get('read-more').style.marginTop = '0px';
-			}
-			
-
 		} else {
 			/* not showing read more if there is no overflow */
 			get('read-more').style.visibility = "hidden";
 		}
 
+
 		/* sponsor! button location calculation */
 		var sponsorButtonElement = get('event-sponsor-button');
+		var logoHeight = get('event-logo').offsetHeight;
 		sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
 
-		/* glyphicons selections logic for sponsorship types */
+		// above-the-description elements location calculation
+		var aboveTheDescriptionElement = get('above-the-description');
+		aboveTheDescriptionElement.style.marginTop = ((logoHeight / 2) - (aboveTheDescriptionElement.offsetHeight / 2)) + 'px';
+
+		/* show requested sponsorship types */
 		crudeEvent = crudeEvent.replace(/\r\n/g, "\\r\\n");
 		var event = JSON.parse(crudeEvent);
 		angular.forEach(event.sponsorship_types, function(type) {
@@ -426,9 +400,10 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			}
 		}
 
+		var threeDotsElement = get('three-dots');
 		$scope.toggleFullDescription = function() {
-			$scope.showRestOfDescription = !$scope.showRestOfDescription;
-			get('three-dots').style.visibility = $scope.showRestOfDescription ? "hidden" : "visible";
+			$scope.showingEntireDescription = !$scope.showingEntireDescription;
+			threeDotsElement.style.visibility = $scope.showingEntireDescription ? "hidden" : "visible";
 		}
 	}
 }]);
