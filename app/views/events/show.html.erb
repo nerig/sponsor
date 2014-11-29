@@ -12,7 +12,7 @@
 					</div>
 					<div id="above-the-description" class="col-md-8">
 						<div class="row">
-							<p class="col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y h:mm a'}}</p>
+							<p class="col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y, h:mm a' : 'UTC'}}</p>
 						</div>
 						<div class="spacer-half"></div>
 						<div class="row">
