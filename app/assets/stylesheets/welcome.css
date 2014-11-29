@@ -46,6 +46,13 @@
 	margin-left: 2em;
 }
 
+#one-trending-event #event-name-homepage {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 17em;
+}
+
 #one-trending-event .text {
 	color: grey;
     font-size: 1em;
