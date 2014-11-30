@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
 			<img id="top" src="/assets/top.png" alt="">
-			<form id="sponsor-form" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses">
+			<form id="sponsor-form" name="sponsorForm" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses" novalidate>
 				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 				<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
 				<div class="row">
@@ -17,20 +17,20 @@
 					<!-- sponsor agent name -->
 					<div class="row">
 						<div class="col-md-12">
-							<p class="field-title"><strong>Your name</strong></p>
+							<p class="field-title"><strong>Your name *</strong></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-3">
 							<div class="input-group">
 								<span class="input-group-addon">First</span>
-								<input name="response[first_name]" type="text" class="form-control" maxlength="255">
+								<input name="response[first_name]" type="text" class="form-control" maxlength="20" ng-model="firstName" ng-minlength="2" ng-maxlegnth="20" required>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="input-group">
 								<span class="input-group-addon">Last</span>
-								<input name="response[last_name]" type="text" class="form-control" maxlength="255">
+								<input name="response[last_name]" type="text" class="form-control" maxlength="30" ng-minlength="2" ng-maxlegnth="30" ng-model="lastName" required>
 							</div>
 						</div>
 					</div>
@@ -39,14 +39,14 @@
 					<!-- sponsor agent email -->
 					<div class="row">
 						<div class="col-md-12">
-							<p class="field-title"><strong>Email</strong></p>
+							<p class="field-title"><strong>Email *</strong></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-7">
 							<div class="input-group">
 								<span class="input-group-addon"></span>
-								<input name="response[email]" type="email" class="form-control" maxlength="255">
+								<input name="response[email]" type="email" class="form-control" ng-minlength="3" ng-maxlength="50" maxlength="50" ng-model="email" required>
 							</div>
 						</div>
 					</div>
@@ -54,14 +54,14 @@
 					<!-- phone number -->
 					<div class="row">
 						<div class="col-md-12">
-							<p class="field-title"><strong>Phone</strong></p>
+							<p class="field-title"><strong>Phone *</strong></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-7">
 							<div class="input-group">
 								<span class="input-group-addon"></span>
-								<input name="response[phone_number]" type="text" class="form-control" maxlength="12">
+								<input name="response[phone_number]" type="text" class="form-control" maxlength="21" ng-model="phone" pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" required>
 							</div>
 						</div>
 					</div>
@@ -69,14 +69,14 @@
 					<!-- company name -->
 					<div class="row">
 						<div class="col-md-12">
-							<p class="field-title"><strong>Company name</strong></p>
+							<p class="field-title"><strong>Business name *</strong></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-7">
 							<div class="input-group">
 								<span class="input-group-addon"></span>
-								<input name="response[company_name]" type="text" class="form-control" maxlength="255">
+								<input name="response[company_name]" type="text" class="form-control" maxlength="30" ng-minlength="2" ng-maxlegnth="30" ng-model="companyName" required>
 							</div>
 						</div>
 					</div>
@@ -84,14 +84,14 @@
 					<!-- agent's title -->
 					<div class="row">
 						<div class="col-md-12">
-							<p class="field-title"><strong>Your title</strong></p>
+							<p class="field-title"><strong>Your title *</strong></p>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" title="Your role at the business">
 						<div class="col-md-7">
 							<div class="input-group">
 								<span class="input-group-addon"></span>
-								<input name="response[title]" type="text" class="form-control" maxlength="255">
+								<input name="response[title]" type="text" class="form-control" maxlength="30" ng-minlength="2" ng-maxlegnth="30" ng-model="title" required>
 							</div>
 						</div>
 					</div>
@@ -99,14 +99,14 @@
 					<!-- sponsorship amount -->
 					<div class="row">
 						<div class="col-md-12">
-							<p class="field-title"><strong>Please enter the sponsorship amount</strong></p>
+							<p class="field-title"><strong>Please enter the sponsorship amount *</strong></p>
 						</div>
 					</div>
 					<div class="row">
 				        <div class="col-md-7">
 				            <div class="input-group">
 				                <span class="input-group-addon">$</span>
-				                <input ng-model="amount" name="response[amount]" type="text" class="form-control" maxlength="10">
+				                <input ng-model="amount" name="response[amount]" type="text" class="form-control" pattern="^(0|[1-9][0-9]*)$" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" required>
 				            </div>
 				        </div>
 				    </div>

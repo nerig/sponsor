@@ -28,21 +28,6 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		$scope.questionsSectionNumber -= 1;
 	}
 
-	var addValidationsCssRule = function() {
-		var sheet = window.document.styleSheets[0];
-		if (sheet.insertRule) {
-			sheet.insertRule('form .ng-untouched.ng-invalid, form .ng-dirty.ng-invalid, form .ng-touched.ng-invalid { border-color: red; box-shadow: none; }', 
-				sheet.cssRules.length);
-			sheet.insertRule('form .ng-untouched.ng-invalid:focus, form .ng-dirty.ng-invalid:focus, form .ng-touched.ng-invalid:focus { outline-offset: 0; outline: -webkit-focus-ring-color auto 0px; }', 
-				sheet.cssRules.length);
-		} else {
-			if (sheet.addRule) {
-				sheet.addRule('form .ng-untouched.ng-invalid, form .ng-dirty.ng-invalid, form .ng-touched.ng-invalid', 'border-color: red; box-shadow: none;', -1);
-				sheet.addRule('form .ng-untouched.ng-invalid:focus, form .ng-dirty.ng-invalid:focus, form .ng-touched.ng-invalid:focus', 'outline-offset: 0; outline: -webkit-focus-ring-color auto 0px;', -1);
-			}
-		}
-	}
-
 	var turnCheckboxesNotificationsOn = function() {
 		if ($scope.typesRequired()) {
 			$scope.showTypesRequiredNotification = true;

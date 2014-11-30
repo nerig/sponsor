@@ -17,16 +17,22 @@ spons.controller('newSponsorshipResponseFormCtrl', ["$scope", function($scope) {
         });
 
         get('btn-sbmt-sponsor').addEventListener('click', function(e) {
-            // Open Checkout with further options
-            handler.open({
-                name: 'You are sponsoring:',
-                description: event.name,
-                panelLabel: "Sponsor {{amount}}",
-                allowRememberMe: false,
-                zipCode: true,
-                amount: $scope.amount * 100
-            });
+            
             e.preventDefault();
+            // if form is not valid, payment and submit is not happening
+            if ($scope.sponsorForm.$invalid) {
+                addValidationsCssRule();
+            } else {
+                // Open Checkout with further options
+                handler.open({
+                    name: 'You are sponsoring:',
+                    description: event.name,
+                    panelLabel: "Sponsor {{amount}}",
+                    allowRememberMe: false,
+                    zipCode: true,
+                    amount: $scope.amount * 100
+                });
+            }
         });
     }
 }]);
