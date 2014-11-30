@@ -20,6 +20,7 @@ form {
 form .hri {
 	margin-left: 1.2em;
 	margin-top: 2em;
+	margin-bottom: -0.4em;
 }
 
 .questions {
@@ -71,6 +72,7 @@ textarea {
 
 .not-valid-notification {
 	color: red;
+	margin-top: 2.9em;
 }
 
 #new-datepicker {

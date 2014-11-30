@@ -13,9 +13,6 @@
 					<hr class="col-md-11 hri">
 				</div>
 				<div class="questions">
-				  <div class="row" ng-show="formIsNotValid">
-				  	<p class="not-valid-notification col-md-12">Please make sure all the fields have valid values.</p>
-				  </div>
 				  <div ng-show="questionsSectionNumber === 1" ng-form="firstSectionForm">
 						
 						<!-- event organizer name -->
@@ -63,7 +60,7 @@
 						<div class="row">
 							<div class="col-md-7">
 								<div class="input-group">
-									<span class="input-group-addon">#</span>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
 									<input name="event[phone]" type="text" class="form-control" maxlength="21" ng-model="phone" pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" required>
 								</div>
 							</div>
@@ -72,22 +69,19 @@
 						<!-- event name -->
 						<div class="row">
 							<div class="col-md-12">
-								<p class="field-title"><strong>Event's name *</strong></p>
+								<p class="field-title"><strong>Event name *</strong></p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-7">
-								<div class="input-group">
-									<span class="input-group-addon"></span>
-									<input name="event[name]" type="text" class="form-control" maxlength="100" ng-maxlength="100" ng-minlength="3" ng-model="eventName" required>
-								</div>
+								<input name="event[name]" type="text" class="form-control" maxlength="100" ng-maxlength="100" ng-minlength="3" ng-model="eventName" required>
 							</div>
 						</div>
 
 						<!-- event size -->
 						<div class="row">
 							<div class="col-md-12">
-								<p class="field-title"><strong>Event's size (#people) *</strong></p>
+								<p class="field-title"><strong>Event size (#people) *</strong></p>
 							</div>
 						</div>
 						<div class="row">
@@ -137,7 +131,7 @@
 						<!-- location -->
 						<div class="row">
 							<div class="col-md-12">
-								<p class="field-title"><strong>Event's location *</strong></p>
+								<p class="field-title"><strong>Event location *</strong></p>
 							</div>
 						</div>
 						<div class="row">
@@ -203,7 +197,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-10">
-								<textarea name="event[description]" rows="2" ng-model="description" ng-minlength="10" required></textarea>
+								<textarea name="event[description]" rows="4" ng-model="description" ng-minlength="10" required></textarea>
 							</div>
 						</div>
 
@@ -267,7 +261,7 @@
 						<!-- image url -->
 						<div class="row">
 							<div class="col-md-12">
-								<p class="field-title"><strong>Link to event's logo *</strong></p>
+								<p class="field-title"><strong>Link to event logo *</strong></p>
 							</div>
 						</div>
 						<div class="row">
@@ -367,7 +361,11 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-11">
+
+						<div class="col-md-6">
+							<p ng-show="formIsNotValid" class="not-valid-notification">Please make sure all the fields have valid values.</p>
+						</div>
+						<div class="col-md-5">
 							<input id="btn-sbmt-event" role="button" class="btn btn-style btn-navy btn-bold" type="submit" name="submitButton" ng-show="questionsSectionNumber === 2" value="Create Event" />
 							<div id="btn-next" role="button" class="btn btn-default btn-style" ng-hide="questionsSectionNumber === 2" ng-click="onNextClick()">Next</div>
 							<div id="btn-back" role="button" class="btn btn-default btn-style" ng-hide="questionsSectionNumber === 1" ng-click="onBackClick()">Back</div>
