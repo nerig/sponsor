@@ -10,9 +10,11 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		formElement.action = "/events/" + eventId;
 		$('#new-event-form').append($('<input type="hidden" name="_method" value="put" />'));
 		get('btn-sbmt-event').value = "Update Event";
+		$scope.eventFormTitle = "Edit event";
 	} else {
 		formElement.action = "/events";
 		get('btn-sbmt-event').value = "Create Event";
+		$scope.eventFormTitle = "Create a new event!";
 	}
 
 	// managing states of the form to show it one part at a time

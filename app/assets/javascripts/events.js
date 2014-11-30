@@ -325,15 +325,17 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			get('read-more').style.visibility = "hidden";
 		}
 
+		$('#event-logo').load(function() {
+			/* sponsor! button location calculation */
+			var sponsorButtonElement = get('event-sponsor-button');
+			var logoHeight = get('event-logo').offsetHeight;
+			sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
 
-		/* sponsor! button location calculation */
-		var sponsorButtonElement = get('event-sponsor-button');
-		var logoHeight = get('event-logo').offsetHeight;
-		sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
+			// above-the-description elements location calculation
+			var aboveTheDescriptionElement = get('above-the-description');
+			aboveTheDescriptionElement.style.marginTop = ((logoHeight / 2) - (aboveTheDescriptionElement.offsetHeight / 2)) + 'px';
+		});
 
-		// above-the-description elements location calculation
-		var aboveTheDescriptionElement = get('above-the-description');
-		aboveTheDescriptionElement.style.marginTop = ((logoHeight / 2) - (aboveTheDescriptionElement.offsetHeight / 2)) + 'px';
 
 		/* show requested sponsorship types */
 		crudeEvent = crudeEvent.replace(/\r\n/g, "\\r\\n");

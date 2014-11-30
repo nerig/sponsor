@@ -7,7 +7,7 @@
 				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 				<div class="row">
 					<div id="form-description">
-						<h4>Create a new event!</h4>
+						<h4 ng-bind-html="eventFormTitle"></h4>
 						<p>Please fill out all the fields.</p>
 					</div>
 					<hr class="col-md-11 hri">
@@ -137,7 +137,7 @@
 						<!-- location -->
 						<div class="row">
 							<div class="col-md-12">
-								<p class="field-title"><strong>Location</strong></p>
+								<p class="field-title"><strong>Event's location</strong></p>
 							</div>
 						</div>
 						<div class="row">
@@ -214,15 +214,15 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-2">	
+							<div class="col-md-2" title="Select capital if you are willing to receive money as a sponsorship">	
 								<input id="cb-capital" name="event[capital]" type="checkbox" value="capital" ng-model="cbCapital" ng-required="typesRequired()" ng-change="onTypesChange()"/>
 								<span ng-click="onCapitalClick()">Capital</span>
 							</div>
-							<div class="col-md-2">	
+							<div class="col-md-2" title="Select discounts if you are willing to have discounts on the sponsor's products">	
 								<input id="cb-discounts" name="event[discounts]" type="checkbox" value="discounts" ng-model="cbDiscounts" ng-required="typesRequired()" ng-change="onTypesChange()"/>
 								<span ng-click="onDiscountsClick()">Discounts</span>
 							</div>
-							<div class="col-md-3">	
+							<div class="col-md-3" title="Select merchandise if you are willing to receive swags as a sponsorship">	
 								<input id="cb-merchandise" name="event[merchandise]" type="checkbox" value="merchandise" ng-model="cbMerchandise" ng-required="typesRequired()" ng-change="onTypesChange()"/>
 								<span ng-click="onMerchandiseClick()">Merchandise</span>
 							</div>
@@ -238,13 +238,13 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-md-5" title="Overall requested amount of money, in case capital sponsorship is wanted">
 								<div class="input-group">
 									<span class="input-group-addon">$</span>
 									<input name="event[total_amount]" type="text" pattern="\d*" class="form-control" minlength="3" maxlength="7" ng-minlength="3" ng-maxlength="7" ng-model="totalAmount" required>
 								</div>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-5" title="Minimun amount of money you are willing to accept from a sponsor">
 								<div class="input-group">
 									<span class="input-group-addon">$</span>
 									<input name="event[min_amount]" type="text" pattern="\d*" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="minAmount" required>
@@ -258,7 +258,7 @@
 								<p class="field-title"><strong>Special sponsorship requests or comments</strong></p>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" title="This is also the place to write how you will benefit your sponsor">
 							<div class="col-md-10">
 								<textarea name="event[sponsorship_requests]" rows="2"></textarea>
 							</div>
