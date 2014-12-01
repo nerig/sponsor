@@ -81,6 +81,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 				$scope.sizeRanges.push({"range": event.size_range});
 				tempValues.push(event.size_range);
 			}
+
+			event.description = event.description.replace(/&#39;/g, "'");
 		});
 		$scope.locations.sort(function(a, b) { return compare(a.city, b.city); });
 		$scope.ageRanges.sort(function(a, b) { return compare(a.range, b.range); });
