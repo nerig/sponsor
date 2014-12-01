@@ -1,9 +1,5 @@
 <div class="container">
-	<div ng-controller="EventsListCtrl" ng-init="initWith('<%= 
-		@events.each { |e|
-			e.description.gsub!('"', '\"')
-		}
-		@events.to_json.gsub("'", "&#39;") %>')">
+	<div ng-controller="EventsListCtrl" ng-init="initWith('<%= @events %>')">
 		
 		<div class="row">
 			<p class="title">Find an event to sponsor:</p>

@@ -4,7 +4,7 @@
 			<input id="homepage-search" type="text" class="form-control freetext-search" ng-model="freetext" ng-change="onTextChange()"/>		
 		</div>
 
-		<div ng-controller="HomepageCtrl" ng-init="initWith('<%=h @six_events.gsub("'", "&#39;") %>')">
+		<div ng-controller="HomepageCtrl" ng-init="initWith('<%= @six_events %>')">
 			<div class="container">
 				<div class="row">
 					<h3 class="col-md-12" style="margin:2em 0 .5em 2.2em;">Trending Events</h3>

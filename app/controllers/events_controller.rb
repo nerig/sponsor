@@ -7,6 +7,11 @@ class EventsController < ApplicationController
 	# action to show all events
 	def index
 		@events = Event.all.sort { |a, b| a.date_time <=> b.date_time}
+
+		@events.each { |e|
+			e.description.gsub!('"', '\"')
+		}
+		@events = @events.to_json.gsub("'", "&#39;")
 	end
 
 	# action taken when a user wants to create a new event
