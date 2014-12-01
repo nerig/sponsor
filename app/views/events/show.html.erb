@@ -1,7 +1,7 @@
 <div class="container" ng-controller="ShowEventCtrl" ng-init="initWith('<%= 
 		temp_event = Marshal.load(Marshal.dump(@event))
 		temp_event.description.gsub!('"', '\"')
-		temp_event.to_json.gsub("'", "&#39;") %>')">
+		temp_event.to_json.gsub("'", "\'") %>')">
 	<div class="margin-left-indent">
 		<div class="row">	
 			<h1 class="col-md-8"><%= @event.name %></h1>

@@ -11,7 +11,7 @@ class EventsController < ApplicationController
 		@events.each { |e|
 			e.description.gsub!('"', '\"')
 		}
-		@events = @events.to_json.gsub("'", "&#39;")
+		@events = @events.to_json.gsub("'", "\'")
 	end
 
 	# action taken when a user wants to create a new event
