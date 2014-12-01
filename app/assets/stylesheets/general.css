@@ -154,3 +154,10 @@ body {
 .cal-icon-color {
 	 color: #5cb85c;
 }
+
+.event-logo {
+	position: relative;
+	width: auto;
+	height: auto;
+	transform: translate(-50%, -50%);
+}

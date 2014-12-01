@@ -34,10 +34,9 @@
 }
 
 #one-trending-event #logo {
-	margin-top: 1em;
+	top: 6.2em; left: 50%;
 	max-height: 10em;
 	max-width: 16em;
-	width: auto;
 }
 
 #one-trending-event .absolute-items {

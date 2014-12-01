@@ -11,13 +11,15 @@
 			<div class="col-md-9">
 				<div class="row">
 					<div class="col-md-4">
-						<img id="event-logo" class="center-block" src="<%= @event.image_url %>">
+						<div id="logo-space">
+							<img id="event-logo" class="event-logo" src="<%= @event.image_url %>">
+						</div>
 					</div>
 					<div id="above-the-description" class="col-md-8">
 						<div class="row">
 							<p class="col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y, h:mm a' : 'UTC'}}</p>
 						</div>
-						<div class="spacer-half"></div>
+						<div class="spacer-1"></div>
 						<div class="row">
 							<table>
 								<tr class="col-md-12">
@@ -26,7 +28,7 @@
 								</tr>
 							</table>
 						</div>
-						<div class="spacer-half"></div>
+						<div class="spacer-1"></div>
 						<div id="little-details" class="row">
 							<div title="Attendees gender: <%= @event.attendees_gender %>" class="col-md-2 text-center">
 								<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png"></img>

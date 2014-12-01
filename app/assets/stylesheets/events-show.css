@@ -2,11 +2,16 @@
 	margin-left: 1em;
 }
 
+#logo-space {
+	min-height: 15em;
+	max-height: 15em;
+}
+
 #event-logo {
-    max-width: 19em;
-    max-height: 19em;
-    width: auto;
-    height: auto;
+    max-width: 15em;
+    max-height: 15em;
+
+    top: 7.6em; left: 52%;
 }
 
 #mark-icon {

@@ -24,13 +24,9 @@
 
 /* event's contents */
 .event .logo {
-	position: relative;
     top: 5.35em; left: 55%;
-    transform: translate(-50%, -50%);
     max-width: calc(10.7em * 0.9);
     max-height: calc(10.7em * 0.9);
-    width: auto;
-    height: auto;
     border-radius: 6px;
 }
 
