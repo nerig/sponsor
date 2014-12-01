@@ -8,12 +8,12 @@ class WelcomeController < ApplicationController
 		@events.each { |e|
 			e.description.gsub!('"', '\"')
 		}
-		@events = @events.to_json.gsub("'", "\'")
+		@events = @events.to_json.gsub("'", "&#39;")
 			
 		@six_events.each { |e|
 			e.description.gsub!('"', '\"')
 		}
-		@six_events = @six_events.to_json.gsub("'", "\'")
+		@six_events = @six_events.to_json.gsub("'", "&#39;")
 		
 	end
 end
