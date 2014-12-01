@@ -60,11 +60,15 @@
 #one-trending-event #line {
 	position: relative;
 	top: -1.2em;
-	width: 18.5em;
+	left: -1.1em;
+	width: 21em;
 }
 
 #sponsor-trending-event-button {
 	margin-top: -1.45em;
+	position: relative;
+	left: 16em;
+	transform: translate(-50%, 0%);
 }
 
 .btn-bold {
