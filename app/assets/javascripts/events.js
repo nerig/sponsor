@@ -330,10 +330,16 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			/* not showing read more if there is no overflow */
 			get('read-more').style.visibility = "hidden";
 		}
-		
+
 		if ($scope.restOfText.indexOf("<br>") === 0) {
 			// removing break if the rest of text starts with it so to not have two newlines instead of one
 			$scope.restOfText = $scope.restOfText.replace("<br>", "");
+		}
+		if (descriptionElement.innerHTML.indexOf('<br><span id="three-dots">...</span>') != -1) {
+			// last line of the beginning of the description we show at start is practiacally
+			// just '...'. it doesn't look so nice
+			descriptionElement.innerHTML = descriptionElement.innerHTML.replace('<br><span id="three-dots">...</span>', '<span id="three-dots">...</span>');
+			$scope.restOfText = "<br>" + $scope.restOfText;
 		}
 
 		var logoHeight = get('logo-space').offsetHeight;
