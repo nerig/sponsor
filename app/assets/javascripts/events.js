@@ -316,8 +316,12 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		if (descriptionElement.offsetHeight > descriptionMaxHeight) {
 			while (descriptionElement.offsetHeight > descriptionMaxHeight) {
 				var lastSpace = tmpTrimmedText.lastIndexOf(" ");
-				tmpTrimmedText = $scope.originalDescription.substring(0, lastSpace);
+				var lastLineBreak = tmpTrimmedText.lastIndexOf("<br>");
+				var lastBreak = Math.max(lastLineBreak, lastSpace);
+				
+				tmpTrimmedText = $scope.originalDescription.substring(0, lastBreak);
 				trimmedText = tmpTrimmedText + '<span id="three-dots">...</span>';
+				
 				$scope.restOfText = $scope.originalDescription.substring(tmpTrimmedText.length, $scope.originalDescription.length);
 				
 				descriptionElement.innerHTML = trimmedText;
@@ -325,6 +329,11 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		} else {
 			/* not showing read more if there is no overflow */
 			get('read-more').style.visibility = "hidden";
+		}
+		
+		if ($scope.restOfText.indexOf("<br>") === 0) {
+			// removing break if the rest of text starts with it so to not have two newlines instead of one
+			$scope.restOfText = $scope.restOfText.replace("<br>", "");
 		}
 
 		var logoHeight = get('logo-space').offsetHeight;
