@@ -6,64 +6,22 @@ body {
 	background: #F7F7F7 !important;
 }
 
-#app-header {
-	background-color: white;
-	border-bottom: 2px solid #AAAAAA;
-	
-	/* sticky header */
-	position:fixed;
-	width:100%;
-	z-index: 999;
-
-	height: 4em;
+nav {
+	background-color: white!important;
 }
 
-#app-header .logo * {
-	color: grey;
+nav .logo {
 	font-size: 2em;
-	margin-top: 0.5em;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-#app-header .logo:hover {
-	text-decoration: none;
-}
-
 .event-create-button {
-	color: white !important;
-	font-size: 1em !important;
-
-	position: relative;
-	bottom: 0.2em;
-}
-
-#app-header #menu {
-	text-align: right;
-}
-
-#app-header #menu ul {
-	margin-top: 1em; 
-	list-style-type: none;
-}
-
-#app-header #menu li { 
-	display: inline;
-
-	padding-left: 2.5em;
-}
-
-#app-header #menu a {
-	font-size: 1.2em;
-	color: grey;
-	text-decoration: none;
-}
-
-#app-header #menu a:hover {
-	color: #0F90C9;
+	margin-top: .6em!important;
+	margin-left: 1.5em!important;
 }
 
 #general-div {
-	padding-top: 4em;
+	padding-top: 50px;
 	padding-bottom: 4em;
 }
 
@@ -120,19 +78,21 @@ body {
 	min-height: 4em;
 	min-width: 8em;
 	position: absolute;
-	top: 4.5em;
-	left: 51.5em;
+	top: 4em;
+	left: -.4em;
 	
 	text-align: center;
 }
 
 #about-us-on-hover a {
 	position: relative;
-	top: 0.9em;
+	color: grey!important;
+	top: 1.2em;
 }
 
 #about-us-on-hover a:hover {
-	color: #0F90C9 !important;
+	color: #333333 !important;
+	text-decoration: none;
 }
 
 #contact-us-item:hover #about-us-on-hover {
