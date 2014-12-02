@@ -308,18 +308,6 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		var descriptionMaxHeight = 60;
 
 		var descriptionElement = get('ev-desc');
-
-		// replace all links in the description with actual links
-		var regx = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?/ig;
-		descriptionElement.innerHTML = descriptionElement.innerHTML.replace(regx, 
-			function(link) {
-				if (link.slice(0, "http".length) === "http") {
-					return '<a target="_blank" href="' + link + '">' + link + '</a>';
-				} else {
-					return '<a target="_blank" href="//' + link + '">' + link + '</a>';
-				}
-		});
-		
 		var tmpTrimmedText = descriptionElement.innerHTML;
 		var trimmedText = descriptionElement.innerHTML;
 		$scope.restOfText = '';
@@ -353,6 +341,21 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 			descriptionElement.innerHTML = descriptionElement.innerHTML.replace('<br><span id="three-dots">...</span>', '<span id="three-dots">...</span>');
 			$scope.restOfText = "<br>" + $scope.restOfText;
 		}
+
+		// replace all links in the description with actual links
+		var replaceUrl = function(str) {
+			var regx = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.#!-]*)*\/?/ig;
+			return str.replace(regx, 
+				function(link) {
+					if (link.slice(0, "http".length) === "http") {
+						return '<a target="_blank" href="' + link + '">' + link + '</a>';
+					} else {
+						return '<a target="_blank" href="//' + link + '">' + link + '</a>';
+					}
+			});
+		}
+		descriptionElement.innerHTML = replaceUrl(descriptionElement.innerHTML);
+		$scope.restOfText = replaceUrl($scope.restOfText);
 
 		var logoHeight = get('logo-space').offsetHeight;
 		/* sponsor! button location calculation */
