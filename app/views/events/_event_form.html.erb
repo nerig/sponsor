@@ -78,6 +78,18 @@
 							</div>
 						</div>
 
+						<!-- image url -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Link to event logo *</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
+								<input name="event[image_url]" type="text" class="form-control" minlength="10" maxlength="255" ng-minlength="10" ng-maxlength="255" ng-model="imageUrl" required>
+							</div>
+						</div>
+
 						<!-- event size -->
 						<div class="row">
 							<div class="col-md-12">
@@ -127,6 +139,21 @@
 								</div>
 							</div>
 						</div>
+
+						<!-- event's description -->
+						<div class="row">
+							<div class="col-md-12">
+								<p class="field-title"><strong>Event description *</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10">
+								<textarea name="event[description]" rows="4" ng-model="description" ng-minlength="10" required></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div ng-show="questionsSectionNumber === 2">
 
 						<!-- location -->
 						<div class="row">
@@ -185,21 +212,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div ng-show="questionsSectionNumber === 2">
-
-						<!-- event's description -->
-						<div class="row">
-							<div class="col-md-12">
-								<p class="field-title"><strong>Event description *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-10">
-								<textarea name="event[description]" rows="4" ng-model="description" ng-minlength="10" required></textarea>
-							</div>
-						</div>
 
 						<!-- Sponsorship types -->
 						<div class="row">
@@ -255,21 +267,6 @@
 						<div class="row" title="This is also the place to write how you will benefit your sponsor">
 							<div class="col-md-10">
 								<textarea name="event[sponsorship_requests]" rows="2"></textarea>
-							</div>
-						</div>
-
-						<!-- image url -->
-						<div class="row">
-							<div class="col-md-12">
-								<p class="field-title"><strong>Link to event logo *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-7">
-								<div class="input-group">
-									<span class="input-group-addon"></span>
-									<input name="event[image_url]" type="text" class="form-control" minlength="10" maxlength="255" ng-minlength="10" ng-maxlength="255" ng-model="imageUrl" required>
-								</div>
 							</div>
 						</div>
 
