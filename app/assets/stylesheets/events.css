@@ -25,8 +25,8 @@
 /* event's contents */
 .event .logo {
     top: 5.35em; left: 55%;
-    max-width: calc(10.7em * 0.9);
-    max-height: calc(10.7em * 0.9);
+    max-width: 9.6em;
+    max-height: 9.6em;
 }
 
 .sponsorButton {
@@ -78,14 +78,12 @@
 /* filters */
 
 .filter {
-	margin-top: calc(7em / 2);
-	transform: translate(0%, -50%);
 	z-index: 10;
 }
 
 .toggleMoreFilters {
 	float: right;
-	margin-right: 1em;
+	margin-right: .65em;
 	color: #007acc;
 }
 
@@ -110,11 +108,7 @@
 
 p.title {
 	font-size: 1.2em;
-	margin: 1em 0 -1em 1em;
-}
-
-#search-filter-div {
-	margin-left: 1em;
+	margin-top: 1em;
 }
 
 .btn-gender {
@@ -142,5 +136,4 @@ p.title {
 @media (min-width: 992px) {
 	.col-md-2-4 {
 		float: left;
-	}
 }

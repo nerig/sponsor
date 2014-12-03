@@ -1,7 +1,7 @@
 <div ng-controller="EntireHomepageCtrl">
 	<div ng-show="showInitialHomepage">
 		<div id="big-background-image">
-			<div class="freetext-search">
+			<div class="freetext-search transform-50-50">
 				<span>
 					<input id="homepage-search" type="text" class="form-control" ng-model="freetext" ng-change="onTextChange()"/>		
 					<label for="homepage-search" id="search-placeholder">Start searching for events...</label>
@@ -19,7 +19,7 @@
 						<li class="col-md-4" ng-repeat="event in events" ng-click="go('/events/' + event.id)">
 							<div id="one-trending-event" class="center-block">
 								<div class="row">
-									<img id="logo" class="event-logo" ng-src="{{event.image_url}}"/>
+									<img id="logo" class="event-logo transform-50-50" ng-src="{{event.image_url}}"/>
 								</div>
 								<div class="absolute-items">
 									<div class="row">
