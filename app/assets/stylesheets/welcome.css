@@ -28,6 +28,10 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
 
 	max-width: 30em;
 	height: auto;
@@ -53,7 +57,9 @@
 }
 
 #one-trending-event #logo {
-	top: 6.2em; left: 50%;
+	position: relative;
+	top: 6.2em;
+	left: 50%;
 	max-height: 10em;
 	max-width: 16em;
 }
@@ -88,6 +94,10 @@
 	position: relative;
 	left: 16em;
 	transform: translate(-50%, 0%);
+	-webkit-transform: translate(-50%, 0%);
+	-ms-transform: translate(-50%, 0%);
+	-moz-transform: translate(-50%, 0%);
+	-o-transform: translate(-50%, 0%);
 }
 
 .btn-bold {
@@ -96,7 +106,7 @@
 
 #create-new-event-button {
 	font-size: 1.5em;
-	margin-left: 2.6em;
+	margin-left: 2.1em;
 }
 
 #events-list {
