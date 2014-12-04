@@ -9,12 +9,38 @@
 
 .event {
 	width: 100%;
-	height: 10.7em;
 	margin-bottom: 2em;
 	cursor: pointer;
 	background: #ffffff;
 	border: 1px solid #ffffff; /* to prevent all the events of moving upon hover */
 	border-radius: 8px;
+}
+
+@media (max-width: 1024px) { /* smartphone-ipad */
+	.event {
+		height: auto;
+	}
+	.description_text {
+		max-width: 100%;
+	}
+	.event .logo {
+		left: 50%;
+	}
+}
+@media (min-width: 1025px) { /* desktops */
+	.event {
+		height: 10.7em;
+	}
+	.description_text {
+		max-width: 43em;
+	}
+	.sponsorButton {
+		top: 1.5em;
+		right: .8em;
+	}
+	.event .logo {
+		left: 60%;
+	}
 }
 
 /* event selectors */
@@ -25,14 +51,13 @@
 /* event's contents */
 .event .logo {
 	top: 5.35em;
-	left: 55%;
+	
 	max-width: 9.6em;
 	max-height: 9.6em;
 }
 
 .sponsorButton {
-	position: absolute;
-	top: 1.5em;
+	position: relative;
 	z-index: 8;
 }
 
@@ -54,7 +79,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: auto;
-    max-width: 45em;
     height: auto;
     padding-top: 0.05em;
 }
