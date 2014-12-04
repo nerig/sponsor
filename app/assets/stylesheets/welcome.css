@@ -126,6 +126,6 @@
 
 @media (min-width: 401px) {
 	.center-li {
-		left: -1em;
+		left: -.8em;
 	}
 }	
