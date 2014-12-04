@@ -16,7 +16,11 @@
 
 #mark-icon {
 	 transform: translate(0%, -100%);
-	 padding-right: .3em;
+	-webkit-transform: translate(0%, -100%);
+	-ms-transform: translate(0%, -100%);
+	-moz-transform: translate(0%, -100%);
+	-o-transform: translate(0%, -100%);
+	padding-right: .3em;
 }
 
 #att-gender {
