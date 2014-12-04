@@ -79,14 +79,12 @@
 /* filters */
 
 .filter {
-	margin-top: calc(7em / 2);
-	transform: translate(0%, -50%);
 	z-index: 10;
 }
 
 .toggleMoreFilters {
 	float: right;
-	margin-right: 1em;
+	margin-right: .65em;
 	color: #007acc;
 }
 
@@ -111,11 +109,7 @@
 
 p.title {
 	font-size: 1.2em;
-	margin: 1em 0 -1em 1em;
-}
-
-#search-filter-div {
-	margin-left: 1em;
+	margin-top: 1em;
 }
 
 .btn-gender {
@@ -140,7 +134,7 @@ p.title {
 	width: 20%;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 799px) {
 	.col-md-2-4 {
 		float: left;
 	}
