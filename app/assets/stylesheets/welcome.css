@@ -120,12 +120,12 @@
 
 @media (max-width: 400px) {
 	.center-li {
-		left: -3em;
+		left: -2em;
 	}
 }
 
 @media (min-width: 401px) {
 	.center-li {
-		left: -.8em;
+		left: -1em;
 	}
 }	
