@@ -344,7 +344,7 @@ spons.controller('eventsListCtrl', ["$scope", function($scope) {
 
 		// replace all links in the description with actual links
 		var replaceUrl = function(str) {
-			var regx = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.#!-]*)*\/?[^. <>]/ig;
+			var regx = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.#!-]*)*\/?[^. ]/ig;
 			return str.replace(regx, 
 				function(link) {
 					if (link.slice(0, "http".length) === "http") {
