@@ -1,13 +1,15 @@
-<div class="container">
-	<div ng-controller="EventsListCtrl" ng-init="initWith('<%= @events %>')">
+<div class="container" ng-controller="EventsListCtrl" ng-init="initWith('<%= @events %>')">
 		
-		<div class="row">
+	<div class="row">
+		<div class="col-md-12">
 			<p class="title">Find an event to sponsor:</p>
 		</div>
-	 	
-	 	<div class="row">
+	</div>
+ 	
+ 	<div class="row">
+ 		<div class="col-md-12">
 	 		<!-- div to arrange searching and filtering area -->
-			<div id="search-filter-div" class="center-block">
+			<div id="search-filter-div">
 			  	
 				<div class="row">
 					<div class="col-md-4 filter">
@@ -19,6 +21,7 @@
 
 			  	<!-- hidden filters -->
 			  	<div class="row" collapse="isCollapsed">
+			  		<div class="spacer-2"></div>
 		  			<div class="col-md-2-4">
 			  			<div class="smallMultiSelect">
 			  				<div multi-select input-model="ageRanges" output-model="ageSelections" button-label="range" item-label="range" tick-property="ticked" max-labels="5" helper-elements="none" default-label="Any age range"></div>
@@ -58,8 +61,10 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
+	<div class="row">
+		<div class="col-md-12">
 			<div ng-click="toggleHiddenFilters()" ng-show="isCollapsed">
 				<a class="toggleMoreFilters" href="">more filtering options</a>
 			</div>
@@ -67,45 +72,46 @@
 				<a class="toggleMoreFilters" href="">less filtering options</a>
 			</div>
 		</div>
+	</div>
 
-		<!-- line in the middle of the screen to indicate too narrow filter -->
-		<div class="row">
-			<h1 class="col-md-12 text-center" style="margin-top:1em;" ng-hide="filteredEvents.length">No events were found to your filtering criteria.</h1>
-		</div>
-		
-		<div class="row">
-			<!-- events listing -->
-			<div class="col-md-offset-1 col-md-10">
-				<ul id="events_list">
-					<li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.id)">
-						<div class="row">
-							<div class="col-md-2">
-								<img class="logo event-logo transform-50-50" ng-src="{{event.image_url}}">
+	<!-- line in the middle of the screen to indicate too narrow filter -->
+	<div class="row">
+		<h1 class="col-md-12 text-center" style="margin-top:1em;" ng-hide="filteredEvents.length">No events were found to your filtering criteria.</h1>
+	</div>
+	
+	<div class="row">
+		<!-- events listing -->
+		<div class="col-md-offset-1 col-md-10">
+			<ul id="events_list">
+				<li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.id)">
+					<div class="row">
+						<div class="col-md-2">
+							<img class="logo event-logo transform-50-50" ng-src="{{event.image_url}}">
+						</div>
+						<div class="col-md-8">
+							<div class="row">
+								<p class="name-text">{{event.name}}</p>
 							</div>
-							<div class="col-md-8">
-								<div class="row">
-									<p class="name-text">{{event.name}}</p>
-								</div>
-								<div class="row">
-									<i class="glyphicon glyphicon-calendar icon cal-icon-color"></i>
-									<p class="text_padding text">{{event.date_time | date : 'EEEE, MMMM d, y h:mm a'}}</p>
-								</div>
-								<div class="row">
-									<i class="glyphicon glyphicon-map-marker icon mark-icon-color"></i>
-									<p class="text_padding text text-capitalize">{{fullAddress(event)}}</p>
-								</div>
-								<div class="row">
-									<p class="description_text text">{{event.description}}</p>
-									<a ng-href="/events/{{event.id}}" style="padding-left: 0.4em;">Read more</a>
-								</div>
+							<div class="row">
+								<i class="glyphicon glyphicon-calendar icon cal-icon-color"></i>
+								<p class="text_padding text">{{event.date_time | date : 'EEEE, MMMM d, y h:mm a'}}</p>
 							</div>
-							<div class="col-md-2">
-								<p><a class="btn btn-lg sponsorButton btn-orange btn-bold" role="button" ng-href="sponsorship_responses/new?event_id={{event.id}}">Sponsor!</a></p>
+							<div class="row">
+								<i class="glyphicon glyphicon-map-marker icon mark-icon-color"></i>
+								<p class="text_padding text text-capitalize">{{fullAddress(event)}}</p>
+							</div>
+							<div class="row">
+								<p class="description_text text">{{event.description}}</p>
+								<a ng-href="/events/{{event.id}}" style="padding-left: 0.4em;">Read more</a>
 							</div>
 						</div>
-					</li>
-				</ul>
-			</div>
+						<div class="col-md-2">
+							<p><a class="btn btn-lg sponsorButton btn-orange btn-bold" role="button" ng-href="sponsorship_responses/new?event_id={{event.id}}">Sponsor!</a></p>
+						</div>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
+
 </div>

@@ -36,7 +36,7 @@ var getStyle = function (el, styleProp)
 // there is not enough content
 window.onload = function() {
 	var footerHeight = getStyle(get('footer'), 'height');
-	var headerHeight = getStyle(get('app-header'), 'height');
+	var headerHeight = getStyle(get('header'), 'height');
 
 	var generalDivMinHeight = window.screen.availHeight - parseInt(headerHeight) - parseInt(footerHeight) - 29;
 
