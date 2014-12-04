@@ -134,7 +134,7 @@ p.title {
 	width: 20%;
 }
 
-@media (min-width: 799px) {
+@media (min-width: 768px) {
 	.col-md-2-4 {
 		float: left;
 	}

@@ -1,8 +1,13 @@
 #big-background-image {
-	background: url(./homepage-bigimage.jpg) no-repeat;
-	background-size: 100% 100%;
 	width: 100%;
-	height: 40em;
+	height: 30em;
+}
+
+@media (min-width: 768px) {
+	#big-background-image {
+		background: url(./homepage-bigimage.jpg) no-repeat;
+		background-size: 100% 100%;
+	}
 }
 
 #big-background-image #search-placeholder {
