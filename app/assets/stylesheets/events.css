@@ -24,9 +24,10 @@
 
 /* event's contents */
 .event .logo {
-    top: 5.35em; left: 55%;
-    max-width: calc(10.7em * 0.9);
-    max-height: calc(10.7em * 0.9);
+	top: 5.35em;
+	left: 55%;
+	max-width: 9.6em;
+	max-height: 9.6em;
 }
 
 .sponsorButton {
