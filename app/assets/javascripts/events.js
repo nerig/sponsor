@@ -357,14 +357,19 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		descriptionElement.innerHTML = replaceUrl(descriptionElement.innerHTML);
 		$scope.restOfText = replaceUrl($scope.restOfText);
 
-		var logoHeight = get('logo-space').offsetHeight;
-		/* sponsor! button location calculation */
 		var sponsorButtonElement = get('event-sponsor-button');
-		sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
+		if (window.width > 1024) {
+			var logoHeight = get('logo-space').offsetHeight;
 
-		// above-the-description elements location calculation
-		var aboveTheDescriptionElement = get('above-the-description');
-		aboveTheDescriptionElement.style.marginTop = ((logoHeight / 2) - (aboveTheDescriptionElement.offsetHeight / 2)) + 'px';
+			// above-the-description elements location calculation
+			var aboveTheDescriptionElement = get('above-the-description');
+			aboveTheDescriptionElement.style.marginTop = ((logoHeight / 2) - (aboveTheDescriptionElement.offsetHeight / 2)) + 'px';
+
+			/* sponsor! button location calculation */
+			sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
+		} else {
+			sponsorButtonElement.style.marginTop = "2em";
+		}
 
 		/* show requested sponsorship types */
 		crudeEvent = crudeEvent.replace(/\r\n/g, "\\r\\n");
