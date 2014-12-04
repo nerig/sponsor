@@ -80,7 +80,7 @@
 					<li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.id)">
 						<div class="row">
 							<div class="col-md-2">
-								<img class="logo event-logo" ng-src="{{event.image_url}}">
+								<img class="logo event-logo transform-50-50" ng-src="{{event.image_url}}">
 							</div>
 							<div class="col-md-8">
 								<div class="row">

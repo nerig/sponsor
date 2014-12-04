@@ -71,6 +71,9 @@ nav .logo {
 #about-us-on-hover {
 	visibility: hidden;
 	transition: visibility .5s ease-in;
+	-webkit-transition: visibility .5s ease-in;
+	-moz-transition: visibility .5s ease-in;
+	-o-transition: visibility .5s ease-in;
 
 	background-color: white;
 	border: solid 1px grey;
@@ -119,6 +122,9 @@ nav .logo {
 	position: relative;
 	width: auto;
 	height: auto;
+}
+
+.transform-50-50 {
 	transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
