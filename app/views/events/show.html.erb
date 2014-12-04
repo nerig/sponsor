@@ -4,25 +4,25 @@
 		temp_event.to_json.gsub("'", "&#39;") %>')">
 	<div class="margin-left-indent">
 		<div class="row">	
-			<h1 class="col-md-8"><%= @event.name %></h1>
+			<h1 class="col-xs-12 col-md-8"><%= @event.name %></h1>
 		</div>
 
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-xs-12 col-md-9">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-xs-12 col-md-4">
 						<div id="logo-space">
 							<img id="event-logo" class="event-logo transform-50-50" src="<%= @event.image_url %>">
 						</div>
 					</div>
-					<div id="above-the-description" class="col-md-8">
+					<div id="above-the-description" class="col-xs-12 col-md-8">
 						<div class="row">
-							<p class="col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y, h:mm a' : 'UTC'}}</p>
+							<p class="col-xs-12 col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y, h:mm a' : 'UTC'}}</p>
 						</div>
 						<div class="spacer-1"></div>
 						<div class="row">
 							<table>
-								<tr class="col-md-12">
+								<tr class="col-xs-12 col-md-12">
 									<td><i id="mark-icon" class="glyphicon glyphicon-map-marker mark-icon-color"></i></td>
 									<td><p class="text-capitalize"> {{streetAddress}}<br>{{cityAndRest}} </p></td>
 								</tr>
@@ -30,14 +30,14 @@
 						</div>
 						<div class="spacer-1"></div>
 						<div id="little-details" class="row">
-							<div title="Attendees gender: <%= @event.attendees_gender %>" class="col-md-2 text-center">
+							<div title="Attendees gender: <%= @event.attendees_gender %>" class="col-xs-4 col-md-2 text-center">
 								<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png"></img>
 							</div>
-							<div title="Attendees age" class="col-md-2 text-center">
+							<div title="Attendees age" class="col-xs-4 col-md-2 text-center">
 								<div class="row age-icon">Ages</div>
 								<div class="row age-detail">{{ageRanges}}</div>
 							</div>
-							<div title="Number of attendees" class="col-md-2 text-center">
+							<div title="Number of attendees" class="col-xs-4 col-md-2 text-center">
 								<div class="row">
 									<img id="size-icon" src="/assets/people.png"></img>
 								</div>
@@ -47,24 +47,28 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-xs-12 col-md-3">
 				<div class="row text-center">
-					<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= @event.id %>">Sponsor!</a></p>
+					<div class="col-xs-12 col-md-12">
+						<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= @event.id %>">Sponsor!</a></p>
+					</div>
 				</div>
 				<div class="row text-center">
-					<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
+					<div class="col-xs-12 col-md-12">
+						<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="spacer-1"></div>
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-xs-12 col-md-9">
 				<p id="ev-desc"><%= @event.description.gsub("\r\n", "<br>").html_safe %> </p>
 				<p id="rest-of-description" collapse="!showingEntireDescription" ng-bind-html="restOfText"></p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-xs-12 col-md-9">
 				<div id="read-more" class="description-toggle" ng-click="toggleFullDescription()" ng-hide="showingEntireDescription">
 					<a href="">Read more</a>
 				</div>
@@ -74,41 +78,41 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 margin-left-indent">
+			<div class="col-xs-12 col-md-3 margin-left-indent">
 				<div class="row">
 					<p>Requested sponsorship:</p>
 				</div>
 				<div class="row" id="capital">
-					<div class="col-md-6">
+					<div class="col-xs-4 col-md-6">
 						<p>Capital</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-xs-4 col-md-6">
 						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
 					</div>
 				</div>
 				<div class="row" id="merchandise">
-					<div class="col-md-6">
+					<div class="col-xs-4 col-md-6">
 						<p>Merchandise</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-xs-4 col-md-6">
 						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
 					</div>
 				</div>
 				<div class="row" id="discounts">
-					<div class="col-md-6">
+					<div class="col-xs-4 col-md-6">
 						<p>Discounts</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-xs-4 col-md-6">
 						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<p class="col-md-9"><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
+			<p class="col-xs-12 col-md-9"><%= @event.sponsorship_requests.gsub("\r\n", "<br>").html_safe %></p>
 		</div>
 		<div class="row">
-			<a class="col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
+			<a class="col-xs-12 col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
 		</div>
 	</div>
 </div>
