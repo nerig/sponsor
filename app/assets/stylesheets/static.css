@@ -9,6 +9,21 @@
 	padding: 1em 0 3em 0;
 }
 
+@media (max-width: 480px) {
+	.static-details-indentation {
+		margin: 0 1em 0 1em;
+		padding: 0 0 1em 0;
+	}
+	.static-action-btn {
+		top: 1.5em;
+	}
+}
+@media (min-width: 481px) {
+	.static-action-btn {
+		top: 1em;
+	}	
+}
+
 .paragraph {
 	font-size: 1.2em;
 }
@@ -44,7 +59,6 @@
 .static-action-btn {
 	float: right;
 	position: relative;
-	top: 1em;
 }
 
 .small-thankyou-message {

@@ -84,6 +84,9 @@
 	#map_canvas {
 		height: 20em;
 	}
+	#event-logo {
+		left: 50%;
+	}
 }
 
 #capital, #merchandise, #discounts {
