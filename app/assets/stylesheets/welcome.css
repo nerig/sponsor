@@ -40,6 +40,7 @@
 
 #trending-events {
 	list-style-type: none;
+	padding: 0;
 }
 
 #one-trending-event {
@@ -114,18 +115,12 @@
 	overflow: hidden;
 }
 
-.center-li {
-	position: relative;
+#trending-events-title {
+	 margin: 2em 0 .5em 1.4em;
 }
 
-@media (max-width: 400px) {
-	.center-li {
-		left: -2.5em;
+@media (max-width: 320px) {
+	#trending-events-title {
+		 margin: 2em 0 .5em 1em;
 	}
 }
-
-@media (min-width: 401px) {
-	.center-li {
-		left: -1em;
-	}
-}	

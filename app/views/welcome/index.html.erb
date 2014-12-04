@@ -12,11 +12,11 @@
 		<div ng-controller="HomepageCtrl" ng-init="initWith('<%= @six_events %>')">
 			<div class="container">
 				<div class="row">
-					<h3 class="col-xs-12 col-md-12" style="margin:2em 0 .5em 2.2em;">Trending Events</h3>
+					<h3 id="trending-events-title" class="col-xs-12 col-md-12">Trending Events</h3>
 				</div>
 				<div class="row center-block">
 					<ul id="trending-events">
-						<li class="col-xs-12 col-md-4 center-li" ng-repeat="event in events" ng-click="go('/events/' + event.id)">
+						<li class="col-xs-12 col-sm-6 col-md-4" ng-repeat="event in events" ng-click="go('/events/' + event.id)">
 							<div id="one-trending-event" class="center-block">
 								<div class="row">
 									<img id="logo" class="event-logo transform-50-50" ng-src="{{event.image_url}}"/>
