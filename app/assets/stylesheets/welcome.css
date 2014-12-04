@@ -106,7 +106,6 @@
 
 #create-new-event-button {
 	font-size: 1.5em;
-	margin-left: 2.1em;
 }
 
 #events-list {
@@ -114,3 +113,19 @@
 	height: 0px;
 	overflow: hidden;
 }
+
+.center-li {
+	position: relative;
+}
+
+@media (max-width: 400px) {
+	.center-li {
+		left: -3em;
+	}
+}
+
+@media (min-width: 401px) {
+	.center-li {
+		left: -1em;
+	}
+}	
