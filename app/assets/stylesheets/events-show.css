@@ -80,6 +80,12 @@
 	margin-top: 1em;
 }
 
+@media (max-width: 1024px) {
+	#map_canvas {
+		height: 20em;
+	}
+}
+
 #capital, #merchandise, #discounts {
 	display: none;
 }
