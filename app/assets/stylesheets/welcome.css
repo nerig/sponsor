@@ -116,11 +116,11 @@
 }
 
 #trending-events-title {
-	 margin: 2em 0 .5em 1.4em;
+	 margin: 2em 0 .5em 1.2em;
 }
 
 @media (max-width: 320px) {
 	#trending-events-title {
-		 margin: 2em 0 .5em 1em;
+		 margin: 2em 0 .5em 0em;
 	}
 }

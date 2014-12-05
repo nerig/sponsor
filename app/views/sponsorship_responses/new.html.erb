@@ -1,16 +1,17 @@
 <div class="container" ng-controller="newSponsorshipResponseFormCtrl" ng-init="initWith('<%=h @event.to_json.gsub("'", "&#39;") %>')">
-	<div class="row">
+	<div class="row hidden-xs hidden-sm">
 		<div class="col-md-offset-2 col-md-8">
-			<img id="top" src="/assets/top.png" alt="">
 			<form id="sponsor-form" name="sponsorForm" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses" novalidate>
 				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 				<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
 				<div class="row">
-					<div id="form-description">
+					<div class="col-xs-12 col-md-12 form-description">
 						<h4>Sponsor <%= @event.name %>!</h4>
 						<p>Please fill out all applicable fields.</p>
 					</div>
-					<hr class="col-md-11 hri">
+				</div>
+				<div class="row">
+					<hr class="col-xs-10 col-sm-11 col-md-11 hri">
 				</div>
 				<div class="questions">
 
@@ -148,9 +149,14 @@
 					<div class="spacer-1"></div>
 				</div>
 			</form>
-			<img id="bottom" src="/assets/bottom.png" alt="">
 		</div>
 	</div>
+	<div class="visible-xs-inline visible-sm-inline">
+		<div class="spacer-2"></div>
+		<p>Sorry, but you can only sponsor an event using a desktop computer.</p>
+		<p>Click to <a href="/">go back to homepage</a></p>
+	</div>
 </div>
+
 
 <%= javascript_include_tag "https://checkout.stripe.com/checkout.js" %>
