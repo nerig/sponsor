@@ -50,6 +50,14 @@ form .hri {
 	left: 0 !important;
 }
 
+#image-thunbnail {
+	display: none;
+	max-height: 7em;
+	max-width: 7em;
+	
+	position: absolute;
+}
+
 .questions textarea {
 	width: 100%;
 	border-radius: 4px;

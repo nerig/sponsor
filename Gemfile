@@ -54,3 +54,5 @@ gem 'remote_syslog_logger'
 gem 'stripe'
 
 gem 'mail'
+
+gem 'aws-sdk-core'
