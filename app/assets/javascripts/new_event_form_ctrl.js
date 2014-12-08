@@ -62,9 +62,38 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 			$scope.showAgesRequiredNotification = false;
 			$scope.showIncomesRequiredNotification = false;
 
+			// uploading image
+			
+
 			formElement.submit();
 		}
     });
+
+    // image handler
+    var fileInputElement = get('file-input');
+    $scope.fileInputClicked = function() {
+    	fileInputElement.click();
+    }
+
+    fileInputElement.addEventListener("change", function() {
+    	var imageFile = this.files[0];
+    	if (imageFile) {
+    		$scope.dummyFileName = this.files[0].name;
+    		$scope.$apply();
+
+    		var img = get('image-thunbnail');
+			img.file = imageFile;
+
+			var reader = new FileReader();
+			
+			reader.onload = (function(aImg) { return function(e) { 
+				aImg.src = e.target.result;
+				aImg.style.display = "inherit";
+			}; })(img);
+
+			reader.readAsDataURL(imageFile);
+    	}
+    }, false);
 
 	// date picker settings
 	$scope.dateOptions = {

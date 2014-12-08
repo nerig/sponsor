@@ -87,7 +87,17 @@
 						</div>
 						<div class="row">
 							<div class="col-xs-11 col-md-7">
-								<input name="event[image_url]" type="text" class="form-control" minlength="10" maxlength="255" ng-minlength="10" ng-maxlength="255" ng-model="imageUrl" required>
+								<input name="event[image_url]" type="hidden" ng-model="imageUrl">
+								<input id="file-input" type="file" accept="image/*" class="form-control" style="display:none">
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default btn-grey" ng-click="fileInputClicked()">Choose logo</button>
+									</span>
+									<input id="dummyFileInput" name="imageFileName" type="text" class="readonly-input form-control" ng-click="fileInputClicked()" ng-change="fileSelected()" ng-model="dummyFileName" readonly required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<img id="image-thunbnail">
 							</div>
 						</div>
 
@@ -106,7 +116,7 @@
 											<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
 										</ul>
 									</div>
-									<input ng-model="sizeInputText" type="text" class="readonly-input form-control" name="event[size]" ng-model="size" readonly required>
+									<input ng-model="sizeInputText" type="text" class="readonly-input form-control" name="event[size]" readonly required>
 								</div>
 							</div>
 						</div>
