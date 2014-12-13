@@ -63,7 +63,7 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 			$scope.showIncomesRequiredNotification = false;
 
 			// uploading image
-			
+						
 
 			formElement.submit();
 		}
