@@ -17,7 +17,7 @@
 					</div>
 					<div id="above-the-description" class="col-xs-12 col-md-8">
 						<div class="row">
-							<p class="col-xs-12 col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{<%= @event.date_time.strftime("%s") + '000' %> | date : 'EEEE, MMMM d, y, h:mm a' : 'UTC'}}</p>
+							<p class="col-xs-12 col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{dateRangeString}}</p>
 						</div>
 						<div class="spacer-1"></div>
 						<div class="row">
@@ -31,7 +31,7 @@
 						<div class="spacer-1"></div>
 						<div id="little-details" class="row">
 							<div title="Attendees gender: <%= @event.attendees_gender %>" class="col-xs-4 col-md-2 text-center">
-								<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png"></img>
+								<img id="att-gender" src="/assets/<%= @event.attendees_gender.downcase %>.png">
 							</div>
 							<div title="Attendees age" class="col-xs-4 col-md-2 text-center">
 								<div class="row age-icon">Ages</div>
@@ -39,7 +39,7 @@
 							</div>
 							<div title="Number of attendees" class="col-xs-4 col-md-2 text-center">
 								<div class="row">
-									<img id="size-icon" src="/assets/people.png"></img>
+									<img id="size-icon" src="/assets/people.png">
 								</div>
 								<div class="row size-range"><%= @event.size_range %></div>
 							</div>

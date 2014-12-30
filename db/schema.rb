@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117024341) do
+ActiveRecord::Schema.define(version: 20141227194356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20141117024341) do
     t.string   "recurrence"
     t.string   "attendees_gender"
     t.string   "image_url"
-    t.datetime "date_time"
     t.text     "sponsorship_types"
     t.text     "attendees_income_levels"
     t.text     "age_ranges"
@@ -43,8 +42,12 @@ ActiveRecord::Schema.define(version: 20141117024341) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.datetime "date_time_starts"
+    t.datetime "date_time_ends"
+    t.string   "identifier"
   end
 
+  add_index "events", ["identifier"], name: "index_events_on_identifier", unique: true, using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "sponsorship_responses", force: true do |t|

@@ -118,27 +118,51 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-11 col-md-5">
-								<div class="input-group">
-									<span class="input-group-btn">
-										<button class="btn btn-default btn-grey" ng-click="toggleCalendar($event)"><i class="glyphicon glyphicon-calendar"></i> <span class="caret"></span></button>
-									</span>
-									<input id="new-datepicker" type="text" class="readonly-input form-control" datepicker-popup="MMM d, y" name="event[date]" ng-model="date" is-open="isOpened" min-date="minDate" datepicker-options="dateOptions" ng-click="isOpened = !isOpened" show-button-bar="true" readonly required>
+							<div class="col-xs-12 col-sm-5">
+								<div class="row">
+									<p class="col-xs-12">Starts</p>
 								</div>
-							</div>
-							<div class="col-xs-11 col-md-5">
-								<div class="input-group">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown"><i class="glyphicon glyphicon-time"></i> <span class="caret"></span></button>
-										<ul class="dropdown-menu scrollable-menu" role="menu">
-											<li ng-repeat="time in times">
-												<a ng-click="onTimeSelected(time)">{{time}}</a>
-											</li>
-										</ul>
+								<div class="row">
+									<div class="col-xs-5 col-sm-6">
+										<input id="date-starts" type="text" class="readonly-input form-control" datepicker-popup="MM/dd/y" name="event[date_starts]" ng-model="dateStarts" is-open="isStartsOpened" min-date="minDate" datepicker-options="dateOptions" ng-click="isStartsOpened = !isStartsOpened" show-button-bar="true" ng-change="newDateStartsSelected()" readonly required>
 									</div>
-									<input ng-model="timeInputText" type="text" class="readonly-input form-control" name="event[time]" readonly required>
+									<div class="col-xs-5 col-sm-6">
+										<div class="btn-group btn-group-justified">
+											<button id="time-starts" type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">7:00 PM</button>
+											<ul class="dropdown-menu scrollable-menu" role="menu">
+												<li ng-repeat="time in times">
+													<a ng-click="onTimeStartsSelected(time)">{{time}}</a>
+												</li>
+											</ul>
+										</div>
+										<input id="hidden-time-starts" type="hidden" name="event[time_starts]">
+									</div>
 								</div>
 							</div>
+							<div class="col-xs-12 col-sm-5">
+								<div class="row">
+									<p class="col-xs-12">Ends</p>
+								</div>
+								<div class="row">
+									<div class="col-xs-5 col-sm-6">
+										<input id="date-ends" type="text" class="readonly-input form-control" datepicker-popup="MM/dd/y" name="event[date_ends]" ng-model="dateEnds" is-open="isEndsOpened" min-date="dateStarts" datepicker-options="dateOptions" ng-click="isEndsOpened = !isEndsOpened" show-button-bar="true" readonly required>
+									</div>
+									<div class="col-xs-5 col-sm-6">
+										<div class="btn-group btn-group-justified">
+											<button id="time-ends" type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">10:00 PM</button>
+											<ul class="dropdown-menu scrollable-menu" role="menu">
+												<li ng-repeat="time in times">
+													<a ng-click="onTimeEndsSelected(time)">{{time}}</a>
+												</li>
+											</ul>
+										</div>
+										<input id="hidden-time-ends" type="hidden" name="event[time_ends]">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							
 						</div>
 
 						<!-- event's description -->

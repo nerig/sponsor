@@ -1,3 +1,6 @@
+require 'active_support/core_ext'
+require 'securerandom'
+
 class EventsController < ApplicationController
 #	before_action :authenticate_user!,
 #		:only => [:new, :create]
@@ -6,7 +9,7 @@ class EventsController < ApplicationController
 
 	# action to show all events
 	def index
-		@events = Event.all.sort { |a, b| a.date_time <=> b.date_time}
+		@events = Event.where("date_time_starts > ?", Time.now).sort { |a, b| a.date_time_starts <=> b.date_time_starts}
 
 		@events.each { |e|
 			e.description.gsub!('"', '\"')
@@ -23,14 +26,15 @@ class EventsController < ApplicationController
 
 	# action taken when a user submits a new event
 	def create
-		@event = Event.new(event_params)
+		identifier = "#{SecureRandom.random_number(36**5).to_s(36).rjust(5, "0")}-#{new_event[:name].split.join('-')}"
+		@event = Event.new(event_params(identifier))
 		@event.save
-		redirect_to @event
+		redirect_to "/events/#{@event.identifier}"
 	end
 
 	def update
-		@event.update(event_params)
-		redirect_to @event
+		@event.update(event_params(@event.identifier))
+		redirect_to "/events/#{@event.identifier}"
 	end
 
 	# action to show one event by id
@@ -39,7 +43,7 @@ class EventsController < ApplicationController
 
 
 private
-	def event_params
+	def event_params(identifier)
 		age_ranges = []
 		age_ranges << new_event[:age12_20] if new_event[:age12_20]
 		age_ranges << new_event[:age21_35] if new_event[:age21_35]
@@ -56,20 +60,42 @@ private
 		sponsorship_types << new_event[:merchandise] if new_event[:merchandise]
 		sponsorship_types << new_event[:discounts] if new_event[:discounts]
 
-		# new_event[:date] = mmm dd, yyyy
-		da = new_event[:date].delete("\n,").split
+		# new_event[:date] = mm/dd/yyyy
+		ds = new_event[:date_starts].split("/")
+		p ds
+		de = new_event[:date_ends].split("/")
+		p de
 
 		# new_event[:time] = hh:mm AM
-		hour_plus_meridian = new_event[:time].split
-		ham = hour_plus_meridian[0].split(":")
+		hour_plus_meridian = new_event[:time_starts].split
+		p hour_plus_meridian
+		hams = hour_plus_meridian[0].split(":")
+		p hams
 		if (hour_plus_meridian[1] == "PM")
-			ham[0] = ham[0].to_i + 12
+			hams[0] = hams[0].to_i + 12
 		end
+		p hams
+		hour_plus_meridian = new_event[:time_ends].split
+		p hour_plus_meridian
+		hame = hour_plus_meridian[0].split(":")
+		p hame
+		if (hour_plus_meridian[1] == "PM")
+			hame[0] = hame[0].to_i + 12
+		end
+		p hame
 
-		date_time = Time.new(da[2], da[0], da[1], ham[0], ham[1])
+		date_time_starts = Time.new(ds[2], ds[0], ds[1], hams[0], hams[1])
+		p date_time_starts
+		date_time_ends = Time.new(de[2], de[0], de[1], hame[0], hame[1])
+		p date_time_ends
 
-		time_array = new_event[:time]
+		if date_time_ends <= date_time_starts # if end date_time is before start date_time
+			date_time_ends = date_time_starts + 2.hours
+		end
+		p date_time_ends
+
 		eparams = {
+			identifier: identifier,
 			first_name: new_event[:first_name],
 			last_name: new_event[:last_name],
 			contact_number: new_event[:phone],
@@ -87,7 +113,8 @@ private
 			recurrence: new_event[:recurrence],
 			attendees_gender: new_event[:gender],
 			image_url: new_event[:image_url],
-			date_time: date_time,
+			date_time_starts: date_time_starts,
+			date_time_ends: date_time_ends,
 			age_ranges: age_ranges,
 			attendees_income_levels: income_levels,
 			sponsorship_types: sponsorship_types,
@@ -101,10 +128,10 @@ private
 	def new_event
 		params.require(:event).permit(
 			:first_name, :last_name, :email,
-			:name, :size, :date, :time,
-			:address1, :address2, :city,
-			:state_province_region, :zipcode,
-			:country, :phone, :description,
+			:name, :size, :date_starts, :time_starts,
+			:date_ends, :time_ends, :address1, 
+			:address2, :city, :state_province_region, 
+			:zipcode, :country, :phone, :description,
 			:capital, :merchandise, :discounts,
 			:total_amount, :min_amount,
 			:sponsorship_requests, :recurrence,
@@ -113,6 +140,6 @@ private
 	end
 
 	def set_event
-		@event = Event.find(params[:id])
+		@event = Event.find_by(identifier: params[:identifier]) # automatically escaped by RoR
 	end
 end

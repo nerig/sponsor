@@ -36,6 +36,15 @@ form .hri {
 	background: #EEEEEE !important;
 }
 
+.btn-white {
+	background: white !important;
+	color: #555555 !important;
+	border: 1px solid #CCCCCC !important;
+	
+	width: 100% !important;
+	text-align: left !important;
+}
+
 .location {
 	margin-top: .5em;
 }

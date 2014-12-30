@@ -8,6 +8,7 @@
 
 Event.create([
 	{
+		identifier: "aner1",
 		name: 'HBS Happy feet',
 		size_range: "0-50",
 		address1: "2 E 59th St",
@@ -23,12 +24,13 @@ Event.create([
 		age_ranges: ["12-20","36-50"],
 		attendees_gender: "Both",
 		attendees_income_levels: ["Medium"],
-		date_time: Time.at(1416990000),
+		date_time_starts: Time.at(1416990000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png",
 		total_amount: 10000,
 		min_amount: 1000
 	},
 	{
+		identifier: "aner2",
 		name: 'Women in labor',
 		size_range: "0-50",
 		address1: "2 E 59th St",
@@ -44,12 +46,14 @@ Event.create([
 		age_ranges: ["12-20","36-50"],
 		attendees_gender: "Both",
 		attendees_income_levels: ["Medium"],
-		date_time: Time.at(1427990000),
+		date_time_starts: Time.at(1427990000),
+		date_time_ends: Time.at(1428000000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png",
 		total_amount: 100000,
 		min_amount: 10000
 	},
 	{
+		identifier: "aner3",
 		name: 'Hot-tub Sunday party',
 		size_range: "0-50",
 		address1: "2 E 59th St",
@@ -65,12 +69,14 @@ Event.create([
 		age_ranges: ["12-20","36-50"],
 		attendees_gender: "Both",
 		attendees_income_levels: ["Medium"],
-		date_time: Time.at(1437990000),
+		date_time_starts: Time.at(1437990000),
+		date_time_ends: Time.at(1438000000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo5.png",
 		total_amount: 2000,
 		min_amount: 400
 	},
 	{
+		identifier: "aner4",
 		name: 'Moses lamps store anniversary',
 		size_range: "50-100",
 		address1: "111 western avenue",
@@ -86,12 +92,14 @@ Event.create([
 		age_ranges: ["36-50","21-35"],
 		attendees_gender: "Male",
 		attendees_income_levels: ["Low"],
-		date_time: Time.at(1416960000),
+		date_time_starts: Time.at(1416960000),
+		date_time_ends: Time.at(1416970000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo4.jpg",
 		total_amount: 3000,
 		min_amount: 500
 	},
 	{
+		identifier: "aner5",
 		name: 'HotS spring Concert',
 		size_range: "100-500",
 		address1: "151 Hanover Street",
@@ -107,12 +115,14 @@ Event.create([
 		age_ranges: ["36-50","51+"],
 		attendees_gender: "Female",
 		attendees_income_levels: ["High"],
-		date_time: Time.at(1417060000),
+		date_time_starts: Time.at(1417060000),
+		date_time_ends: Time.at(1417070000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo3.png",
 		total_amount: 1000,
 		min_amount: 1000
 	},
 	{
+		identifier: "aner6",
 		name: 'cyber Posium',
 		size_range: "500-1000",
 		address1: "136 W 3rd St",
@@ -128,12 +138,14 @@ Event.create([
 		age_ranges: ["21-35","51+"],
 		attendees_gender: "Female",
 		attendees_income_levels: ["Medium"],
-		date_time: Time.at(1417960000),
+		date_time_starts: Time.at(1417960000),
+		date_time_ends: Time.at(1417970000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo2.jpg",
 		total_amount: 10000,
 		min_amount: 1000
 	},
 	{
+		identifier: "aner7",
 		name: 'cAts in an alley',
 		size_range: "1000+",
 		address1: "30085 Comercio",
@@ -149,7 +161,8 @@ Event.create([
 		age_ranges: ["12-20","21-35"],
 		attendees_gender: "Male",
 		attendees_income_levels: ["Low"],
-		date_time: Time.at(1426960000),
+		date_time_starts: Time.at(1426960000),
+		date_time_ends: Time.at(1426970000),
 		image_url: "https://s3.amazonaws.com/rmktimages/logo1.JPG",
 		total_amount: 10000,
 		min_amount: 1000
