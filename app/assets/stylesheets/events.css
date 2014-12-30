@@ -112,6 +112,10 @@
 	color: #007acc;
 }
 
+.higher-height {
+	min-height: 2.5em;
+}
+
 .genderCaret {
 	float: right !important;
 	position: relative !important;
