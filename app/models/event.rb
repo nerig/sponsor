@@ -19,7 +19,6 @@
 #  recurrence              :string(255)
 #  attendees_gender        :string(255)
 #  image_url               :string(255)
-#  date_time               :datetime
 #  sponsorship_types       :text
 #  attendees_income_levels :text
 #  age_ranges              :text
@@ -29,10 +28,14 @@
 #  first_name              :string(255)
 #  last_name               :string(255)
 #  email                   :string(255)
+#  date_time_starts        :datetime
+#  date_time_ends          :datetime
+#  identifier              :string(255)
 #
 # Indexes
 #
-#  index_events_on_user_id  (user_id)
+#  index_events_on_identifier  (identifier) UNIQUE
+#  index_events_on_user_id     (user_id)
 #
 
 class Event < ActiveRecord::Base

@@ -212,7 +212,7 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		}
     
 		return events.filter(function(element, index, array) {
-			return (fromDate.getTime() <= new Date(element.date_time).getTime());
+			return (fromDate.getTime() <= new Date(element.date_time_starts).getTime());
 		});
 	};	
 })
@@ -225,7 +225,8 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		}
     
 		return events.filter(function(element, index, array) {
-			return (toDate.getTime() >= new Date(element.date_time).getTime());
+			//					adding a day to capture events ending on the same filtered day
+			return (toDate.getTime() + 86400000 >= new Date(element.date_time_ends).getTime());
 		});
 	};	
 })
@@ -296,14 +297,14 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 	}
 }])
 
-.controller('ShowEventCtrl', ["$scope", function ($scope) {
+.controller('ShowEventCtrl', ["$scope", "$filter", function ($scope, $filter) {
 		
 	$scope.initWith = function(crudeEvent) {
 		/* contains calculation of various elements of the events show page,
 		including lenght of description in case the description gets to be 
 		lower than the image, sponsor! button location, selection of glyphicons
 		for sponsorship types... */
-		
+
 		/* description length and description position calculations */
 		var descriptionMaxHeight = 60;
 
@@ -357,8 +358,9 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		descriptionElement.innerHTML = replaceUrl(descriptionElement.innerHTML);
 		$scope.restOfText = replaceUrl($scope.restOfText);
 
+		// put sponsor button and event details in a nice location
 		var sponsorButtonElement = get('event-sponsor-button');
-		if (window.width > 1024) {
+		if (window.innerWidth > 1024) {
 			var logoHeight = get('logo-space').offsetHeight;
 
 			// above-the-description elements location calculation
@@ -381,6 +383,14 @@ spons.controller('EventsListCtrl', ["$scope", function($scope) {
 		$scope.streetAddress = getStreetAddress(event);
 		$scope.cityAndRest =  getCityAndRest(event);
 		$scope.fullAddress = getFullAddress(event);
+		
+		// event dates range
+		var startDate = new Date(event.date_time_starts);
+		var endDate = new Date(event.date_time_ends);
+		$scope.dateRangeString = $filter('date')(startDate,'EEEE, MMMM d, y, h:mm a', 'UTC') + ' - ';
+		$scope.dateRangeString += (startDate.toDateString() === endDate.toDateString()) ?
+			$filter('date')(endDate, 'h:mm a', 'UTC') :
+			$filter('date')(endDate, 'EEEE, MMMM d, y, h:mm a', 'UTC');
 
 		/* get the map */
 		var mapInit = function() {

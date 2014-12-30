@@ -16,7 +16,7 @@
 				</div>
 				<div class="row center-block">
 					<ul id="trending-events">
-						<li class="col-xs-12 col-sm-6 col-md-4" ng-repeat="event in events" ng-click="go('/events/' + event.id)">
+						<li class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="event in events" ng-click="go('/events/' + event.identifier)">
 							<div id="one-trending-event" class="center-block">
 								<div class="row">
 									<img id="logo" class="event-logo transform-50-50" ng-src="{{event.image_url}}"/>
@@ -30,7 +30,7 @@
 									<div class="row">
 										<div class="col-xs-12 col-md-12">
 											<i class="glyphicon glyphicon-calendar icon cal-icon-color"></i>
-											<p class="text_padding text">{{event.date_time | date : 'fullDate'}}</p>
+											<p class="text_padding text">{{event.date_time_starts | date : 'fullDate'}}</p>
 										</div>
 									</div>
 									<div class="row">

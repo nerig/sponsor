@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :events
+  resources :events, param: :identifier
   resources :sponsorship_responses
 
   get '/about' => 'pages#about'

@@ -85,7 +85,7 @@
 		<!-- events listing -->
 		<div class="col-xs-12 col-md-offset-1 col-md-10">
 			<ul id="events_list">
-				<li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.id)">
+				<li class="event" ng-repeat="event in filteredEvents = (events | locationFilter: locationSelections | ageFilter: ageSelections | sizeFilter: sizeSelections | fromDateFilter: fromDate | toDateFilter: toDate | genderFilter: genderFilterSelection | incomeFilter: incomeSelections | filter: freetext)" ng-click="go('/events/' + event.identifier)">
 					<div class="row">
 						<div class="col-xs-12 col-md-2">
 							<img class="logo event-logo transform-50-50" ng-src="{{event.image_url}}">
@@ -99,7 +99,7 @@
 							<div class="row">
 								<div class="col-xs-12 col-md-12">
 									<i class="glyphicon glyphicon-calendar icon cal-icon-color"></i>
-									<p class="text_padding text">{{event.date_time | date : 'EEEE, MMMM d, y h:mm a'}}</p>
+									<p class="text_padding text">{{event.date_time_starts | date : 'EEEE, MMMM d, y h:mm a'}}</p>
 								</div>
 							</div>
 							<div class="row">

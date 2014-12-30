@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
 	def index
-		@events = Event.all.sort { |a, b| a.date_time <=> b.date_time}
+		@events = @events = Event.where("date_time_starts > ?", Time.now).sort { |a, b| a.date_time_starts <=> b.date_time_starts}
 		@six_events = @events[0..5].map { |e|
 			Marshal.load(Marshal.dump(e))
 		}

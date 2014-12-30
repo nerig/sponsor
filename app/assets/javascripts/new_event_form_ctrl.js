@@ -101,17 +101,30 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		showWeeks: false
 	};
 
+	var getFormattedDate = function(date, ignoreDay) {
+		if (ignoreDay)
+			return (date.getMonth() > 8 ? '' : '0') + (date.getMonth() + 1) + '/01/' + date.getFullYear();
+		else
+			return (date.getMonth() > 8 ? '' : '0') + (date.getMonth() + 1) + '/' + (date.getDate() > 9 ? '' : '0') + date.getDate() + '/' + date.getFullYear();
+	}
+
+	var now = new Date();
+	var year = now.getFullYear();
+	var month = now.getMonth();
+	if (month >= 10) {
+	    var current = new Date(year + 1, (month == 10) ? 0 : 1, 1);
+	} else {
+	    var current = new Date(year, month + 2, 1);
+	}
+	$scope.dateStarts = getFormattedDate(current, true);
+	$scope.dateEnds = $scope.dateStarts;
 	$scope.minDate = new Date();
 
-	$scope.toggleCalendar = function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		$scope.isOpened = !$scope.isOpened;
+	$scope.newDateStartsSelected = function() {
+		$scope.dateEnds = getFormattedDate($scope.dateStarts, false);
 	}
 
 	// time picker settings
-
 	$scope.times = ["12:00 AM", "12:30 AM", "1:00 AM", "1:30 AM",
 		"2:00 AM", "2:30 AM", "3:00 AM", "3:30 AM",
 		"4:00 AM", "4:30 AM", "5:00 AM", "5:30 AM",
@@ -125,8 +138,18 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		"8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM",
 		"10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"]
 
-	$scope.onTimeSelected = function(time) {
-		$scope.timeInputText = time;
+	var hiddenTimeStartsElement = get('hidden-time-starts');
+	hiddenTimeStartsElement.value = "7:00 PM";
+	var hiddenTimeEndsElement = get('hidden-time-ends');
+	hiddenTimeEndsElement.value = "10:00 PM";
+
+	$scope.onTimeStartsSelected = function(time) {
+		get('time-starts').innerHTML = time;
+		hiddenTimeStartsElement.value = time;
+	}
+	$scope.onTimeEndsSelected = function(time) {
+		get('time-ends').innerHTML = time;
+		hiddenTimeEndsElement.value = time;
 	}
 
 	// event size dropdown
