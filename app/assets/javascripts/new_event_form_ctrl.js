@@ -127,7 +127,8 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	$scope.sizes = ["0-50", "50-100", "100-500", "500-1000", "1000+"];
 
 	$scope.onSizeSelected = function(size) {
-		$scope.sizeInputText = size;
+		get('size-hidden-input').value = size;
+		get('size-button').innerHTML = size + ' <span class="caret"></span>';
 	}
 
 	// countries dropdown
@@ -198,14 +199,16 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	$scope.ocurrences = ["One-time event", "Weekly", "Monthly", "Yearly"];
 
 	$scope.onRecurrenceSelected = function(recurrence) {
-		$scope.recurrenceInputText = recurrence;
+		get('recurrence-hidden-input').value = recurrence;
+		get('recurrence-button').innerHTML = recurrence + ' <span class="caret"></span>';
 	}
 
 	// gender settings
 	$scope.genders = ["Both", "Female", "Male"];
 
 	$scope.onGenderSelected = function(gender) {
-		$scope.genderInputText = gender;
+		get('gender-hidden-input').value = gender;
+		get('gender-button').innerHTML = gender + ' <span class="caret"></span>';
 	}
 
 	// income settings
@@ -232,6 +235,11 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 
 	$scope.incomesRequired = function() {
 		return (!get('cb-income-low').checked && !get('cb-income-med').checked && !get('cb-income-high').checked);
+	}
+
+	$scope.totalAmountInvalid = true;
+	$scope.totalAmoungChanged = function() {
+		$scope.totalAmountInvalid = !$scope.newEventForm["event[total_amount]"].$valid;
 	}
 
 	$scope.countries = ["Afghanistan", "Albania", "Algeria", "Andorra", 
@@ -279,7 +287,34 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		"United Arab Emirates", "United Kingdom", "United States", 
 		"Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", 
 		"Vietnam", "Yemen", "Zambia", "Zimbabwe"];
-}]);
+}])
+
+.directive("validateMinAmount", function() {
+	// requires an isloated model
+	return {
+		// restrict to an attribute type.
+		restrict: 'A',
+		// element must have ng-model attribute.
+		require: 'ngModel',
+		link: function(scope, ele, attrs, ctrl) {
+
+			function validate(value) {
+				if (value && scope.totalAmount) {
+
+					var isValid = false;
+					if (parseInt(value) <= scope.totalAmount)
+						isValid = true;
+
+					ctrl.$setValidity('invalidMinAmount', isValid);
+				}
+
+				return isValid ? value : undefined;
+			}
+
+			ctrl.$parsers.unshift(validate);
+		}
+	}
+});
 
 
 

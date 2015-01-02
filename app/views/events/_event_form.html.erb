@@ -91,26 +91,6 @@
 							</div>
 						</div>
 
-						<!-- event size -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Event size (#people) *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<div class="input-group">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Pick a range <span class="caret"></span></button>
-										<ul class="dropdown-menu" role="menu">
-											<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
-										</ul>
-									</div>
-									<input ng-model="sizeInputText" type="text" class="readonly-input form-control" name="event[size]" ng-model="size" readonly required>
-								</div>
-							</div>
-						</div>
-
 						<!-- date and time-->
 						<div class="row">
 							<div class="col-xs-12 col-md-12">
@@ -163,6 +143,64 @@
 						</div>
 						<div class="row">
 							
+						</div>
+
+						<!-- event size, recurrence and gender -->
+						<div class="row">
+							<div class="col-xs-12 col-md-3">
+								<div class="row">
+									<div class="col-xs-12">
+										<p class="field-title"><strong>Event size (#people) *</strong></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="input-group">
+											<button id="size-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">100-500 <span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
+											</ul>
+											<input id="size-hidden-input" type="hidden" class="readonly-input form-control" name="event[size]" value="100-500">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-3">
+								<div class="row">
+									<div class="col-xs-12">
+										<p class="field-title"><strong>Event recurrence *</strong></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="input-group">
+											<button id="recurrence-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">One-time event <span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li ng-repeat="ocurrence in ocurrences"><a ng-click="onRecurrenceSelected(ocurrence)">{{ocurrence}}</a></li>
+											</ul>
+										</div>
+										<input id="recurrence-hidden-input" type="hidden" class="form-control readonly-input" name="event[recurrence]" value="One-time event">
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-3">
+								<div class="row">
+									<div class="col-xs-12">
+										<p class="field-title"><strong>Attendees' gender *</strong></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="input-group">
+											<button id="gender-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Both <span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li ng-repeat="gender in genders"><a ng-click="onGenderSelected(gender)">{{gender}}</a></li>
+											</ul>
+											<input id="gender-hidden-input" type="hidden" class="form-control readonly-input" name="event[gender]" value="Both">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 
 						<!-- event's description -->
@@ -279,13 +317,13 @@
 							<div class="col-xs-6 col-md-5" title="Overall requested amount of money, in case capital sponsorship is wanted">
 								<div class="input-group">
 									<span class="input-group-addon">$</span>
-									<input name="event[total_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="totalAmount" required>
+									<input name="event[total_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="totalAmount" ng-change="totalAmoungChanged()" required>
 								</div>
 							</div>
 							<div class="col-xs-5 col-md-5" title="Minimun amount of money you are willing to accept from a sponsor">
-								<div class="input-group">
+								<div class="input-group" title="Should be equal to or less than the total requested sponsorship">
 									<span class="input-group-addon">$</span>
-									<input name="event[min_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="minAmount" required>
+									<input name="event[min_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="minAmount" ng-disabled="totalAmountInvalid" validate-min-amount required>
 								</div>
 							</div>
 						</div>
@@ -299,26 +337,6 @@
 						<div class="row" title="This is also the place to write how you will benefit your sponsor">
 							<div class="col-xs-11 col-md-10">
 								<textarea name="event[sponsorship_requests]" rows="2"></textarea>
-							</div>
-						</div>
-
-						<!-- Event recurrence -->
-						<div class="row">
-							<div class="col-xs-11 col-md-12">
-								<p class="field-title"><strong>Event recurrence *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<div class="input-group">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Recurrence <span class="caret"></span></button>
-										<ul class="dropdown-menu" role="menu">
-											<li ng-repeat="ocurrence in ocurrences"><a ng-click="onRecurrenceSelected(ocurrence)">{{ocurrence}}</a></li>
-										</ul>
-									</div>
-									<input ng-model="recurrenceInputText" type="text" class="form-control readonly-input" name="event[recurrence]" ng-model="recurrence" readonly required>
-								</div>
 							</div>
 						</div>
 
@@ -344,26 +362,6 @@
 							<div class="col-xs-3 col-sm-2 col-md-2">	
 								<input id="cb-51" name="event[age51]" type="checkbox" value="51+" ng-model="age51" ng-required="agesRequired()" ng-change="onAgesChange()"/>
 								<span ng-click="on51Click()">51+</span>
-							</div>
-						</div>
-
-						<!-- gender -->
-						<div class="row">
-							<div class="col-xs-11 col-md-12">
-								<p class="field-title"><strong>Attendees' gender *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<div class="input-group">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Gender <span class="caret"></span></button>
-										<ul class="dropdown-menu" role="menu">
-											<li ng-repeat="gender in genders"><a ng-click="onGenderSelected(gender)">{{gender}}</a></li>
-										</ul>
-									</div>
-									<input ng-model="genderInputText" type="text" class="form-control readonly-input" name="event[gender]" ng-model="gender" readonly required>
-								</div>
 							</div>
 						</div>
 
