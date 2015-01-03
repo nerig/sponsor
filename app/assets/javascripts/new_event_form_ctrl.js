@@ -139,9 +139,11 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 	$scope.countryInputText = "United States";
 
 	// sponsorship types settings
+	$scope.cbCapital = false;
 	$scope.onCapitalClick = function() {
 		var element = get('cb-capital');
 		element.checked = !element.checked;
+		$scope.cbCapital = !$scope.cbCapital;
 	}
 
 	$scope.onMerchandiseClick = function() {
