@@ -293,15 +293,15 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-4 col-sm-2 col-md-2" title="Select capital if you are willing to receive money as a sponsorship">	
+							<div class="col-xs-4 col-sm-2" title="Select capital if you are willing to receive money as a sponsorship">	
 								<input id="cb-capital" name="event[capital]" type="checkbox" value="capital" ng-model="cbCapital" ng-required="typesRequired()" ng-change="onTypesChange()"/>
 								<span ng-click="onCapitalClick()">Capital</span>
 							</div>
-							<div class="col-xs-4 col-sm-2 ol-md-2" title="Select discounts if you are willing to have discounts on the sponsor's products">	
+							<div class="col-xs-4 col-sm-2" title="Select discounts if you are willing to have discounts on the sponsor's products">	
 								<input id="cb-discounts" name="event[discounts]" type="checkbox" value="discounts" ng-model="cbDiscounts" ng-required="typesRequired()" ng-change="onTypesChange()"/>
 								<span ng-click="onDiscountsClick()">Discounts</span>
 							</div>
-							<div class="col-xs-5 col-sm-3 col-md-3" title="Select merchandise if you are willing to receive swags as a sponsorship">	
+							<div class="col-xs-5 col-sm-3" title="Select merchandise if you are willing to receive swags as a sponsorship">	
 								<input id="cb-merchandise" name="event[merchandise]" type="checkbox" value="merchandise" ng-model="cbMerchandise" ng-required="typesRequired()" ng-change="onTypesChange()"/>
 								<span ng-click="onMerchandiseClick()">Merchandise</span>
 							</div>
@@ -311,10 +311,10 @@
 						<div class="row">
 							<div class="hidden-xs">
 								<div class="col-sm-5 col-md-5">
-									<p class="field-title"><strong>Total sponsorship requested *</strong></p>
+									<p class="field-title"><strong>Total sponsorship requested <span ng-show="cbCapital">*</span></strong></p>
 								</div>
 								<div class="col-sm-6 col-md-5">
-									<p class="field-title"><strong>Minimum acceptable amount *</strong></p>
+									<p class="field-title"><strong>Minimum acceptable amount <span ng-show="cbCapital">*</span></strong></p>
 								</div>
 							</div>
 							<div class="visible-xs-inline">
@@ -327,13 +327,13 @@
 							<div class="col-xs-6 col-md-5" title="Overall requested amount of money, in case capital sponsorship is wanted">
 								<div class="input-group">
 									<span class="input-group-addon">$</span>
-									<input name="event[total_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="totalAmount" ng-change="totalAmountChanged()" required>
+									<input name="event[total_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="totalAmount" ng-change="totalAmountChanged()" ng-required="cbCapital">
 								</div>
 							</div>
 							<div class="col-xs-5 col-md-5" title="Minimun amount of money you are willing to accept from a sponsor">
 								<div class="input-group" title="Should be equal to or less than the total requested sponsorship">
 									<span class="input-group-addon">$</span>
-									<input name="event[min_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="minAmount" ng-disabled="totalAmountInvalid" validate-min-amount required>
+									<input name="event[min_amount]" type="text" pattern="^(0|[1-9][0-9]*)$" class="form-control" minlength="2" maxlength="7" ng-minlength="2" ng-maxlength="7" ng-model="minAmount" validate-min-amount ng-required="cbCapital">
 								</div>
 							</div>
 						</div>
