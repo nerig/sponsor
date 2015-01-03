@@ -266,9 +266,8 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 		return (!get('cb-income-low').checked && !get('cb-income-med').checked && !get('cb-income-high').checked);
 	}
 
-	$scope.totalAmountInvalid = true;
-	$scope.totalAmoungChanged = function() {
-		$scope.totalAmountInvalid = !$scope.newEventForm["event[total_amount]"].$valid;
+	$scope.totalAmountChanged = function() {
+		$scope.newEventForm["event[min_amount]"].$validate();
 	}
 
 	$scope.countries = ["Afghanistan", "Albania", "Algeria", "Andorra", 
