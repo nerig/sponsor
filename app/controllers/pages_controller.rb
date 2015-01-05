@@ -37,7 +37,7 @@ class PagesController < ApplicationController
 		  subject subject
 
 		  text_part do
-		    body "New message from #{name}, email: #{email}\n\r\n\r#{message}"
+		    body "New message from #{name}, email: #{email}\r\n\r\n#{message}"
 		  end
 		end
 

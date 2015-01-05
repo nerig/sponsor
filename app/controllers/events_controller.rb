@@ -9,12 +9,7 @@ class EventsController < ApplicationController
 
 	# action to show all events
 	def index
-		@events = Event.where("date_time_starts > ?", Time.now).sort { |a, b| a.date_time_starts <=> b.date_time_starts}
-
-		@events.each { |e|
-			e.description.gsub!('"', '\"')
-		}
-		@events = @events.to_json.gsub("'", "&#39;")
+		@events = Event.where("date_time_starts > ?", Time.now).sort { |a, b| a.date_time_starts <=> b.date_time_starts}.to_json
 	end
 
 	# action taken when a user wants to create a new event
@@ -62,37 +57,26 @@ private
 
 		# new_event[:date] = mm/dd/yyyy
 		ds = new_event[:date_starts].split("/")
-		p ds
 		de = new_event[:date_ends].split("/")
-		p de
 
 		# new_event[:time] = hh:mm AM
 		hour_plus_meridian = new_event[:time_starts].split
-		p hour_plus_meridian
 		hams = hour_plus_meridian[0].split(":")
-		p hams
 		if (hour_plus_meridian[1] == "PM")
 			hams[0] = hams[0].to_i + 12
 		end
-		p hams
 		hour_plus_meridian = new_event[:time_ends].split
-		p hour_plus_meridian
 		hame = hour_plus_meridian[0].split(":")
-		p hame
 		if (hour_plus_meridian[1] == "PM")
 			hame[0] = hame[0].to_i + 12
 		end
-		p hame
 
 		date_time_starts = Time.new(ds[2], ds[0], ds[1], hams[0], hams[1])
-		p date_time_starts
 		date_time_ends = Time.new(de[2], de[0], de[1], hame[0], hame[1])
-		p date_time_ends
 
 		if date_time_ends <= date_time_starts # if end date_time is before start date_time
 			date_time_ends = date_time_starts + 2.hours
 		end
-		p date_time_ends
 
 		eparams = {
 			identifier: identifier,
@@ -107,9 +91,9 @@ private
 			region: new_event[:state_province_region],
 			zipcode: new_event[:zipcode],
 			country: new_event[:country],
-			description: new_event[:description],
+			description: new_event[:description].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
 			size_range: new_event[:size],
-			sponsorship_requests: new_event[:sponsorship_requests],
+			sponsorship_requests: new_event[:sponsorship_requests].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
 			recurrence: new_event[:recurrence],
 			attendees_gender: new_event[:gender],
 			image_url: new_event[:image_url],
