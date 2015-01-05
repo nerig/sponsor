@@ -1,4 +1,4 @@
-<div class="container" ng-controller="newSponsorshipResponseFormCtrl" ng-init="initWith('<%=h @event.to_json.gsub("'", "&#39;") %>')">
+<div class="container" ng-controller="newSponsorshipResponseFormCtrl" event-name="<%= @event.name %>">
 	<div class="row hidden-xs hidden-sm">
 		<div class="col-md-offset-2 col-md-8">
 			<form id="sponsor-form" name="sponsorForm" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses" novalidate>

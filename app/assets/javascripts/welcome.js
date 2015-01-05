@@ -55,10 +55,9 @@ spons.controller('EntireHomepageCtrl', ["$scope", "$timeout", function($scope, $
 
 }])
 
-.controller('HomepageCtrl', ["$scope", function($scope) {
-	$scope.initWith =  function(events) {
-		$scope.events = JSON.parse(events.replace(/\r\n/g, "\\r\\n"));
-	}
+.controller('HomepageCtrl', ["$scope", "$attrs", function($scope, $attrs) {
+	
+	$scope.events = JSON.parse($attrs.events);
 
 	$scope.go = function(path) {
 		window.location.href = path;
