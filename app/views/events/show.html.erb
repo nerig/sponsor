@@ -118,3 +118,35 @@
 		<div id="map_canvas"></div>
 	</div>
 </div>
+<div class="container" ng-controller="SimilarEventsCtrl" events="<%= @three_similar_events %>">
+	<div class="row">
+		<h3 class="col-xs-12">Similar Events</h3>
+	</div>
+	<div class="row center-block">
+		<ul class="events-ul">
+			<li class="col-xs-12 col-lg-3" ng-repeat="event in events" ng-click="go('/events/' + event.identifier)">
+				<div id="one-similar-event" class="center-block">
+					<div class="row">
+						<div class="col-xs-4">
+							<img id="logo" class="event-logo transform-50-50" ng-src="{{event.image_url}}"/>
+						</div>
+						<div class="col-xs-8">
+							<div class="row">
+								<p class="sim-event-name">{{event.name}}</p>
+							</div>
+							<div class="row">
+								<p class="sim-similar-in sim-similar-title"><em>Similar in:</em></p>
+							</div>
+							<div class="row">
+								<p class="sim-similar-in sim-similar-criteria"><em>{{event.similar_in.join(", ")}}</em></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="col-xs-12 col-lg-3 text-center">
+			<p class="more-events"><a class="btn btn-navy btn-lg" role="button" ng-href="/events">Find More Events</a></p>
+		</div>
+	</div>
+</div>

@@ -57,3 +57,7 @@ var addValidationsCssRule = function() {
 		}
 	}
 }
+
+var go = function(path) {
+	window.location.href = path;
+}

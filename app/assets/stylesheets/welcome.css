@@ -38,11 +38,6 @@
 	font-size: 1.8em;
 }
 
-#trending-events {
-	list-style-type: none;
-	padding: 0;
-}
-
 #one-trending-event {
 	width: 23em;
 	height: 25em;
@@ -58,7 +53,6 @@
 }
 
 #one-trending-event #logo {
-	position: relative;
 	top: 6.2em;
 	left: 50%;
 	max-height: 10em;
@@ -105,7 +99,7 @@
 	font-weight: bold !important;
 }
 
-#create-new-event-button {
+#more-events-button {
 	font-size: 1.5em;
 }
 

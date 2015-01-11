@@ -59,7 +59,5 @@ spons.controller('EntireHomepageCtrl', ["$scope", "$timeout", function($scope, $
 	
 	$scope.events = JSON.parse($attrs.events);
 
-	$scope.go = function(path) {
-		window.location.href = path;
-	}
+	$scope.go = go;
 }]);

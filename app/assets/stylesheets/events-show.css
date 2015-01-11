@@ -92,3 +92,50 @@
 #capital, #merchandise, #discounts {
 	display: none;
 }
+
+#one-similar-event {
+	width: 19em;
+	height: 7em;
+	cursor: pointer;
+	background: #ffffff;
+	border: 1px solid #ffffff; /* to prevent all the events of moving upon hover */
+	border-radius: 3px;
+}
+
+#one-similar-event:hover {
+	border: 1px solid #c2c2ff;
+}
+
+#one-similar-event #logo {
+	top: 3.5em;
+	left: 2.9em;
+	max-width: 5em;
+	max-height: 5em;
+}
+
+.sim-event-name {
+	position: relative;
+	top: .5em;
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 12em;
+}
+
+.sim-similar-in {
+	font-size: 0.9em;
+}
+
+.sim-similar-title {
+	margin-top: .5em;
+}
+
+.sim-similar-criteria {
+	margin-top: -.5em;
+	margin-left: .5em;
+}
+
+.more-events {
+	margin-top: 1em;
+}
