@@ -46,7 +46,7 @@ class EventsController < ApplicationController
 		}
 
 		@three_similar_events = []
-		events_scores_and_similar_in_criteria.sort_by { |event, score, crit| score }.reverse.each { |event, score, crit|
+		events_scores_and_similar_in_criteria.sort_by { |event, score, crit| score }.reverse[0..2].each { |event, score, crit|
 			event_details = {}
 			event_details["name"] = event.name
 			event_details["identifier"] = event.identifier
