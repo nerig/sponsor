@@ -34,10 +34,72 @@ class EventsController < ApplicationController
 
 	# action to show one event by id
 	def show
+		# prepare similar events for bottom of the page
+		# comparisonable event properties, by importance: gender (if not both), city+country, age, income
+		
+		events = Event.where("date_time_starts > ?", Time.now).to_a
+		events.delete_if { |e| e.identifier == @event.identifier } # remove same event
+		events_scores_and_similar_in_criteria = [] # array of event to a score resembling similarity and an array describe what is similar
+		events.each { |e| 
+			score_and_text = get_score_and_similar_in_criteria(e)
+			events_scores_and_similar_in_criteria << [e, score_and_text[0], score_and_text[1]] 
+		}
+
+		@three_similar_events = []
+		events_scores_and_similar_in_criteria.sort_by { |event, score, crit| score }.reverse.each { |event, score, crit|
+			event_details = {}
+			event_details["name"] = event.name
+			event_details["identifier"] = event.identifier
+			event_details["image_url"] = event.image_url
+			event_details["similar_in"] = crit
+
+			@three_similar_events << event_details
+		}
+
+		@three_similar_events = @three_similar_events.to_json
 	end
 
-
 private
+	def get_score_and_similar_in_criteria(event)
+		# gender match (if not both) --> +6
+		# city match --> +4
+		# ages match (one is enough) --> +3
+		# income levels match (one is enough) --> +1
+		score = 0
+		similar_in = []
+		if @event.attendees_gender.downcase != "both"
+			if @event.attendees_gender == event.attendees_gender
+				score = score + 6
+				similar_in << "gender"
+			end
+		end
+
+		current_event_city_country = @event.city + @event.country
+		event_city_country = event.city + event.country
+		if current_event_city_country == event_city_country
+			score = score + 4
+			similar_in << "city"
+		end
+
+		event.age_ranges.each { |ar|
+			if @event.age_ranges.include? ar
+				score = score + 3
+				similar_in << "ages"
+				break
+			end
+		}
+
+		event.attendees_income_levels.each { |inc|
+			if @event.attendees_income_levels.include? inc
+				score = score + 1
+				similar_in << "income"
+				break
+			end
+		}
+
+		return score, similar_in
+	end
+
 	def event_params(identifier)
 		age_ranges = []
 		age_ranges << new_event[:age12_20] if new_event[:age12_20]

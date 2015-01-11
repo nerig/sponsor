@@ -94,9 +94,7 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 
 	$scope.isCollapsed = true;
 
-	$scope.go = function(path) {
-		window.location.href = path;
-	}
+	$scope.go = go;
 
 	$scope.toggleHiddenFilters = function() {
 		$scope.isCollapsed = !$scope.isCollapsed;
@@ -445,4 +443,10 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 		$scope.showingEntireDescription = !$scope.showingEntireDescription;
 		threeDotsElement.style.visibility = $scope.showingEntireDescription ? "hidden" : "visible";
 	}
+}])
+
+.controller('SimilarEventsCtrl', ["$scope", "$attrs", function ($scope, $attrs) {
+	$scope.events = JSON.parse($attrs.events);
+
+	$scope.go = go;
 }]);

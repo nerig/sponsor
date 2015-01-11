@@ -131,3 +131,8 @@ nav .logo {
 	-moz-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 }
+
+.events-ul {
+	list-style-type: none;
+	padding: 0;
+}
