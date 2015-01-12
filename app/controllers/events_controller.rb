@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 
 	# action taken when a user submits a new event
 	def create
-		identifier = "#{SecureRandom.random_number(36**5).to_s(36).rjust(5, "0")}-#{new_event[:name].split.join('-')}"
+		identifier = "#{SecureRandom.random_number(36**5).to_s(36).rjust(5, "0")}-#{new_event[:name].parameterize}"
 		@event = Event.new(event_params(identifier))
 		@event.save
 		redirect_to "/events/#{@event.identifier}"
