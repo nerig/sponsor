@@ -138,6 +138,10 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 
 	$scope.countryInputText = "United States";
 
+	$scope.regionRequired = function() {
+		return ($scope.countryInputText === "United States");
+	}
+
 	// sponsorship types settings
 	$scope.cbCapital = false;
 	$scope.onCapitalClick = function() {

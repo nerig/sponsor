@@ -250,7 +250,7 @@
 							<div class="col-xs-11 col-sm-6 col-md-6">
 								<div class="input-group location">
 									<span class="input-group-addon">State / Province / Region</span>
-									<input name="event[state_province_region]" type="text" class="form-control" maxlength="50">
+									<input ng-model="regionInputText" name="event[state_province_region]" type="text" class="form-control" maxlength="50" ng-required="regionRequired()">
 								</div>
 							</div>
 						</div>
@@ -271,7 +271,7 @@
 											</li>
 										</ul>
 									</div>
-									<input ng-model="countryInputText" type="text" class="readonly-input form-control" name="event[country]" ng-model="country" readonly required>
+									<input ng-model="countryInputText" type="text" class="readonly-input form-control" name="event[country]" readonly required>
 								</div>
 							</div>
 						</div>
