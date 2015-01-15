@@ -291,7 +291,7 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 	}
 }])
 
-.controller('ShowEventCtrl', ["$scope", "$filter", "$attrs" , function ($scope, $filter, $attrs) {
+.controller('ShowEventCtrl', ["$scope", "$filter", "$attrs", "$sanitize", function ($scope, $filter, $attrs, $sanitize) {
 	
 	/* contains calculation of various elements of the events show page,
 	including lenght of description in case the description gets to be 
@@ -372,9 +372,9 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 		get(type).style.display = "inherit";
 	});
 
-	$scope.streetAddress = getStreetAddress(event);
-	$scope.cityAndRest =  getCityAndRest(event);
-	$scope.fullAddress = getFullAddress(event);
+	$scope.streetAddress = $sanitize(getStreetAddress(event));
+	$scope.cityAndRest = $sanitize(getCityAndRest(event));
+	$scope.fullAddress = $sanitize(getFullAddress(event));
 	
 	// event dates range
 	var startDate = new Date(event.date_time_starts);
@@ -383,6 +383,7 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 	$scope.dateRangeString += (startDate.toDateString() === endDate.toDateString()) ?
 		$filter('date')(endDate, 'h:mm a', 'UTC') :
 		$filter('date')(endDate, 'EEEE, MMMM d, y, h:mm a', 'UTC');
+	$scope.dateRangeString = $sanitize($scope.dateRangeString);
 
 	/* get the map */
 	var mapInit = function() {
@@ -437,6 +438,7 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 			$scope.ageRanges += ',' + event.age_ranges[i];
 		}
 	}
+	$scope.ageRanges = $sanitize($scope.ageRanges);
 
 	var threeDotsElement = get('three-dots');
 	$scope.toggleFullDescription = function() {
@@ -445,8 +447,12 @@ spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs)
 	}
 }])
 
-.controller('SimilarEventsCtrl', ["$scope", "$attrs", function ($scope, $attrs) {
+.controller('SimilarEventsCtrl', ["$scope", "$attrs", "$sanitize",  function ($scope, $attrs, $sanitize) {
 	$scope.events = JSON.parse($attrs.events);
 
 	$scope.go = go;
+
+	$scope.getSimilarInText = function(similarInArray) {
+		return $sanitize(similarInArray.join(", "));
+	}
 }]);

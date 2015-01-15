@@ -1,4 +1,4 @@
-<div class="container" ng-controller="newSponsorshipResponseFormCtrl" event-name="<%= @event.name %>">
+<div class="container" ng-controller="newSponsorshipResponseFormCtrl" event-name="<%= h @event.name %>">
 	<div class="row hidden-xs hidden-sm">
 		<div class="col-md-offset-2 col-md-8">
 			<form id="sponsor-form" name="sponsorForm" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses" novalidate>
@@ -6,7 +6,7 @@
 				<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
 				<div class="row">
 					<div class="col-xs-12 col-md-12 form-description">
-						<h4>Sponsor <%= @event.name %>!</h4>
+						<h4>Sponsor <%= h @event.name %>!</h4>
 						<p>Please fill out all applicable fields.</p>
 					</div>
 				</div>
