@@ -1,6 +1,6 @@
 "use strict";
 
-spons.controller('newSponsorshipResponseFormCtrl', ["$scope", "$attrs", function($scope, $attrs) {
+spons.controller('newSponsorshipResponseFormCtrl', ["$scope", "$attrs", "$sanitize", function($scope, $attrs, $sanitize) {
 
     var handler = StripeCheckout.configure({
         key: 'pk_test_ivj8TLBMdtxp3dek1oI5Szny',
@@ -23,10 +23,10 @@ spons.controller('newSponsorshipResponseFormCtrl', ["$scope", "$attrs", function
             handler.open({
                 name: 'You are sponsoring:',
                 description: $attrs.eventName,
-                panelLabel: "Sponsor {{amount}}",
+                panelLabel: $sanitize("Sponsor {{amount}}"),
                 allowRememberMe: false,
                 zipCode: true,
-                amount: $scope.amount * 100
+                amount: $sanitize($scope.amount) * 100
             });
         }
     });

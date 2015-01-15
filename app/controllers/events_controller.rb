@@ -42,6 +42,7 @@ class EventsController < ApplicationController
 		events_scores_and_similar_in_criteria = [] # array of event to a score resembling similarity and an array describe what is similar
 		events.each { |e| 
 			score_and_text = get_score_and_similar_in_criteria(e)
+			next if score_and_text[0] == 0 # ignore non-similar events
 			events_scores_and_similar_in_criteria << [e, score_and_text[0], score_and_text[1]] 
 		}
 

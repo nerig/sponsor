@@ -24,19 +24,19 @@
 								<div class="absolute-items">
 									<div class="row">
 										<div class="col-xs-12 col-md-12">
-											<h4 id="event-name-homepage">{{event.name}}</h4>
+											<h4 id="event-name-homepage" ng-bind-html="event.name"></h4>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12 col-md-12">
 											<i class="glyphicon glyphicon-calendar icon cal-icon-color"></i>
-											<p class="text_padding text">{{event.date_time_starts | date : 'fullDate'}}</p>
+											<p class="text_padding text" ng-bind-html="event.date_time_starts | date : 'fullDate'"></p>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12 col-md-12">
 											<i class="glyphicon glyphicon-map-marker icon mark-icon-color"></i>
-											<p class="text_padding text">{{event.city}}</p>
+											<p class="text_padding text" ng-bind-html="event.city"></p>
 										</div>
 									</div>
 									<div class="row">
