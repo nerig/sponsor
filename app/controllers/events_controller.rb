@@ -14,6 +14,12 @@ class EventsController < ApplicationController
 
 	# action taken when a user wants to create a new event
 	def new
+		@s3_direct_post = S3_BUCKET.presigned_post(key: "#{SecureRandom.uuid}-${filename}",
+			success_action_status: 201, acl: :public_read)
+
+		@aws_fields = @s3_direct_post.fields.to_json
+		@aws_url = @s3_direct_post.url.to_s
+		@aws_host = @s3_direct_post.url.host
 	end
 
 	def edit
@@ -159,7 +165,9 @@ private
 			sponsorship_requests: new_event[:sponsorship_requests].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
 			recurrence: new_event[:recurrence],
 			attendees_gender: new_event[:gender],
-			image_url: new_event[:image_url],
+			image_url: new_event[:image_url].downcase.start_with?("http") ? 
+				new_event[:image_url] :
+				"http://#{new_event[:image_url]}",
 			date_time_starts: date_time_starts,
 			date_time_ends: date_time_ends,
 			age_ranges: age_ranges,

@@ -1,6 +1,6 @@
-ruby '2.0.0'
-source 'https://rubygems.org'
-source 'https://code.stripe.com'
+ruby '2.1.5'
+source 'http://rubygems.org'
+source 'http://code.stripe.com'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -54,3 +54,5 @@ gem 'remote_syslog_logger'
 gem 'stripe'
 
 gem 'mail'
+
+gem 'aws-sdk'

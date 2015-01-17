@@ -1,4 +1,4 @@
-<div class="container" ng-controller="newEventFormCtrl">
+<div class="container" ng-controller="newEventFormCtrl" aws-fields="<%= h @aws_fields %>" aws-url="<%= h @aws_url %>" aws-host="<%= h @aws_host %>">
 
 	<div class="row">
 		<div class="col-xs-12 col-md-offset-2 col-md-8">
@@ -82,12 +82,24 @@
 						<!-- image url -->
 						<div class="row">
 							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Link to event logo *</strong></p>
+								<p class="field-title"><strong>Event logo *</strong></p>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<input name="event[image_url]" type="text" class="form-control" minlength="10" maxlength="255" ng-minlength="10" ng-maxlength="255" ng-model="imageUrl" required>
+							<div class="col-xs-2">
+								<div id="logo-image-border">
+									<img id="image-thunbnail" class="transform-50-50" src="/assets/no-image.JPG">
+								</div>
+							</div>
+							<div class="col-xs-9 col-md-5" style="margin-top:5.6em;">
+								<input id="hidden-image-url" name="event[image_url]" type="hidden">
+								<input id="file-input" type="file" accept="image/*" class="form-control" style="display:none">
+								<div id="dummy-file-input" class="input-group">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default btn-grey" ng-click="fileInputClicked()">Browse</button>
+									</span>
+									<input type="text" class="readonly-input form-control" ng-click="fileInputClicked()" ng-change="fileSelected()" ng-model="dummyFileName" readonly required>
+								</div>
 							</div>
 						</div>
 
@@ -150,24 +162,6 @@
 							<div class="col-xs-12 col-md-3">
 								<div class="row">
 									<div class="col-xs-12">
-										<p class="field-title"><strong>Event size (#people) *</strong></p>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="input-group">
-											<button id="size-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">100-500 <span class="caret"></span></button>
-											<ul class="dropdown-menu" role="menu">
-												<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
-											</ul>
-											<input id="size-hidden-input" type="hidden" class="readonly-input form-control" name="event[size]" value="100-500">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12 col-md-3">
-								<div class="row">
-									<div class="col-xs-12">
 										<p class="field-title"><strong>Event recurrence *</strong></p>
 									</div>
 								</div>
@@ -186,7 +180,25 @@
 							<div class="col-xs-12 col-md-3">
 								<div class="row">
 									<div class="col-xs-12">
-										<p class="field-title"><strong>Attendees' gender *</strong></p>
+										<p class="field-title"><strong>Event size (#people) *</strong></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="input-group">
+											<button id="size-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">100-500 <span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
+											</ul>
+											<input id="size-hidden-input" type="hidden" class="readonly-input form-control" name="event[size]" value="100-500">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-3">
+								<div class="row">
+									<div class="col-xs-12">
+										<p class="field-title"><strong>Attendees gender *</strong></p>
 									</div>
 								</div>
 								<div class="row">
