@@ -1,6 +1,6 @@
 "use strict";
 
-spons.controller('newEventFormCtrl', ["$scope", function($scope) {
+spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attrs) {
 	
 	var formElement = get('new-event-form');
 	formElement.method = "POST";
@@ -88,12 +88,65 @@ spons.controller('newEventFormCtrl', ["$scope", function($scope) {
 			
 			reader.onload = (function(aImg) { return function(e) { 
 				aImg.src = e.target.result;
-				aImg.style.display = "inherit";
 			}; })(img);
 
 			reader.readAsDataURL(imageFile);
     	}
     }, false);
+
+    // upload logo
+    $(function() {
+    	var logoBorderElement = $("#logo-image-border");
+		var progressBar  = $("<div class='bar-a'></div>");
+		var barContainer = $("<div class='progress-a'></div>").append(progressBar);
+		logoBorderElement.before(barContainer);
+
+		var submitButtonElement = $("#btn-sbmt-event");
+
+		var fileInputElement = $("#file-input");
+		fileInputElement.fileupload({
+			fileInput: fileInputElement,
+			url: $attrs.awsUrl,
+			type: 'POST',
+			autoUpload: true,
+			formData: JSON.parse($attrs.awsFields),
+			paramName: 'file', // S3 does not like nested name fields i.e. name="user[avatar_url]"
+			dataType: 'XML',  // S3 returns XML if success_action_status is set to 201
+			replaceFileInput: false,
+			disableImageResize: /Android(?!.*Chrome)|Opera/
+				.test(window.navigator && navigator.userAgent),
+			imageMaxWidth: 300,
+			imageMaxHeight: 300,
+			progressall: function (e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				progressBar.css('width', progress + '%');
+			},
+			start: function (e) {
+				submitButtonElement.prop('disabled', true);
+
+				progressBar.
+					css('background', 'green').
+					css('display', 'block').
+					css('width', '0%');
+			},
+			done: function(e, data) {
+				submitButtonElement.prop('disabled', false);
+
+				// extract key and generate URL from response
+				var key = $(data.jqXHR.responseXML).find("Key").text();
+				var url = $attrs.awsHost + '/' + key;
+
+				// update hidden field
+				get("hidden-image-url").value = url;
+			},
+			fail: function(e, data) {
+				submitButtonElement.prop('disabled', false);
+
+				progressBar.
+					css("background", "red");
+			}
+		});
+	});
 
 	// date picker settings
 	$scope.dateOptions = {
