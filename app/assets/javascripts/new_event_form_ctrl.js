@@ -42,6 +42,213 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 		}
 	}
 
+	// used when submit button is clicked and we want to only save part of the data
+	var putPartialFormDataIntoCookie = function() {
+		
+		if ($scope.firstName != undefined) setCookie("firstName", $scope.firstName);
+		if ($scope.lastName != undefined) setCookie("lastName", $scope.lastName);
+		if ($scope.email != undefined) setCookie("email", $scope.email);
+		if ($scope.phone != undefined) setCookie("phone", $scope.phone);
+		if ($scope.city != undefined) setCookie("city", $scope.city);
+		if ($scope.regionInputText != undefined) setCookie("region", $scope.regionInputText);
+		if ($scope.zipcode != undefined) setCookie("zipcode", $scope.zipcode);
+		if ($scope.countryInputText != undefined) setCookie("country", $scope.countryInputText);
+
+		setCookie("questionsSectionNumber", $scope.questionsSectionNumber);
+
+		// delete all other cookies so the form is empty where relevant
+		if (getCookie("type") != "full") {
+			setCookie("type", "partial");
+
+			deleteCookie("eventName");
+			deleteCookie("logoImageUrl");
+			deleteCookie("startDate");
+			deleteCookie("startTime");
+			deleteCookie("endDate");
+			deleteCookie("endTime");
+			deleteCookie("recurrence");
+			deleteCookie("size");
+			deleteCookie("gender");
+			deleteCookie("description");
+			deleteCookie("address1");
+			deleteCookie("address2");
+			deleteCookie("cbCapital");
+			deleteCookie("cbDiscounts");
+			deleteCookie("cbMerchandise");
+			deleteCookie("totalAmount");
+			deleteCookie("minAmount");
+			deleteCookie("sponsorshipRequests");
+			deleteCookie("age1220");
+			deleteCookie("age2135");
+			deleteCookie("age3650");
+			deleteCookie("age51");
+			deleteCookie("incomeLow");
+			deleteCookie("incomeMed");
+			deleteCookie("incomeHigh");
+		}
+	}
+
+	// used when submit buttun is NOT clicked and we want to save all the data
+	var putAllFormDataIntoCookie = function() {
+		setCookie("type", "full");
+
+		putPartialFormDataIntoCookie();
+
+		if ($scope.eventName != undefined) setCookie("eventName", $scope.eventName);
+		var hiddenImageUrlElement= get('hidden-image-url');
+		if (hiddenImageUrlElement.value != undefined && hiddenImageUrlElement.value != "") {
+			var url = (hiddenImageUrlElement.value.indexOf("http") == -1) ? 
+				"http://" + hiddenImageUrlElement.value :
+				hiddenImageUrlElement.value;
+			setCookie("logoImageUrl", url);
+		}
+		if ($scope.dateStarts != undefined) setCookie("dateStarts", $scope.dateStarts);
+		var hiddenTimeStartsElement = get('hidden-time-starts');
+		if (hiddenTimeStartsElement.value != undefined) setCookie("timeStarts", hiddenTimeStartsElement.value);
+		if ($scope.dateEnds != undefined) setCookie("dateEnds", $scope.dateEnds);
+		var hiddenTimeEndsElement = get('hidden-time-ends');
+		if (hiddenTimeEndsElement.value != undefined) setCookie("timeEnds", hiddenTimeEndsElement.value);
+		var recurrenceHiddenInputElement = get('recurrence-hidden-input');
+		if (recurrenceHiddenInputElement.value != undefined) setCookie("recurrence", recurrenceHiddenInputElement.value);
+		var sizeHiddenInputElement = get('size-hidden-input');
+		if (sizeHiddenInputElement.value != undefined) setCookie("size", sizeHiddenInputElement.value);
+		var genderHiddenInputElement = get('gender-hidden-input');
+		if (genderHiddenInputElement.value != undefined) setCookie("gender", genderHiddenInputElement.value);
+		if ($scope.description != undefined) setCookie("description", $scope.description);
+		if ($scope.address1 != undefined) setCookie("address1", $scope.address1);
+		if ($scope.address2 != undefined) setCookie("address2", $scope.address2);
+		if ($scope.cbCapital != undefined) setCookie("cbCapital", $scope.cbCapital);
+		if ($scope.cbDiscounts != undefined) setCookie("cbDiscounts", $scope.cbDiscounts);
+		if ($scope.cbMerchandise != undefined) setCookie("cbMerchandise", $scope.cbMerchandise);
+		if ($scope.totalAmount != undefined) setCookie("totalAmount", $scope.totalAmount);
+		if ($scope.minAmount != undefined) setCookie("minAmount", $scope.minAmount);
+		if ($scope.sponsorshipRequests != undefined) setCookie("sponsorshipRequests", $scope.sponsorshipRequests);
+		if ($scope.age1220 != undefined) setCookie("age1220", $scope.age1220);
+		if ($scope.age2135 != undefined) setCookie("age2135", $scope.age2135);
+		if ($scope.age3650 != undefined) setCookie("age3650", $scope.age3650);
+		if ($scope.age51 != undefined) setCookie("age51", $scope.age51);
+		if ($scope.incomeLow != undefined) setCookie("incomeLow", $scope.incomeLow);
+		if ($scope.incomeMed != undefined) setCookie("incomeMed", $scope.incomeMed);
+		if ($scope.incomeHigh != undefined) setCookie("incomeHigh", $scope.incomeHigh);
+	}
+
+	$(window).on('load', function() {
+    	
+		var tempVal = getCookie("firstName");
+		if (tempVal != undefined) $scope.firstName = tempVal;
+
+		tempVal = getCookie("lastName");
+		if (tempVal != undefined) $scope.lastName = tempVal;
+
+		tempVal = getCookie("email");
+		if (tempVal != undefined) $scope.email = tempVal;
+
+		tempVal = getCookie("phone");
+		if (tempVal != undefined) $scope.phone = tempVal;
+
+		tempVal = getCookie("city");
+		if (tempVal != undefined) $scope.city = tempVal;
+
+		tempVal = getCookie("region");
+		if (tempVal != undefined) $scope.regionInputText = tempVal;
+
+		tempVal = getCookie("zipcode");
+		if (tempVal != undefined) $scope.zipcode = tempVal;
+
+		tempVal = getCookie("country");
+		if (tempVal != undefined) $scope.countryInputText = tempVal;
+
+    	if (getCookie("type") === "full")
+    	{
+    		tempVal = getCookie("eventName");
+			if (tempVal != undefined) $scope.eventName = tempVal;
+
+			tempVal = getCookie("logoImageUrl");
+			if (tempVal != undefined) {
+				get('hidden-image-url').value = tempVal;
+				$scope.image = tempVal;
+				$scope.dummyFileName = tempVal.split("--")[1];
+			}
+
+			tempVal = getCookie("dateStarts");
+			if (tempVal != undefined) $scope.dateStarts = tempVal;
+
+			tempVal = getCookie("timeStarts");
+			if (tempVal != undefined) $scope.onTimeStartsSelected(tempVal);
+
+			tempVal = getCookie("dateEnds");
+			if (tempVal != undefined) $scope.dateEnds = tempVal;
+
+			tempVal = getCookie("timeEnds");
+			if (tempVal != undefined) $scope.onTimeEndsSelected(tempVal);
+
+			tempVal = getCookie("recurrence");
+			if (tempVal != undefined) $scope.onRecurrenceSelected(tempVal);
+
+			tempVal = getCookie("size");
+			if (tempVal != undefined) $scope.onSizeSelected(tempVal);
+
+			tempVal = getCookie("gender");
+			if (tempVal != undefined) $scope.onGenderSelected(tempVal);
+
+			tempVal = getCookie("description");
+			if (tempVal != undefined) $scope.description = tempVal;
+
+			tempVal = getCookie("address1");
+			if (tempVal != undefined) $scope.address1 = tempVal;
+
+			tempVal = getCookie("address2");
+			if (tempVal != undefined) $scope.address2 = tempVal;
+
+			tempVal = getCookie("cbCapital");
+			if (tempVal != undefined && tempVal === "true") $scope.onCapitalClick();
+
+			tempVal = getCookie("cbDiscounts");
+			if (tempVal != undefined && tempVal === "true") $scope.onDiscountsClick();
+
+			tempVal = getCookie("cbMerchandise");
+			if (tempVal != undefined && tempVal === "true") $scope.onMerchandiseClick();
+
+			tempVal = getCookie("totalAmount");
+			if (tempVal != undefined) $scope.totalAmount = tempVal;
+
+			tempVal = getCookie("minAmount");
+			if (tempVal != undefined) $scope.minAmount = tempVal;
+
+			tempVal = getCookie("sponsorshipRequests");
+			if (tempVal != undefined) $scope.sponsorshipRequests = tempVal;
+
+			tempVal = getCookie("age1220");
+			if (tempVal != undefined && tempVal === "true") $scope.on12_20Click();
+
+			tempVal = getCookie("age2135");
+			if (tempVal != undefined && tempVal === "true") $scope.on21_35Click();
+
+			tempVal = getCookie("age3650");
+			if (tempVal != undefined && tempVal === "true") $scope.on36_50Click();
+
+			tempVal = getCookie("age51");
+			if (tempVal != undefined && tempVal === "true") $scope.on51Click();
+
+			tempVal = getCookie("incomeLow");
+			if (tempVal != undefined && tempVal === "true") $scope.onIncomeLowClick();
+
+			tempVal = getCookie("incomeMed");
+			if (tempVal != undefined && tempVal === "true") $scope.onIncomeMedClick();
+
+			tempVal = getCookie("incomeHigh");
+			if (tempVal != undefined && tempVal === "true") $scope.onIncomeHighClick();
+    	}
+
+    	tempVal = getCookie("questionsSectionNumber");
+		if (tempVal != undefined) $scope.questionsSectionNumber = parseInt(tempVal);
+
+		$scope.$apply();
+		deleteCookie("type");
+	});
+
+	$scope.image = "/assets/no-image.JPG";
+
 	get('btn-sbmt-event').addEventListener('click', function(e) {
 
 		// if form is not valid, submit is not happening
@@ -62,8 +269,14 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 			$scope.showAgesRequiredNotification = false;
 			$scope.showIncomesRequiredNotification = false;
 
+			putPartialFormDataIntoCookie();
+
 			formElement.submit();
 		}
+    });
+
+    $(window).on('beforeunload', function(){
+    	if (getCookie("type") != "partial") putAllFormDataIntoCookie();
     });
 
     // image handler
@@ -171,7 +384,7 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 	$scope.minDate = new Date();
 
 	$scope.newDateStartsSelected = function() {
-		$scope.dateEnds = getFormattedDate($scope.dateStarts, false);
+		$scope.dateStarts = $scope.dateEnds = getFormattedDate($scope.dateStarts, false);
 	}
 
 	// time picker settings
@@ -232,11 +445,13 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 	$scope.onMerchandiseClick = function() {
 		var element = get('cb-merchandise');
 		element.checked = !element.checked;
+		$scope.cbMerchandise = !$scope.cbMerchandise;
 	}
 
 	$scope.onDiscountsClick = function() {
 		var element = get('cb-discounts');
 		element.checked = !element.checked;
+		$scope.cbDiscounts = !$scope.cbDiscounts;
 	}
 
 	$scope.onTypesChange = function () {
@@ -253,21 +468,25 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 	$scope.on12_20Click = function() {
 		var element = get('cb-12-20');
 		element.checked = !element.checked;
+		$scope.age1220 = !$scope.age1220;
 	}
 
 	$scope.on21_35Click = function() {
 		var element = get('cb-21-35');
 		element.checked = !element.checked;
+		$scope.age2135 = !$scope.age2135;
 	}
 
 	$scope.on36_50Click = function() {
 		var element = get('cb-36-50');
 		element.checked = !element.checked;
+		$scope.age3650 = !$scope.age3650;
 	}
 
 	$scope.on51Click = function() {
 		var element = get('cb-51');
 		element.checked = !element.checked;
+		$scope.age51 = !$scope.age51;
 	}
 
 	$scope.onAgesChange = function () {
@@ -300,16 +519,19 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 	$scope.onIncomeLowClick = function() {
 		var element = get('cb-income-low');
 		element.checked = !element.checked;
+		$scope.incomeLow = !$scope.incomeLow;
 	}
 
 	$scope.onIncomeMedClick = function() {
 		var element = get('cb-income-med');
 		element.checked = !element.checked;
+		$scope.incomeMed = !$scope.incomeMed;
 	}
 
 	$scope.onIncomeHighClick = function() {
 		var element = get('cb-income-high');
 		element.checked = !element.checked;
+		$scope.incomeHigh = !$scope.incomeHigh;
 	}
 
 	$scope.onIncomesChange = function () {

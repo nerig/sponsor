@@ -14,7 +14,7 @@ class EventsController < ApplicationController
 
 	# action taken when a user wants to create a new event
 	def new
-		@s3_direct_post = S3_BUCKET.presigned_post(key: "#{SecureRandom.uuid}-${filename}",
+		@s3_direct_post = S3_BUCKET.presigned_post(key: "#{SecureRandom.uuid}--${filename}",
 			success_action_status: 201, acl: :public_read)
 
 		@aws_fields = @s3_direct_post.fields.to_json
