@@ -88,7 +88,7 @@
 						<div class="row">
 							<div class="col-xs-2">
 								<div id="logo-image-border">
-									<img id="image-thunbnail" class="transform-50-50" src="/assets/no-image.JPG">
+									<img id="image-thunbnail" class="transform-50-50" ng-src="{{image}}">
 								</div>
 							</div>
 							<div class="col-xs-9 col-md-5" style="margin-top:5.6em;">
@@ -248,7 +248,7 @@
 							<div class="col-xs-11 col-md-10">
 								<div class="input-group location">
 									<span class="input-group-addon">Address line 2</span>
-									<input name="event[address2]" type="text" class="form-control" maxlength="255">
+									<input name="event[address2]" type="text" class="form-control" maxlength="255" ng-model="address2">
 								</div>
 							</div>
 						</div>
@@ -270,7 +270,7 @@
 							<div class="col-xs-11 col-sm-5 col-md-4">
 								<div class="input-group location">
 									<span class="input-group-addon">Postal / Zip code</span>
-									<input name="event[zipcode]" type="text" class="form-control" maxlength="20">
+									<input ng-model="zipcode" name="event[zipcode]" type="text" class="form-control" maxlength="20">
 								</div>
 							</div>
 							<div class="col-xs-11 col-sm-6 col-md-6">
@@ -348,7 +348,7 @@
 						</div>
 						<div class="row" title="This is also the place to write how you will benefit your sponsor">
 							<div class="col-xs-11 col-md-10">
-								<textarea name="event[sponsorship_requests]" rows="2"></textarea>
+								<textarea name="event[sponsorship_requests]" rows="2" ng-model="sponsorshipRequests"></textarea>
 							</div>
 						</div>
 
