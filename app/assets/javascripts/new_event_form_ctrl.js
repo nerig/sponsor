@@ -295,8 +295,7 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 			img.file = imageFile;
 
 			var reader = new FileReader();
-			
-			reader.onload = (function(aImg) { return function(e) { 
+			reader.onload = (function(aImg) { return function(e) {
 				aImg.src = e.target.result;
 			}; })(img);
 
