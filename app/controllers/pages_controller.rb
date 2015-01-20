@@ -21,8 +21,8 @@ class PagesController < ApplicationController
 		  delivery_method :smtp, {
 		    :port      => 587,
 		    :address   => "smtp.mandrillapp.com",
-		    :user_name => "tempaner@gmail.com",
-		    :password  => "Yd-IV-Bp5Kfae_xjugej5Q"
+		    :user_name => ENV["MANDRILL_USERNAME"],
+		    :password  => ENV["MANDRILL_PASSWORD"]
 		  }
 		end
 
