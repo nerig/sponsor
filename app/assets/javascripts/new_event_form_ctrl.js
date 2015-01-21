@@ -607,7 +607,7 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 				if (value && scope.totalAmount) {
 
 					var isValid = false;
-					if (parseInt(value) <= scope.totalAmount)
+					if (parseInt(value) <= parseInt(scope.totalAmount.replace(/,/g, "")))
 						isValid = true;
 
 					ctrl.$setValidity('invalidMinAmount', isValid);
