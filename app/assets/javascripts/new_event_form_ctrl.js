@@ -45,20 +45,18 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 	// used when submit button is clicked and we want to only save part of the data
 	var putPartialFormDataIntoCookie = function() {
 		
-		if ($scope.firstName != undefined) setCookie("firstName", $scope.firstName);
-		if ($scope.lastName != undefined) setCookie("lastName", $scope.lastName);
-		if ($scope.email != undefined) setCookie("email", $scope.email);
-		if ($scope.phone != undefined) setCookie("phone", $scope.phone);
-		if ($scope.city != undefined) setCookie("city", $scope.city);
-		if ($scope.regionInputText != undefined) setCookie("region", $scope.regionInputText);
-		if ($scope.zipcode != undefined) setCookie("zipcode", $scope.zipcode);
-		if ($scope.countryInputText != undefined) setCookie("country", $scope.countryInputText);
-
-		setCookie("questionsSectionNumber", $scope.questionsSectionNumber);
+		if ($scope.firstName != undefined) setCookie("firstName", $scope.firstName, true);
+		if ($scope.lastName != undefined) setCookie("lastName", $scope.lastName, true);
+		if ($scope.email != undefined) setCookie("email", $scope.email, true);
+		if ($scope.phone != undefined) setCookie("phone", $scope.phone, true);
+		if ($scope.city != undefined) setCookie("city", $scope.city, true);
+		if ($scope.regionInputText != undefined) setCookie("region", $scope.regionInputText, true);
+		if ($scope.zipcode != undefined) setCookie("zipcode", $scope.zipcode, true);
+		if ($scope.countryInputText != undefined) setCookie("country", $scope.countryInputText, true);
 
 		// delete all other cookies so the form is empty where relevant
 		if (getCookie("type") != "full") {
-			setCookie("type", "partial");
+			setCookie("type", "partial", true);
 
 			deleteCookie("eventName");
 			deleteCookie("logoImageUrl");
@@ -90,46 +88,48 @@ spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attr
 
 	// used when submit buttun is NOT clicked and we want to save all the data
 	var putAllFormDataIntoCookie = function() {
-		setCookie("type", "full");
+		setCookie("type", "full", false);
 
 		putPartialFormDataIntoCookie();
 
-		if ($scope.eventName != undefined) setCookie("eventName", $scope.eventName);
+		setCookie("questionsSectionNumber", $scope.questionsSectionNumber, false);
+
+		if ($scope.eventName != undefined) setCookie("eventName", $scope.eventName, false);
 		var hiddenImageUrlElement= get('hidden-image-url');
 		if (hiddenImageUrlElement.value != undefined && hiddenImageUrlElement.value != "") {
 			var url = (hiddenImageUrlElement.value.indexOf("http") == -1) ? 
 				"http://" + hiddenImageUrlElement.value :
 				hiddenImageUrlElement.value;
-			setCookie("logoImageUrl", url);
+			setCookie("logoImageUrl", url, false);
 		}
-		if ($scope.dateStarts != undefined) setCookie("dateStarts", $scope.dateStarts);
+		if ($scope.dateStarts != undefined) setCookie("dateStarts", $scope.dateStarts, false);
 		var hiddenTimeStartsElement = get('hidden-time-starts');
-		if (hiddenTimeStartsElement.value != undefined) setCookie("timeStarts", hiddenTimeStartsElement.value);
-		if ($scope.dateEnds != undefined) setCookie("dateEnds", $scope.dateEnds);
+		if (hiddenTimeStartsElement.value != undefined) setCookie("timeStarts", hiddenTimeStartsElement.value, false);
+		if ($scope.dateEnds != undefined) setCookie("dateEnds", $scope.dateEnds, false);
 		var hiddenTimeEndsElement = get('hidden-time-ends');
-		if (hiddenTimeEndsElement.value != undefined) setCookie("timeEnds", hiddenTimeEndsElement.value);
+		if (hiddenTimeEndsElement.value != undefined) setCookie("timeEnds", hiddenTimeEndsElement.value, false);
 		var recurrenceHiddenInputElement = get('recurrence-hidden-input');
-		if (recurrenceHiddenInputElement.value != undefined) setCookie("recurrence", recurrenceHiddenInputElement.value);
+		if (recurrenceHiddenInputElement.value != undefined) setCookie("recurrence", recurrenceHiddenInputElement.value, false);
 		var sizeHiddenInputElement = get('size-hidden-input');
-		if (sizeHiddenInputElement.value != undefined) setCookie("size", sizeHiddenInputElement.value);
+		if (sizeHiddenInputElement.value != undefined) setCookie("size", sizeHiddenInputElement.value, false);
 		var genderHiddenInputElement = get('gender-hidden-input');
-		if (genderHiddenInputElement.value != undefined) setCookie("gender", genderHiddenInputElement.value);
-		if ($scope.description != undefined) setCookie("description", $scope.description);
-		if ($scope.address1 != undefined) setCookie("address1", $scope.address1);
-		if ($scope.address2 != undefined) setCookie("address2", $scope.address2);
-		if ($scope.cbCapital != undefined) setCookie("cbCapital", $scope.cbCapital);
-		if ($scope.cbDiscounts != undefined) setCookie("cbDiscounts", $scope.cbDiscounts);
-		if ($scope.cbMerchandise != undefined) setCookie("cbMerchandise", $scope.cbMerchandise);
-		if ($scope.totalAmount != undefined) setCookie("totalAmount", $scope.totalAmount);
-		if ($scope.minAmount != undefined) setCookie("minAmount", $scope.minAmount);
-		if ($scope.sponsorshipRequests != undefined) setCookie("sponsorshipRequests", $scope.sponsorshipRequests);
-		if ($scope.age1220 != undefined) setCookie("age1220", $scope.age1220);
-		if ($scope.age2135 != undefined) setCookie("age2135", $scope.age2135);
-		if ($scope.age3650 != undefined) setCookie("age3650", $scope.age3650);
-		if ($scope.age51 != undefined) setCookie("age51", $scope.age51);
-		if ($scope.incomeLow != undefined) setCookie("incomeLow", $scope.incomeLow);
-		if ($scope.incomeMed != undefined) setCookie("incomeMed", $scope.incomeMed);
-		if ($scope.incomeHigh != undefined) setCookie("incomeHigh", $scope.incomeHigh);
+		if (genderHiddenInputElement.value != undefined) setCookie("gender", genderHiddenInputElement.value, false);
+		if ($scope.description != undefined) setCookie("description", $scope.description, false);
+		if ($scope.address1 != undefined) setCookie("address1", $scope.address1, false);
+		if ($scope.address2 != undefined) setCookie("address2", $scope.address2, false);
+		if ($scope.cbCapital != undefined) setCookie("cbCapital", $scope.cbCapital, false);
+		if ($scope.cbDiscounts != undefined) setCookie("cbDiscounts", $scope.cbDiscounts, false);
+		if ($scope.cbMerchandise != undefined) setCookie("cbMerchandise", $scope.cbMerchandise, false);
+		if ($scope.totalAmount != undefined) setCookie("totalAmount", $scope.totalAmount, false);
+		if ($scope.minAmount != undefined) setCookie("minAmount", $scope.minAmount, false);
+		if ($scope.sponsorshipRequests != undefined) setCookie("sponsorshipRequests", $scope.sponsorshipRequests, false);
+		if ($scope.age1220 != undefined) setCookie("age1220", $scope.age1220, false);
+		if ($scope.age2135 != undefined) setCookie("age2135", $scope.age2135, false);
+		if ($scope.age3650 != undefined) setCookie("age3650", $scope.age3650, false);
+		if ($scope.age51 != undefined) setCookie("age51", $scope.age51, false);
+		if ($scope.incomeLow != undefined) setCookie("incomeLow", $scope.incomeLow, false);
+		if ($scope.incomeMed != undefined) setCookie("incomeMed", $scope.incomeMed, false);
+		if ($scope.incomeHigh != undefined) setCookie("incomeHigh", $scope.incomeHigh, false);
 	}
 
 	$(window).on('load', function() {

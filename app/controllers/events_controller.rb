@@ -76,7 +76,7 @@ private
 		similar_in = []
 		if @event.attendees_gender.downcase != "both"
 			if @event.attendees_gender == event.attendees_gender
-				score = score + 6
+				score = score + 4
 				similar_in << "gender"
 			end
 		end
