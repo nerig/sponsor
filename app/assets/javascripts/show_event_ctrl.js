@@ -1,4 +1,4 @@
-spons.controller('ShowEventCtrl', ["$scope", "$filter", "$attrs", "$sanitize", function ($scope, $filter, $attrs, $sanitize) {
+angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attrs", "$sanitize", function ($scope, $filter, $attrs, $sanitize) {
 	
 	/* contains calculation of various elements of the events show page,
 	including lenght of description in case the description gets to be 
@@ -17,7 +17,7 @@ spons.controller('ShowEventCtrl', ["$scope", "$filter", "$attrs", "$sanitize", f
 	if (descriptionElement.offsetHeight > descriptionMaxHeight) {
 		while (descriptionElement.offsetHeight > descriptionMaxHeight) {
 			var lastSpace = tmpTrimmedText.lastIndexOf(" ");
-			var lastLineBreak = tmpTrimmedText.lastIndexOf("<br>");
+			var lastLineBreak = tmpTrimmedText.lastIndexOf("<br />");
 			var lastBreak = Math.max(lastLineBreak, lastSpace);
 			
 			tmpTrimmedText = $scope.originalDescription.substring(0, lastBreak);
@@ -32,15 +32,15 @@ spons.controller('ShowEventCtrl', ["$scope", "$filter", "$attrs", "$sanitize", f
 		get('read-more').style.visibility = "hidden";
 	}
 
-	if ($scope.restOfText.indexOf("<br>") === 0) {
+	if ($scope.restOfText.indexOf("<br />") === 0) {
 		// removing break if the rest of text starts with it so to not have two newlines instead of one
-		$scope.restOfText = $scope.restOfText.replace("<br>", "");
+		$scope.restOfText = $scope.restOfText.replace("<br />", "");
 	}
-	if (descriptionElement.innerHTML.indexOf('<br><span id="three-dots">...</span>') != -1) {
+	if (descriptionElement.innerHTML.indexOf('<br /><span id="three-dots">...</span>') != -1) {
 		// last line of the beginning of the description we show at start is practiacally
 		// just '...'. it doesn't look so nice
-		descriptionElement.innerHTML = descriptionElement.innerHTML.replace('<br><span id="three-dots">...</span>', '<span id="three-dots">...</span>');
-		$scope.restOfText = "<br>" + $scope.restOfText;
+		descriptionElement.innerHTML = descriptionElement.innerHTML.replace('<br /><span id="three-dots">...</span>', '<span id="three-dots">...</span>');
+		$scope.restOfText = "<br />" + $scope.restOfText;
 	}
 
 	// replace all links in the description with actual links

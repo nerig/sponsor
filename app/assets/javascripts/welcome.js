@@ -1,6 +1,6 @@
 "use strict";
 
-spons.controller('EntireHomepageCtrl', ["$scope", "$timeout", function($scope, $timeout) {
+angular.module('spons').controller('EntireHomepageCtrl', ["$scope", "$timeout", function($scope, $timeout) {
 	
 	var makeEventsVisible = function() {
 		$scope.showInitialHomepage = false;

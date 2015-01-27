@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 #	before_action :authenticate_user!,
 #		:only => [:new, :create]
 	before_action :set_event, only: [:show, :edit, :update, :destroy]
+	before_action :prepare_aws_vars, only: [:new, :edit]
 	http_basic_authenticate_with name: "marketiers", password: "marketiersedit", only: [:edit, :update]
 
 	# action to show all events
@@ -14,12 +15,6 @@ class EventsController < ApplicationController
 
 	# action taken when a user wants to create a new event
 	def new
-		@s3_direct_post = S3_BUCKET.presigned_post(key: "#{SecureRandom.uuid}--${filename}",
-			success_action_status: 201, acl: :public_read)
-
-		@aws_fields = @s3_direct_post.fields.to_json
-		@aws_url = @s3_direct_post.url.to_s
-		@aws_host = @s3_direct_post.url.host
 	end
 
 	def edit
@@ -27,7 +22,7 @@ class EventsController < ApplicationController
 
 	# action taken when a user submits a new event
 	def create
-		identifier = "#{SecureRandom.random_number(36**5).to_s(36).rjust(5, "0")}-#{new_event[:name].parameterize}"
+		identifier = "#{SecureRandom.random_number(36**5).to_s(36).rjust(5, "0")}-#{event_params[:name].parameterize}"
 		@event = Event.new(event_params(identifier))
 		@event.save
 		redirect_to "/events/#{@event.identifier}"
@@ -68,7 +63,7 @@ class EventsController < ApplicationController
 
 private
 	def get_score_and_similar_in_criteria(event)
-		# gender match (if not both) --> +6
+		# gender match (if not both) --> +4
 		# city match --> +4
 		# ages match (one is enough) --> +3
 		# income levels match (one is enough) --> +1
@@ -109,32 +104,32 @@ private
 
 	def event_params(identifier)
 		age_ranges = []
-		age_ranges << new_event[:age12_20] if new_event[:age12_20]
-		age_ranges << new_event[:age21_35] if new_event[:age21_35]
-		age_ranges << new_event[:age36_50] if new_event[:age36_50]
-		age_ranges << new_event[:age51] if new_event[:age51]
+		age_ranges << event_params[:age12_20] if event_params[:age12_20]
+		age_ranges << event_params[:age21_35] if event_params[:age21_35]
+		age_ranges << event_params[:age36_50] if event_params[:age36_50]
+		age_ranges << event_params[:age51] if event_params[:age51]
 
 		income_levels = []
-		income_levels << new_event[:income_low] if new_event[:income_low]
-		income_levels << new_event[:income_med] if new_event[:income_med]
-		income_levels << new_event[:income_high] if new_event[:income_high]
+		income_levels << event_params[:income_low] if event_params[:income_low]
+		income_levels << event_params[:income_med] if event_params[:income_med]
+		income_levels << event_params[:income_high] if event_params[:income_high]
 
 		sponsorship_types = []
-		sponsorship_types << new_event[:capital] if new_event[:capital]
-		sponsorship_types << new_event[:merchandise] if new_event[:merchandise]
-		sponsorship_types << new_event[:discounts] if new_event[:discounts]
+		sponsorship_types << event_params[:capital] if event_params[:capital]
+		sponsorship_types << event_params[:merchandise] if event_params[:merchandise]
+		sponsorship_types << event_params[:discounts] if event_params[:discounts]
 
-		# new_event[:date] = mm/dd/yyyy
-		ds = new_event[:date_starts].split("/")
-		de = new_event[:date_ends].split("/")
+		# event_params[:date] = mm/dd/yyyy
+		ds = event_params[:date_starts].split("/")
+		de = event_params[:date_ends].split("/")
 
-		# new_event[:time] = hh:mm AM
-		hour_plus_meridian = new_event[:time_starts].split
+		# event_params[:time] = hh:mm AM
+		hour_plus_meridian = event_params[:time_starts].split
 		hams = hour_plus_meridian[0].split(":")
 		if (hour_plus_meridian[1] == "PM")
 			hams[0] = hams[0].to_i + 12
 		end
-		hour_plus_meridian = new_event[:time_ends].split
+		hour_plus_meridian = event_params[:time_ends].split
 		hame = hour_plus_meridian[0].split(":")
 		if (hour_plus_meridian[1] == "PM")
 			hame[0] = hame[0].to_i + 12
@@ -149,38 +144,38 @@ private
 
 		eparams = {
 			identifier: identifier,
-			first_name: new_event[:first_name],
-			last_name: new_event[:last_name],
-			contact_number: new_event[:phone],
-			email: new_event[:email],
-			name: new_event[:name],
-			address1: new_event[:address1],
-			address2: new_event[:address2],
-			city: new_event[:city],
-			region: new_event[:state_province_region],
-			zipcode: new_event[:zipcode],
-			country: new_event[:country],
-			description: new_event[:description].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
-			size_range: new_event[:size],
-			sponsorship_requests: new_event[:sponsorship_requests].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
-			recurrence: new_event[:recurrence],
-			attendees_gender: new_event[:gender],
-			image_url: new_event[:image_url].downcase.start_with?("http") ? 
-				new_event[:image_url] :
-				"http://#{new_event[:image_url]}",
+			first_name: event_params[:first_name],
+			last_name: event_params[:last_name],
+			contact_number: event_params[:phone],
+			email: event_params[:email],
+			name: event_params[:name],
+			address1: event_params[:address1],
+			address2: event_params[:address2],
+			city: event_params[:city],
+			region: event_params[:state_province_region],
+			zipcode: event_params[:zipcode],
+			country: event_params[:country],
+			description: event_params[:description].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
+			size_range: event_params[:size],
+			sponsorship_requests: event_params[:sponsorship_requests].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
+			recurrence: event_params[:recurrence],
+			attendees_gender: event_params[:gender],
+			image_url: event_params[:image_url].downcase.start_with?("http") ? 
+				event_params[:image_url] :
+				"http://#{event_params[:image_url]}",
 			date_time_starts: date_time_starts,
 			date_time_ends: date_time_ends,
 			age_ranges: age_ranges,
 			attendees_income_levels: income_levels,
 			sponsorship_types: sponsorship_types,
-			total_amount: new_event[:total_amount],
-			min_amount: new_event[:min_amount]
+			total_amount: event_params[:total_amount],
+			min_amount: event_params[:min_amount]
 		}
 
 		return eparams
 	end
 
-	def new_event
+	def event_params
 		params.require(:event).permit(
 			:first_name, :last_name, :email,
 			:name, :size, :date_starts, :time_starts,
@@ -195,6 +190,15 @@ private
 	end
 
 	def set_event
-		@event = Event.find_by(identifier: params[:identifier]) # automatically escaped by RoR
+		@event = Event.find_by(identifier: params[:identifier])
+	end
+
+	def prepare_aws_vars
+		@s3_direct_post = S3_BUCKET.presigned_post(key: "#{SecureRandom.uuid}--${filename}",
+			success_action_status: 201, acl: :public_read)
+
+		@aws_fields = @s3_direct_post.fields.to_json
+		@aws_url = @s3_direct_post.url.to_s
+		@aws_host = @s3_direct_post.url.host
 	end
 end

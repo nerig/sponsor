@@ -1,1 +1,3 @@
-<%= render 'event_form' %>
+<div ng-controller="editEventFormCtrl" event="<%= @event.to_json %>">
+	<%= render 'event_form' %>
+</div>

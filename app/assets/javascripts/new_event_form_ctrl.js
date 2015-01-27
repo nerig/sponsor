@@ -1,30 +1,43 @@
 "use strict";
 
-spons.controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attrs) {
+angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attrs) {
 	
 	var formElement = get('new-event-form');
 	formElement.method = "POST";
 	var urlParts = document.URL.split("/");
-	if (urlParts[urlParts.length - 1] === "edit") {
-		var eventId = urlParts[urlParts.length - 2];
-		formElement.action = "/events/" + eventId;
+	if ($scope.$parent.eventToEdit != undefined) {
+		// this is an edit scenario
+
+		formElement.action = "/events/" + $scope.$parent.eventToEdit.identifier;
 		$('#new-event-form').append($('<input type="hidden" name="_method" value="put" />'));
-		get('btn-sbmt-event').value = "Update Event";
+		get('btn-sbmt-event').value = "Update";
 		$scope.eventFormTitle = "Edit event";
+		$scope.eventFormSubTitle = "";
 	} else {
 		formElement.action = "/events";
-		get('btn-sbmt-event').value = "Create Event";
+		get('btn-sbmt-event').value = "Create";
 		$scope.eventFormTitle = "Create a new event!";
+		$scope.eventFormSubTitle = "Please fill out all the fields.";
 	}
 
 	// managing states of the form to show it one part at a time
 	$scope.questionsSectionNumber = 1;
 
 	$scope.onNextClick = function() {
+		if ($scope.questionsSectionNumber >= 2) {
+			$scope.questionsSectionNumber = 2;
+			return;
+		}
+
 		$scope.questionsSectionNumber += 1;
 	}
 
 	$scope.onBackClick = function() {
+		if ($scope.questionsSectionNumber <= 1) {
+			$scope.questionsSectionNumber = 1;
+			return;
+		}
+
 		$scope.questionsSectionNumber -= 1;
 	}
 

@@ -54,9 +54,7 @@ var getFullAddress = function(event) {
 	return address;
 }
 
-var spons = angular.module('spons', ['multi-select', 'ui.bootstrap', 'ngSanitize', 'ng']);
-
-spons.controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs) {
+angular.module('spons').controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs) {
 	
 	$scope.events = JSON.parse($attrs.events);
 	

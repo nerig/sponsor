@@ -13,7 +13,6 @@
 //= require_tree ./public
 //= require_tree .
 
-
 var log = function(str) {
 	console.log(str);
 }

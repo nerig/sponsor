@@ -1,6 +1,6 @@
 "use strict";
 
-spons.controller('newSponsorshipResponseFormCtrl', ["$scope", "$attrs", "$sanitize", function($scope, $attrs, $sanitize) {
+angular.module('spons').controller('newSponsorshipResponseFormCtrl', ["$scope", "$attrs", "$sanitize", function($scope, $attrs, $sanitize) {
 
     var handler = StripeCheckout.configure({
         key: 'pk_test_ivj8TLBMdtxp3dek1oI5Szny',
