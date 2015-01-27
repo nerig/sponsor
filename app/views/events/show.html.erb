@@ -52,7 +52,7 @@
 				</div>
 				<div class="row text-center">
 					<div class="col-xs-12 col-md-12">
-						<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
+						<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
 					</div>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 			<p class="col-xs-12 col-md-9"><%= h @event.sponsorship_requests %></p>
 		</div>
 		<div class="row">
-			<a class="col-xs-12 col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor <%= h @event.name %>&amp;body=Event ID = 302<%= @event.id %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
+			<a class="col-xs-12 col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
 		</div>
 	</div>
 </div>
