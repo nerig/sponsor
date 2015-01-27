@@ -53,7 +53,9 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 		}
 
 		// delete three dots to add them later properly
-		$scope.beginningOfText = $scope.beginningOfText.substring(0, $scope.beginningOfText.lastIndexOf("..."));
+		if (threeDotsNeeded) {
+			$scope.beginningOfText = $scope.beginningOfText.substring(0, $scope.beginningOfText.lastIndexOf("..."));
+		}
 
 		if ($scope.restOfText.indexOf("<br/>") === 0) {
 			// removing break if the rest of text starts with it so to not have two newlines instead of one
