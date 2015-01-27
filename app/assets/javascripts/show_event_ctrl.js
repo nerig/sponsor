@@ -5,45 +5,11 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 	lower than the image, sponsor! button location, selection of glyphicons
 	for sponsorship types... */
 
+	$scope.event = JSON.parse($attrs.event);
+
 	/* description length and description position calculations */
-	var descriptionMaxHeight = 60;
 
-	var descriptionElement = get('ev-desc');
-	var tmpTrimmedText = descriptionElement.innerHTML;
-	var trimmedText = descriptionElement.innerHTML;
-	$scope.restOfText = '';
-	
-	$scope.originalDescription = descriptionElement.innerHTML;
-	if (descriptionElement.offsetHeight > descriptionMaxHeight) {
-		while (descriptionElement.offsetHeight > descriptionMaxHeight) {
-			var lastSpace = tmpTrimmedText.lastIndexOf(" ");
-			var lastLineBreak = tmpTrimmedText.lastIndexOf("<br />");
-			var lastBreak = Math.max(lastLineBreak, lastSpace);
-			
-			tmpTrimmedText = $scope.originalDescription.substring(0, lastBreak);
-			trimmedText = tmpTrimmedText + '<span id="three-dots">...</span>';
-			
-			$scope.restOfText = $scope.originalDescription.substring(tmpTrimmedText.length, $scope.originalDescription.length);
-			
-			descriptionElement.innerHTML = trimmedText;
-		}
-	} else {
-		/* not showing read more if there is no overflow */
-		get('read-more').style.visibility = "hidden";
-	}
-
-	if ($scope.restOfText.indexOf("<br />") === 0) {
-		// removing break if the rest of text starts with it so to not have two newlines instead of one
-		$scope.restOfText = $scope.restOfText.replace("<br />", "");
-	}
-	if (descriptionElement.innerHTML.indexOf('<br /><span id="three-dots">...</span>') != -1) {
-		// last line of the beginning of the description we show at start is practiacally
-		// just '...'. it doesn't look so nice
-		descriptionElement.innerHTML = descriptionElement.innerHTML.replace('<br /><span id="three-dots">...</span>', '<span id="three-dots">...</span>');
-		$scope.restOfText = "<br />" + $scope.restOfText;
-	}
-
-	// replace all links in the description with actual links
+	// replace all links in a string with actual links
 	var replaceUrl = function(str) {
 		var regx = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.#!-]*)*\/?[^. <>]/ig;
 		return str.replace(regx, 
@@ -55,8 +21,59 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 				}
 		});
 	}
-	descriptionElement.innerHTML = replaceUrl(descriptionElement.innerHTML);
-	$scope.restOfText = replaceUrl($scope.restOfText);
+
+	window.onload = function() {
+		var tmpTrimmedText = $scope.beginningOfText = $scope.event.description;
+
+		$scope.$apply();
+
+		var descriptionElement = get('ev-desc');
+		var descriptionMaxHeight = 60;
+		
+		$scope.restOfText = '';
+
+		var threeDotsNeeded = true;
+
+		if (descriptionElement.offsetHeight > descriptionMaxHeight) {
+			while (descriptionElement.offsetHeight > descriptionMaxHeight) {
+				var lastSpace = tmpTrimmedText.lastIndexOf(" ");
+				var lastLineBreak = tmpTrimmedText.lastIndexOf("<br/>");
+				var lastBreak = Math.max(lastLineBreak, lastSpace);
+				
+				tmpTrimmedText = $scope.event.description.substring(0, lastBreak);
+				$scope.beginningOfText = tmpTrimmedText;
+				$scope.restOfText = $scope.event.description.substring(tmpTrimmedText.length, $scope.event.description.length);
+
+				$scope.$apply();
+			}
+		} else {
+			/* not showing read more if there is no overflow */
+			get('read-more').style.visibility = "hidden";
+			threeDotsNeeded = false;
+		}
+
+
+		if ($scope.restOfText.indexOf("<br/>") === 0) {
+			// removing break if the rest of text starts with it so to not have two newlines instead of one
+			$scope.restOfText = $scope.restOfText.replace("<br/>", "");
+		}
+		if ($scope.beginningOfText.lastIndexOf('<br/>') == ($scope.beginningOfText.length - 5)) {
+			log("here");
+			// last line of the beginning of the description we show at start is practiacally
+			// just '...'. it doesn't look so nice
+			$scope.beginningOfText = $scope.beginningOfText.substring(0, $scope.beginningOfText.length - 5);
+			$scope.restOfText = "<br/>" + $scope.restOfText;
+		}
+
+		$scope.beginningOfText = replaceUrl($scope.beginningOfText);
+		$scope.restOfText = replaceUrl($scope.restOfText);
+
+		$scope.$apply();
+
+		if (threeDotsNeeded)
+			descriptionElement.innerHTML = descriptionElement.innerHTML + '<span id="three-dots">...</span>';
+	}
+
 
 	// put sponsor button and event details in a nice location
 	var sponsorButtonElement = get('event-sponsor-button');
@@ -74,18 +91,17 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 	}
 
 	/* show requested sponsorship types */
-	var event = JSON.parse($attrs.event);
-	angular.forEach(event.sponsorship_types, function(type) {
+	angular.forEach($scope.event.sponsorship_types, function(type) {
 		get(type).style.display = "inherit";
 	});
 
-	$scope.streetAddress = $sanitize(getStreetAddress(event));
-	$scope.cityAndRest = $sanitize(getCityAndRest(event));
-	$scope.fullAddress = $sanitize(getFullAddress(event));
+	$scope.streetAddress = $sanitize(getStreetAddress($scope.event));
+	$scope.cityAndRest = $sanitize(getCityAndRest($scope.event));
+	$scope.fullAddress = $sanitize(getFullAddress($scope.event));
 	
 	// event dates range
-	var startDate = new Date(event.date_time_starts);
-	var endDate = new Date(event.date_time_ends);
+	var startDate = new Date($scope.event.date_time_starts);
+	var endDate = new Date($scope.event.date_time_ends);
 	$scope.dateRangeString = $filter('date')(startDate,'EEEE, MMMM d, y, h:mm a', 'UTC') + ' - ';
 	$scope.dateRangeString += (startDate.toDateString() === endDate.toDateString()) ?
 		$filter('date')(endDate, 'h:mm a', 'UTC') :
@@ -108,7 +124,7 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 				var marker = new google.maps.Marker({
 					map: map,
 					position: results[0].geometry.location,
-					title: event.name
+					title: $scope.event.name
 				});
 			} else {
 				log('could not find address for showing in google maps');
@@ -121,14 +137,14 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 	google.maps.event.addDomListener(window, 'load', mapInit);
 
 	/* make age range readable */
-	event.age_ranges.sort();
-	for (var i = 0; i < event.age_ranges.length; i++) {
+	$scope.event.age_ranges.sort();
+	for (var i = 0; i < $scope.event.age_ranges.length; i++) {
 		if (!$scope.ageRanges) {
-			$scope.ageRanges = event.age_ranges[i];
+			$scope.ageRanges = $scope.event.age_ranges[i];
 			continue;
 		}
 
-		var splitRange = event.age_ranges[i].split("-");
+		var splitRange = $scope.event.age_ranges[i].split("-");
 		var bigger = parseInt(splitRange[0]);
 
 		var splitScope = $scope.ageRanges.split("-");
@@ -142,13 +158,13 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 				$scope.ageRanges = $scope.ageRanges.replace(smallerStr, splitRange[1]);
 			}
 		} else {
-			$scope.ageRanges += ',' + event.age_ranges[i];
+			$scope.ageRanges += ',' + $scope.event.age_ranges[i];
 		}
 	}
 	$scope.ageRanges = $sanitize($scope.ageRanges);
 
-	var threeDotsElement = get('three-dots');
 	$scope.toggleFullDescription = function() {
+		var threeDotsElement = get('three-dots');
 		$scope.showingEntireDescription = !$scope.showingEntireDescription;
 		threeDotsElement.style.visibility = $scope.showingEntireDescription ? "hidden" : "visible";
 	}

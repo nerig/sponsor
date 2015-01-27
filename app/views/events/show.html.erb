@@ -60,7 +60,7 @@
 		<div class="spacer-1"></div>
 		<div class="row">
 			<div class="col-xs-12 col-md-9">
-				<p id="ev-desc"><%= h @event.description %> </p>
+				<p id="ev-desc" ng-bind-html="beginningOfText"></p>
 				<p id="rest-of-description" collapse="!showingEntireDescription" ng-bind-html="restOfText"></p>
 			</div>
 		</div>

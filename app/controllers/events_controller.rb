@@ -155,9 +155,9 @@ private
 			region: event_params[:state_province_region],
 			zipcode: event_params[:zipcode],
 			country: event_params[:country],
-			description: event_params[:description].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
+			description: event_params[:description].gsub("\r\n", "<br/>").gsub('"', '&quot;').gsub("'", "&#39;"),
 			size_range: event_params[:size],
-			sponsorship_requests: event_params[:sponsorship_requests].gsub("\r\n", "<br />").gsub('"', '&quot;').gsub("'", "&#39;"),
+			sponsorship_requests: event_params[:sponsorship_requests].gsub("\r\n", "<br/>").gsub('"', '&quot;').gsub("'", "&#39;"),
 			recurrence: event_params[:recurrence],
 			attendees_gender: event_params[:gender],
 			image_url: event_params[:image_url].downcase.start_with?("http") ? 
