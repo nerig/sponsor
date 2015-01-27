@@ -41,7 +41,7 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 				var lastBreak = Math.max(lastLineBreak, lastSpace);
 				
 				tmpTrimmedText = $scope.event.description.substring(0, lastBreak);
-				$scope.beginningOfText = tmpTrimmedText;
+				$scope.beginningOfText = tmpTrimmedText + "...";
 				$scope.restOfText = $scope.event.description.substring(tmpTrimmedText.length, $scope.event.description.length);
 
 				$scope.$apply();
@@ -52,6 +52,8 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 			threeDotsNeeded = false;
 		}
 
+		// delete three dots to add them later properly
+		$scope.beginningOfText = $scope.beginningOfText.substring(0, $scope.beginningOfText.lastIndexOf("..."));
 
 		if ($scope.restOfText.indexOf("<br/>") === 0) {
 			// removing break if the rest of text starts with it so to not have two newlines instead of one
@@ -70,8 +72,9 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 
 		$scope.$apply();
 
-		if (threeDotsNeeded)
+		if (threeDotsNeeded) {
 			descriptionElement.innerHTML = descriptionElement.innerHTML + '<span id="three-dots">...</span>';
+		}
 	}
 
 
