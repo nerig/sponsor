@@ -318,11 +318,6 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", func
 
     // upload logo
     $(function() {
-    	var logoBorderElement = $("#logo-image-border");
-		var progressBar  = $("<div class='bar-a'></div>");
-		var barContainer = $("<div class='progress-a'></div>").append(progressBar);
-		logoBorderElement.before(barContainer);
-
 		var submitButtonElement = $("#btn-sbmt-event");
 
 		var fileInputElement = $("#file-input");
@@ -339,17 +334,8 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", func
 				.test(window.navigator && navigator.userAgent),
 			imageMaxWidth: 300,
 			imageMaxHeight: 300,
-			progressall: function (e, data) {
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				progressBar.css('width', progress + '%');
-			},
 			start: function (e) {
 				submitButtonElement.prop('disabled', true);
-
-				progressBar.
-					css('background', 'green').
-					css('display', 'block').
-					css('width', '0%');
 			},
 			done: function(e, data) {
 				submitButtonElement.prop('disabled', false);
@@ -363,9 +349,6 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", func
 			},
 			fail: function(e, data) {
 				submitButtonElement.prop('disabled', false);
-
-				progressBar.
-					css("background", "red");
 			}
 		});
 	});
