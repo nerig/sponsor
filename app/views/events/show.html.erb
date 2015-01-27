@@ -61,7 +61,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-9">
 				<p id="ev-desc"><%= h @event.description %> </p>
-				<p id="rest-of-description" collapse="!showingEntireDescription" ng-bind-html-unsafe="restOfText"></p>
+				<p id="rest-of-description" collapse="!showingEntireDescription" ng-bind-html="restOfText"></p>
 			</div>
 		</div>
 		<div class="row">
