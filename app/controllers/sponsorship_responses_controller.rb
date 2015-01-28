@@ -23,6 +23,8 @@ class SponsorshipResponsesController < ApplicationController
         @sponsorship_response = SponsorshipResponse.new(sponsorship_response_params)
         @sponsorship_response.save
 
+        notify_sponsorship
+
         # Create the charge on Stripe's servers - this will charge the user's card
         begin
             Stripe.api_key = "sk_test_AszVo3Z8gOO2X324y01pLzZj"
@@ -49,6 +51,31 @@ class SponsorshipResponsesController < ApplicationController
     end
 
     private
+        def notify_sponsorship
+            subject = "Someone wants to sponsor an event with id #{sponsorship_response_params[:event_id]}!"
+            name = "Marketiers new sponsorship"
+            email = "mrktiers@gmail.com"
+            message = "Take a look - a sponsorship was added. Details:\r\n
+                Name: #{sponsorship_response_params[:first_name]} #{sponsorship_response_params[:last_name]}\r\n
+                Email: #{sponsorship_response_params[:email]}\r\n
+                Phone: #{sponsorship_response_params[:phone_number]}\r\n
+                Company name: #{sponsorship_response_params[:company_name]}\r\n
+                Title: #{sponsorship_response_params[:title]}\r\n
+                Amount: $#{sponsorship_response_params[:amount]}\r\n
+                Offered sponsorship: #{sponsorship_response_params[:offered_sponsorship]}\r\n
+                Comments: #{sponsorship_response_params[:comments]}"
+
+            mail = Mail.deliver do
+              to      'tempaner@gmail.com'
+              from    "#{name} <#{email}>"
+              subject subject
+
+              text_part do
+                body message
+              end
+            end
+        end
+
 
         def set_sponsorship_response
             @sponsorship_response = SponsorshipResponse.find(params[:id])
