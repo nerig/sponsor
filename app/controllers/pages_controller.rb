@@ -17,14 +17,6 @@ class PagesController < ApplicationController
 	end
 
 	def send_contact
-		Mail.defaults do
-		  delivery_method :smtp, {
-		    :port      => 587,
-		    :address   => "smtp.mandrillapp.com",
-		    :user_name => ENV["MANDRILL_USERNAME"],
-		    :password  => ENV["MANDRILL_PASSWORD"]
-		  }
-		end
 
 		subject = contact_params['subject']
 		name = contact_params['name']
@@ -33,7 +25,7 @@ class PagesController < ApplicationController
 
 		mail = Mail.deliver do
 		  to      'tempaner@gmail.com'
-		  from    'Marketiers Contact Us <mrktiers@gmail.com>' # Your from name and email address
+		  from    "#{name} <#{email}>"
 		  subject subject
 
 		  text_part do
