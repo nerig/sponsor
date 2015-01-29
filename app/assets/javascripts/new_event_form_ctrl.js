@@ -1,21 +1,24 @@
 "use strict";
 
-angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", function($scope, $attrs) {
+angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$filter", function($scope, $attrs, $filter) {
 	
+	var thisIsAnEditScenario = ($scope.$parent.eventToEdit != undefined);
+
 	var formElement = get('new-event-form');
 	formElement.method = "POST";
-	var urlParts = document.URL.split("/");
-	if ($scope.$parent.eventToEdit != undefined) {
-		// this is an edit scenario
-
+	if (thisIsAnEditScenario) {
 		formElement.action = "/events/" + $scope.$parent.eventToEdit.identifier;
 		$('#new-event-form').append($('<input type="hidden" name="_method" value="put" />'));
+		
 		get('btn-sbmt-event').value = "Update";
+		
 		$scope.eventFormTitle = "Edit event";
 		$scope.eventFormSubTitle = "";
 	} else {
 		formElement.action = "/events";
+		
 		get('btn-sbmt-event').value = "Create";
+		
 		$scope.eventFormTitle = "Create a new event!";
 		$scope.eventFormSubTitle = "Please fill out all the fields.";
 	}
@@ -145,119 +148,134 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", func
 		if ($scope.incomeHigh != undefined) setCookie("incomeHigh", $scope.incomeHigh, false);
 	}
 
+	var setPartialFields = function(firstName, lastName, email, phone, city, region, zipcode, country) {
+		if (firstName !== undefined) $scope.firstName = firstName;
+		if (lastName !== undefined) $scope.lastName = lastName;
+		if (email !== undefined) $scope.email = email;
+		if (phone !== undefined) $scope.phone = phone;
+		if (city !== undefined) $scope.city = city;
+		if (region !== undefined) $scope.regionInputText = region;
+		if (zipcode !== undefined) $scope.zipcode = zipcode;
+		if (country !== undefined) $scope.countryInputText = country;		
+	}
+
+	var setFields = function(firstName, lastName, email, phone, city, region, zipcode, country,
+		eventName, imageUrl, dateStarts, timeStarts, dateEnds, timeEnds, recurrence, size, gender,
+		description, address1, address2, cbCapital, cbDiscounts, cbMerchandise, totalAmount, minAmount,
+		sponsorshipRequests, age1220, age2135, age3650, age51, incomeLow, incomeMed, incomeHigh) {
+
+		setPartialFields(firstName, lastName, email, phone, city, region, zipcode, country);
+
+		if (eventName !== undefined) $scope.eventName = eventName;
+
+		if (imageUrl !== undefined) {
+			get('hidden-image-url').value = imageUrl;
+			$scope.image = imageUrl;
+			$scope.dummyFileName = imageUrl.split("--")[1];
+		}
+
+		if (dateStarts !== undefined) $scope.dateStarts = dateStarts;
+		if (timeStarts !== undefined) $scope.onTimeStartsSelected(timeStarts);
+		if (dateEnds !== undefined) $scope.dateEnds = dateEnds;
+		if (timeEnds !== undefined) $scope.onTimeEndsSelected(timeEnds);
+		if (recurrence !== undefined) $scope.onRecurrenceSelected(recurrence);
+		if (size !== undefined) $scope.onSizeSelected(size);
+		if (gender !== undefined) $scope.onGenderSelected(gender);
+		if (description !== undefined) $scope.description = description;
+		if (address1 !== undefined) $scope.address1 = address1;
+		if (address2 !== undefined) $scope.address2 = address2;
+
+		if (cbCapital !== undefined && cbCapital === "true") $scope.onCapitalClick();
+		if (cbDiscounts !== undefined && cbDiscounts === "true") $scope.onDiscountsClick();
+		if (cbMerchandise !== undefined && cbMerchandise === "true") $scope.onMerchandiseClick();
+
+		if (totalAmount !== undefined) $scope.totalAmount = totalAmount;
+		if (minAmount !== undefined) $scope.minAmount = minAmount;
+		if (sponsorshipRequests !== undefined) $scope.sponsorshipRequests = sponsorshipRequests;
+
+		if (age1220 !== undefined && age1220 === "true") $scope.on12_20Click();
+		if (age2135 !== undefined && age2135 === "true") $scope.on21_35Click();
+		if (age3650 !== undefined && age3650 === "true") $scope.on36_50Click();
+		if (age51 !== undefined && age51 === "true") $scope.on51Click();
+
+		if (incomeLow !== undefined && incomeLow === "true") $scope.onIncomeLowClick();
+		if (incomeMed !== undefined && incomeMed === "true") $scope.onIncomeMedClick();
+		if (incomeHigh !== undefined && incomeHigh === "true") $scope.onIncomeHighClick();
+	}
+
 	$(window).on('load', function() {
     	
-		var tempVal = getCookie("firstName");
-		if (tempVal != undefined) $scope.firstName = tempVal;
+		if (thisIsAnEditScenario) {
+			var ev = $scope.$parent.eventToEdit;
 
-		tempVal = getCookie("lastName");
-		if (tempVal != undefined) $scope.lastName = tempVal;
+			var startDateTime = new Date(ev.date_time_starts);
+			var endDateTime = new Date(ev.date_time_ends);
 
-		tempVal = getCookie("email");
-		if (tempVal != undefined) $scope.email = tempVal;
+			var startDate = $filter('date')(startDateTime, 'MM/dd/y', 'UTC');
+			var startTime = $filter('date')(startDateTime, 'h:mm a', 'UTC');
+			var endDate = $filter('date')(endDateTime, 'MM/dd/y', 'UTC');
+			var endTime = $filter('date')(endDateTime, 'h:mm a', 'UTC');
 
-		tempVal = getCookie("phone");
-		if (tempVal != undefined) $scope.phone = tempVal;
+			var cbCapital = "false";
+			var cbDiscounts = "false";
+			var cbMerchandise = "false";
+			ev.sponsorship_types.forEach(function(el) {
+				if (el === 'capital') cbCapital = "true";
+				if (el === 'discounts') cbDiscounts = "true";
+				if (el === 'merchandise') cbMerchandise = "true";
+			});
 
-		tempVal = getCookie("city");
-		if (tempVal != undefined) $scope.city = tempVal;
+			var age1220 = "false";
+			var age2135 = "false";
+			var age3650 = "false";
+			var age51 = "false";
+			ev.age_ranges.forEach(function(el) {
+				if (el === '12-20') age1220 = "true";
+				if (el === '21-35') age2135 = "true";
+				if (el === '36-50') age3650 = "true";
+				if (el === '51+') age51 = "true";
+			});
 
-		tempVal = getCookie("region");
-		if (tempVal != undefined) $scope.regionInputText = tempVal;
+			var incomeLow = "false";
+			var incomeMed = "false";
+			var incomeHigh = "false";
+			ev.attendees_income_levels.forEach(function(el) {
+				if (el === 'low') incomeLow = "true";
+				if (el === 'medium') incomeMed = "true";
+				if (el === 'high') incomeHigh = "true";
+			});
 
-		tempVal = getCookie("zipcode");
-		if (tempVal != undefined) $scope.zipcode = tempVal;
+			setFields(ev.first_name, ev.last_name, ev.email, ev.contact_number, ev.city, ev.region, 
+				ev.zipcode, ev.country, ev.name, ev.image_url, startDate, startTime, endDate, endTime,
+				ev.recurrence, ev.size_range, ev.attendees_gender, ev.description, ev.address1,
+				ev.address2, cbCapital, cbDiscounts, cbMerchandise, ev.total_amount, ev.min_amount,
+				ev.sponsorship_requests, age1220, age2135, age3650, age51, incomeLow, incomeMed, incomeHigh);
+		} else {
 
-		tempVal = getCookie("country");
-		if (tempVal != undefined) $scope.countryInputText = tempVal;
-
-    	if (getCookie("type") === "full")
-    	{
-    		tempVal = getCookie("eventName");
-			if (tempVal != undefined) $scope.eventName = tempVal;
-
-			tempVal = getCookie("logoImageUrl");
-			if (tempVal != undefined) {
-				get('hidden-image-url').value = tempVal;
-				$scope.image = tempVal;
-				$scope.dummyFileName = tempVal.split("--")[1];
+			if (getCookie("type") === "full") {
+				setFields(getCookie("firstName"), getCookie("lastName"), getCookie("email"), 
+					getCookie("phone"), getCookie("city"), getCookie("region"), getCookie("zipcode"), 
+					getCookie("country"), getCookie("eventName"), getCookie("logoImageUrl"), 
+					getCookie("dateStarts"), getCookie("timeStarts"), getCookie("dateEnds"), 
+					getCookie("timeEnds"), getCookie("recurrence"), getCookie("size"), getCookie("gender"), 
+					getCookie("description"), getCookie("address1"),getCookie("address2"), 
+					getCookie("cbCapital"), getCookie("cbDiscounts"), getCookie("cbMerchandise"), 
+					getCookie("totalAmount"), getCookie("minAmount"), getCookie("sponsorshipRequests"), 
+					getCookie("age1220"),getCookie("age2135"), getCookie("age3650"), getCookie("age51"), 
+					getCookie("incomeLow"), getCookie("incomeMed"), getCookie("incomeHigh"));
+			} else {
+				setPartialFields(getCookie("firstName"), getCookie("lastName"), getCookie("email"), getCookie("phone"), 
+					getCookie("city"), getCookie("region"), getCookie("zipcode"), getCookie("country"));
 			}
 
-			tempVal = getCookie("dateStarts");
-			if (tempVal != undefined) $scope.dateStarts = tempVal;
+	    	var tempVal = getCookie("questionsSectionNumber");
+			if (tempVal != undefined) $scope.questionsSectionNumber = parseInt(tempVal);
 
-			tempVal = getCookie("timeStarts");
-			if (tempVal != undefined) $scope.onTimeStartsSelected(tempVal);
-
-			tempVal = getCookie("dateEnds");
-			if (tempVal != undefined) $scope.dateEnds = tempVal;
-
-			tempVal = getCookie("timeEnds");
-			if (tempVal != undefined) $scope.onTimeEndsSelected(tempVal);
-
-			tempVal = getCookie("recurrence");
-			if (tempVal != undefined) $scope.onRecurrenceSelected(tempVal);
-
-			tempVal = getCookie("size");
-			if (tempVal != undefined) $scope.onSizeSelected(tempVal);
-
-			tempVal = getCookie("gender");
-			if (tempVal != undefined) $scope.onGenderSelected(tempVal);
-
-			tempVal = getCookie("description");
-			if (tempVal != undefined) $scope.description = tempVal;
-
-			tempVal = getCookie("address1");
-			if (tempVal != undefined) $scope.address1 = tempVal;
-
-			tempVal = getCookie("address2");
-			if (tempVal != undefined) $scope.address2 = tempVal;
-
-			tempVal = getCookie("cbCapital");
-			if (tempVal != undefined && tempVal === "true") $scope.onCapitalClick();
-
-			tempVal = getCookie("cbDiscounts");
-			if (tempVal != undefined && tempVal === "true") $scope.onDiscountsClick();
-
-			tempVal = getCookie("cbMerchandise");
-			if (tempVal != undefined && tempVal === "true") $scope.onMerchandiseClick();
-
-			tempVal = getCookie("totalAmount");
-			if (tempVal != undefined) $scope.totalAmount = tempVal;
-
-			tempVal = getCookie("minAmount");
-			if (tempVal != undefined) $scope.minAmount = tempVal;
-
-			tempVal = getCookie("sponsorshipRequests");
-			if (tempVal != undefined) $scope.sponsorshipRequests = tempVal;
-
-			tempVal = getCookie("age1220");
-			if (tempVal != undefined && tempVal === "true") $scope.on12_20Click();
-
-			tempVal = getCookie("age2135");
-			if (tempVal != undefined && tempVal === "true") $scope.on21_35Click();
-
-			tempVal = getCookie("age3650");
-			if (tempVal != undefined && tempVal === "true") $scope.on36_50Click();
-
-			tempVal = getCookie("age51");
-			if (tempVal != undefined && tempVal === "true") $scope.on51Click();
-
-			tempVal = getCookie("incomeLow");
-			if (tempVal != undefined && tempVal === "true") $scope.onIncomeLowClick();
-
-			tempVal = getCookie("incomeMed");
-			if (tempVal != undefined && tempVal === "true") $scope.onIncomeMedClick();
-
-			tempVal = getCookie("incomeHigh");
-			if (tempVal != undefined && tempVal === "true") $scope.onIncomeHighClick();
-    	}
-
-    	tempVal = getCookie("questionsSectionNumber");
-		if (tempVal != undefined) $scope.questionsSectionNumber = parseInt(tempVal);
+			deleteCookie("type");
+    	
+		}
 
 		$scope.$apply();
-		deleteCookie("type");
 	});
 
 	$scope.image = "/assets/no-image.JPG";

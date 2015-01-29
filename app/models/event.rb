@@ -44,8 +44,4 @@ class Event < ActiveRecord::Base
 	serialize :sponsorship_types, Array
 	serialize :age_ranges, Array
 	serialize :attendees_income_levels, Array
-
-	def as_json(options={})
-		super(options.merge(except: :email))
-	end
 end
