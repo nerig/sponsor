@@ -1,11 +1,11 @@
 class WelcomeController < ApplicationController
 	def index
 		
-		# temp code to decapitalize sponsorship types in the already saved events
+		# temp code to decapitalize attendees_income_levels in the already saved events
 		Event.all.each { |e|
-			types = []
-			e.sponsorship_types.each { |st| types << st.downcase }
-			e.update(sponsorship_types: types)
+			levels = []
+			e.attendees_income_levels.each { |il| levels << il.downcase }
+			e.update(attendees_income_levels: levels)
 		}
 
 		@events = Event.where("date_time_starts > ?", Time.now).sort { |a, b| a.date_time_starts <=> b.date_time_starts}
