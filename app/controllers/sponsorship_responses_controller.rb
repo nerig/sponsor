@@ -27,7 +27,7 @@ class SponsorshipResponsesController < ApplicationController
 
         # Create the charge on Stripe's servers - this will charge the user's card
         begin
-            Stripe.api_key = "sk_test_AszVo3Z8gOO2X324y01pLzZj"
+            Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
             charge = Stripe::Charge.create(
                 :amount => (@sponsorship_response.amount * 100).to_i,
                 :currency => "usd",

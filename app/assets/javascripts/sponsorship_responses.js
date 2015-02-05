@@ -3,7 +3,7 @@
 angular.module('spons').controller('newSponsorshipResponseFormCtrl', ["$scope", "$attrs", "$sanitize", function($scope, $attrs, $sanitize) {
 
     var handler = StripeCheckout.configure({
-        key: 'pk_test_ivj8TLBMdtxp3dek1oI5Szny',
+        key: 'pk_live_TcfK9gwjaFVT9guYsFkFPkBl',
         image: 'https://www.callfire.com/sites/default/files/blog/images/advertising.jpg',
         token: function(token) {
             var formElement = $('#sponsor-form');
