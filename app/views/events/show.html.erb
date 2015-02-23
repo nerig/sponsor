@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ShowEventCtrl" event="<%= @event.to_json %>">
+<div class="container" ng-controller="ShowEventCtrl" event="<%= @event.to_json %>" my-event="<%= @my_event %>">
 	<div class="margin-left-indent">
 		<div class="row">	
 			<h1 class="col-xs-12 col-md-8"><%= h @event.name %></h1>
@@ -45,15 +45,22 @@
 				</div>
 			</div>
 			<div class="col-xs-12 col-md-3">
-				<div class="row text-center">
-					<div class="col-xs-12 col-md-12">
-						<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= h @event.id %>">Sponsor!</a></p>
+				<div ng-hide="myEvent">
+					<div class="row text-center">
+						<div class="col-xs-12 col-md-12">
+							<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= h @event.id %>">Sponsor!</a></p>
+						</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-xs-12 col-md-12">
+							<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
+						</div>
 					</div>
 				</div>
-				<div class="row text-center">
-					<div class="col-xs-12 col-md-12">
-						<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
-					</div>
+				<div id="my-event-edit-delete" ng-show="myEvent">
+					<a ng-href="events/{{event.identifier}}/edit">Edit</a>
+					|
+					<a ng-href="events/{{event.identifier}}/delete">Delete</a>
 				</div>
 			</div>
 		</div>

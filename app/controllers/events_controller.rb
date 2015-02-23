@@ -2,22 +2,26 @@ require 'active_support/core_ext'
 require 'securerandom'
 
 class EventsController < ApplicationController
-#	before_action :authenticate_user!,
-#		:only => [:new, :create]
+	before_action :authenticate_user!,
+		:only => [:edit]
 	before_action :set_event, only: [:show, :edit, :update, :destroy]
 	before_action :prepare_aws_vars, only: [:new, :edit]
-	http_basic_authenticate_with name: "marketiers", password: "marketiersedit", only: [:edit, :update]
+	before_action :set_user_id
 
 	# action to show all events
 	def index
 		@events = Event.where("date_time_starts > ?", Time.now).sort { |a, b| a.date_time_starts <=> b.date_time_starts}.to_json
+
+		@user_first_name = nil
+		@user_events = nil
+		if user_signed_in?
+			@user_first_name = current_user.first_name
+			@user_events = current_user.events.sort { |a, b| a.date_time_starts <=> b.date_time_starts}.to_json
+		end
 	end
 
 	# action taken when a user wants to create a new event
 	def new
-	end
-
-	def edit
 	end
 
 	# action taken when a user submits a new event
@@ -31,16 +35,40 @@ class EventsController < ApplicationController
 		redirect_to "/events/#{@event.identifier}"
 	end
 
+	def edit
+
+		if user_signed_in?
+			if current_user.events.any? { |event| event.identifier == params[:identifier]}
+				return
+			end
+		end
+		
+		redirect_to root_path
+	end
+
 	def update
-		@event.update(event_params(@event.identifier))
-
-		notify_event("updated")
-
-		redirect_to "/events/#{@event.identifier}"
+		if user_signed_in?
+			if current_user.events.any? { |event| event.identifier == @event.identifier}
+				@event.update(event_params(@event.identifier))
+				notify_event("updated")
+				redirect_to "/events/#{@event.identifier}"
+				return
+			end
+		end
+		
+		redirect_to root_path
 	end
 
 	# action to show one event by id
 	def show
+
+		@my_event = false
+		if user_signed_in?
+			if current_user.events.any? { |event| event.identifier == params[:identifier]}
+				@my_event = true
+			end
+		end
+
 		# prepare similar events for bottom of the page
 		# comparisonable event properties, by importance: gender (if not both), city+country, age, income
 		
@@ -65,6 +93,19 @@ class EventsController < ApplicationController
 		}
 
 		@three_similar_events = @three_similar_events.to_json
+	end
+
+	def destroy
+		
+		if user_signed_in?
+			if current_user.events.any? { |event| event.identifier == params[:identifier]}
+				Event.find_by(identifier: params[:identifier]).delete
+				redirect_to '/events#my-events'
+				return
+			end
+		end
+
+		redirect_to root_path		
 	end
 
 private
@@ -168,6 +209,7 @@ private
 
 		eparams = {
 			identifier: identifier,
+			user_id: crude_params[:user_id],
 			first_name: crude_params[:first_name],
 			last_name: crude_params[:last_name],
 			contact_number: crude_params[:phone],
@@ -207,7 +249,7 @@ private
 			:address2, :city, :state_province_region, 
 			:zipcode, :country, :phone, :description,
 			:capital, :merchandise, :discounts,
-			:total_amount, :min_amount,
+			:total_amount, :min_amount, :user_id,
 			:sponsorship_requests, :recurrence,
 			:age12_20, :age21_35, :age36_50, :age51,
 			:gender, :income_low, :income_med, :income_high, :image_url)
@@ -224,5 +266,12 @@ private
 		@aws_fields = @s3_direct_post.fields.to_json
 		@aws_url = @s3_direct_post.url.to_s
 		@aws_host = @s3_direct_post.url.host
+	end
+
+	def set_user_id
+		@user_id = -1
+		if user_signed_in?
+			@user_id = current_user.id
+		end
 	end
 end

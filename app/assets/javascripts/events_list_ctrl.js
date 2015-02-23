@@ -56,7 +56,23 @@ var getFullAddress = function(event) {
 
 angular.module('spons').controller('EventsListCtrl', ["$scope", "$attrs", function($scope, $attrs) {
 	
-	$scope.events = JSON.parse($attrs.events);
+	$scope.myEvents = false;
+	if (window.location.hash.length > 0) {
+		if (window.location.hash === '#my-events' && $attrs.userId !== "-1") {
+			$scope.myEvents = true;
+			$scope.events = JSON.parse($attrs.userEvents);
+		} else {
+			window.location = "/events"
+		}
+	}
+	
+	if (!$scope.myEvents) {
+		$scope.events = JSON.parse($attrs.events);
+	}
+
+	$(window).on('hashchange', function() {
+		window.location.reload();
+	});
 	
 	// extracting the lists of filters from existing values in the events
 	$scope.locations = [];

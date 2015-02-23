@@ -1,9 +1,8 @@
-<div class="container" ng-controller="newEventFormCtrl" aws-fields="<%= h @aws_fields %>" aws-url="<%= h @aws_url %>" aws-host="<%= h @aws_host %>">
+<div class="container" ng-controller="newEventFormCtrl" aws-fields="<%= h @aws_fields %>" aws-url="<%= h @aws_url %>" aws-host="<%= h @aws_host %>" user-id="<%= h @user_id %>">
 
 	<div class="row">
 		<div class="col-xs-12 col-md-offset-2 col-md-8">
-			<form accept-charset="UTF-8" enctype="multipart/form-data" name="newEventForm" id="new-event-form" novalidate>
-				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+			<div class="mrktiers-form">
 				<div class="row">
 					<div class="col-xs-12 col-md-12 form-description">
 						<h4 ng-bind-html="eventFormTitle"></h4>
@@ -11,409 +10,390 @@
 					</div>
 				</div>
 				<div class="row">
-					<hr class="col-xs-10 col-sm-11 col-md-11 hri">
+					<hr class="col-xs-10 col-sm-11 col-md-11 hri hrii">
 				</div>
 				<div class="questions">
-				  <div ng-show="questionsSectionNumber === 1" ng-form="firstSectionForm">
-						
-						<!-- event organizer name -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Your name *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-5 col-md-3">
-								<div class="input-group">
-									<span class="input-group-addon">First</span>
-									<input name="event[first_name]" type="text" class="form-control" maxlength="20" ng-model="firstName" ng-minlength="2" ng-maxlegnth="20" required>
-								</div>
-							</div>
-							<div class="col-xs-6 col-md-4">
-								<div class="input-group">
-									<span class="input-group-addon">Last</span>
-									<input name="event[last_name]" type="text" class="form-control" maxlength="30" ng-minlength="2" ng-maxlegnth="30" ng-model="lastName" required>
-								</div>
-							</div>
-						</div>
+					<div ng-show="questionsSectionNumber === 1">
+						<%- if not user_signed_in? %>
+							<form accept-charset="UTF-8" enctype="multipart/form-data" name="signupForm" id="signup-form" method="post" action="/users" novalidate>
+								<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+								<%= render "devise/shared/personal_questions" %>
+							</form>
+						<% end %>
+					</div>
+					<form accept-charset="UTF-8" enctype="multipart/form-data" name="newEventForm" id="new-event-form" novalidate>
+						<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+						<div ng-show="questionsSectionNumber === 1" ng-form="firstSectionForm">
 
-						<!-- event organizer email -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Email *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<div class="input-group">
-									<span class="input-group-addon">@</span>
-									<input name="event[email]" type="email" class="form-control" ng-minlength="3" ng-maxlength="50" maxlength="50" ng-model="email" required>
+							<input id="hidden-user-id-input" type="hidden" name="event[user_id]">
+								
+							<!-- event name -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<p class="field-title"><strong>Event name *</strong></p>
 								</div>
 							</div>
-						</div>
+							<div class="row">
+								<div class="col-xs-11 col-md-7">
+									<input name="event[name]" type="text" class="form-control" maxlength="100" ng-maxlength="100" ng-minlength="3" ng-model="eventName" required>
+								</div>
+							</div>
 
-						<!-- phone number -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Phone *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-									<input name="event[phone]" type="text" class="form-control" maxlength="21" ng-model="phone" pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" required>
+							<!-- image url -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<p class="field-title"><strong>Event logo *</strong></p>
 								</div>
 							</div>
-						</div>
-					
-						<!-- event name -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Event name *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-7">
-								<input name="event[name]" type="text" class="form-control" maxlength="100" ng-maxlength="100" ng-minlength="3" ng-model="eventName" required>
-							</div>
-						</div>
-
-						<!-- image url -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Event logo *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-2">
-								<div id="logo-image-border">
-									<img id="image-thunbnail" class="transform-50-50" ng-src="{{image}}">
-								</div>
-							</div>
-							<div class="col-xs-9 col-md-5" style="margin-top:5.6em;">
-								<input id="hidden-image-url" name="event[image_url]" type="hidden">
-								<input id="file-input" type="file" accept="image/*" class="form-control" style="display:none">
-								<div id="dummy-file-input" class="input-group">
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default btn-grey" ng-click="fileInputClicked()">Browse</button>
-									</span>
-									<input type="text" class="readonly-input form-control" ng-click="fileInputClicked()" ng-change="fileSelected()" ng-model="dummyFileName" readonly required>
-								</div>
-							</div>
-						</div>
-
-						<!-- date and time-->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Date and time *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12 col-sm-5">
-								<div class="row">
-									<p style="margin-bottom: 0;" class="col-xs-12">Starts</p>
-								</div>
-								<div class="row">
-									<div class="col-xs-5 col-sm-6">
-										<input id="date-starts" type="text" class="readonly-input form-control" datepicker-popup="MM/dd/y" name="event[date_starts]" ng-model="dateStarts" is-open="isStartsOpened" min-date="minDate" datepicker-options="dateOptions" ng-click="isStartsOpened = !isStartsOpened" show-button-bar="true" ng-change="newDateStartsSelected()" readonly required>
+							<div class="row">
+								<div class="col-xs-2">
+									<div id="logo-image-border">
+										<img id="image-thunbnail" class="transform-50-50" ng-src="{{image}}">
 									</div>
-									<div class="col-xs-5 col-sm-6">
-										<div class="btn-group btn-group-justified">
-											<button id="time-starts" type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">7:00 PM</button>
+								</div>
+								<div class="col-xs-9 col-md-5" style="margin-top:5.6em;">
+									<input id="hidden-image-url" name="event[image_url]" type="hidden">
+									<input id="file-input" type="file" accept="image/*" class="form-control" style="display:none">
+									<div id="dummy-file-input" class="input-group">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-grey" ng-click="fileInputClicked()">Browse</button>
+										</span>
+										<input type="text" class="readonly-input form-control" ng-click="fileInputClicked()" ng-change="fileSelected()" ng-model="dummyFileName" readonly required>
+									</div>
+								</div>
+							</div>
+
+							<!-- date and time-->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<p class="field-title"><strong>Date and time *</strong></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 col-sm-5">
+									<div class="row">
+										<p style="margin-bottom: 0;" class="col-xs-12">Starts</p>
+									</div>
+									<div class="row">
+										<div class="col-xs-5 col-sm-6">
+											<input id="date-starts" type="text" class="readonly-input form-control" datepicker-popup="MM/dd/y" name="event[date_starts]" ng-model="dateStarts" is-open="isStartsOpened" min-date="minDate" datepicker-options="dateOptions" ng-click="isStartsOpened = !isStartsOpened" show-button-bar="true" ng-change="newDateStartsSelected()" readonly required>
+										</div>
+										<div class="col-xs-5 col-sm-6">
+											<div class="btn-group btn-group-justified">
+												<button id="time-starts" type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">7:00 PM</button>
+												<ul class="dropdown-menu scrollable-menu" role="menu">
+													<li ng-repeat="time in times">
+														<a ng-click="onTimeStartsSelected(time)">{{time}}</a>
+													</li>
+												</ul>
+											</div>
+											<input id="hidden-time-starts" type="hidden" name="event[time_starts]">
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-5">
+									<div class="row">
+										<p style="margin-bottom: 0;" class="col-xs-12">Ends</p>
+									</div>
+									<div class="row">
+										<div class="col-xs-5 col-sm-6">
+											<input id="date-ends" type="text" class="readonly-input form-control" datepicker-popup="MM/dd/y" name="event[date_ends]" ng-model="dateEnds" is-open="isEndsOpened" min-date="dateStarts" datepicker-options="dateOptions" ng-click="isEndsOpened = !isEndsOpened" show-button-bar="true" readonly required>
+										</div>
+										<div class="col-xs-5 col-sm-6">
+											<div class="btn-group btn-group-justified">
+												<button id="time-ends" type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">10:00 PM</button>
+												<ul class="dropdown-menu scrollable-menu" role="menu">
+													<li ng-repeat="time in times">
+														<a ng-click="onTimeEndsSelected(time)">{{time}}</a>
+													</li>
+												</ul>
+											</div>
+											<input id="hidden-time-ends" type="hidden" name="event[time_ends]">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								
+							</div>
+
+							<!-- event size, recurrence and gender -->
+							<div class="row">
+								<div class="col-xs-12 col-md-3">
+									<div class="row">
+										<div class="col-xs-12">
+											<p class="field-title"><strong>Event recurrence *</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="input-group">
+												<button id="recurrence-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">One-time event <span class="caret"></span></button>
+												<ul class="dropdown-menu" role="menu">
+													<li ng-repeat="ocurrence in ocurrences"><a ng-click="onRecurrenceSelected(ocurrence)">{{ocurrence}}</a></li>
+												</ul>
+											</div>
+											<input id="recurrence-hidden-input" type="hidden" class="form-control readonly-input" name="event[recurrence]" value="One-time event">
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-md-3">
+									<div class="row">
+										<div class="col-xs-12">
+											<p class="field-title"><strong>Event size (#people) *</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="input-group">
+												<button id="size-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">100-500 <span class="caret"></span></button>
+												<ul class="dropdown-menu" role="menu">
+													<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
+												</ul>
+												<input id="size-hidden-input" type="hidden" class="readonly-input form-control" name="event[size]" value="100-500">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-md-3">
+									<div class="row">
+										<div class="col-xs-12">
+											<p class="field-title"><strong>Attendees gender *</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="input-group">
+												<button id="gender-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Both <span class="caret"></span></button>
+												<ul class="dropdown-menu" role="menu">
+													<li ng-repeat="gender in genders"><a ng-click="onGenderSelected(gender)">{{gender}}</a></li>
+												</ul>
+												<input id="gender-hidden-input" type="hidden" class="form-control readonly-input" name="event[gender]" value="Both">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<%- if user_signed_in? %>
+								<!-- event's description -->
+								<div class="row">
+									<div class="col-xs-12 col-md-12">
+										<p class="field-title"><strong>Event description *</strong></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-11 col-md-10">
+										<textarea name="event[description]" rows="4" ng-model="description" ng-minlength="10" required></textarea>
+									</div>
+								</div>
+							<% end %>
+
+						</div>
+
+						<div ng-show="questionsSectionNumber === 2">
+
+							<%- if not user_signed_in? %>
+								<!-- event's description -->
+								<div class="row">
+									<div class="col-xs-12 col-md-12">
+										<p class="field-title"><strong>Event description *</strong></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-11 col-md-10">
+										<textarea name="event[description]" rows="4" ng-model="description" ng-minlength="10" required></textarea>
+									</div>
+								</div>
+							<% end %>
+
+							<!-- location -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<p class="field-title"><strong>Event location *</strong></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-11 col-md-10">
+									<div class="input-group">
+										<span class="input-group-addon">Address line 1</span>
+										<input name="event[address1]" type="text" class="form-control" maxlength="255" ng-maxlength="255" ng-minlength="3" ng-model="address1" required>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-11 col-md-10">
+									<div class="input-group location">
+										<span class="input-group-addon">Address line 2</span>
+										<input name="event[address2]" type="text" class="form-control" maxlength="255" ng-model="address2">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-11 col-sm-5 col-md-4">
+									<div class="input-group location">
+										<span class="input-group-addon">City</span>
+										<input name="event[city]" type="text" class="form-control" maxlength="50" ng-minlength="2" ng-maxlength="50" ng-model="city" required>
+									</div>
+								</div>
+								<div class="col-xs-11 col-sm-6 col-md-6">
+									<div class="input-group location">
+										<span class="input-group-addon">State / Province / Region</span>
+										<input ng-model="regionInputText" name="event[state_province_region]" type="text" class="form-control" maxlength="50" ng-required="regionRequired()">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-11 col-sm-5 col-md-4">
+									<div class="input-group location">
+										<span class="input-group-addon">Postal / Zip code</span>
+										<input ng-model="zipcode" name="event[zipcode]" type="text" class="form-control" maxlength="20">
+									</div>
+								</div>
+								<div class="col-xs-11 col-sm-6 col-md-6">
+									<div class="input-group location">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Country <span class="caret"></span></button>
 											<ul class="dropdown-menu scrollable-menu" role="menu">
-												<li ng-repeat="time in times">
-													<a ng-click="onTimeStartsSelected(time)">{{time}}</a>
+												<li ng-repeat="country in countries">
+													<a ng-click="onCountrySelected(country)">{{country}}</a>
 												</li>
 											</ul>
 										</div>
-										<input id="hidden-time-starts" type="hidden" name="event[time_starts]">
+										<input ng-model="countryInputText" type="text" class="readonly-input form-control" name="event[country]" readonly required>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-5">
-								<div class="row">
-									<p style="margin-bottom: 0;" class="col-xs-12">Ends</p>
-								</div>
-								<div class="row">
-									<div class="col-xs-5 col-sm-6">
-										<input id="date-ends" type="text" class="readonly-input form-control" datepicker-popup="MM/dd/y" name="event[date_ends]" ng-model="dateEnds" is-open="isEndsOpened" min-date="dateStarts" datepicker-options="dateOptions" ng-click="isEndsOpened = !isEndsOpened" show-button-bar="true" readonly required>
-									</div>
-									<div class="col-xs-5 col-sm-6">
-										<div class="btn-group btn-group-justified">
-											<button id="time-ends" type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">10:00 PM</button>
-											<ul class="dropdown-menu scrollable-menu" role="menu">
-												<li ng-repeat="time in times">
-													<a ng-click="onTimeEndsSelected(time)">{{time}}</a>
-												</li>
-											</ul>
-										</div>
-										<input id="hidden-time-ends" type="hidden" name="event[time_ends]">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							
-						</div>
 
-						<!-- event size, recurrence and gender -->
-						<div class="row">
-							<div class="col-xs-12 col-md-3">
+							<!-- Sponsorship types -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<p class="field-title"><strong>Sponsorship types you're interested in *</strong> <span ng-show="showTypesRequiredNotification" class="not-valid-notification">Please select at least one</span></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-4 col-sm-2" title="Select capital if you are willing to receive money as a sponsorship">	
+									<input id="cb-capital" name="event[capital]" type="checkbox" value="capital" ng-model="cbCapital" ng-required="typesRequired()" ng-change="onTypesChange()"/>
+									<span ng-click="onCapitalClick()">Capital</span>
+								</div>
+								<div class="col-xs-4 col-sm-2" title="Select discounts if you are willing to have discounts on the sponsor's products">	
+									<input id="cb-discounts" name="event[discounts]" type="checkbox" value="discounts" ng-model="cbDiscounts" ng-required="typesRequired()" ng-change="onTypesChange()"/>
+									<span ng-click="onDiscountsClick()">Discounts</span>
+								</div>
+								<div class="col-xs-5 col-sm-3" title="Select merchandise if you are willing to receive swags as a sponsorship">	
+									<input id="cb-merchandise" name="event[merchandise]" type="checkbox" value="merchandise" ng-model="cbMerchandise" ng-required="typesRequired()" ng-change="onTypesChange()"/>
+									<span ng-click="onMerchandiseClick()">Merchandise</span>
+								</div>
+							</div>
+
+							<!-- overall requested sponsorship & minimum acceptable sponsorship -->
+							<div>
 								<div class="row">
-									<div class="col-xs-12">
-										<p class="field-title"><strong>Event recurrence *</strong></p>
+									<div class="hidden-xs">
+										<div class="col-sm-5 col-md-5">
+											<p class="field-title"><strong>Total sponsorship requested <span ng-show="cbCapital">*</span></strong></p>
+										</div>
+										<div class="col-sm-6 col-md-5">
+											<p class="field-title"><strong>Minimum acceptable amount <span ng-show="cbCapital">*</span></strong></p>
+										</div>
+									</div>
+									<div class="visible-xs-inline">
+										<div class="col-xs-11">
+											<p class="field-title"><strong>Total sponsorship requested and minimum acceptable amount *</strong></p>
+										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-xs-6 col-md-5" title="Overall requested amount of money, in case capital sponsorship is wanted">
 										<div class="input-group">
-											<button id="recurrence-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">One-time event <span class="caret"></span></button>
-											<ul class="dropdown-menu" role="menu">
-												<li ng-repeat="ocurrence in ocurrences"><a ng-click="onRecurrenceSelected(ocurrence)">{{ocurrence}}</a></li>
-											</ul>
+											<span class="input-group-addon">$</span>
+											<input name="event[total_amount]" type="text" pattern="^([1-9](?:\d*|(?:\d{0,2})(?:,\d{3})*))$" class="form-control" minlength="2" maxlength="9" ng-minlength="2" ng-maxlength="9" ng-model="totalAmount" ng-change="totalAmountChanged()" ng-required="cbCapital">
 										</div>
-										<input id="recurrence-hidden-input" type="hidden" class="form-control readonly-input" name="event[recurrence]" value="One-time event">
 									</div>
-								</div>
-							</div>
-							<div class="col-xs-12 col-md-3">
-								<div class="row">
-									<div class="col-xs-12">
-										<p class="field-title"><strong>Event size (#people) *</strong></p>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="input-group">
-											<button id="size-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">100-500 <span class="caret"></span></button>
-											<ul class="dropdown-menu" role="menu">
-												<li ng-repeat="size in sizes"><a ng-click="onSizeSelected(size)">{{size}}</a></li>
-											</ul>
-											<input id="size-hidden-input" type="hidden" class="readonly-input form-control" name="event[size]" value="100-500">
+									<div class="col-xs-5 col-md-5" title="Minimun amount of money you are willing to accept from a sponsor">
+										<div class="input-group" title="Should be equal to or less than the total requested sponsorship">
+											<span class="input-group-addon">$</span>
+											<input name="event[min_amount]" type="text" pattern="^([1-9](?:\d*|(?:\d{0,2})(?:,\d{3})*))$" class="form-control" minlength="2" maxlength="9" ng-minlength="2" ng-maxlength="9" ng-model="minAmount" validate-min-amount ng-required="cbCapital">
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-12 col-md-3">
-								<div class="row">
-									<div class="col-xs-12">
-										<p class="field-title"><strong>Attendees gender *</strong></p>
-									</div>
+
+							<!-- Sponsorship Requests -->
+							<div class="row">
+								<div class="col-xs-11 col-md-12">
+									<p class="field-title"><strong>Special sponsorship requests or comments</strong></p>
 								</div>
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="input-group">
-											<button id="gender-button" type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Both <span class="caret"></span></button>
-											<ul class="dropdown-menu" role="menu">
-												<li ng-repeat="gender in genders"><a ng-click="onGenderSelected(gender)">{{gender}}</a></li>
-											</ul>
-											<input id="gender-hidden-input" type="hidden" class="form-control readonly-input" name="event[gender]" value="Both">
-										</div>
-									</div>
+							</div>
+							<div class="row" title="This is also the place to write how you will benefit your sponsor">
+								<div class="col-xs-11 col-md-10">
+									<textarea name="event[sponsorship_requests]" rows="2" ng-model="sponsorshipRequests"></textarea>
+								</div>
+							</div>
+
+							<!-- Ages -->
+							<div class="row">
+								<div class="col-xs-11 col-md-12">
+									<p class="field-title"><strong>Attendees' age group *</strong> <span ng-show="showAgesRequiredNotification" class="not-valid-notification">Please select at least one</span></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-3 col-sm-2 col-md-2">	
+									<input id="cb-12-20" name="event[age12_20]" type="checkbox" value="12-20" ng-model="age1220" ng-required="agesRequired()" ng-change="onAgesChange()"/>
+									<span ng-click="on12_20Click()">12-20</span>
+								</div>
+								<div class="col-xs-3 col-sm-2 col-md-2">	
+									<input id="cb-21-35" name="event[age21_35]" type="checkbox" value="21-35" ng-model="age2135" ng-required="agesRequired()" ng-change="onAgesChange()"/>
+									<span ng-click="on21_35Click()">21-35</span>
+								</div>
+								<div class="col-xs-3 col-sm-2 col-md-2">	
+									<input id="cb-36-50" name="event[age36_50]" type="checkbox" value="36-50" ng-model="age3650" ng-required="agesRequired()" ng-change="onAgesChange()"/>
+									<span ng-click="on36_50Click()">36-50</span>
+								</div>
+								<div class="col-xs-3 col-sm-2 col-md-2">	
+									<input id="cb-51" name="event[age51]" type="checkbox" value="51+" ng-model="age51" ng-required="agesRequired()" ng-change="onAgesChange()"/>
+									<span ng-click="on51Click()">51+</span>
+								</div>
+							</div>
+
+							<!-- income -->
+							<div class="row">
+								<div class="col-xs-11 col-md-12">
+									<p class="field-title"><strong>Attendees' income level *</strong> <span ng-show="showIncomesRequiredNotification" class="not-valid-notification">Please select at least one</span></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-4 col-sm-2">	
+									<input id="cb-income-low" name="event[income_low]" type="checkbox" value="low" ng-model="incomeLow" ng-required="incomesRequired()" ng-change="onIncomesChange()"/>
+									<span ng-click="onIncomeLowClick()">Low</span>
+								</div>
+								<div class="col-xs-4 col-sm-2">	
+									<input id="cb-income-med" name="event[income_med]" type="checkbox" value="medium" ng-model="incomeMed" ng-required="incomesRequired()" ng-change="onIncomesChange()"/>
+									<span ng-click="onIncomeMedClick()">Medium</span>
+								</div>
+								<div class="col-xs-4 col-sm-2">	
+									<input id="cb-income-high" name="event[income_high]" type="checkbox" value="high" ng-model="incomeHigh" ng-required="incomesRequired()" ng-change="onIncomesChange()"/>
+									<span ng-click="onIncomeHighClick()">High</span>
 								</div>
 							</div>
 						</div>
 
-						<!-- event's description -->
 						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Event description *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-10">
-								<textarea name="event[description]" rows="4" ng-model="description" ng-minlength="10" required></textarea>
-							</div>
-						</div>
-					</div>
 
-					<div ng-show="questionsSectionNumber === 2">
+							<div class="col-xs-11 col-md-6">
+								<p ng-show="formIsNotValid" class="not-valid-notification">Please make sure all the fields have valid values.</p>
+							</div>
+							<div class="col-xs-11 col-md-5">
+								<input id="btn-sbmt-event" role="button" class="btn btn-style btn-navy btn-bold" type="submit" name="submitButton" ng-show="questionsSectionNumber === 2" value="Create Event" />
+								<div id="btn-next" role="button" class="btn btn-navy btn-style" ng-hide="questionsSectionNumber === 2" ng-click="onNextClick()">Next</div>
+								<div id="btn-back" role="button" class="btn btn-default btn-style" ng-hide="questionsSectionNumber === 1" ng-click="onBackClick()">Back</div>
+							</div>
+						</div>
+						<div class="spacer-1"></div>
 
-						<!-- location -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Event location *</strong></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-10">
-								<div class="input-group">
-									<span class="input-group-addon">Address line 1</span>
-									<input name="event[address1]" type="text" class="form-control" maxlength="255" ng-maxlength="255" ng-minlength="3" ng-model="address1" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-md-10">
-								<div class="input-group location">
-									<span class="input-group-addon">Address line 2</span>
-									<input name="event[address2]" type="text" class="form-control" maxlength="255" ng-model="address2">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-sm-5 col-md-4">
-								<div class="input-group location">
-									<span class="input-group-addon">City</span>
-									<input name="event[city]" type="text" class="form-control" maxlength="50" ng-minlength="2" ng-maxlength="50" ng-model="city" required>
-								</div>
-							</div>
-							<div class="col-xs-11 col-sm-6 col-md-6">
-								<div class="input-group location">
-									<span class="input-group-addon">State / Province / Region</span>
-									<input ng-model="regionInputText" name="event[state_province_region]" type="text" class="form-control" maxlength="50" ng-required="regionRequired()">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-11 col-sm-5 col-md-4">
-								<div class="input-group location">
-									<span class="input-group-addon">Postal / Zip code</span>
-									<input ng-model="zipcode" name="event[zipcode]" type="text" class="form-control" maxlength="20">
-								</div>
-							</div>
-							<div class="col-xs-11 col-sm-6 col-md-6">
-								<div class="input-group location">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-default dropdown-toggle btn-grey" data-toggle="dropdown">Country <span class="caret"></span></button>
-										<ul class="dropdown-menu scrollable-menu" role="menu">
-											<li ng-repeat="country in countries">
-												<a ng-click="onCountrySelected(country)">{{country}}</a>
-											</li>
-										</ul>
-									</div>
-									<input ng-model="countryInputText" type="text" class="readonly-input form-control" name="event[country]" readonly required>
-								</div>
-							</div>
-						</div>
-
-						<!-- Sponsorship types -->
-						<div class="row">
-							<div class="col-xs-12 col-md-12">
-								<p class="field-title"><strong>Sponsorship types you're interested in *</strong> <span ng-show="showTypesRequiredNotification" class="not-valid-notification">Please select at least one</span></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-4 col-sm-2" title="Select capital if you are willing to receive money as a sponsorship">	
-								<input id="cb-capital" name="event[capital]" type="checkbox" value="capital" ng-model="cbCapital" ng-required="typesRequired()" ng-change="onTypesChange()"/>
-								<span ng-click="onCapitalClick()">Capital</span>
-							</div>
-							<div class="col-xs-4 col-sm-2" title="Select discounts if you are willing to have discounts on the sponsor's products">	
-								<input id="cb-discounts" name="event[discounts]" type="checkbox" value="discounts" ng-model="cbDiscounts" ng-required="typesRequired()" ng-change="onTypesChange()"/>
-								<span ng-click="onDiscountsClick()">Discounts</span>
-							</div>
-							<div class="col-xs-5 col-sm-3" title="Select merchandise if you are willing to receive swags as a sponsorship">	
-								<input id="cb-merchandise" name="event[merchandise]" type="checkbox" value="merchandise" ng-model="cbMerchandise" ng-required="typesRequired()" ng-change="onTypesChange()"/>
-								<span ng-click="onMerchandiseClick()">Merchandise</span>
-							</div>
-						</div>
-
-						<!-- overall requested sponsorship & minimum acceptable sponsorship -->
-						<div class="row">
-							<div class="hidden-xs">
-								<div class="col-sm-5 col-md-5">
-									<p class="field-title"><strong>Total sponsorship requested <span ng-show="cbCapital">*</span></strong></p>
-								</div>
-								<div class="col-sm-6 col-md-5">
-									<p class="field-title"><strong>Minimum acceptable amount <span ng-show="cbCapital">*</span></strong></p>
-								</div>
-							</div>
-							<div class="visible-xs-inline">
-								<div class="col-xs-11">
-									<p class="field-title"><strong>Total sponsorship requested and minimum acceptable amount *</strong></p>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-6 col-md-5" title="Overall requested amount of money, in case capital sponsorship is wanted">
-								<div class="input-group">
-									<span class="input-group-addon">$</span>
-									<input name="event[total_amount]" type="text" pattern="^([1-9](?:\d*|(?:\d{0,2})(?:,\d{3})*))$" class="form-control" minlength="2" maxlength="9" ng-minlength="2" ng-maxlength="9" ng-model="totalAmount" ng-change="totalAmountChanged()" ng-required="cbCapital">
-								</div>
-							</div>
-							<div class="col-xs-5 col-md-5" title="Minimun amount of money you are willing to accept from a sponsor">
-								<div class="input-group" title="Should be equal to or less than the total requested sponsorship">
-									<span class="input-group-addon">$</span>
-									<input name="event[min_amount]" type="text" pattern="^([1-9](?:\d*|(?:\d{0,2})(?:,\d{3})*))$" class="form-control" minlength="2" maxlength="9" ng-minlength="2" ng-maxlength="9" ng-model="minAmount" validate-min-amount ng-required="cbCapital">
-								</div>
-							</div>
-						</div>
-
-						<!-- Sponsorship Requests -->
-						<div class="row">
-							<div class="col-xs-11 col-md-12">
-								<p class="field-title"><strong>Special sponsorship requests or comments</strong></p>
-							</div>
-						</div>
-						<div class="row" title="This is also the place to write how you will benefit your sponsor">
-							<div class="col-xs-11 col-md-10">
-								<textarea name="event[sponsorship_requests]" rows="2" ng-model="sponsorshipRequests"></textarea>
-							</div>
-						</div>
-
-						<!-- Ages -->
-						<div class="row">
-							<div class="col-xs-11 col-md-12">
-								<p class="field-title"><strong>Attendees' age group *</strong> <span ng-show="showAgesRequiredNotification" class="not-valid-notification">Please select at least one</span></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-sm-2 col-md-2">	
-								<input id="cb-12-20" name="event[age12_20]" type="checkbox" value="12-20" ng-model="age1220" ng-required="agesRequired()" ng-change="onAgesChange()"/>
-								<span ng-click="on12_20Click()">12-20</span>
-							</div>
-							<div class="col-xs-3 col-sm-2 col-md-2">	
-								<input id="cb-21-35" name="event[age21_35]" type="checkbox" value="21-35" ng-model="age2135" ng-required="agesRequired()" ng-change="onAgesChange()"/>
-								<span ng-click="on21_35Click()">21-35</span>
-							</div>
-							<div class="col-xs-3 col-sm-2 col-md-2">	
-								<input id="cb-36-50" name="event[age36_50]" type="checkbox" value="36-50" ng-model="age3650" ng-required="agesRequired()" ng-change="onAgesChange()"/>
-								<span ng-click="on36_50Click()">36-50</span>
-							</div>
-							<div class="col-xs-3 col-sm-2 col-md-2">	
-								<input id="cb-51" name="event[age51]" type="checkbox" value="51+" ng-model="age51" ng-required="agesRequired()" ng-change="onAgesChange()"/>
-								<span ng-click="on51Click()">51+</span>
-							</div>
-						</div>
-
-						<!-- income -->
-						<div class="row">
-							<div class="col-xs-11 col-md-12">
-								<p class="field-title"><strong>Attendees' income level *</strong> <span ng-show="showIncomesRequiredNotification" class="not-valid-notification">Please select at least one</span></p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-4 col-sm-2">	
-								<input id="cb-income-low" name="event[income_low]" type="checkbox" value="low" ng-model="incomeLow" ng-required="incomesRequired()" ng-change="onIncomesChange()"/>
-								<span ng-click="onIncomeLowClick()">Low</span>
-							</div>
-							<div class="col-xs-4 col-sm-2">	
-								<input id="cb-income-med" name="event[income_med]" type="checkbox" value="medium" ng-model="incomeMed" ng-required="incomesRequired()" ng-change="onIncomesChange()"/>
-								<span ng-click="onIncomeMedClick()">Medium</span>
-							</div>
-							<div class="col-xs-4 col-sm-2">	
-								<input id="cb-income-high" name="event[income_high]" type="checkbox" value="high" ng-model="incomeHigh" ng-required="incomesRequired()" ng-change="onIncomesChange()"/>
-								<span ng-click="onIncomeHighClick()">High</span>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-
-						<div class="col-xs-11 col-md-6">
-							<p ng-show="formIsNotValid" class="not-valid-notification">Please make sure all the fields have valid values.</p>
-						</div>
-						<div class="col-xs-11 col-md-5">
-							<input id="btn-sbmt-event" role="button" class="btn btn-style btn-navy btn-bold" type="submit" name="submitButton" ng-show="questionsSectionNumber === 2" value="Create Event" />
-							<div id="btn-next" role="button" class="btn btn-navy btn-style" ng-hide="questionsSectionNumber === 2" ng-click="onNextClick()">Next</div>
-							<div id="btn-back" role="button" class="btn btn-default btn-style" ng-hide="questionsSectionNumber === 1" ng-click="onBackClick()">Back</div>
-						</div>
-					</div>
-					<div class="spacer-1"></div>
-
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

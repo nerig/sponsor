@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
+#  first_name             :string(255)
+#  last_name              :string(255)
+#  phone                  :string(255)
 #
 # Indexes
 #
@@ -25,7 +28,7 @@
 class User < ActiveRecord::Base
 	has_many :events
 	# Include default devise modules. Others available are:
-	# :confirmable, :lockable, :timeoutable and :omniauthable
+	# :lockable, :timeoutable and :omniauthable
 	# see https://github.com/plataformatec/devise for explanations
 	# and don't forget to update a migration when you add or remove
 	# a module

@@ -1,5 +1,7 @@
 angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attrs", "$sanitize", function ($scope, $filter, $attrs, $sanitize) {
 	
+	$scope.myEvent = $attrs.myEvent === 'true';
+
 	/* contains calculation of various elements of the events show page,
 	including lenght of description in case the description gets to be 
 	lower than the image, sponsor! button location, selection of glyphicons
@@ -82,6 +84,7 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 
 	// put sponsor button and event details in a nice location
 	var sponsorButtonElement = get('event-sponsor-button');
+	var editDeleteElement = get('my-event-edit-delete');
 	if (window.innerWidth > 1024) {
 		var logoHeight = get('logo-space').offsetHeight;
 
@@ -91,8 +94,10 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 
 		/* sponsor! button location calculation */
 		sponsorButtonElement.style.marginTop = ((logoHeight / 2) - (sponsorButtonElement.offsetHeight / 2)) + 'px';
+		editDeleteElement.style.marginTop = ((logoHeight / 2) - (editDeleteElement.offsetHeight / 2)) + 'px';
 	} else {
 		sponsorButtonElement.style.marginTop = "2em";
+		editDeleteElement.style.marginTop = "2em";
 	}
 
 	/* show requested sponsorship types */

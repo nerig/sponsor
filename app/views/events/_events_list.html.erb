@@ -1,8 +1,9 @@
-<div class="container" ng-controller="EventsListCtrl" events="<%= @events %>">
+<div class="container" ng-controller="EventsListCtrl" events="<%= @events %>" user-events="<%= @user_events %>" user-id="<%= @user_id %>">
 		
 	<div class="row">
 		<div class="col-xs-12 col-md-12">
-			<p class="title">Find an event to sponsor:</p>
+			<p class="title" ng-hide="myEvents">Find an event to sponsor:</p>
+			<p class="title" ng-show="myEvents">Hello <%= @user_first_name %>! Browse your events:</p>
 		</div>
 	</div>
  	
@@ -78,7 +79,11 @@
 
 	<!-- line in the middle of the screen to indicate too narrow filter -->
 	<div class="row">
-		<h1 class="col-xs-12 col-md-12 text-center" style="margin-top:1em;" ng-hide="filteredEvents.length">No events were found to your filtering criteria.</h1>
+		<h1 class="col-xs-12 col-md-12 text-center" style="margin-top:1em;" ng-hide="filteredEvents.length || myEvents">No events were found to your filtering criteria.</h1>
+		<div ng-hide="filteredEvents.length || !myEvents">
+			<h1 class="col-xs-12 col-md-12 text-center" style="margin-top:1em;">No events.</h1>
+			<p class="text-center"><a class="btn btn-navy" role="button" href="/events/new">Create Event</a></p>
+		</div>
 	</div>
 	
 	<div class="row">
@@ -115,8 +120,13 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-12 col-md-2 text-center">
+						<div class="col-xs-12 col-md-2 text-center" ng-hide="myEvents">
 							<p><a class="btn btn-lg sponsorButton btn-orange btn-bold" role="button" ng-href="sponsorship_responses/new?event_id={{event.id}}">Sponsor!</a></p>
+						</div>
+						<div ng-show="myEvents" id="edit-delete-links">
+							<a ng-href="events/{{event.identifier}}/edit">Edit</a>
+							|
+							<a ng-href="events/{{event.identifier}}/delete">Delete</a>
 						</div>
 					</div>
 				</li>

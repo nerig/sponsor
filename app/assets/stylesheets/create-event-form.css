@@ -1,5 +1,5 @@
 
-form {
+.mrktiers-form {
 	position: relative;
 	top: 1em;
 
@@ -17,10 +17,13 @@ form {
 	margin-bottom: -1em;
 }
 
-form .hri {
+.mrktiers-form .hri {
 	margin-left: 1.2em;
-	margin-top: 2em;
 	margin-bottom: -0.4em;
+}
+
+.mrktiers-form .hrii {
+	margin-top: 2em;
 }
 
 .questions {
@@ -30,6 +33,10 @@ form .hri {
 
 .questions .field-title {
 	margin: 1em 0 0.2em 0;
+}
+
+.change-cursor-to-pointer {
+	cursor: pointer;
 }
 
 .btn-grey {
@@ -96,4 +103,12 @@ form .hri {
 	position: relative;
 	top: 49%;
 	left: 50%;
+}
+
+.lower-the-line {
+	margin-top: 2.9em;
+}
+
+.lower-the-line-less {
+	margin-top: 1.7em;
 }

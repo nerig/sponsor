@@ -35,7 +35,7 @@
 		max-width: 43em;
 	}
 	.sponsorButton {
-		top: 1.5em;
+		top: 2.8em;
 		right: .8em;
 	}
 	.event .logo {
@@ -59,6 +59,11 @@
 .sponsorButton {
 	position: relative;
 	z-index: 8;
+}
+
+#edit-delete-links {
+	position: relative;
+	top: 4.5em;
 }
 
 .event .name-text {

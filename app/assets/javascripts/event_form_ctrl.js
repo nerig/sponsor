@@ -99,6 +99,7 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 			deleteCookie("incomeLow");
 			deleteCookie("incomeMed");
 			deleteCookie("incomeHigh");
+			deleteCookie("questionsSectionNumber");
 		}
 	}
 
@@ -283,14 +284,21 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 	get('btn-sbmt-event').addEventListener('click', function(e) {
 
 		// if form is not valid, submit is not happening
-		if ($scope.newEventForm.$invalid) {
+		var signupFormInvalid = false;
+		var signupFormExists = false;
+		if ($scope.signupForm) {
+			signupFormInvalid = $scope.signupForm.$invalid;
+			signupFormExists = true;
+		}
+		
+		if ($scope.newEventForm.$invalid || signupFormInvalid) {
 
 			$scope.formIsNotValid = true;
 
 			addValidationsCssRule();
 			turnCheckboxesNotificationsOn();
 			
-			if (!$scope.firstSectionForm.$valid) {
+			if (!$scope.firstSectionForm.$valid || signupFormInvalid) {
 				$scope.onBackClick();
 			}
 
@@ -302,7 +310,18 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 
 			putPartialFormDataIntoCookie();
 
-			formElement.submit();
+			if (signupFormExists) {
+				$.post("/users", $('#signup-form').serialize())
+					.done(function(data) {
+						get('hidden-user-id-input').value = data.id;
+						formElement.submit();
+					});
+			} else {
+				if ($attrs.userId !== -1) {
+					get('hidden-user-id-input').value = $attrs.userId;
+					formElement.submit();
+				}
+			}
 		}
     });
 
@@ -618,16 +637,16 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 		link: function(scope, ele, attrs, ctrl) {
 
 			function validate(value) {
+				var isValid = false;
 				if (value && scope.totalAmount) {
 
-					var isValid = false;
-					if (parseInt(value) <= parseInt(scope.totalAmount.replace(/,/g, "")))
+					if (parseInt(value.replace(/,/g, "")) <= parseInt(scope.totalAmount.replace(/,/g, "")))
 						isValid = true;
 
 					ctrl.$setValidity('invalidMinAmount', isValid);
 				}
 
-				return isValid ? value : undefined;
+				return isValid ? value : null;
 			}
 
 			ctrl.$parsers.unshift(validate);

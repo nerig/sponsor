@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, path_names: { sign_in: 'login' }, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+  devise_scope :user do 
+    get "/users/logout" => "devise/sessions#destroy"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :events, param: :identifier
+  get '/events/:identifier/delete' => 'events#destroy'
   resources :sponsorship_responses
 
   get '/about' => 'pages#about'

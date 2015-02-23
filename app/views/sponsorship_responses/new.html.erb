@@ -1,7 +1,7 @@
 <div class="container" ng-controller="newSponsorshipResponseFormCtrl" event-name="<%= h @event.name %>">
 	<div class="row hidden-xs hidden-sm">
 		<div class="col-md-offset-2 col-md-8">
-			<form id="sponsor-form" name="sponsorForm" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses" novalidate>
+			<form id="sponsor-form" class="mrktiers-form" name="sponsorForm" accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="/sponsorship_responses" novalidate>
 				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 				<%= tag(:input, :type => "hidden", :name => 'response[event_id]', :value => @event.id) %>
 				<div class="row">
@@ -11,7 +11,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<hr class="col-xs-10 col-sm-11 col-md-11 hri">
+					<hr class="col-xs-10 col-sm-11 col-md-11 hri hrii">
 				</div>
 				<div class="questions">
 

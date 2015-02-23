@@ -7,7 +7,7 @@ body {
 }
 
 nav {
-	background-color: white!important;
+	background-color: white !important;
 }
 
 nav .logo {
@@ -15,9 +15,9 @@ nav .logo {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-.event-create-button {
-	margin-top: .6em!important;
-	margin-left: 1.5em!important;
+.navbar-button {
+	margin-top: .6em !important;
+	margin-left: 1.5em !important;
 }
 
 #general-div {
@@ -68,7 +68,7 @@ nav .logo {
 	background: #002A66 !important;
 }
 
-#about-us-on-hover {
+.on-hover-navbar-element {
 	visibility: hidden;
 	transition: visibility .5s ease-in;
 	-webkit-transition: visibility .5s ease-in;
@@ -79,12 +79,15 @@ nav .logo {
 	border: solid 1px grey;
 	border-radius: 4px;
 	min-height: 4em;
-	min-width: 8em;
+	min-width: 6em;
 	position: absolute;
 	top: 4em;
-	left: -.4em;
 	
 	text-align: center;
+}
+
+#about-us-on-hover {
+	left: .7em;
 }
 
 #about-us-on-hover a {
@@ -99,6 +102,25 @@ nav .logo {
 }
 
 #contact-us-item:hover #about-us-on-hover {
+	visibility: visible;
+}
+
+#logout-on-hover {
+	left: .5em;
+}
+
+#logout-on-hover a {
+	position: relative;
+	color: grey!important;
+	top: 1.2em;
+}
+
+#logout-on-hover a:hover {
+	color: #333333 !important;
+	text-decoration: none;
+}
+
+#my-events-item:hover #logout-on-hover {
 	visibility: visible;
 }
 

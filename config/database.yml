@@ -56,8 +56,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: 
+  database: sponsor_production
   pool: 5
-  username: 
-  password: 
+  username: postgres
+  password: password
   host: 

@@ -38,8 +38,13 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="collapsables">
-				<div class="nav navbar-nav navbar-right event-create-button hidden-xs hidden-sm">
+				<div class="nav navbar-nav navbar-right navbar-button hidden-xs hidden-sm">
 					<a class="btn btn-navy" role="button" href="/events/new">Create Event</a>
+				</div>
+				<div class="nav navbar-nav navbar-right navbar-button hidden-xs hidden-sm">
+					<%- if not user_signed_in? %>
+						<a class="btn btn-default" role="button" href="/users/login">Login</a>
+					<% end %>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="visible-xs-inline visible-sm-inline"><a href="/events/new">Create Event</a></li>
@@ -49,8 +54,17 @@
 					<li class="visible-xs-inline visible-sm-inline"><a href="/about">About Us</a></li>
 					<li class="visible-xs-inline visible-sm-inline"><a href="/contact-us">Contact Us</a></li>
 					<li class="hidden-xs hidden-sm" id="contact-us-item"><a href="/contact-us">Contact Us</a>
-						<div id="about-us-on-hover"><a href="/about">About Us</a></div>
+						<div id="about-us-on-hover" class="on-hover-navbar-element"><a href="/about">About Us</a></div>
 					</li>
+					<%- if user_signed_in? %>
+						<li class="hidden-xs hidden-sm" id="my-events-item"><a href="/events#my-events">My Events</a>
+							<div id="logout-on-hover" class="on-hover-navbar-element"><a href="/users/logout">Logout</a></div>
+						</li>
+						<li class="visible-xs-inline visible-sm-inline"><a href="/events#my-events">My Events</a></li>
+						<li class="visible-xs-inline visible-sm-inline"><a href="/users/logout">Logout</a></li>
+					<% else %>
+						<li class="visible-xs-inline visible-sm-inline"><a href="/users/login">Login</a></li>
+					<% end %>
 				</ul>
 			</div>
 		</div>

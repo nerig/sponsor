@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
+#  first_name             :string(255)
+#  last_name              :string(255)
+#  phone                  :string(255)
 #
 # Indexes
 #

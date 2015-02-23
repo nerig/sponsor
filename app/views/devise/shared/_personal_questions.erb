@@ -1,0 +1,66 @@
+<!-- name -->
+<div class="row">
+	<div class="col-xs-12 col-md-10">
+		<p class="field-title"><strong>Your name *</strong><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Already have an account? <a href="/users/login">Log in</a></span></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-5 col-md-3">
+		<div class="input-group">
+			<span class="input-group-addon">First</span>
+			<input name="user[first_name]" type="text" class="form-control" maxlength="20" ng-model="firstName" ng-minlength="2" ng-maxlegnth="20" required>
+		</div>
+	</div>
+	<div class="col-xs-6 col-md-4">
+		<div class="input-group">
+			<span class="input-group-addon">Last</span>
+			<input name="user[last_name]" type="text" class="form-control" maxlength="30" ng-minlength="2" ng-maxlegnth="30" ng-model="lastName" required>
+		</div>
+	</div>
+</div>
+
+<!-- event organizer email -->
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<p class="field-title"><strong>Email *</strong></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-11 col-md-7">
+		<div class="input-group">
+			<span class="input-group-addon">@</span>
+			<input name="user[email]" type="email" class="form-control" ng-minlength="3" ng-maxlength="50" maxlength="50" ng-model="email" required>
+		</div>
+	</div>
+</div>
+
+<!-- password -->
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<p class="field-title"><strong>Password *</strong></p>
+	</div>
+</div>
+<div class="row" ng-controller="passwordEyeCtrl">
+	<div class="col-xs-11 col-md-7">
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			<input id="inputPassword" name="user[password]" type="password" class="form-control" ng-minlength="8" ng-maxlength="50" maxlength="50" ng-model="password" required>
+			<span class="input-group-addon"><i class="glyphicon glyphicon-eye-open change-cursor-to-pointer"></i></span>
+		</div>
+	</div>
+</div>							
+
+<!-- phone number -->
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<p class="field-title"><strong>Phone *</strong></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-11 col-md-7">
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+			<input name="user[phone]" type="text" class="form-control" maxlength="21" ng-model="phone" pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" required>
+		</div>
+	</div>
+</div>

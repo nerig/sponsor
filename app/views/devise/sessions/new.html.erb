@@ -1,17 +1,67 @@
-<h2>Log in</h2>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+	<div class="row">
+		<div class="col-xs-12 col-md-offset-2 col-md-8">
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mrktiers-form" }) do |f| %>
+				<div class="row">
+					<div class="col-xs-12 col-md-2 form-description">
+						<h4>Log in</h4>
+					</div>
+					<div class="col-xs-12 col-md-10 lower-the-line-less">
+						<%= render "devise/shared/links" %>
+					</div>
+				</div>
+				<div class="row">
+					<hr class="col-xs-10 col-sm-11 col-md-11 hri">
+				</div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+				<div class="questions">
+					<div class="row">
+						<div class="col-xs-12 col-md-12">
+							<p class="field-title"><strong>Email</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-11 col-md-7">
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<input name="user[email]" type="email" class="form-control" autofocus required>
+							</div>
+						</div>
+					</div>
 
-  <div><%= f.submit "Log in" %></div>
-<% end %>
+					<div class="row">
+						<div class="col-xs-12 col-md-12">
+							<p class="field-title"><strong>Password</strong></p>
+						</div>
+					</div>
+					<div class="row" ng-controller="passwordEyeCtrl">
+						<div class="col-xs-11 col-md-7">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="inputPassword" name="user[password]" type="password" class="form-control" autocomplete="off" required>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-eye-open change-cursor-to-pointer"></i></span>
+							</div>
+						</div>
+					</div>
 
-<%= render "devise/shared/links" %>
+					<div class="row">
+						<div class="col-xs-11 col-md-offset-6 col-md-3 lower-the-line">
+							<input name="user[remember_me]" type="hidden" value="0">
+							<input name="user[remember_me]" type="checkbox" value="1" />
+							<span>Remember me</span>
+						</div>
+						<div class="col-xs-11 col-md-2">
+							<input role="button" class="btn btn-style btn-orange" type="submit" name="submitButton" value="Log in" />
+						</div>
+					</div>
+				</div>
+			<% end %>
+
+
+		</div>
+	</div>
+</div>
+
+<%= devise_error_messages! %>

@@ -1,18 +1,33 @@
-<h2>Sign up</h2>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+	<div class="row">
+		<div class="col-xs-12 col-md-offset-2 col-md-8">
+			<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mrktiers-form" }) do |f| %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+				<div class="row">
+					<div class="col-xs-12 col-md-2 form-description">
+						<h4>Sign up</h4>
+					</div>
+					<div class="col-xs-12 col-md-10 lower-the-line-less">
+						<%= render "devise/shared/links" %>
+					</div>
+				</div>
+				<div class="row">
+					<hr class="col-xs-10 col-sm-11 col-md-11 hri">
+				</div>
 
-  <div><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+				<div class="questions">
+					<%= render "devise/shared/personal_questions" %>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+					<div class="row">
+						<div class="col-xs-11 col-md-11">
+							<input role="button" class="btn btn-style btn-orange" type="submit" name="submitButton" value="Sign up" />
+						</div>
+					</div>
+				</div>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+			<% end %>
 
-<%= render "devise/shared/links" %>
+		</div>
+	</div>
+</div>
