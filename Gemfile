@@ -55,4 +55,4 @@ gem 'stripe'
 
 gem 'mail'
 
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
