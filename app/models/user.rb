@@ -34,4 +34,6 @@ class User < ActiveRecord::Base
 	# a module
 	devise :database_authenticatable, :registerable,
 		:recoverable, :rememberable, :trackable, :validatable
+
+	attr_accessor :first_name, :last_name, :phone
 end
