@@ -14,8 +14,9 @@ class EventsController < ApplicationController
 
 		@user_first_name = nil
 		@user_events = nil
+		
 		if user_signed_in?
-			@user_first_name = current_user.first_name
+			@user_first_name = current_user['first_name']
 			@user_events = current_user.events.sort { |a, b| a.date_time_starts <=> b.date_time_starts}.to_json
 		end
 	end
