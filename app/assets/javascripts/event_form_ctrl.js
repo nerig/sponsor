@@ -44,6 +44,94 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 		$scope.questionsSectionNumber -= 1;
 	}
 
+	var showOnMapWithCoordinates = function(latlng) {
+		var mapOptions = {
+			zoom: 13,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: true
+		}
+		var map = new google.maps.Map(get("map-helper"), mapOptions);
+		var marker = new google.maps.Marker({
+			map: map,
+			position: latlng,
+			title: ""
+		});
+	}
+
+	var showOnMapWithFullAddress = function(address) {
+		new google.maps.Geocoder().geocode({ 'address': address }, function(results, status) {
+			if (status === google.maps.GeocoderStatus.OK) {
+				showOnMapWithCoordinates(results[0].geometry.location);
+			}
+		});
+	}
+
+	var showOnMapWithScopeAddress = function() {
+		showOnMapWithFullAddress(getFullAddress({
+			"address1": $scope.address1,
+			"address2": $scope.address2,
+			"city": $scope.locality,
+			"region": $scope.administrative_area_level_1,
+			"country": $scope.country
+		}));
+	}
+
+	var componentForm = {
+		locality: 'long_name',
+		administrative_area_level_1: 'short_name',
+		country: 'long_name',
+		postal_code: 'short_name'
+	};
+
+	var autocompleteElement = get('autocomplete');
+	var autocomplete = new google.maps.places.Autocomplete(autocompleteElement, { types: ['geocode'] });
+	
+	// When the user selects an address from the dropdown,
+	// populate the address fields in the form.
+	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+		// Get the place details from the autocomplete object.
+		var place = autocomplete.getPlace();
+
+		if (place.address_components === undefined) {
+			showOnMapWithScopeAddress();
+			return;
+		}
+
+		for (var component in componentForm) {
+			get(component).value = '';
+		}
+
+		// Get each component of the address from the place details
+		// and fill the corresponding field on the form.
+		for (var i = 0; i < place.address_components.length; i++) {
+			var addressType = place.address_components[i].types[0];
+			if (componentForm[addressType]) {
+				var val = place.address_components[i][componentForm[addressType]];
+				get(addressType).value = val;
+				$scope[addressType] = val;
+			}
+		}
+
+		setTimeout(function() { // overriding google result
+			autocompleteElement.value = place.name;
+			$scope.address1 = place.name;
+		}, 50);
+
+		// show on the map
+		showOnMapWithCoordinates(new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()));
+	});
+
+	autocompleteElement.addEventListener('keypress', function(event) {
+		if (event.keyCode == 13) {
+			event.preventDefault();
+		}
+	});
+
+	$scope.addressComponentBlurred = function() {
+		showOnMapWithScopeAddress();
+	}
+
 	var turnCheckboxesNotificationsOn = function() {
 		if ($scope.typesRequired()) {
 			$scope.showTypesRequiredNotification = true;
@@ -65,10 +153,10 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 		if ($scope.lastName != undefined) setCookie("lastName", $scope.lastName, true);
 		if ($scope.email != undefined) setCookie("email", $scope.email, true);
 		if ($scope.phone != undefined) setCookie("phone", $scope.phone, true);
-		if ($scope.city != undefined) setCookie("city", $scope.city, true);
-		if ($scope.regionInputText != undefined) setCookie("region", $scope.regionInputText, true);
-		if ($scope.zipcode != undefined) setCookie("zipcode", $scope.zipcode, true);
-		if ($scope.countryInputText != undefined) setCookie("country", $scope.countryInputText, true);
+		if ($scope.locality != undefined) setCookie("city", $scope.locality, true);
+		if ($scope.administrative_area_level_1 != undefined) setCookie("region", $scope.administrative_area_level_1, true);
+		if ($scope.postal_code != undefined) setCookie("zipcode", $scope.postal_code, true);
+		if ($scope.country != undefined) setCookie("country", $scope.country, true);
 
 		// delete all other cookies so the form is empty where relevant
 		if (getCookie("type") != "full") {
@@ -154,10 +242,10 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 		if (lastName !== undefined) $scope.lastName = lastName;
 		if (email !== undefined) $scope.email = email;
 		if (phone !== undefined) $scope.phone = phone;
-		if (city !== undefined) $scope.city = city;
-		if (region !== undefined) $scope.regionInputText = region;
-		if (zipcode !== undefined) $scope.zipcode = zipcode;
-		if (country !== undefined) $scope.countryInputText = country;		
+		if (city !== undefined) $scope.locality = city;
+		if (region !== undefined) $scope.administrative_area_level_1 = region;
+		if (zipcode !== undefined) $scope.postal_code = zipcode;
+		if (country !== undefined) $scope.country = country;		
 	}
 
 	var setFields = function(firstName, lastName, email, phone, city, region, zipcode, country,
@@ -205,7 +293,7 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 	}
 
 	$(window).on('load', function() {
-    	
+		var address;
 		if (thisIsAnEditScenario) {
 			var ev = $scope.$parent.eventToEdit;
 
@@ -251,19 +339,33 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 				ev.recurrence, ev.size_range, ev.attendees_gender, ev.description, ev.address1,
 				ev.address2, cbCapital, cbDiscounts, cbMerchandise, ev.total_amount, ev.min_amount,
 				ev.sponsorship_requests, age1220, age2135, age3650, age51, incomeLow, incomeMed, incomeHigh);
-		} else {
 
+			address = getFullAddress(ev);
+		} else {
 			if (getCookie("type") === "full") {
+				var address1 = getCookie("address1"),
+					address2 = getCookie("address2"),
+					city = getCookie("city"),
+					region = getCookie("region"),
+					country = getCookie("country");
+
 				setFields(getCookie("firstName"), getCookie("lastName"), getCookie("email"), 
-					getCookie("phone"), getCookie("city"), getCookie("region"), getCookie("zipcode"), 
-					getCookie("country"), getCookie("eventName"), getCookie("logoImageUrl"), 
-					getCookie("dateStarts"), getCookie("timeStarts"), getCookie("dateEnds"), 
-					getCookie("timeEnds"), getCookie("recurrence"), getCookie("size"), getCookie("gender"), 
-					getCookie("description"), getCookie("address1"),getCookie("address2"), 
-					getCookie("cbCapital"), getCookie("cbDiscounts"), getCookie("cbMerchandise"), 
+					getCookie("phone"), city, region, getCookie("zipcode"), country, getCookie("eventName"),
+					getCookie("logoImageUrl"), getCookie("dateStarts"), getCookie("timeStarts"),
+					getCookie("dateEnds"), getCookie("timeEnds"), getCookie("recurrence"),
+					getCookie("size"), getCookie("gender"), getCookie("description"), address1, 
+					address2, getCookie("cbCapital"), getCookie("cbDiscounts"), getCookie("cbMerchandise"), 
 					getCookie("totalAmount"), getCookie("minAmount"), getCookie("sponsorshipRequests"), 
 					getCookie("age1220"),getCookie("age2135"), getCookie("age3650"), getCookie("age51"), 
 					getCookie("incomeLow"), getCookie("incomeMed"), getCookie("incomeHigh"));
+
+				address = getFullAddress({
+					"address1": address1,
+					"address2": address2,
+					"city": city,
+					"region": region,
+					"country": country
+				});
 			} else {
 				setPartialFields(getCookie("firstName"), getCookie("lastName"), getCookie("email"), getCookie("phone"), 
 					getCookie("city"), getCookie("region"), getCookie("zipcode"), getCookie("country"));
@@ -273,8 +375,10 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 			if (tempVal != undefined) $scope.questionsSectionNumber = parseInt(tempVal);
 
 			deleteCookie("type");
-    	
 		}
+
+		// show on map
+		showOnMapWithFullAddress(address);
 
 		$scope.$apply();
 	});
@@ -325,7 +429,7 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 		}
     });
 
-    $(window).on('beforeunload', function(){
+    $(window).on('beforeunload', function() {
     	if (getCookie("type") != "partial") putAllFormDataIntoCookie();
     });
 
@@ -457,13 +561,14 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 
 	// countries dropdown
 	$scope.onCountrySelected = function(country) {
-		$scope.countryInputText = country;
+		$scope.country = country;
+		showOnMapWithScopeAddress();
 	}
 
-	$scope.countryInputText = "United States";
+	$scope.country = "United States";
 
 	$scope.regionRequired = function() {
-		return ($scope.countryInputText === "United States");
+		return ($scope.country === "United States");
 	}
 
 	// sponsorship types settings
