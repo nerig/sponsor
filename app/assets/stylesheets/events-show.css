@@ -1,7 +1,3 @@
-.margin-left-indent {
-	margin-left: 1em;
-}
-
 #logo-space {
 	min-height: 15em;
 	max-height: 15em;
@@ -75,9 +71,7 @@
 
 #map_canvas {
 	width: 100%;
-	height: 40em;
-	background-color: #CCC;
-	margin-top: 1em;
+	height: 15em;
 }
 
 @media (max-width: 1024px) {

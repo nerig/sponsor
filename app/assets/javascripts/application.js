@@ -30,17 +30,31 @@ var getStyle = function (el, styleProp)
 	return y;
 }
 
+var windowOnLoad = function(block) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = block;
+	} else {
+		window.onload = function() {
+			if (oldonload) {
+				oldonload();
+			}
+			block();
+		}
+	}
+}
+
 // calculating correct minimum hight of general-div so the 
 // footer will always be at the bottom of the screen when 
 // there is not enough content
-window.onload = function() {
+windowOnLoad(function() {
 	var footerHeight = getStyle(get('footer'), 'height');
 	var headerHeight = getStyle(get('header'), 'height');
 
-	var generalDivMinHeight = window.screen.availHeight - parseInt(headerHeight) - parseInt(footerHeight) - 29;
-
+	var generalDivMinHeight = window.screen.availHeight - parseInt(headerHeight) - parseInt(footerHeight) - 34;
+	
 	get('general-div').style.minHeight = generalDivMinHeight + 'px';
-}
+});
 
 var addValidationsCssRule = function() {
 	var sheet = window.document.styleSheets[0];

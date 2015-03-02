@@ -24,7 +24,7 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 		});
 	}
 
-	window.onload = function() {
+	windowOnLoad(function() {
 		var tmpTrimmedText = $scope.beginningOfText = $scope.event.description;
 
 		$scope.$apply();
@@ -79,7 +79,7 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 		if (threeDotsNeeded) {
 			descriptionElement.innerHTML = descriptionElement.innerHTML + '<span id="three-dots">...</span>';
 		}
-	}
+	});
 
 
 	// put sponsor button and event details in a nice location
@@ -124,10 +124,10 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 		geocoder.geocode({ 'address': $scope.fullAddress }, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				var mapOptions = {
-					zoom: 17,
+					zoom: 14,
 					center: results[0].geometry.location,
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
-					scrollwheel: false
+					scrollwheel: true
 				}
 				var map = new google.maps.Map(get("map_canvas"), mapOptions);
 

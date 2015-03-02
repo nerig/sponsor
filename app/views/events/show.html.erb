@@ -1,160 +1,161 @@
 <div class="container" ng-controller="ShowEventCtrl" event="<%= @event.to_json %>" my-event="<%= @my_event %>">
-	<div class="margin-left-indent">
-		<div class="row">	
-			<h1 class="col-xs-12 col-md-8"><%= h @event.name %></h1>
-		</div>
+	<div class="row">	
+		<h1 class="col-xs-12 col-md-8"><%= h @event.name %></h1>
+	</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-md-9">
-				<div class="row">
-					<div class="col-xs-12 col-md-4">
-						<div id="logo-space">
-							<img id="event-logo" class="event-logo transform-50-50" src="<%= h @event.image_url %>">
-						</div>
-					</div>
-					<div id="above-the-description" class="col-xs-12 col-md-8">
-						<div class="row">
-							<p class="col-xs-12 col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{dateRangeString}}</p>
-						</div>
-						<div class="spacer-half"></div>
-						<div class="row">
-							<table>
-								<tr class="col-xs-12 col-md-12">
-									<td><i id="mark-icon" class="glyphicon glyphicon-map-marker mark-icon-color"></i></td>
-									<td><p class="text-capitalize"> {{streetAddress}}<br>{{cityAndRest}} </p></td>
-								</tr>
-							</table>
-						</div>
-						<div class="spacer-half"></div>
-						<div id="little-details" class="row">
-							<div title="Attendees gender: <%= h @event.attendees_gender %>" class="col-xs-4 col-md-2 text-center">
-								<img id="att-gender" src="/assets/<%= h @event.attendees_gender.downcase %>.png">
-							</div>
-							<div title="Attendees age" class="col-xs-4 col-md-2 text-center">
-								<div class="row age-icon">Ages</div>
-								<div class="row age-detail">{{ageRanges}}</div>
-							</div>
-							<div title="Number of attendees" class="col-xs-4 col-md-2 text-center">
-								<div class="row">
-									<img id="size-icon" src="/assets/people.png">
-								</div>
-								<div class="row size-range"><%= h @event.size_range %></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-3">
-				<div ng-hide="myEvent">
-					<div class="row text-center">
-						<div class="col-xs-12 col-md-12">
-							<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= h @event.id %>">Sponsor!</a></p>
-						</div>
-					</div>
-					<div class="row text-center">
-						<div class="col-xs-12 col-md-12">
-							<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
-						</div>
-					</div>
-				</div>
-				<div id="my-event-edit-delete" ng-show="myEvent">
-					<a ng-href="/events/{{event.identifier}}/edit">Edit</a>
-					|
-					<a ng-href="/events/{{event.identifier}}/delete">Delete</a>
-				</div>
-			</div>
-		</div>
-		<div class="spacer-1"></div>
-		<div class="row">
-			<div class="col-xs-12 col-md-9">
-				<p id="ev-desc" ng-bind-html="beginningOfText"></p>
-				<p id="rest-of-description" collapse="!showingEntireDescription" ng-bind-html="restOfText"></p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-9">
-				<div id="read-more" class="description-toggle" ng-click="toggleFullDescription()" ng-hide="showingEntireDescription">
-					<a href="">Read more</a>
-				</div>
-				<div class="description-toggle" ng-click="toggleFullDescription()" ng-show="showingEntireDescription">
-					<a href="">Read less</a>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-3 margin-left-indent">
-				<div class="row">
-					<p>Requested sponsorship:</p>
-				</div>
-				<div class="row" id="capital">
-					<div class="col-xs-4 col-md-6">
-						<p>Capital</p>
-					</div>
-					<div class="col-xs-4 col-md-6">
-						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
-					</div>
-				</div>
-				<div class="row" id="merchandise">
-					<div class="col-xs-4 col-md-6">
-						<p>Merchandise</p>
-					</div>
-					<div class="col-xs-4 col-md-6">
-						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
-					</div>
-				</div>
-				<div class="row" id="discounts">
-					<div class="col-xs-4 col-md-6">
-						<p>Discounts</p>
-					</div>
-					<div class="col-xs-4 col-md-6">
-						<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<p class="col-xs-12 col-md-9"><%= h @event.sponsorship_requests %></p>
-		</div>
-		<div class="row">
-			<a class="col-xs-12 col-md-9" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 col-md-12">
-		<div id="map_canvas"></div>
-	</div>
-</div>
-<div class="container" ng-controller="SimilarEventsCtrl" events="<%= @three_similar_events %>">
 	<div class="row">
-		<h3 class="col-xs-12" ng-show="events.length > 0">Similar Events</h3>
-		<h3 class="col-xs-12" ng-hide="events.length > 0">No Similar Events</h3>
-	</div>
-	<div class="row center-block">
-		<ul class="events-ul">
-			<li class="col-xs-12 col-lg-3" ng-repeat="event in events" ng-click="go('/events/' + event.identifier)">
-				<div id="one-similar-event" class="center-block">
+		<div class="col-xs-12 col-md-9">
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<div id="logo-space">
+						<img id="event-logo" class="event-logo transform-50-50" src="<%= h @event.image_url %>">
+					</div>
+				</div>
+				<div id="above-the-description" class="col-xs-12 col-md-8">
 					<div class="row">
-						<div class="col-xs-4">
-							<img id="logo" class="event-logo transform-50-50" ng-src="{{event.image_url}}"/>
+						<p class="col-xs-12 col-md-12"><span><i class="glyphicon glyphicon-calendar cal-icon-color"></i></span> {{dateRangeString}}</p>
+					</div>
+					<div class="spacer-half"></div>
+					<div class="row">
+						<table>
+							<tr class="col-xs-12 col-md-12">
+								<td><i id="mark-icon" class="glyphicon glyphicon-map-marker mark-icon-color"></i></td>
+								<td><p class="text-capitalize"> {{streetAddress}}<br>{{cityAndRest}} </p></td>
+							</tr>
+						</table>
+					</div>
+					<div class="spacer-half"></div>
+					<div id="little-details" class="row">
+						<div title="Attendees gender: <%= h @event.attendees_gender %>" class="col-xs-4 col-md-2 text-center">
+							<img id="att-gender" src="/assets/<%= h @event.attendees_gender.downcase %>.png">
 						</div>
-						<div class="col-xs-8">
+						<div title="Attendees age" class="col-xs-4 col-md-2 text-center">
+							<div class="row age-icon">Ages</div>
+							<div class="row age-detail">{{ageRanges}}</div>
+						</div>
+						<div title="Number of attendees" class="col-xs-4 col-md-2 text-center">
 							<div class="row">
-								<p class="sim-event-name" ng-bind-html="event.name"></p>
+								<img id="size-icon" src="/assets/people.png">
 							</div>
-							<div class="row">
-								<p class="sim-similar-in sim-similar-title"><em>Similar in:</em></p>
-							</div>
-							<div class="row">
-								<p class="sim-similar-in sim-similar-criteria"><em>{{getSimilarInText(event.similar_in)}}</em></p>
-							</div>
+							<div class="row size-range"><%= h @event.size_range %></div>
 						</div>
 					</div>
 				</div>
-			</li>
-		</ul>
-		<div class="col-xs-12 col-lg-3 text-center">
-			<p class="more-events"><a class="btn btn-navy btn-lg" role="button" ng-href="/events">Find More Events</a></p>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-3">
+			<div ng-hide="myEvent">
+				<div class="row text-center">
+					<div class="col-xs-12 col-md-12">
+						<p id="event-sponsor-button"><a class="btn btn-orange btn-lg btn-wide btn-bold" role="button" ng-href="/sponsorship_responses/new?event_id=<%= h @event.id %>">Sponsor!</a></p>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-xs-12 col-md-12">
+						<p id="contact-below-button">or <span><a href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">contact event organizer</a></span></p>
+					</div>
+				</div>
+			</div>
+			<div id="my-event-edit-delete" class="text-center" ng-show="myEvent">
+				<a ng-href="/events/{{event.identifier}}/edit">Edit</a>
+				|
+				<a ng-href="/events/{{event.identifier}}/delete">Delete</a>
+			</div>
+		</div>
+	</div>
+	<div class="spacer-1"></div>
+	<div class="row">
+		<div class="col-xs-12 col-md-9">
+			<div class="row">
+				<div class="col-xs-12 col-md-12">
+					<p id="ev-desc" ng-bind-html="beginningOfText"></p>
+					<p id="rest-of-description" collapse="!showingEntireDescription" ng-bind-html="restOfText"></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-12">
+					<div id="read-more" class="description-toggle" ng-click="toggleFullDescription()" ng-hide="showingEntireDescription">
+						<a href="">Read more</a>
+					</div>
+					<div class="description-toggle" ng-click="toggleFullDescription()" ng-show="showingEntireDescription">
+						<a href="">Read less</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-4 margin-left-indent">
+					<div class="row">
+						<p class="col-md-12">Requested sponsorship:</p>
+					</div>
+					<div class="row" id="capital">
+						<div class="col-xs-4 col-md-6">
+							<p>Capital</p>
+						</div>
+						<div class="col-xs-4 col-md-6">
+							<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
+						</div>
+					</div>
+					<div class="row" id="merchandise">
+						<div class="col-xs-4 col-md-6">
+							<p>Merchandise</p>
+						</div>
+						<div class="col-xs-4 col-md-6">
+							<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
+						</div>
+					</div>
+					<div class="row" id="discounts">
+						<div class="col-xs-4 col-md-6">
+							<p>Discounts</p>
+						</div>
+						<div class="col-xs-4 col-md-6">
+							<i class="glyphicon glyphicon-ok requested-sponsorship-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<p class="col-xs-12 col-md-12"><%= h @event.sponsorship_requests %></p>
+			</div>
+			<div class="row">
+				<a class="col-xs-12 col-md-912 href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-3 text-center">
+			<div id="map_canvas"></div>
+		</div>
+	</div>
+
+	<div ng-controller="SimilarEventsCtrl" events="<%= @three_similar_events %>">
+		<div class="row">
+			<h3 class="col-xs-12" ng-show="events.length > 0">Similar Events</h3>
+			<h3 class="col-xs-12" ng-hide="events.length > 0">No Similar Events</h3>
+		</div>
+		<div class="row center-block">
+			<ul class="events-ul">
+				<li class="col-xs-12 col-lg-3" ng-repeat="event in events" ng-click="go('/events/' + event.identifier)">
+					<div id="one-similar-event" class="center-block">
+						<div class="row">
+							<div class="col-xs-4">
+								<img id="logo" class="event-logo transform-50-50" ng-src="{{event.image_url}}"/>
+							</div>
+							<div class="col-xs-8">
+								<div class="row">
+									<p class="sim-event-name" ng-bind-html="event.name"></p>
+								</div>
+								<div class="row">
+									<p class="sim-similar-in sim-similar-title"><em>Similar in:</em></p>
+								</div>
+								<div class="row">
+									<p class="sim-similar-in sim-similar-criteria"><em>{{getSimilarInText(event.similar_in)}}</em></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="col-xs-12 col-lg-3 text-center">
+				<p class="more-events"><a class="btn btn-navy btn-lg" role="button" ng-href="/events">Find More Events</a></p>
+			</div>
 		</div>
 	</div>
 </div>

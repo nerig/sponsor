@@ -43,7 +43,7 @@ angular.module('spons').controller('EntireHomepageCtrl', ["$scope", "$timeout", 
 		}
 	}
 
-	window.onload = function() {
+	windowOnLoad(function() {
 		var imageHeightWidthRatio = 0.29;
 		
 		var bigImageElement = get('big-background-image');
@@ -51,7 +51,7 @@ angular.module('spons').controller('EntireHomepageCtrl', ["$scope", "$timeout", 
 		var imageHeight = imageWidth * imageHeightWidthRatio;
 		
 		bigImageElement.style.height = imageHeight + 'px';
-	}
+	});
 
 }])
 
