@@ -1,85 +1,86 @@
 <div class="container">
-	<div class="static">
-		<div class="static-details-indentation">
-			<div class="row">
-				<div class="col-xs-12 col-sm-5 col-md-3">
-					<h1>Contact Us</h1>
-				</div>
-				<div class="col-xs-12 col-sm-7 col-md-9">
-					<h1><small class="small-thankyou-message" ng-show="<%= @message_sent %>">Thank you for your message. We will be in touch shortly.</small></h1>
-				</div>
-			</div>
-			<div class="spacer-2"></div>
-			<div class="row">
-				<p class="paragraph col-xs-12 col-md-12">For Additional Information, inquires, requests, riddles and jokes please contact us through the form below, we'll be in touch shortly!</p>
-			</div>
-			<form accept-charset="UTF-8" enctype="multipart/form-data" name="contactUsForm" id="contact-us-form" action="/send_contact" method="post" novalidate>
-				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-				<div class="questions">
-					<!-- name -->
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-12">
-							<p class="field-title"><strong>Name</strong></p>
-						</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-offset-1 col-md-10">
+			<div class="mrktiers-form">
+				<div class="row">
+					<div class="col-xs-12 col-md-2 form-description">
+						<h4>Contact Us</h4>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-6">
-							<div class="input-group">
-								<span class="input-group-addon"></span>
+					<div class="col-xs-12 col-md-10">
+						<p ng-show="<%= @message_sent %>" class="small-thankyou-message">Thank you for your message. We will be in touch shortly.</p>
+					</div>
+				</div>
+				<div class="spacer-1"></div>
+				<div class="row">
+					<div class="col-xs-12 col-md-12 form-description">
+						<p>For Additional Information, inquires, requests, riddles and jokes please contact us through the form below, we'll be in touch shortly!</p>
+					</div>
+				</div>
+				<div class="row">
+					<hr class="col-xs-10 col-sm-11 col-md-11 hri hrii">
+				</div>
+				<form accept-charset="UTF-8" enctype="multipart/form-data" name="contactUsForm" id="contact-us-form" action="/send_contact" method="post" novalidate>
+					<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+					<div class="questions">
+						<!-- name -->
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<p class="field-title"><strong>Name</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-7">
 								<input name="contact[name]" type="text" class="form-control" placeholder="" ng-minlength="3" ng-maxlength="50" maxlength="50" ng-model="name" required>
 							</div>
 						</div>
-					</div>
 
-					<!-- email -->
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-12">
-							<p class="field-title"><strong>Email</strong></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-6">
-							<div class="input-group">
-								<span class="input-group-addon">@</span>
-								<input name="contact[email]" type="email" class="form-control" placeholder="" ng-minlength="3" ng-maxlength="50" maxlength="50" ng-model="email" required>
+						<!-- email -->
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<p class="field-title"><strong>Email</strong></p>
 							</div>
 						</div>
-					</div>
-
-					<!-- subject -->
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-12">
-							<p class="field-title"><strong>Subject</strong></p>
+						<div class="row">
+							<div class="col-xs-12 col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon">@</span>
+									<input name="contact[email]" type="email" class="form-control" placeholder="" ng-minlength="3" ng-maxlength="50" maxlength="50" ng-model="email" required>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-6">
-							<div class="input-group">
-								<span class="input-group-addon"></span>
+
+						<!-- subject -->
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<p class="field-title"><strong>Subject</strong></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-7">
 								<input name="contact[subject]" type="text" class="form-control" placeholder="" ng-minlength="5" ng-maxlength="100" maxlength="100" ng-model="subject" required>
 							</div>
 						</div>
-					</div>
 
-					<!-- message -->
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-12">
-							<p class="field-title"><strong>Message</strong></p>
+						<!-- message -->
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<p class="field-title"><strong>Message</strong></p>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-6">
-							<textarea name="contact[message]" rows="5" ng-model="message" ng-minlength="10" required></textarea>
+						<div class="row">
+							<div class="col-xs-12 col-md-10">
+								<textarea name="contact[message]" rows="5" ng-model="message" ng-minlength="10" required></textarea>
+							</div>
 						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-xs-12 col-md-offset-3 col-md-6" style="margin-top:.5em">
-							<input id="btn-sbmt-contact" role="button" class="btn btn-style btn-orange" type="submit" name="submitButton" value="Send Message" />
+						<div class="row">
+							<div class="col-xs-12 col-md-11" style="margin-top:.5em">
+								<input id="btn-sbmt-contact" role="button" class="btn btn-style btn-orange" type="submit" name="submitButton" value="Send Message" />
+							</div>
 						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
