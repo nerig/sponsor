@@ -27,6 +27,25 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 	$scope.questionsSectionNumber = 1;
 
 	$scope.onNextClick = function() {
+		// if first page is not valid, next is not happening
+		var signupFormInvalid = false;
+		if ($scope.signupForm) {
+			signupFormInvalid = $scope.signupForm.$invalid;
+		}
+		if (!$scope.firstSectionForm.$valid || signupFormInvalid) {
+			addValidationsCssRule();
+			turnCheckboxesNotificationsOn();
+			return;
+		}
+
+		// removing error comments if next is clicked and first page is valid
+		if (!$scope.formIsNotValid) {
+			$scope.showTypesRequiredNotification = false;
+			$scope.showAgesRequiredNotification = false;
+			$scope.showIncomesRequiredNotification = false;
+			removeValidationCssRule();
+		}
+
 		if ($scope.questionsSectionNumber >= 2) {
 			$scope.questionsSectionNumber = 2;
 			return;
@@ -408,7 +427,7 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 
 		} else { // submit form
 			$scope.formIsNotValid = false;
-			$scope.showTypeRequiredNotification = false;
+			$scope.showTypesRequiredNotification = false;
 			$scope.showAgesRequiredNotification = false;
 			$scope.showIncomesRequiredNotification = false;
 

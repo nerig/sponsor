@@ -71,6 +71,25 @@ var addValidationsCssRule = function() {
 	}
 }
 
+var removeValidationCssRule = function() {
+	var sheet = window.document.styleSheets[0];
+	var rules = sheet.cssRules ? sheet.cssRules : sheet.rules;
+	var rulesIndexes = [];
+	for (var i = 0; i < rules.length; i++) {
+		if ((rules[i].selectorText === "form .ng-untouched.ng-invalid, form .ng-dirty.ng-invalid, form .ng-touched.ng-invalid") ||
+			(rules[i].selectorText === "form .ng-untouched.ng-invalid:focus, form .ng-dirty.ng-invalid:focus, form .ng-touched.ng-invalid:focus")) {
+			rulesIndexes.push(i);
+		}
+	}
+
+	// delete bigger first
+	rulesIndexes.sort();
+	rulesIndexes.reverse();
+	rulesIndexes.forEach(function(index) {
+		sheet.deleteRule(index);
+	});
+}
+
 var go = function(path) {
 	window.location.href = path;
 }
