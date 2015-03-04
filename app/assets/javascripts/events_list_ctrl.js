@@ -5,8 +5,8 @@ var compare = function(a, b) {
 }
 
 var getStreetAddress = function(event) {
-	return (event.address1 ? event.address1 : '') + 
-		(event.address2 ? ' ' + event.address2 : '');
+	return (event.address1 ? event.address1 : '');// + 
+		//(event.address2 ? ' ' + event.address2 : '');
 }
 
 var getCityAndRest = function(event) {
