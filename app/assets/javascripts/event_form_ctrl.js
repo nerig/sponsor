@@ -70,7 +70,7 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 	var showOnMapWithScopeAddress = function() {
 		showOnMapWithFullAddress(getFullAddress({
 			"address1": $scope.address1,
-			"address2": $scope.address2,
+			//"address2": $scope.address2,
 			"city": $scope.locality,
 			"region": $scope.administrative_area_level_1,
 			"country": $scope.country
