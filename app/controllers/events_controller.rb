@@ -208,6 +208,13 @@ private
 			date_time_ends = date_time_starts + 2.hours
 		end
 
+		image_url = "/assets/no-image.JPG"
+		if !crude_params[:image_url].blank?
+			image_url = crude_params[:image_url].downcase.start_with?("http") ? 
+				crude_params[:image_url] :
+				"http://#{crude_params[:image_url]}"
+		end
+
 		eparams = {
 			identifier: identifier,
 			user_id: crude_params[:user_id],
@@ -227,9 +234,7 @@ private
 			sponsorship_requests: crude_params[:sponsorship_requests].gsub("\r\n", "<br/>").gsub('"', '&quot;').gsub("'", "&#39;"),
 			recurrence: crude_params[:recurrence],
 			attendees_gender: crude_params[:gender],
-			image_url: crude_params[:image_url].downcase.start_with?("http") ? 
-				crude_params[:image_url] :
-				"http://#{crude_params[:image_url]}",
+			image_url: image_url,
 			date_time_starts: date_time_starts,
 			date_time_ends: date_time_ends,
 			age_ranges: age_ranges,
