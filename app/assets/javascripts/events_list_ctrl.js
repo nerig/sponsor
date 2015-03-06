@@ -4,9 +4,12 @@ var compare = function(a, b) {
 	return (a > b) ? 1 : ((b > a) ? -1 : 0);
 }
 
-var getStreetAddress = function(event) {
-	return (event.address1 ? event.address1 : '');// + 
-		//(event.address2 ? ' ' + event.address2 : '');
+var getStreetAddress = function(event, isForMap) {
+	var address = event.address1 ? event.address1 : '';
+	if (isForMap) return address;
+
+	return address + 
+		(event.address2 ? ' ' + event.address2 : '');
 }
 
 var getCityAndRest = function(event) {
@@ -38,9 +41,9 @@ var getCityAndRest = function(event) {
 	return cityRegionAndCountry;
 }
 
-var getFullAddress = function(event) {
-	var streetAddress = getStreetAddress(event);
-	
+var getFullAddress = function(event, isForMap) {
+	var streetAddress = getStreetAddress(event, isForMap);
+
 	var address = '';
 	if (streetAddress != '') {
 		address += streetAddress;

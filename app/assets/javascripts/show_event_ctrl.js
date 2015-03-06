@@ -107,7 +107,6 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 
 	$scope.streetAddress = $sanitize(getStreetAddress($scope.event));
 	$scope.cityAndRest = $sanitize(getCityAndRest($scope.event));
-	$scope.fullAddress = $sanitize(getFullAddress($scope.event));
 	
 	// event dates range
 	var startDate = new Date($scope.event.date_time_starts);
@@ -121,7 +120,7 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 	/* get the map */
 	var mapInit = function() {
 		var geocoder = new google.maps.Geocoder();
-		geocoder.geocode({ 'address': $scope.fullAddress }, function(results, status) {
+		geocoder.geocode({ 'address': getFullAddress($scope.event, true) }, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				var mapOptions = {
 					zoom: 14,

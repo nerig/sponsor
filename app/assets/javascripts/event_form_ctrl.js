@@ -52,6 +52,7 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 		}
 
 		$scope.questionsSectionNumber += 1;
+		showOnMapWithScopeAddress();
 	}
 
 	$scope.onBackClick = function() {
@@ -89,11 +90,10 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 	var showOnMapWithScopeAddress = function() {
 		showOnMapWithFullAddress(getFullAddress({
 			"address1": $scope.address1,
-			//"address2": $scope.address2,
 			"city": $scope.locality,
 			"region": $scope.administrative_area_level_1,
 			"country": $scope.country
-		}));
+		}, true));
 	}
 
 	var componentForm = {
@@ -359,11 +359,10 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 				ev.address2, cbCapital, cbDiscounts, cbMerchandise, ev.total_amount, ev.min_amount,
 				ev.sponsorship_requests, age1220, age2135, age3650, age51, incomeLow, incomeMed, incomeHigh);
 
-			address = getFullAddress(ev);
-		} else {
+			address = getFullAddress(ev, true);
+		} else { // create event scenario
 			if (getCookie("type") === "full") {
 				var address1 = getCookie("address1"),
-					address2 = getCookie("address2"),
 					city = getCookie("city"),
 					region = getCookie("region"),
 					country = getCookie("country");
@@ -373,18 +372,17 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 					getCookie("logoImageUrl"), getCookie("dateStarts"), getCookie("timeStarts"),
 					getCookie("dateEnds"), getCookie("timeEnds"), getCookie("recurrence"),
 					getCookie("size"), getCookie("gender"), getCookie("description"), address1, 
-					address2, getCookie("cbCapital"), getCookie("cbDiscounts"), getCookie("cbMerchandise"), 
+					getCookie("address2"), getCookie("cbCapital"), getCookie("cbDiscounts"), getCookie("cbMerchandise"), 
 					getCookie("totalAmount"), getCookie("minAmount"), getCookie("sponsorshipRequests"), 
 					getCookie("age1220"),getCookie("age2135"), getCookie("age3650"), getCookie("age51"), 
 					getCookie("incomeLow"), getCookie("incomeMed"), getCookie("incomeHigh"));
 
 				address = getFullAddress({
 					"address1": address1,
-					"address2": address2,
 					"city": city,
 					"region": region,
 					"country": country
-				});
+				}, true);
 			} else {
 				setPartialFields(getCookie("firstName"), getCookie("lastName"), getCookie("email"), getCookie("phone"), 
 					getCookie("city"), getCookie("region"), getCookie("zipcode"), getCookie("country"));
@@ -396,8 +394,10 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 			deleteCookie("type");
 		}
 
-		// show on map
-		showOnMapWithFullAddress(address);
+		// show on map, only if we land on the map page, otherwise we need to resize the map when getting to that page
+		if ($scope.questionsSectionNumber === 2) {
+			showOnMapWithFullAddress(address);
+		}
 
 		$scope.$apply();
 	});
