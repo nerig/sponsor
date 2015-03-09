@@ -257,11 +257,12 @@ angular.module('spons').controller('EventsListCtrl', ["$scope", "$attrs", functi
 
 .controller('DatepickerCtrl', ["$scope", function ($scope) {
 	
-	$scope.toggleMin = function() {
+	if (window.location.hash === '#my-events') {
+		$scope.minDateFrom = null;
+	} else {
 		$scope.minDateFrom = $scope.minDateFrom ? null : new Date();
-		$scope.minDateTo = $scope.minDateTo ? null : new Date();
-	};
-	$scope.toggleMin();
+	}
+	$scope.minDateTo = $scope.minDateTo ? null : new Date();
 
 	$scope.open = function($event, what) {
 		$event.preventDefault();
