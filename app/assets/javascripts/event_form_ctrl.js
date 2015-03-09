@@ -355,9 +355,11 @@ angular.module('spons').controller('newEventFormCtrl', ["$scope", "$attrs", "$fi
 
 			setFields(ev.first_name, ev.last_name, ev.email, ev.contact_number, ev.city, ev.region, 
 				ev.zipcode, ev.country, ev.name, ev.image_url, startDate, startTime, endDate, endTime,
-				ev.recurrence, ev.size_range, ev.attendees_gender, ev.description, ev.address1,
-				ev.address2, cbCapital, cbDiscounts, cbMerchandise, ev.total_amount, ev.min_amount,
-				ev.sponsorship_requests, age1220, age2135, age3650, age51, incomeLow, incomeMed, incomeHigh);
+				ev.recurrence, ev.size_range, ev.attendees_gender, 
+				ev.description.replace(/<br\/>/g, "\r\n").replace(/&quot;/g, '"').replace(/&#39;/g, "'"), 
+				ev.address1, ev.address2, cbCapital, cbDiscounts, cbMerchandise, ev.total_amount, ev.min_amount,
+				ev.sponsorship_requests.replace(/<br\/>/g, "\r\n").replace(/&quot;/g, '"').replace(/&#39;/g, "'"),
+				age1220, age2135, age3650, age51, incomeLow, incomeMed, incomeHigh);
 
 			address = getFullAddress(ev, true);
 		} else { // create event scenario

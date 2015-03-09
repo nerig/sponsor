@@ -114,7 +114,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<p class="col-xs-12 col-md-12"><%= h @event.sponsorship_requests %></p>
+				<p class="col-xs-12 col-md-12" ng-bind-html="event.sponsorship_requests"></p>
 			</div>
 			<div class="row">
 				<a class="col-xs-12 col-md-12" href="mailto:mrktiers@gmail.com?subject=I would like to sponsor an event&amp;body=Link to event: http://www.mrktiers.com/events/<%= @event.identifier %>%0D%0A%0D%0APlease write your communication below this line.%0D%0A%0D%0A%0D%0A">Contact event organizer</a>

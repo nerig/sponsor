@@ -209,7 +209,7 @@ private
 		end
 
 		image_url = "/assets/no-image.JPG"
-		if !crude_params[:image_url].blank?
+		if !crude_params[:image_url].blank? && !(crude_params[:image_url] == image_url)
 			image_url = crude_params[:image_url].downcase.start_with?("http") ? 
 				crude_params[:image_url] :
 				"http://#{crude_params[:image_url]}"
