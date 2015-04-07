@@ -1,6 +1,6 @@
 require 'mail'
 require 'rest_client'
-require 'JSON'
+require 'json'
 require 'securerandom'
 require 'date_core'
 require 'time'
