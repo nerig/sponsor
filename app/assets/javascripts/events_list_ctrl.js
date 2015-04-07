@@ -64,7 +64,7 @@ angular.module('spons').controller('EventsListCtrl', ["$scope", "$attrs", functi
 		if (window.location.hash === '#my-events' && $attrs.userId !== "-1") {
 			$scope.myEvents = true;
 			$scope.events = JSON.parse($attrs.userEvents);
-		} else {
+		} else if (window.location.hash !== '#events') {
 			window.location = "/events"
 		}
 	}
@@ -74,7 +74,9 @@ angular.module('spons').controller('EventsListCtrl', ["$scope", "$attrs", functi
 	}
 
 	$(window).on('hashchange', function() {
-		window.location.reload();
+		if (window.location.hash === '' || window.location.hash === '#my-events') {
+			window.location.reload();
+		}
 	});
 	
 	// extracting the lists of filters from existing values in the events

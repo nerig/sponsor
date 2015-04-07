@@ -19,7 +19,7 @@ angular.module('spons').controller('EntireHomepageCtrl', ["$scope", "$timeout", 
 			var val = ftsElement.value;
 			ftsElement.value = '';
 			ftsElement.value = val;
-		})
+		});
 	}
 
 	$scope.showInitialHomepage = true;
