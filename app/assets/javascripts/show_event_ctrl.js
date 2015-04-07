@@ -111,10 +111,10 @@ angular.module('spons').controller('ShowEventCtrl', ["$scope", "$filter", "$attr
 	// event dates range
 	var startDate = new Date($scope.event.date_time_starts);
 	var endDate = new Date($scope.event.date_time_ends);
-	$scope.dateRangeString = $filter('date')(startDate,'EEEE, MMMM d, y, h:mm a', 'UTC') + ' - ';
+	$scope.dateRangeString = $filter('date')(startDate,'EEEE, MMMM d, y, h:mm a') + ' - ';
 	$scope.dateRangeString += (startDate.toDateString() === endDate.toDateString()) ?
-		$filter('date')(endDate, 'h:mm a', 'UTC') :
-		$filter('date')(endDate, 'EEEE, MMMM d, y, h:mm a', 'UTC');
+		$filter('date')(endDate, 'h:mm a') :
+		$filter('date')(endDate, 'EEEE, MMMM d, y, h:mm a');
 	$scope.dateRangeString = $sanitize($scope.dateRangeString);
 
 	/* get the map */
