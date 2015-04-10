@@ -219,6 +219,7 @@
 										<div class="col-md-12">
 											<div class="input-group">
 												<span class="input-group-addon">Address line 1</span>
+												<input type="text" name="event[address1]" value="" style="display:none"> <!-- for overriding chrome autocomplete -->
 												<input id="autocomplete" name="event[address1]" type="text" class="form-control" maxlength="255" ng-maxlength="255" ng-minlength="3" ng-model="address1" ng-blur="addressComponentBlurred()" required>
 											</div>
 										</div>
