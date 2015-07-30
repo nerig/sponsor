@@ -44,4 +44,14 @@ class Event < ActiveRecord::Base
 	serialize :sponsorship_types, Array
 	serialize :age_ranges, Array
 	serialize :attendees_income_levels, Array
+
+	after_initialize { |event|
+		unless event.image_url.blank?
+			# replacing the shortened image url with the full url which we couldn't save since it was too long
+			# this is probably temporary and what we should really do is change the db schema so that image_url's
+			# type is text instead of string
+			event.image_url.sub!("~!shrtn!~", "https://img.evbuc.com/https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F")
+		end
+	}
+
 end
